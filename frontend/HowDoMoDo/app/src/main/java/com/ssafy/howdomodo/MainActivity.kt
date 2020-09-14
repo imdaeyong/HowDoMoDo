@@ -1,4 +1,4 @@
-package ssafy.team.howdomodo
+package com.ssafy.howdomodo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

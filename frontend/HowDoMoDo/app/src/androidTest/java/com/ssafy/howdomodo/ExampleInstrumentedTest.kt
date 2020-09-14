@@ -1,4 +1,4 @@
-package ssafy.team.howdomodo
+package com.ssafy.howdomodo
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("ssafy.team.howdomodo", appContext.packageName)
+        assertEquals("com.ssafy.howdomodo", appContext.packageName)
     }
 }
