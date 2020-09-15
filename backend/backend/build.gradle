@@ -33,6 +33,10 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+
+	// DB
+	compile group: 'com.zaxxer', name: 'HikariCP', version: '2.6.2'
+	compile 'org.mariadb.jdbc:mariadb-java-client'
 }
 
 test {
