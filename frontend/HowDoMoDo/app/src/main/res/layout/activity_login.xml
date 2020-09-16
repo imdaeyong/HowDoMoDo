@@ -8,13 +8,12 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="321dp"
-        android:layout_height="147dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="100dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.157" />
+        app:layout_constraintTop_toTopOf="parent" />
 <!--        app:srcCompat="@drawable/img_title"-->
 
 
@@ -33,25 +32,28 @@
 
     <EditText
         android:id="@+id/act_login_et_id"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
         android:bufferType="normal"
         android:ems="10"
         android:hint=" ID"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="33dp"
+        app:layout_constraintTop_toBottomOf="@id/imageView"
         app:layout_constraintHorizontal_bias="0.161"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.483" />
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <EditText
         android:id="@+id/act_login_et_password"
-        android:layout_width="250dp"
+        android:layout_width="0dp"
         android:layout_height="40dp"
         android:ems="10"
         android:hint=" Password"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.161"
@@ -62,8 +64,8 @@
 
     <Button
         android:id="@+id/act_login_btn"
-        android:layout_width="100dp"
-        android:layout_height="90dp"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
         android:onClick="Login_Click_Listener"
         android:text="LOGIN"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -72,9 +74,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.913"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.521" />
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/act_login_tv_signup"

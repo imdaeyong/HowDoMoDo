@@ -13,7 +13,9 @@ class Application : Application() {
 
             androidContext(this@Application)
             modules(listOf(
-                    appModule))
+                    remoteDataSourceAppModule,
+                    repositoryAppModule,
+                    viewModelAppModule))
         }
     }
 }
