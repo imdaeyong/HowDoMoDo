@@ -1,4 +1,4 @@
-package com.ssafy.howdomodo.backend;
+package com.ssafy.howdomodo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
