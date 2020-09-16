@@ -33,7 +33,6 @@ dependencies {
 	// DB
 	compile group: 'com.zaxxer', name: 'HikariCP', version: '2.6.2'
 	compile 'org.mariadb.jdbc:mariadb-java-client'
-
 }
 
 test {
