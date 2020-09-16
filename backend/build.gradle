@@ -33,6 +33,10 @@ dependencies {
 	// DB
 	compile group: 'com.zaxxer', name: 'HikariCP', version: '2.6.2'
 	compile 'org.mariadb.jdbc:mariadb-java-client'
+
+	// Swagger
+	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
 }
 
 test {
