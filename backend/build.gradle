@@ -37,6 +37,11 @@ dependencies {
 	
 	// DataBase	
 	compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.5.1'
+	
+	// swagger2
+	// https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
+	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 }
 
 test {
