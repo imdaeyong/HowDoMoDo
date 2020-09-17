@@ -2,16 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/main_background"
-    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     >
 
     <ImageView
         android:id="@+id/ll_main_iv_poster"
-        android:layout_width="370dp"
-        android:layout_height="500dp"
+        android:layout_width="180dp"
+        android:layout_height="240dp"
         android:layout_marginLeft="22dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,7 +24,7 @@
         app:layout_constraintTop_toBottomOf="@id/ll_main_iv_poster"
         app:layout_constraintStart_toStartOf="@id/ll_main_iv_poster"
         app:layout_constraintEnd_toEndOf="@id/ll_main_iv_poster"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="8dp"
         android:text="영화 이름"
         />
     <TextView
@@ -96,7 +94,7 @@
         android:lineSpacingExtra="6sp"
         android:text="예매하러 가기"
         app:layout_constraintTop_toBottomOf="@id/ll_main_tv_name"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="@id/ll_main_iv_poster"
         app:layout_constraintStart_toStartOf="@id/ll_main_iv_poster"
 
