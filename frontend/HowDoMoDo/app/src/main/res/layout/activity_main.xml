@@ -4,32 +4,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_background"
     tools:context=".MainActivity">
 
+<!-- TV, HOWDOMODO   -->
     <TextView
-        android:id="@+id/act_main_tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:id="@+id/act_main_tv_logo"
+        android:layout_width="85dp"
+        android:layout_height="19dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginStart="137dp"
+        android:layout_marginEnd="137dp"
+        android:textSize="16sp"
+        android:textColor="#ffffff"
+        android:lineSpacingExtra="3sp"
+        android:text="HOWDOMODO"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
+<!-- TV, 영화 보는 재미, 느껴보실래요? -->
     <TextView
-        android:id="@+id/act_main_tv_title2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:id="@+id/act_main_tv_slogan"
+        android:layout_width="0dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="114dp"
+        android:textSize="18sp"
+        android:textColor="#ffffff"
+        android:lineSpacingExtra="9sp"
+        android:text="영화 보는 재미, 느껴보실래요?"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/act_main_tv_title" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
+<!-- TV, 현재 상영작 -->
     <TextView
-        android:id="@+id/act_main_tv_title3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/act_main_tv_title2" />
+        android:id="@+id/act_main_tv_movie"
+        android:layout_width="68dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="270dp"
+        app:layout_constraintLeft_toLeftOf="@id/act_main_tv_slogan"
+        app:layout_constraintTop_toBottomOf="@id/act_main_tv_slogan"
+
+        android:textSize="14sp"
+        android:textColor="#ffffff"
+        android:lineSpacingExtra="6sp"
+        android:text="현재 상영작"
+        />
+<!-- RecyclerView, 현재 상영작 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/act_main_rv_movie"
+        android:layout_width="0dp"
+        android:layout_height="339dp"
+        android:scrollbars="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/act_main_tv_movie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        />
+
+<!-- TV, 무비 블로그 포스팅 -->
+<!-- RecyclerView, 무비 블로그 포스팅 -->
 </androidx.constraintlayout.widget.ConstraintLayout>
