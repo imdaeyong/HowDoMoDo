@@ -7,6 +7,6 @@ data class LoginResponse(
 )
 
 data class Users(
-        val uid: String,
+        val email: String,
         val password: String
 )
