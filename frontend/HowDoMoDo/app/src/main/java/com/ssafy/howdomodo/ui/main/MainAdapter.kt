@@ -1,8 +1,9 @@
-package com.ssafy.howdomodo
+package com.ssafy.howdomodo.ui.main
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.data.datasource.model.Movie
 
 class MainAdapter (private val itemList : List<Movie>) : RecyclerView.Adapter<MainViewHolder>()  {

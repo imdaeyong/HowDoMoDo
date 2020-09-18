@@ -82,6 +82,17 @@ class BottomTabActivity : AppCompatActivity() {
 
         bottom_vp.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(bottom_tab_layout))
 
+        bottom_tab_layout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                bottom_vp!!.currentItem = tab.position
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab) {
+            }
+        })
     }
 
 }

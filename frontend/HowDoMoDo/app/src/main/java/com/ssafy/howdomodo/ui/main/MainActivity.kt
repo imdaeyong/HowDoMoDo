@@ -1,9 +1,9 @@
-package com.ssafy.howdomodo;
+package com.ssafy.howdomodo.ui.main;
 
-import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.data.datasource.model.Movie
 import kotlinx.android.synthetic.main.activity_main.*
 
