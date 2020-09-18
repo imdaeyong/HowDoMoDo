@@ -1,6 +1,6 @@
 package com.ssafy.howdomodo.data.datasource.model
 
 data class User(
-        val id: String,
+        val email: String,
         val passWord: String
 )
