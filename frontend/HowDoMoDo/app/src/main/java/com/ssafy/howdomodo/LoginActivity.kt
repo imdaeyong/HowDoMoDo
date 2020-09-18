@@ -1,5 +1,7 @@
 package com.ssafy.howdomodo
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -31,9 +33,21 @@ class LoginActivity : AppCompatActivity() {
         })
         nameViewModel.getHeader.observe(this, Observer {
             // TODO: 2020/09/16 헤더를 넣어주는 로직을 짜야한다. SharedPreferences 를 사용하라.
+            val token = it
+            if(act_login_cb_auto_login.isChecked){
+                val sf = getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
+                val editor = sf.edit()
+                editor.putString("userToken",token)
+                editor.commit()
+            }
         })
         nameViewModel.loginResponse.observe(this, Observer {
-            // TODO: 2020/09/16 로그인 통신이 성공했을떄의 로직을 짜라.
+            // TODO: 2020/09/16 로그인 통신이 성공했을때의 로직을 짜라.
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("email", it.data.email)
+            startActivity(intent)
+            finish()
+
         })
 
     }
@@ -78,6 +92,17 @@ class LoginActivity : AppCompatActivity() {
 //            R.id.act_login_tv_sign_up ->startActivity(Intent(applicationContext, SignUpActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
         }
     }
+
+    fun Findpw_Click_Listener(view :View){
+
+    }
+
+    fun Signup_Click_Listener(view :View){
+        val goSignUpActivity = Intent(this@LoginActivity,MainActivity::class.java)
+        startActivity(goSignUpActivity)
+
+    }
+
     inner class EditListener : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
             if(!s.isNullOrEmpty())
