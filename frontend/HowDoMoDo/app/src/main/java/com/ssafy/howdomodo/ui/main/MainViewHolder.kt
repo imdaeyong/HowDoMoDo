@@ -1,4 +1,4 @@
-package com.ssafy.howdomodo
+package com.ssafy.howdomodo.ui.main
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

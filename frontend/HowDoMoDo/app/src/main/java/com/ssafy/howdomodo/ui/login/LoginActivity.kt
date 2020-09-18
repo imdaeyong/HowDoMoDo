@@ -1,4 +1,4 @@
-package com.ssafy.howdomodo
+package com.ssafy.howdomodo.ui.login
 
 import android.content.Context
 import android.content.Intent
@@ -11,7 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
-import com.ssafy.howdomodo.ui.login.LoginViewModel
+import com.ssafy.howdomodo.R
+import com.ssafy.howdomodo.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONObject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -98,7 +99,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun Signup_Click_Listener(view :View){
-        val goSignUpActivity = Intent(this@LoginActivity,MainActivity::class.java)
+        val goSignUpActivity = Intent(this@LoginActivity, MainActivity::class.java)
         startActivity(goSignUpActivity)
 
     }
