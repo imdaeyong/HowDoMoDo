@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 public class JwtTokenProvider {
 
 	private String secretKey = "howdomodo";
+	
 	private final RedisTemplate redisTemplate;
 
 	// 토큰 유효시간 30분
