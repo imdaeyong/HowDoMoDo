@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="22dp"
     >
 
     <ImageView
@@ -11,9 +12,20 @@
         android:layout_width="180dp"
         android:layout_height="240dp"
         android:layout_marginLeft="22dp"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/tenet"
+        />
+    <ImageView
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@drawable/movie_twelve"
+        app:layout_constraintTop_toBottomOf="@id/ll_main_iv_poster"
+        app:layout_constraintEnd_toStartOf="@id/ll_main_tv_name"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="6dp"
+        />
     <TextView
         android:id="@+id/ll_main_tv_name"
         android:layout_width="wrap_content"
@@ -24,9 +36,10 @@
         app:layout_constraintTop_toBottomOf="@id/ll_main_iv_poster"
         app:layout_constraintStart_toStartOf="@id/ll_main_iv_poster"
         app:layout_constraintEnd_toEndOf="@id/ll_main_iv_poster"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="6dp"
         android:text="영화 이름"
         />
+
     <TextView
         android:id="@+id/ll_main_tv_star"
         android:layout_width="wrap_content"
@@ -38,8 +51,8 @@
         app:layout_constraintTop_toBottomOf="@id/ll_main_tv_name"
         app:layout_constraintEnd_toEndOf="@id/ll_main_iv_poster"
         app:layout_constraintStart_toStartOf="@id/ll_main_iv_poster"
-        app:layout_constraintHorizontal_bias="0.3"
-        android:layout_marginTop="20dp"
+        app:layout_constraintHorizontal_bias="0.2"
+        android:layout_marginTop="10dp"
         />
     <TextView
         android:id="@+id/ll_main_tv_mvstar"
@@ -48,12 +61,10 @@
         android:textSize="11sp"
         android:textColor="#ffffff"
         android:lineSpacingExtra="6sp"
-        android:text="영화평점"
-        app:layout_constraintTop_toBottomOf="@id/ll_main_tv_name"
-        app:layout_constraintEnd_toEndOf="@id/ll_main_iv_poster"
-        app:layout_constraintStart_toStartOf="@id/ll_main_iv_poster"
-        app:layout_constraintHorizontal_bias="0.4"
-        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toTopOf="@id/ll_main_tv_star"
+        app:layout_constraintBottom_toBottomOf="@id/ll_main_tv_star"
+        app:layout_constraintStart_toEndOf="@id/ll_main_tv_star"
+        android:layout_marginLeft="4dp"
         />
     <TextView
         android:id="@+id/ll_main_tv_type"
@@ -67,7 +78,7 @@
         app:layout_constraintEnd_toEndOf="@id/ll_main_iv_poster"
         app:layout_constraintStart_toStartOf="@id/ll_main_iv_poster"
         app:layout_constraintHorizontal_bias="0.55"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         />
     <TextView
         android:id="@+id/ll_main_tv_mvtype"
@@ -77,11 +88,10 @@
         android:textColor="#ffffff"
         android:lineSpacingExtra="6sp"
         android:text="영화 장르"
-        app:layout_constraintTop_toBottomOf="@id/ll_main_tv_name"
-        app:layout_constraintEnd_toEndOf="@id/ll_main_iv_poster"
-        app:layout_constraintStart_toStartOf="@id/ll_main_iv_poster"
-        app:layout_constraintHorizontal_bias="0.65"
-        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toTopOf="@id/ll_main_tv_type"
+        app:layout_constraintBottom_toBottomOf="@id/ll_main_tv_type"
+        app:layout_constraintStart_toEndOf="@id/ll_main_tv_type"
+        android:layout_marginLeft="4dp"
         />
 
     <Button
@@ -94,7 +104,7 @@
         android:lineSpacingExtra="6sp"
         android:text="예매하러 가기"
         app:layout_constraintTop_toBottomOf="@id/ll_main_tv_name"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="37dp"
         app:layout_constraintEnd_toEndOf="@id/ll_main_iv_poster"
         app:layout_constraintStart_toStartOf="@id/ll_main_iv_poster"
 

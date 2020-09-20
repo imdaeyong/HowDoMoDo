@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="movie">
+        <item>공작</item>
+        <item>테넷</item>
+        <item>왕의 남자</item>
+    </string-array>
+
+</resources>

@@ -14,8 +14,8 @@ class MainViewHolder (v: View) : RecyclerView.ViewHolder(v) {
 
         view.ll_main_tv_name.text = item.movieName
 //        view.ll_main_iv_poster. = item.moviePoster
-        view.ll_main_tv_type.text = item.movieType
-        view.ll_main_tv_star.text = item.movieStar.toString()
+        view.ll_main_tv_mvtype.text = item.movieType
+        view.ll_main_tv_mvstar.text = item.movieStar.toString()
 
     }
 }
