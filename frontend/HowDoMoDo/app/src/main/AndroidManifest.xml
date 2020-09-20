@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.main.MainActivity"/>
-        <activity android:name=".ui.bottomtap.BottomTabActivity">
+        <activity android:name=".ui.bottomtap.BottomTabActivity"/>
+        <activity android:name=".ui.gwanSelect.GwanSelectActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
