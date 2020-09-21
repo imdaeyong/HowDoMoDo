@@ -21,6 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/noto_sans_kr_bold"
         tools:text="공작 첩보물 최고 꿀잼 영화 등판!" />
     <!--  Posting Content  -->
     <TextView
@@ -30,6 +31,7 @@
         android:lineSpacingExtra="6sp"
         android:textColor="#ffffff"
         android:textSize="11sp"
+        android:fontFamily="@font/noto_sans_kr_regular"
         tools:text="사진은 권력이다 영화 공작, 남과북의 공작정치에 대한 고발장이자 반성문 같은 영화.."
         app:layout_constraintStart_toStartOf="@id/ll_main_tv_posting_title"
         app:layout_constraintTop_toBottomOf="@id/ll_main_tv_posting_title"
@@ -44,6 +46,7 @@
         android:textColor="#ffffff"
         android:lineSpacingExtra="5sp"
         tools:text="2016년 12월 18일"
+        android:fontFamily="@font/noto_sans_kr_regular"
         app:layout_constraintStart_toStartOf="@id/ll_main_tv_posting_title"
         app:layout_constraintTop_toBottomOf="@id/ll_main_tv_posting_content"
         android:layout_marginTop="11dp"
@@ -58,6 +61,7 @@
         android:background="@drawable/main_btn_posting_border"
         android:lineSpacingExtra="6sp"
         android:text="포스팅 보기"
+        android:fontFamily="@font/noto_sans_kr_medium"
         app:layout_constraintTop_toBottomOf="@id/ll_main_tv_posting_date"
         android:layout_marginTop="14dp"
         app:layout_constraintEnd_toEndOf="parent"

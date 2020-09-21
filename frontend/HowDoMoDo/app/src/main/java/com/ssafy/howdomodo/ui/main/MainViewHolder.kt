@@ -4,7 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.howdomodo.data.datasource.model.Movie
 import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.android.synthetic.main.activity_main_movie.view.*
+import kotlinx.android.synthetic.main.item_main_movie.view.*
 
 class MainViewHolder (v: View) : RecyclerView.ViewHolder(v) {
     var view : View = v

@@ -38,6 +38,7 @@
         app:layout_constraintEnd_toEndOf="@id/ll_main_iv_poster"
         android:layout_marginTop="6dp"
         android:text="영화 이름"
+        android:fontFamily="@font/noto_sans_kr_medium"
         />
 
     <TextView
@@ -53,6 +54,7 @@
         app:layout_constraintStart_toStartOf="@id/ll_main_iv_poster"
         app:layout_constraintHorizontal_bias="0.2"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/noto_sans_kr_bold"
         />
     <TextView
         android:id="@+id/ll_main_tv_mvstar"
@@ -65,6 +67,7 @@
         app:layout_constraintBottom_toBottomOf="@id/ll_main_tv_star"
         app:layout_constraintStart_toEndOf="@id/ll_main_tv_star"
         android:layout_marginLeft="4dp"
+        android:fontFamily="@font/noto_sans_kr_regular"
         />
     <TextView
         android:id="@+id/ll_main_tv_type"
@@ -79,6 +82,7 @@
         app:layout_constraintStart_toStartOf="@id/ll_main_iv_poster"
         app:layout_constraintHorizontal_bias="0.55"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/noto_sans_kr_bold"
         />
     <TextView
         android:id="@+id/ll_main_tv_mvtype"
@@ -92,7 +96,7 @@
         app:layout_constraintBottom_toBottomOf="@id/ll_main_tv_type"
         app:layout_constraintStart_toEndOf="@id/ll_main_tv_type"
         android:layout_marginLeft="4dp"
-        />
+        android:fontFamily="@font/noto_sans_kr_regular"/>
 
     <Button
         android:id="@+id/ll_main_btn_ticketing"
@@ -102,6 +106,7 @@
         android:textColor="#ffffff"
         android:background="@drawable/main_btn_ticketing_border"
         android:lineSpacingExtra="6sp"
+        android:fontFamily="@font/noto_sans_kr_medium"
         android:text="예매하러 가기"
         app:layout_constraintTop_toBottomOf="@id/ll_main_tv_name"
         android:layout_marginTop="37dp"
