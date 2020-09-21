@@ -8,5 +8,7 @@ import com.ssafy.howdomodo.domain.Users;
 public interface UserRepository extends JpaRepository<Users, Long> {
 	
 	Users findByUserEmail(String userEmail);
+
+	Users findByUserNick(String userNick);
 	
 }

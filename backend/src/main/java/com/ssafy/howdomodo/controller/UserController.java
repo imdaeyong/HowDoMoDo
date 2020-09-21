@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -65,6 +66,22 @@ public class UserController {
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="닉네임 중복체크")
+	@GetMapping(value="/ckNick/{userNick}")
+	public Object ckNick(@PathVariable String userNick) {
+		final Response result = new Response();
+		Users user = userService.ckNick(userNick);
+		
+		if(user == null) {
+			result.status = true;
+			result.data = SUCCESS;
+		} else {
+			result.status = true;
+			result.data = "isHave";
+		}
+		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
+	
 	@ApiOperation(value="로그아웃")
 	@GetMapping("/logout")
 	public Object logout(HttpSession session) {
@@ -75,4 +92,25 @@ public class UserController {
 		
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
+	
+//	@PostMapping(value = "/email")
+//	@ApiOperation(value = "이메일인증")
+//	public ResponseEntity<BasicResponse> sendMail(@Valid @RequestBody Map<String, String> data) {
+//		SimpleMailMessage simpleMessage = new SimpleMailMessage();
+//		int random = new Random().nextInt(900000) + 100000;
+//		String authCode = String.valueOf(random);
+//
+//		simpleMessage.setTo(data.get("email"));
+//		simpleMessage.setSubject("이메일 인증 확인 메일");
+//		simpleMessage.setText(" 인증번호 : " + authCode);
+//		javaMailSender.send(simpleMessage);
+//
+//		// 추가로 뷰에 autoCode저장 + 확인필요
+//		final BasicResponse result = new BasicResponse();
+//		result.status = true;
+//		result.data = "success";
+//		result.object = authCode;
+//
+//		return new ResponseEntity<>(result, HttpStatus.OK);
+//	}
 }
