@@ -1,6 +1,6 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/android,java,kotlin,androidstudio
-# Edit at https://www.toptal.com/developers/gitignore?templates=android,java,kotlin,androidstudio
+# Created by https://www.toptal.com/developers/gitignore/api/kotlin,android,androidstudio
+# Edit at https://www.toptal.com/developers/gitignore?templates=kotlin,android,androidstudio
 
 ### Android ###
 # Built application files
@@ -96,7 +96,7 @@ output.json
 # Replacement of .externalNativeBuild directories introduced
 # with Android Studio 3.5.
 
-### Java ###
+### Kotlin ###
 # Compiled class file
 
 # Log file
@@ -118,19 +118,6 @@ output.json
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-
-### Kotlin ###
-# Compiled class file
-
-# Log file
-
-# BlueJ files
-
-# Mobile Tools for Java (J2ME)
-
-# Package Files #
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 
 ### AndroidStudio ###
 # Covers files to be ignored for android development using Android Studio.
@@ -236,4 +223,4 @@ fabric.properties
 
 !/gradle/wrapper/gradle-wrapper.jar
 
-# End of https://www.toptal.com/developers/gitignore/api/android,java,kotlin,androidstudio
+# End of https://www.toptal.com/developers/gitignore/api/kotlin,android,androidstudio
