@@ -13,7 +13,7 @@ class MainAdapter (private val itemList : List<Movie>) : RecyclerView.Adapter<Ma
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-        val inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.activity_main_movie, parent, false)
+        val inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.item_main_movie, parent, false)
         return MainViewHolder(inflatedView);
     }
 

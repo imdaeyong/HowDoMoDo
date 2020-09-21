@@ -5,8 +5,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.howdomodo.data.datasource.model.Movie
 import com.ssafy.howdomodo.data.datasource.model.Posting
 import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.android.synthetic.main.activity_main_movie.view.*
-import kotlinx.android.synthetic.main.activity_main_posting.view.*
+import kotlinx.android.synthetic.main.item_main_movie.view.*
+import kotlinx.android.synthetic.main.item_main_posting.view.*
 
 class PostingViewHolder (v: View) : RecyclerView.ViewHolder(v) {
     var view : View = v
