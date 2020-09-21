@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.0"
 
     defaultConfig {
-        applicationId "ssafy.team.howdomodo"
+        applicationId "com.ssafy.howdomodo"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
