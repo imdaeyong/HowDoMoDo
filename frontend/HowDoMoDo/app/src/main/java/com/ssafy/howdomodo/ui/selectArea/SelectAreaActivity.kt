@@ -5,7 +5,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.howdomodo.R
-import com.ssafy.howdomodo.data.datasource.model.*
+import com.ssafy.howdomodo.data.datasource.model.Gugun
+import com.ssafy.howdomodo.data.datasource.model.Sido
+import com.ssafy.howdomodo.data.datasource.model.Theater
 import kotlinx.android.synthetic.main.activity_select_area.*
 
 class SelectAreaActivity : AppCompatActivity() {

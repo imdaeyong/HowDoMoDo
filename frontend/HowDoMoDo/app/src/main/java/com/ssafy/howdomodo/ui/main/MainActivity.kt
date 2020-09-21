@@ -1,36 +1,41 @@
 package com.ssafy.howdomodo.ui.main;
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.howdomodo.R
-import com.ssafy.howdomodo.data.datasource.model.Movie
+import com.ssafy.howdomodo.ui.bottomtap.BottomTabActivity
+import com.ssafy.howdomodo.ui.gwanSelect.GwanSelectActivity
+import com.ssafy.howdomodo.ui.login.LoginActivity
+import com.ssafy.howdomodo.ui.selectArea.SelectAreaActivity
+import com.ssafy.howdomodo.ui.signup.SignupActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    var movieList : List<Movie> = listOf(
-            Movie("공작","액션",3.4,"url/image1"),
-            Movie("미스터빈","코미디",2.1,"url/image2"),
-            Movie("암살","액션",4.9,"url/image3"),
-            Movie("괴물","스릴러",4.6,"url/image4")
-    )
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val adapter = MainAdapter(this.movieList)
-        act_main_rv_movie.adapter = adapter
-        act_main_rv_movie.layoutManager = LinearLayoutManager(this).also { it.orientation = LinearLayoutManager.HORIZONTAL }
-        act_main_rv_movie.setHasFixedSize(true)
 
-//        val sf = getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
-//        val token = sf.getString("token","")
-//        if(token.equals("")){
-//
-//        }else{
-//            // 통신코드
-//        }
-
+        act_main_btn_login.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
+        act_main_btn_signup.setOnClickListener {
+            val intent = Intent(this, SignupActivity::class.java)
+            startActivity(intent)
+        }
+        act_main_btn_bottom.setOnClickListener {
+            val intent = Intent(this, BottomTabActivity::class.java)
+            startActivity(intent)
+        }
+        act_main_btn_gwan.setOnClickListener {
+            val intent = Intent(this, GwanSelectActivity::class.java)
+            startActivity(intent)
+        }
+        act_main_btn_select_area.setOnClickListener {
+            val intent = Intent(this, SelectAreaActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 }
