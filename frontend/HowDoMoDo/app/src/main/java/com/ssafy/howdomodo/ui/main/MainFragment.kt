@@ -74,6 +74,8 @@ class MainFragment : Fragment() {
                  */
             }
 
+            // Naver API
+            // https://mrkevinna.github.io/Naver-Search-API%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%88%98%EC%A7%91/
         }
     }
 }
