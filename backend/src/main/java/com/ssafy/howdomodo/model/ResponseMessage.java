@@ -19,6 +19,7 @@ public class ResponseMessage {
     public static final String SEARCH_ALLUSERS_FAIL = "전체 회원 목록 조회 실패";
     public static final String SEARCH_ALLUSERS_SUCCESS = "전체 회원 목록 조회 성공";
     
+    public static final String UNUSED_USER = "사용 가능한 Email입니다";
     public static final String ALREADY_USER = "이미 존재하는 Email입니다.";
     public static final String CREATED_USER = "회원 가입 성공";
     public static final String FAIL_CREATE_USER = "회원 가입 실패";

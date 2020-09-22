@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,6 +60,16 @@ public class UserController {
 		}
 		
 		return new ResponseEntity<Response>(new Response(StatusCode.CREATED, ResponseMessage.CREATED_USER), HttpStatus.CREATED);
+	}
+	
+	@ApiOperation(value = "Email 중복체크")
+	@GetMapping("/{email}")
+	public ResponseEntity emailCheck(@PathVariable String email) {
+		String userEmail = userService.findByUserEmail(email);
+		if(userEmail == null)
+			return new ResponseEntity<Response>(new Response(StatusCode.OK, ResponseMessage.UNUSED_USER), HttpStatus.OK);
+		else	
+			return new ResponseEntity<Response>(new Response(StatusCode.FORBIDDEN, ResponseMessage.ALREADY_USER), HttpStatus.OK);
 	}
 	
 //	@ApiOperation(value="로그인")

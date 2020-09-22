@@ -25,9 +25,16 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
-//	@Override
-//	public Users findByUserEmail(String userEmail) {
-//		
-//	}
+	@Override
+	public String findByUserEmail(String userEmail) {
+		String email = null;
+		try {
+			email = userMapper.findByUserEmail(userEmail);
+			return email;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 }

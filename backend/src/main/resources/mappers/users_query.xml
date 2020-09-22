@@ -10,5 +10,9 @@
         INSERT INTO users (`user_code`, `user_email`, `user_name`, `user_nick`, `user_pw`, `user_gender`, `user_birth`)
                         VALUES (#{userCode}, #{userEmail}, #{userName}, #{userNick}, #{userPw}, #{userGender}, #{userBirth})
     </insert>
-
+    
+    <!-- email 중복체크 -->
+    <select id="findByUserEmail" parameterType="string" resultType="string">
+    	select user_email from users where user_email=#{userEmail}
+    </select>
 </mapper>
