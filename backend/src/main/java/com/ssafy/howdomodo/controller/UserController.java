@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.howdomodo.config.security.SecurityUtil;
 import com.ssafy.howdomodo.domain.Users;
 import com.ssafy.howdomodo.model.Response;
+import com.ssafy.howdomodo.model.ResponseMessage;
+import com.ssafy.howdomodo.model.RestException;
+import com.ssafy.howdomodo.model.StatusCode;
 import com.ssafy.howdomodo.service.UserService;
 
 import io.swagger.annotations.ApiOperation;
@@ -44,23 +47,18 @@ public class UserController {
 	private SecurityUtil securityUtil;
 	
 	@ApiOperation(value = "회원가입")
-	@PostMapping("/singUp")
-	public Object singUp(@RequestBody Users user) {
-		final Response result = new Response();
+	@PostMapping("/signUp")
+	public ResponseEntity singUp(@RequestBody Users user) {
 
 		UUID uuid = UUID.randomUUID();
 		int userUuid = Math.abs(uuid.hashCode());
 		user.setUserCode(userUuid);
 		user.setUserPw(securityUtil.encryptSHA256(user.getUserPw()));
-		if (userService.join(user) != -1) {
-			result.status = true;
-			result.data = SUCCESS;
-		} else {
-			result.status = false;
-			result.data = FAIL;
+		if (userService.join(user) == -1) {
+			throw new RestException(ResponseMessage.FAIL_CREATE_USER, HttpStatus.FORBIDDEN);
 		}
-
-		return new ResponseEntity<>(result, HttpStatus.OK);
+		
+		return new ResponseEntity<Response>(new Response(StatusCode.CREATED, ResponseMessage.CREATED_USER), HttpStatus.CREATED);
 	}
 	
 //	@ApiOperation(value="로그인")

@@ -1,12 +1,35 @@
 package com.ssafy.howdomodo.model;
+import lombok.*;
 
-import io.swagger.annotations.ApiModelProperty;
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Response<T> {
 
-public class Response {
-	@ApiModelProperty(value = "status", position=1)
-	public boolean status;
-	@ApiModelProperty(value="data",position=2)
-	public String data;
-	@ApiModelProperty(value="object", position=3)
-	public Object object;
+    private int status;
+
+    private String message;
+
+    private T data;
+
+    public Response(final int status, final String message) {
+        this.status = status;
+        this.message = message;
+        this.data = null;
+    }
+
+    public static<T> Response<T> res(final int status, final String message) {
+        return res(status, message, null);
+    }
+
+    public static<T> Response<T> res(final int status, final String message, final T t) {
+        return Response.<T>builder()
+                .data(t)
+                .status(status)
+                .message(message)
+                .build();
+    }
+
+    public static final Response FAIL_DEFAULT_RES = new Response(StatusCode.INTERNAL_SERVER_ERROR, ResponseMessage.INTERNAL_SERVER_ERROR);
 }
