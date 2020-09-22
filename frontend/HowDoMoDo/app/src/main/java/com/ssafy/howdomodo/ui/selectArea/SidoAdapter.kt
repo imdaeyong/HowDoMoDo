@@ -26,7 +26,7 @@ class SidoAdapter(val context: Context, val sidoList: ArrayList<Sido>, val sidoC
     }
 
     inner class Holder(itemView: View,itemClick: (Sido) -> Unit) : RecyclerView.ViewHolder(itemView) {
-        var sidotv = itemView?.findViewById<TextView>(R.id.act_sido_tv_item)
+        var sidotv = itemView?.findViewById<TextView>(R.id.item_sido_tv_city)
 
         fun bind(sido: Sido, context: Context) {
             sidotv?.text = sido.sido

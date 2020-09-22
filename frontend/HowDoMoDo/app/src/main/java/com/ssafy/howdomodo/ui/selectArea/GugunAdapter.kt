@@ -26,7 +26,7 @@ class GugunAdapter(val context: Context, val gugunList: ArrayList<Gugun>, val gu
     }
 
     inner class Holder(itemView: View,itemClick: (Gugun) -> Unit) : RecyclerView.ViewHolder(itemView) {
-        var guguntv = itemView?.findViewById<TextView>(R.id.act_gugun_tv_item)
+        var guguntv = itemView?.findViewById<TextView>(R.id.item_gugun_tv_gugun)
 
         fun bind(gugun : Gugun, context: Context) {
             guguntv?.text = gugun.gugun
