@@ -9,4 +9,5 @@ public interface UserService {
 	
 	public Users join(Users user);
 	public Users findByUserEmail(String userEmail);
+	public Users ckNick(String userNick);
 }

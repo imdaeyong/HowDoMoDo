@@ -22,4 +22,9 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findByUserEmail(userEmail);
 	}
 
+	@Override
+	public Users ckNick(String userNick) {
+		return userRepository.findByUserNick(userNick);
+	}
+
 }
