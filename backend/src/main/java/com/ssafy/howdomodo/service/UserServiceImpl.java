@@ -1,25 +1,33 @@
 package com.ssafy.howdomodo.service;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.howdomodo.domain.Users;
-import com.ssafy.howdomodo.repository.UserRepository;
+import com.ssafy.howdomodo.mapper.UsersMapper;
 
 @Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private UserRepository userRepository;
+	private UsersMapper userMapper;
 	
 	@Override
-	public Users join(Users user) {
-		return userRepository.save(user);
+	public int join(Users user) {
+		try {
+			int res = userMapper.join(user);
+			return res;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 
-	@Override
-	public Users findByUserEmail(String userEmail) {
-		return userRepository.findByUserEmail(userEmail);
-	}
+//	@Override
+//	public Users findByUserEmail(String userEmail) {
+//		
+//	}
 
 }
