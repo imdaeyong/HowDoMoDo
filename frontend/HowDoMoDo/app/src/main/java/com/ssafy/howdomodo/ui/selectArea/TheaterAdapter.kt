@@ -1,6 +1,7 @@
 package com.ssafy.howdomodo.ui.selectArea
 
 import android.content.Context
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,12 +28,11 @@ class TheaterAdapter(val context: Context, val theaterList: ArrayList<Theater>, 
     }
 
     inner class Holder(itemView: View,theaterClick: (Theater) -> Unit) : RecyclerView.ViewHolder(itemView) {
-        var photo = itemView?.findViewById<ImageView>(R.id.act_theater_area_iv_photo)
-        val kind = itemView?.findViewById<TextView>(R.id.act_theater_area_tv_kind)
-        var name = itemView?.findViewById<TextView>(R.id.act_theater_area_tv_name)
-        var distance = itemView?.findViewById<TextView>(R.id.act_theater_area_tv_distance)
+        var photo = itemView?.findViewById<ImageView>(R.id.item_select_area_theater_iv_photo)
+        var name = itemView?.findViewById<TextView>(R.id.item_select_area_theater_tv_name)
+        var distance = itemView?.findViewById<TextView>(R.id.item_select_area_theater_tv_distance)
 
-        var bt = itemView?.findViewById<TextView>(R.id.act_theater_area_tv_distance)
+        var booking = itemView?.findViewById<ImageView>(R.id.item_select_area_theater_iv_booking)
 
 
         fun bind(theater: Theater, context: Context) {
@@ -43,9 +43,8 @@ class TheaterAdapter(val context: Context, val theaterList: ArrayList<Theater>, 
                 photo?.setImageResource(R.mipmap.ic_launcher)
             }
 
-            kind?.text = theater.kind
-            name?.text = theater.name
-            distance?.text = theater.distance
+            name?.text = theater.kind+ " "+ theater.name
+            distance?.text = theater.distance + "km"
 
             itemView.setOnClickListener {
                 theaterClick(theater)
