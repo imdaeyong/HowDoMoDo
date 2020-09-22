@@ -1,8 +1,11 @@
 package com.ssafy.howdomodo.controller;
 
+import java.util.UUID;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.howdomodo.config.security.SecurityUtil;
 import com.ssafy.howdomodo.domain.Users;
 import com.ssafy.howdomodo.model.Response;
 import com.ssafy.howdomodo.service.UserService;
@@ -33,46 +37,57 @@ public class UserController {
 //	private final PasswordEncoder passwordEncoder;
 //	private final JwtTokenProvider jwtTokenProvider;
 	
+	@Autowired
 	private final UserService userService;
 	
-	private static int uid = 2;
-	@ApiOperation(value="회원가입")
+	@Autowired
+	private SecurityUtil securityUtil;
+	
+	@ApiOperation(value = "회원가입")
 	@PostMapping("/singUp")
 	public Object singUp(@RequestBody Users user) {
 		final Response result = new Response();
-		user.setUserCode(uid++); // 나중에 수정 필요
-		userService.join(user);
-		result.status = true;
-		result.data = SUCCESS;
-		
-		return new ResponseEntity<>(result, HttpStatus.OK);
-	}
-	
-	@ApiOperation(value="로그인")
-	@PostMapping("/login")
-	public Object login(@RequestBody Users user, HttpSession session) {
-		final Response result = new Response();
-		Users member = userService.findByUserEmail(user.getUserEmail());
-		if(member.getUserPw().equals(user.getUserPw())) {
-			session.setAttribute("user", user);
+
+		UUID uuid = UUID.randomUUID();
+		int userUuid = Math.abs(uuid.hashCode());
+		user.setUserCode(userUuid);
+		user.setUserPw(securityUtil.encryptSHA256(user.getUserPw()));
+		if (userService.join(user) != -1) {
 			result.status = true;
-			result.object = session.getAttribute("user");
+			result.data = SUCCESS;
 		} else {
 			result.status = false;
-			result.object = FAIL;
+			result.data = FAIL;
 		}
-		
+
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 	
-	@ApiOperation(value="로그아웃")
-	@GetMapping("/logout")
-	public Object logout(HttpSession session) {
-		final Response result = new Response();
-		session.invalidate();
-		result.status = true;
-		result.object = SUCCESS;
-		
-		return new ResponseEntity<>(result, HttpStatus.OK);
-	}
+//	@ApiOperation(value="로그인")
+//	@PostMapping("/login")
+//	public Object login(@RequestBody Users user, HttpSession session) {
+//		final Response result = new Response();
+//		Users member = userService.findByUserEmail(user.getUserEmail());
+//		if(member.getUserPw().equals(user.getUserPw())) {
+//			session.setAttribute("user", user);
+//			result.status = true;
+//			result.object = session.getAttribute("user");
+//		} else {
+//			result.status = false;
+//			result.object = FAIL;
+//		}
+//		
+//		return new ResponseEntity<>(result, HttpStatus.OK);
+//	}
+//	
+//	@ApiOperation(value="로그아웃")
+//	@GetMapping("/logout")
+//	public Object logout(HttpSession session) {
+//		final Response result = new Response();
+//		session.invalidate();
+//		result.status = true;
+//		result.object = SUCCESS;
+//		
+//		return new ResponseEntity<>(result, HttpStatus.OK);
+//	}
 }
