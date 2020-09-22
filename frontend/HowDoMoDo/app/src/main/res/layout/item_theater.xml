@@ -49,19 +49,18 @@
         android:layout_width="wrap_content"
         android:layout_height="37dp"
         android:layout_marginEnd="19dp"
-        android:src="@drawable/btn_location"
-        android:text="예매하기"
-        android:textSize="20dp"
-        android:textStyle="bold"
+        android:src="@drawable/star_unclicked"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/item_Theater_view_under_bar"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
+        android:id="@+id/item_Theater_view_under_bar"
         android:layout_width="0dp"
         android:layout_height="2dp"
         android:background="#EEEEEE"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/item_select_area_theater_iv_booking"
+        android:layout_marginEnd="19dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/item_select_area_theater_iv_photo" />
 </androidx.constraintlayout.widget.ConstraintLayout>
