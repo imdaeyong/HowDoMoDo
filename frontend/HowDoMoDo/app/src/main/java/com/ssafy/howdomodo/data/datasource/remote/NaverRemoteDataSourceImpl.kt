@@ -1,6 +1,5 @@
 package com.ssafy.howdomodo.data.datasource.remote
-import NaverRemoteDataSource
-import com.ssafy.howdomodo.`object`.ObjectCollection
+import NaverSevicelmpl
 import com.ssafy.howdomodo.data.datasource.model.NaverApi
 import retrofit2.Call
 import retrofit2.Response
@@ -11,7 +10,7 @@ class NaverRemoteDataSourceImpl : NaverRemoteDataSource {
         onResponse: (NaverApi) -> Unit,
         onFailure: (Throwable) -> Unit
     ) {
-        NaverSevicelmpl.service.getBlog(title).enqueue(
+        NaverSevicelmpl.service.getBlog(title, "Asd", "ASd").enqueue(
             object : retrofit2.Callback<NaverApi> {
                 override fun onFailure(call: Call<NaverApi>, t: Throwable) {
                     onFailure(t)

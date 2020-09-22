@@ -1,4 +1,3 @@
-import com.example.architecture_project.data.datasource.remote.retrofit.NaverService
 import com.ssafy.howdomodo.Intercepter.CookiesIntercepter
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
