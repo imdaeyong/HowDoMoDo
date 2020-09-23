@@ -15,7 +15,6 @@ class TheaterAdapter(private val onclick: TheaterViewHolder.TheaterClickListener
     RecyclerView.Adapter<TheaterAdapter.TheaterViewHolder>() {
 
     private val theaterData = ArrayList<Theater>()
-    parent.conte
 
 
     fun setTheaterData(newData: List<Theater>) {
@@ -90,12 +89,12 @@ class TheaterAdapter(private val onclick: TheaterViewHolder.TheaterClickListener
 
 
 
-            if (data.photo != "") {
-                val resourceId =
-                    context.resources.getIdentifier(data.photo, "drawable", context.packageName)
-                photo_iv.setImageResource(resourceId)
-            } else {
-                photo_iv.setImageResource(R.mipmap.ic_launcher)
+            if (data.kind == "CGV") {
+                itemView.item_select_area_theater_iv_photo.setImageResource(R.drawable.cgv)
+            }else if(data.kind == "메가박스") {
+                itemView.item_select_area_theater_iv_photo.setImageResource(R.drawable.megabox)
+            }else if(data.kind == "롯데시네마") {
+                itemView.item_select_area_theater_iv_photo.setImageResource(R.drawable.lottecinema)
             }
 
             if (data.isClicked) {
