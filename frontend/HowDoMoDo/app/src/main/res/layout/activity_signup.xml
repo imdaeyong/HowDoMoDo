@@ -64,65 +64,16 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
-            android:id="@+id/act_sign_up_bt_email_auth"
+            android:id="@+id/act_sign_up_bt_email_duplicate_check"
             android:layout_width="75dp"
             android:layout_height="36dp"
             android:layout_marginStart="19dp"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_launcher_background"
-            android:text="인증번호 발송"
+            android:src="@drawable/btn_jungbok"
+            android:text="중복체크"
             app:layout_constraintBottom_toBottomOf="@id/act_sign_up_cl_email"
             app:layout_constraintStart_toEndOf="@id/act_sign_up_cl_email"
             app:layout_constraintTop_toTopOf="@id/act_sign_up_cl_email" />
-
-        <TextView
-            android:id="@+id/act_sign_up_tv_place_authcode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="22dp"
-            android:layout_marginTop="16dp"
-            android:lineSpacingExtra="9sp"
-            android:text="인증코드"
-            android:textColor="#333333"
-            android:textSize="15sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/act_sign_up_cl_email" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/act_sign_up_cl_authcode"
-            android:layout_width="228dp"
-            android:layout_height="36dp"
-            android:layout_marginTop="6dp"
-            android:background="@drawable/sign_up_et_border"
-            app:layout_constraintStart_toStartOf="@+id/act_sign_up_tv_place_authcode"
-            app:layout_constraintTop_toBottomOf="@+id/act_sign_up_tv_place_authcode"
-
-            >
-
-            <EditText
-                android:id="@+id/act_sign_up_et_authcode"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:hint="인증코드를 입력하세요"
-                android:inputType="number"
-                android:lineSpacingExtra="9sp"
-                android:paddingLeft="7dp"
-                android:textColor="#333333"
-                android:textSize="15sp" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <ImageView
-            android:id="@+id/act_sign_up_bt_email_auth_check"
-            android:layout_width="75dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="19dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_launcher_background"
-            android:text="인증번호 확인"
-            app:layout_constraintBottom_toBottomOf="@id/act_sign_up_cl_authcode"
-            app:layout_constraintStart_toEndOf="@id/act_sign_up_cl_authcode"
-            app:layout_constraintTop_toTopOf="@id/act_sign_up_cl_authcode" />
 
         <TextView
             android:id="@+id/act_sign_up_tv_place_nick"
@@ -135,7 +86,7 @@
             android:textColor="#333333"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/act_sign_up_cl_authcode" />
+            app:layout_constraintTop_toBottomOf="@id/act_sign_up_cl_email" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/act_sign_up_cl_nick"
@@ -166,7 +117,7 @@
             android:layout_height="36dp"
             android:layout_marginStart="19dp"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/btn_jungbok"
             android:text="중복확인"
             app:layout_constraintBottom_toBottomOf="@id/act_sign_up_cl_nick"
             app:layout_constraintStart_toEndOf="@id/act_sign_up_cl_nick"
@@ -191,7 +142,7 @@
             android:layout_height="36dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/sign_up_et_border"
-            app:layout_constraintEnd_toEndOf="@id/act_sign_up_bt_email_auth"
+            app:layout_constraintEnd_toEndOf="@id/act_sign_up_bt_email_duplicate_check"
             app:layout_constraintStart_toStartOf="@+id/act_sign_up_tv_place_name"
             app:layout_constraintTop_toBottomOf="@+id/act_sign_up_tv_place_name"
 
@@ -229,7 +180,7 @@
             android:layout_height="36dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/sign_up_et_border"
-            app:layout_constraintEnd_toEndOf="@id/act_sign_up_bt_email_auth"
+            app:layout_constraintEnd_toEndOf="@id/act_sign_up_bt_email_duplicate_check"
             app:layout_constraintStart_toStartOf="@+id/act_sign_up_tv_place_pass"
             app:layout_constraintTop_toBottomOf="@+id/act_sign_up_tv_place_pass"
 
@@ -254,7 +205,7 @@
             android:layout_height="36dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/sign_up_et_border"
-            app:layout_constraintEnd_toEndOf="@id/act_sign_up_bt_email_auth"
+            app:layout_constraintEnd_toEndOf="@id/act_sign_up_bt_email_duplicate_check"
             app:layout_constraintStart_toStartOf="@+id/act_sign_up_cl_pass"
             app:layout_constraintTop_toBottomOf="@+id/act_sign_up_cl_pass"
 
@@ -293,7 +244,7 @@
             android:layout_height="36dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/sign_up_et_border"
-            app:layout_constraintEnd_toEndOf="@id/act_sign_up_bt_email_auth"
+            app:layout_constraintEnd_toEndOf="@id/act_sign_up_bt_email_duplicate_check"
             app:layout_constraintStart_toStartOf="@+id/act_sign_up_tv_place_birth"
             app:layout_constraintTop_toBottomOf="@+id/act_sign_up_tv_place_birth"
 
@@ -331,7 +282,7 @@
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_marginTop="6dp"
-            app:layout_constraintEnd_toEndOf="@id/act_sign_up_bt_email_auth"
+            app:layout_constraintEnd_toEndOf="@id/act_sign_up_bt_email_duplicate_check"
             app:layout_constraintStart_toStartOf="@+id/act_sign_up_tv_place_sex"
             app:layout_constraintTop_toBottomOf="@+id/act_sign_up_tv_place_sex">
 

@@ -1,55 +1,109 @@
 package com.ssafy.howdomodo.ui.selectArea
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.data.datasource.model.Theater
+import kotlinx.android.synthetic.main.item_theater.view.*
 
-class TheaterAdapter(val context: Context, val theaterList: ArrayList<Theater>, var theaterClick :(Theater)->Unit) :
-    RecyclerView.Adapter<TheaterAdapter.Holder>() {
+class TheaterAdapter(private val onclick: TheaterViewHolder.TheaterClickListener) :
+    RecyclerView.Adapter<TheaterAdapter.TheaterViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_theater,parent,false)
-        return Holder(view,theaterClick)
+    private val theaterData = ArrayList<Theater>()
+    parent.conte
+
+
+    fun setTheaterData(newData: List<Theater>) {
+        with(theaterData) {
+            clear()
+            addAll(newData)
+        }
+        notifyDataSetChanged()
+    }
+
+    fun getClicked(position: Int): Boolean {
+        return theaterData[position].isClicked
+    }
+
+    fun getClickedTheater(): Int {
+        for (i in theaterData.indices) {
+            if (theaterData[i].isClicked) {
+                return i
+            }
+        }
+        return -1
+    }
+
+    fun setClicked(position: Int, status: Boolean) {
+        theaterData[position].isClicked = status
+
+        notifyDataSetChanged()
+    }
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TheaterViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_theater, parent, false)
+        return TheaterViewHolder(view, onclick)
     }
 
     override fun getItemCount(): Int {
-        return theaterList.size
+        return theaterData.size
     }
 
-    override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder?.bind(theaterList[position],context)
+    override fun onBindViewHolder(holder: TheaterViewHolder, position: Int) {
+        holder.bind(theaterData[position],)
     }
 
-    inner class Holder(itemView: View,theaterClick: (Theater) -> Unit) : RecyclerView.ViewHolder(itemView) {
-        var photo = itemView?.findViewById<ImageView>(R.id.act_theater_area_iv_photo)
-        val kind = itemView?.findViewById<TextView>(R.id.act_theater_area_tv_kind)
-        var name = itemView?.findViewById<TextView>(R.id.act_theater_area_tv_name)
-        var distance = itemView?.findViewById<TextView>(R.id.act_theater_area_tv_distance)
+    class TheaterViewHolder(
+        itemView: View,
+        private val theaterClickListener: TheaterClickListener
+    ) : RecyclerView.ViewHolder(itemView) {
 
-        var bt = itemView?.findViewById<TextView>(R.id.act_theater_area_tv_distance)
+        interface TheaterClickListener {
+            fun onclick(position: Int, textView: TextView)
+        }
+
+        init {
+            itemView.item_theater_cl_box.setOnClickListener {
+                theaterClickListener.onclick(
+                    adapterPosition,
+                    itemView.item_select_area_theater_tv_name
+                )
+            }
+        }
 
 
-        fun bind(theater: Theater, context: Context) {
-            if (theater.photo != "") {
-                val resourceId = context.resources.getIdentifier(theater.photo, "drawable", context.packageName)
-                photo?.setImageResource(resourceId)
+        fun bind(data: Theater) {
+            var distance = data.distance + "km"
+            var name = data.kind + " " + data.name
+            var photo = data.photo
+            var photo_iv = itemView.item_select_area_theater_iv_photo
+
+            itemView.item_select_area_theater_tv_name.text = name
+            itemView.item_select_area_theater_tv_distance.text = distance
+
+
+
+
+            if (data.photo != "") {
+                val resourceId =
+                    context.resources.getIdentifier(data.photo, "drawable", context.packageName)
+                photo_iv.setImageResource(resourceId)
             } else {
-                photo?.setImageResource(R.mipmap.ic_launcher)
+                photo_iv.setImageResource(R.mipmap.ic_launcher)
             }
 
-            kind?.text = theater.kind
-            name?.text = theater.name
-            distance?.text = theater.distance
-
-            itemView.setOnClickListener {
-                theaterClick(theater)
+            if (data.isClicked) {
+                itemView.item_theater_cl_box.setBackgroundColor(Color.parseColor("#EEEEEE"))
+            } else {
+                itemView.item_theater_cl_box.setBackgroundColor(Color.parseColor("#FFFFFF"))
             }
+
         }
     }
 }
