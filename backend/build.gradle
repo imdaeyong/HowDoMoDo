@@ -10,6 +10,10 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
@@ -20,13 +24,49 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+	
+	// lombok
+	compileOnly 'org.projectlombok:lombok:1.18.12'
+	// annotationProcessor 'org.projectlombok:lombok'
+	
+	// DataBase	
+	compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.5.1'
+	
+	// swagger2
+	// https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
+	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+	
+	// jwt
+   	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+   
+   	// Redis
+   	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+   	implementation 'it.ozimov:embedded-redis:0.7.2'
+   	// https://mvnrepository.com/artifact/com.github.kstyrc/embedded-redis
+   	testCompile group: 'com.github.kstyrc', name: 'embedded-redis', version: '0.6'
+   	// https://mvnrepository.com/artifact/redis.clients/jedis
+   	compile group: 'redis.clients', name: 'jedis', version: '3.3.0'
+   	
+   	// spring security
+   	implementation 'org.springframework.boot:spring-boot-starter-security'
+   	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+     exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+   	}
+   	testImplementation 'org.springframework.security:spring-security-test'
+   	
+   	// oauth
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+   	// h2database
+	runtimeOnly 'com.h2database:h2'
 }
 
 test {
