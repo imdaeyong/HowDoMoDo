@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -96,6 +97,17 @@ public class UserController {
 		
 		session.setAttribute("user", member);
 		return new ResponseEntity<Response>(new Response(StatusCode.OK, ResponseMessage.LOGIN_SUCCESS, member),HttpStatus.OK);
+	}
+	
+	@ApiOperation(value="비밀번호 재설정")
+	@PutMapping("/pw")
+	public ResponseEntity resetPw(@RequestBody Users user) {
+		user.setUserPw(securityUtil.encryptSHA256(user.getUserPw()));
+		int res = userService.updatePwd(user);
+		if(res == -1)
+			return new ResponseEntity<Response>(new Response(StatusCode.FORBIDDEN, ResponseMessage.FAIL_RESET_PWD), HttpStatus.FORBIDDEN);
+		
+		return new ResponseEntity<Response>(new Response(StatusCode.OK, ResponseMessage.RESET_PWD), HttpStatus.OK);	
 	}
 	
 	@ApiOperation(value="로그아웃")

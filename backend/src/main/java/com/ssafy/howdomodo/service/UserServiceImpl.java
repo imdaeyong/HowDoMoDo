@@ -49,4 +49,21 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+//	@Override
+//	public int updateUser(Users user) {
+//		userMapper.
+//	}
+
+	@Override
+	public int updatePwd(Users user) {
+		try {
+			int res = userMapper.updatePwd(user);
+			return res;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1;
+		}
+	}
+
 }

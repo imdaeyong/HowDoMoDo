@@ -20,4 +20,14 @@
     <select id="findByUserNick" parameterType="string" resultType="string">
     	select userNick from users where userNick=#{userNick}
     </select>
+    
+    <!-- 회원정보 수정 -->
+    <!-- <update id="updateUser">
+    	UPDATE users SET user
+    </update> -->
+    
+    <!-- 비밀번호 재설정 -->
+    <update id="updatePwd">
+    	UPDATE users SET userPw = #{userPw} WHERE userEmail=#{userEmail}
+    </update>
 </mapper>
