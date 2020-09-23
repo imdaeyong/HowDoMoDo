@@ -5,6 +5,6 @@ import com.ssafy.howdomodo.domain.Users;
 public interface UserService {
 	
 	public int join(Users user);
-	public String findByUserEmail(String userEmail);
+	public Users findByUserEmail(String userEmail);
 	public String findByUserNick(String userNick);
 }

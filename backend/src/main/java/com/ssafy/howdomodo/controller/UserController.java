@@ -65,8 +65,8 @@ public class UserController {
 	@ApiOperation(value = "Email 중복체크")
 	@GetMapping("/join/{email}")
 	public ResponseEntity emailCheck(@PathVariable String email) {
-		String userEmail = userService.findByUserEmail(email);
-		if(userEmail == null)
+		Users user = userService.findByUserEmail(email);
+		if(user == null)
 			return new ResponseEntity<Response>(new Response(StatusCode.OK, ResponseMessage.UNUSED_USER), HttpStatus.OK);
 		else	
 			return new ResponseEntity<Response>(new Response(StatusCode.FORBIDDEN, ResponseMessage.ALREADY_USER), HttpStatus.OK);
@@ -82,31 +82,26 @@ public class UserController {
 			return new ResponseEntity<Response>(new Response(StatusCode.FORBIDDEN, ResponseMessage.SEARCH_NICKNAME_EXIST), HttpStatus.OK);
 	}
 	
-//	@ApiOperation(value="로그인")
-//	@PostMapping("/login")
-//	public Object login(@RequestBody Users user, HttpSession session) {
-//		final Response result = new Response();
-//		Users member = userService.findByUserEmail(user.getUserEmail());
-//		if(member.getUserPw().equals(user.getUserPw())) {
-//			session.setAttribute("user", user);
-//			result.status = true;
-//			result.object = session.getAttribute("user");
-//		} else {
-//			result.status = false;
-//			result.object = FAIL;
-//		}
-//		
-//		return new ResponseEntity<>(result, HttpStatus.OK);
-//	}
-//	
-//	@ApiOperation(value="로그아웃")
-//	@GetMapping("/logout")
-//	public Object logout(HttpSession session) {
-//		final Response result = new Response();
-//		session.invalidate();
-//		result.status = true;
-//		result.object = SUCCESS;
-//		
-//		return new ResponseEntity<>(result, HttpStatus.OK);
-//	}
+	@ApiOperation(value="로그인")
+	@PostMapping("/login")
+	public ResponseEntity login(@RequestBody Users user, HttpSession session) {
+		Users member = userService.findByUserEmail(user.getUserEmail());
+		if(member == null) // 사용자 정보가 없는 경우
+			throw new RestException(ResponseMessage.LOGIN_FAIL, HttpStatus.NOT_FOUND);
+		
+		// 비밀번호가 일치하지 않는 경우
+		if(!member.getUserPw().equals(securityUtil.encryptSHA256(user.getUserPw()))) {
+			return new ResponseEntity<Response>(new Response(StatusCode.FORBIDDEN, ResponseMessage.LOGIN_FAIL), HttpStatus.FORBIDDEN);
+		}
+		
+		session.setAttribute("user", member);
+		return new ResponseEntity<Response>(new Response(StatusCode.OK, ResponseMessage.LOGIN_SUCCESS, member),HttpStatus.OK);
+	}
+	
+	@ApiOperation(value="로그아웃")
+	@GetMapping("/logout")
+	public ResponseEntity logout(HttpSession session) {
+		session.invalidate();
+		return new ResponseEntity<Response>(new Response(StatusCode.OK, ResponseMessage.LOGOUT_SUCCESS), HttpStatus.OK);
+	}
 }
