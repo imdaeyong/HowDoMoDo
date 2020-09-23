@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/item_gugun_cl_box"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
-    android:background="@drawable/select_area_tv_border">
+    android:layout_height="40dp">
 
     <TextView
         android:id="@+id/item_gugun_tv_gugun"
