@@ -9,8 +9,6 @@ interface NaverService {
     @GET("/v1/search/blog.json")
     fun getBlog(
         @Query("query") keyword: String,
-        @Header("X-Naver-Cliend-Id") clientId: String,
-        @Header("X-Naver-Cliend-Secret") clientSecret: String,
         ): Call<NaverApi>
 
 }

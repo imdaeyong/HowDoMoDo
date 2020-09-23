@@ -1,7 +1,7 @@
 package com.ssafy.howdomodo.data.repository
 
-import NaverRemoteDataSource
 import com.ssafy.howdomodo.data.datasource.model.NaverApi
+import com.ssafy.howdomodo.data.datasource.remote.NaverRemoteDataSource
 
 
 class NaverRepository(private val naverRemoteDataSource: NaverRemoteDataSource) {

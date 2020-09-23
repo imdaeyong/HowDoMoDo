@@ -26,7 +26,7 @@ class SignupActivity : AppCompatActivity() {
 
 
 
-        act_sign_up_bt_email_auth.setOnClickListener {
+        act_sign_up_bt_email_duplicate_check.setOnClickListener {
             var email = act_sign_up_et_email.text.toString()
             var dialog = AlertDialog.Builder(this)
             dialog.setTitle("ㅎㅇ")

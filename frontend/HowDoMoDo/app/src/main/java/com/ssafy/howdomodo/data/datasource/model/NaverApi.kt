@@ -1,9 +1,10 @@
 package com.ssafy.howdomodo.data.datasource.model
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
-class NaverApi (
+data class NaverApi (
     val total : Int,
-    val postdate :  Date,
+    val postdate :  String,
     val items: List<Posting>
 )
