@@ -10,7 +10,7 @@ class NaverRemoteDataSourceImpl : NaverRemoteDataSource {
         onResponse: (NaverApi) -> Unit,
         onFailure: (Throwable) -> Unit
     ) {
-        NaverSevicelmpl.service.getBlog(title, "Asd", "ASd").enqueue(
+        NaverSevicelmpl.service.getBlog("공작").enqueue(
             object : retrofit2.Callback<NaverApi> {
                 override fun onFailure(call: Call<NaverApi>, t: Throwable) {
                     onFailure(t)

@@ -7,10 +7,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.data.datasource.model.Posting
 
-class PostingAdapter (private val itemList : List<Posting>) : RecyclerView.Adapter<PostingViewHolder>()  {
+class PostingAdapter () : RecyclerView.Adapter<PostingViewHolder>()  {
+
+    private val blogData: ArrayList<Posting> = ArrayList()
+
+    fun setBlogItemList(newBlogData: List<Posting>) {
+        with(blogData) {
+            clear()
+            addAll(newBlogData)
+        }
+        notifyDataSetChanged()
+    }
 
     override fun getItemCount(): Int {
-        return itemList.size
+        return blogData.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostingViewHolder {
@@ -21,7 +31,7 @@ class PostingAdapter (private val itemList : List<Posting>) : RecyclerView.Adapt
     override fun onBindViewHolder(holder: PostingViewHolder, position: Int) {
         Log.e("Asd",position.toString())
 
-        val item = itemList[position]
+        val item = blogData[position]
         holder.apply {
             Log.e("Asd","ASd")
             bind(item)

@@ -18,7 +18,7 @@ class PostingViewHolder (v: View) : RecyclerView.ViewHolder(v) {
 
         view.ll_main_tv_posting_title.text = item.title
         view.ll_main_tv_posting_content.text = item.description
-        view.ll_main_tv_posting_date.text = item.postdate.toString()
+//        view.ll_main_tv_posting_date.text = item.postdate.toString()
 
     }
 }
