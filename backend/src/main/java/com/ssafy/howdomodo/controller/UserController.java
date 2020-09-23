@@ -74,7 +74,7 @@ public class UserController {
 	}
 	
 	@ApiOperation(value = "닉네임 중복체크")
-	@GetMapping("/{nickname}")
+	@GetMapping("/check/{nickname}")
 	public ResponseEntity nickCheck(@PathVariable String nickname) {
 		String userNick = userService.findByUserNick(nickname);
 		if(userNick == null)
@@ -108,6 +108,26 @@ public class UserController {
 			return new ResponseEntity<Response>(new Response(StatusCode.FORBIDDEN, ResponseMessage.FAIL_RESET_PWD), HttpStatus.FORBIDDEN);
 		
 		return new ResponseEntity<Response>(new Response(StatusCode.OK, ResponseMessage.RESET_PWD), HttpStatus.OK);	
+	}
+	
+	@ApiOperation(value="회원정보 수정")
+	@PutMapping("")
+	public ResponseEntity updateUsers(@RequestBody Users user) {
+		int res = userService.updateUser(user);
+		if(res == -1)
+			return new ResponseEntity<Response>(new Response(StatusCode.FORBIDDEN, ResponseMessage.FAIL_UPDATE_USER), HttpStatus.FORBIDDEN);
+		
+		return new ResponseEntity<Response>(new Response(StatusCode.OK, ResponseMessage.UPDATE_USER, user), HttpStatus.OK);
+	}
+	
+	@ApiOperation(value="회원정보 조회")
+	@GetMapping("/{userCode}")
+	public ResponseEntity searchUserByUserCode(@PathVariable int userCode) {
+		Users user = userService.findByUserCode(userCode);
+		if(user == null)
+			throw new RestException(ResponseMessage.NOT_FOUND_USER, HttpStatus.NOT_FOUND);
+		
+		return new ResponseEntity<Response>(new Response(StatusCode.OK, ResponseMessage.READ_USER, user), HttpStatus.OK);
 	}
 	
 	@ApiOperation(value="로그아웃")

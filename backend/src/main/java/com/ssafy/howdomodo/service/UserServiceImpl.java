@@ -49,10 +49,16 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
-//	@Override
-//	public int updateUser(Users user) {
-//		userMapper.
-//	}
+	@Override
+	public int updateUser(Users user) {
+		try {
+			int res = userMapper.updateUser(user);
+			return res;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
 
 	@Override
 	public int updatePwd(Users user) {
@@ -63,6 +69,18 @@ public class UserServiceImpl implements UserService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return -1;
+		}
+	}
+
+	@Override
+	public Users findByUserCode(int userCode) {
+		Users user = null;
+		try {
+			user = userMapper.findByUserCode(userCode);
+			return user;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 
