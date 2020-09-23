@@ -11,8 +11,8 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     val getHeader = MutableLiveData<String>()
     val loginError = MutableLiveData<String>()
 
-    fun login(userData: JsonObject) {
-        loginRepository.login(userData, success = { response, header ->
+    fun login(loginRequestBody: JsonObject) {
+        loginRepository.login(loginRequestBody, success = { response, header ->
             loginResponse.value = response
             getHeader.value = header
         }, fail = {
