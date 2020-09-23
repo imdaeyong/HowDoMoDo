@@ -3,10 +3,15 @@ package com.ssafy.howdomodo.data.datasource.model
 data class LoginResponse(
         val status: Int,
         val message: String,
-        val data: Users
+        val data: Users?
 )
 
 data class Users(
-        val email: String,
-        val password: String
+        val userCode: String,
+        val userEmail: String,
+        val userName: String,
+        val userNick: String,
+        val userPw: String,
+        val userGender: String,
+        val userBirth: String
 )

@@ -1,11 +1,19 @@
 package com.ssafy.howdomodo.ui.signup
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import com.ssafy.howdomodo.R
+import com.ssafy.howdomodo.ui.login.LoginActivity
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_signup.*
+import org.json.JSONObject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 //import javax.mail.Message
 //import javax.mail.PasswordAuthentication
@@ -15,11 +23,15 @@ import kotlinx.android.synthetic.main.activity_signup.*
 //import javax.mail.internet.MimeMessage
 
 class SignupActivity : AppCompatActivity() {
+    val signUpViewModel: SignUpViewModel by viewModel()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
+
+
+        observe()
 
         val str = intent.getStringExtra("btnName")
         Toast.makeText(this, str.toString(), Toast.LENGTH_SHORT).show()
@@ -43,10 +55,20 @@ class SignupActivity : AppCompatActivity() {
             var birth = act_sign_up_et_birth.text.toString()
             var sex = "";
 
-            var dialog = AlertDialog.Builder(this)
-            dialog.setTitle(email)
-            dialog.setMessage(nick + name + pass)
-            dialog.show()
+            val signUpJsonObject = JSONObject()
+            signUpJsonObject.put("userEmail", email)
+            signUpJsonObject.put("userPw", pass)
+            signUpJsonObject.put("userName", name)
+            signUpJsonObject.put("userBirth", birth)
+            signUpJsonObject.put("userGender", sex)
+            signUpJsonObject.put("userNick", nick)
+            val body = JsonParser.parseString(signUpJsonObject.toString()) as JsonObject
+            signUpViewModel.signUp(body)
+//
+//            var dialog = AlertDialog.Builder(this)
+//            dialog.setTitle(email)
+//            dialog.setMessage(nick + name + pass)
+//            dialog.show()
 
         }
 
@@ -54,6 +76,19 @@ class SignupActivity : AppCompatActivity() {
 //        val goMain = Intent(this,MainActivity::class.java)
 //        startActivity(goMain)
     }
+        fun observe() {
+            signUpViewModel.errorToast.observe(this, Observer {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            })
+            signUpViewModel.successMessage.observe(this, Observer {
+                if (it == "회원 가입 성공") {
+                    // 회원가입 성공!!!
+                    val goLogin = Intent(this, LoginActivity::class.java)
+                    startActivity(goLogin)
+                    finish()
+                }
+            })
+        }
 
 //    private fun verifyEmail(email: String) {
 //        // 보내는 메일 주소와 비밀번호
