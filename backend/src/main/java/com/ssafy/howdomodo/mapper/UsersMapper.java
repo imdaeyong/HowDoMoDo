@@ -11,4 +11,5 @@ public interface UsersMapper {
 	
 	public int join(Users user) throws SQLException;
 	public String findByUserEmail(String userEmail) throws SQLException;
+	public String findByUserNick(String userNick) throws SQLException;
 }

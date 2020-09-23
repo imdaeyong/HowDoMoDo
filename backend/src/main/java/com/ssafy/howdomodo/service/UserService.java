@@ -6,4 +6,5 @@ public interface UserService {
 	
 	public int join(Users user);
 	public String findByUserEmail(String userEmail);
+	public String findByUserNick(String userNick);
 }

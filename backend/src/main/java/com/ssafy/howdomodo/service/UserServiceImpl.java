@@ -37,4 +37,16 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public String findByUserNick(String userNick) {
+		String nick = null;
+		try {
+			nick = userMapper.findByUserNick(userNick);
+			return nick;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

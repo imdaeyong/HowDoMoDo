@@ -48,7 +48,7 @@ public class UserController {
 	private SecurityUtil securityUtil;
 	
 	@ApiOperation(value = "회원가입")
-	@PostMapping("/signUp")
+	@PostMapping("/join")
 	public ResponseEntity singUp(@RequestBody Users user) {
 
 		UUID uuid = UUID.randomUUID();
@@ -63,13 +63,23 @@ public class UserController {
 	}
 	
 	@ApiOperation(value = "Email 중복체크")
-	@GetMapping("/{email}")
+	@GetMapping("/join/{email}")
 	public ResponseEntity emailCheck(@PathVariable String email) {
 		String userEmail = userService.findByUserEmail(email);
 		if(userEmail == null)
 			return new ResponseEntity<Response>(new Response(StatusCode.OK, ResponseMessage.UNUSED_USER), HttpStatus.OK);
 		else	
 			return new ResponseEntity<Response>(new Response(StatusCode.FORBIDDEN, ResponseMessage.ALREADY_USER), HttpStatus.OK);
+	}
+	
+	@ApiOperation(value = "닉네임 중복체크")
+	@GetMapping("/{nickname}")
+	public ResponseEntity nickCheck(@PathVariable String nickname) {
+		String userNick = userService.findByUserNick(nickname);
+		if(userNick == null)
+			return new ResponseEntity<Response>(new Response(StatusCode.OK, ResponseMessage.SEARCH_NICKNAME_NONE), HttpStatus.OK);
+		else	
+			return new ResponseEntity<Response>(new Response(StatusCode.FORBIDDEN, ResponseMessage.SEARCH_NICKNAME_EXIST), HttpStatus.OK);
 	}
 	
 //	@ApiOperation(value="로그인")
