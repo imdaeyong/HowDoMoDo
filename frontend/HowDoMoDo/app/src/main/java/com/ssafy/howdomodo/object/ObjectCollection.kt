@@ -2,6 +2,7 @@ package com.ssafy.howdomodo.`object`
 
 object ObjectCollection {
     const val URL = "url"
-    const val API_ID = "WNMOA7SCA1KgsgKqdpiW"
-    const val API_SECRET = "G9ZfV1Ou1u"
+    const val API_ID = ""
+    const val API_SECRET = ""
+    const val MOVIE_API_KEY = ""
 }

@@ -1,9 +1,6 @@
 package com.ssafy.howdomodo.di
 
-import com.ssafy.howdomodo.data.repository.GwanSelectRepository
-import com.ssafy.howdomodo.data.repository.LoginRepository
-import com.ssafy.howdomodo.data.repository.NaverRepository
-import com.ssafy.howdomodo.data.repository.SignUpRepository
+import com.ssafy.howdomodo.data.repository.*
 import org.koin.dsl.module
 
 val repositoryAppModule = module {
@@ -11,4 +8,5 @@ val repositoryAppModule = module {
     single { LoginRepository(get()) }
     single { GwanSelectRepository(get()) }
     single { NaverRepository(get()) }
+    single { MovieRepository(get()) }
 }
