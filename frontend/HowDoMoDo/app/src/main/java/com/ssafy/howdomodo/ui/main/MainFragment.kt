@@ -16,11 +16,17 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.`object`.ObjectMovie
+import com.ssafy.howdomodo.ui.Loading
 import com.ssafy.howdomodo.ui.selectArea.SelectAreaActivity
 import kotlinx.android.synthetic.main.fragment_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
+    companion object {
+        var movieDataBool = false
+        var postDataBool = false
+    }
+
     private val vm: MainViewModel by viewModel()
     private val mvm: MovieViewModel by viewModel()
 //    var movieList: List<Movie> = listOf(
@@ -47,6 +53,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Loading.goLoading(view.context)
         mvm.getMovieData()
 
 
@@ -99,10 +106,25 @@ class MainFragment : Fragment() {
 
     }
 
-    fun movieObserve(mainAdapter: MainAdapter){
+    fun movieObserve(mainAdapter: MainAdapter) {
+        mvm.loading.observe(this, Observer {
+            movieDataBool = it
+
+            if (!movieDataBool && !postDataBool) {
+                Loading.exitLoading()
+            }
+        })
+
+        vm.loading.observe(this, Observer {
+            postDataBool = it
+            if (!movieDataBool && !postDataBool) {
+                Loading.exitLoading()
+            }
+        })
+
         mvm.movieData.observe(this, Observer {
             val movieList = it
-            Log.d("TEST",movieList.size.toString())
+            Log.d("TEST", movieList.size.toString())
             mainAdapter.setMovieItemList(movieList)
         })
         mvm.spinnerCopyData.observe(this, Observer {

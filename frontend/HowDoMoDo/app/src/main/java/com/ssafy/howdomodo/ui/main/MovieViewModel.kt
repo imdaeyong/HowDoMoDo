@@ -9,6 +9,7 @@ import com.ssafy.howdomodo.data.repository.MovieRepository
 
 class MovieViewModel (private val movieRepository: MovieRepository) : ViewModel(){
 
+    val loading = MutableLiveData<Boolean>()
     val isEmptyMovieData = MutableLiveData<Unit>()
     val movieData = MutableLiveData<List<Movie>>()
     val spinnerData = arrayListOf<String>()
@@ -16,6 +17,7 @@ class MovieViewModel (private val movieRepository: MovieRepository) : ViewModel(
     val errorToast = MutableLiveData<Throwable>()
 
     fun getMovieData(){
+        loading.value = true
         val key = ObjectCollection.MOVIE_API_KEY
         val region = "ko"
         Log.d("TEST",key)
@@ -34,5 +36,7 @@ class MovieViewModel (private val movieRepository: MovieRepository) : ViewModel(
             Log.e("error is :", it.toString())
             errorToast.value = it
         })
+
+        loading.value = false
     }
 }

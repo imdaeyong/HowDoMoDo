@@ -14,6 +14,7 @@ import com.ssafy.howdomodo.data.repository.NaverRepository
 
 class MainViewModel (private val naverRepository: NaverRepository) : ViewModel(){
 
+    val loading = MutableLiveData<Boolean>()
     val isEmptyBlogData = MutableLiveData<Unit>()
     val blogData = MutableLiveData<List<Posting>>()
     val errorToast = MutableLiveData<Throwable>()
@@ -30,6 +31,7 @@ class MainViewModel (private val naverRepository: NaverRepository) : ViewModel()
             Log.e("error is :", it.toString())
             errorToast.value = it
         })
+        loading.value = false
     }
 
 }

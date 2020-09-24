@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import com.ssafy.howdomodo.R
+import com.ssafy.howdomodo.ui.bottomtap.BottomTabActivity
 import com.ssafy.howdomodo.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONObject
@@ -86,7 +87,11 @@ class LoginActivity : AppCompatActivity() {
                     loginJsonObject.put("userName", act_login_et_id.text.toString())
                     loginJsonObject.put("userPassword", act_login_et_password.text.toString())
                     val body = JsonParser.parseString(loginJsonObject.toString()) as JsonObject
-                    nameViewModel.login(body)
+//                    nameViewModel.login(body)
+
+                    val intent = Intent(this,BottomTabActivity::class.java)
+                    startActivity(intent)
+                    finish()
 //                    Login_Control().POST_login(act_login_et_id.text.toString(), act_login_et_password.text.toString())
                 }
             }
