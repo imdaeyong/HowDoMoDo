@@ -1,12 +1,11 @@
 package com.ssafy.howdomodo.ui.selectArea
 
+import android.graphics.Color
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.howdomodo.R
@@ -14,19 +13,24 @@ import com.ssafy.howdomodo.data.datasource.model.Gugun
 import com.ssafy.howdomodo.data.datasource.model.Sido
 import com.ssafy.howdomodo.data.datasource.model.Theater
 import kotlinx.android.synthetic.main.activity_select_area.*
-import kotlinx.android.synthetic.main.item_map.*
 import net.daum.mf.map.api.MapView
 
 class SelectAreaActivity : AppCompatActivity() {
+
+    companion object {
+        val boolList = arrayListOf<Boolean>(false, false, false)
+    }
+
     var theaterList = arrayListOf<Theater>(
-        Theater("CGV", "강남1점", "5",  false,37.4874592	,127.0471432,false),
-        Theater("CGV", "강남2점", "6",  false    ,37.516363	,127.0219782,false),
-        Theater("메가박스", "강남1점", "5",  false    ,37.5004008	,127.0270069,false),
-        Theater("메가박스", "강남2점", "4",  false    ,37.5128784	,127.0572911,false),
-        Theater("롯데시네마", "강남1점", "1",  false    ,37.5016424	,127.0263372,false),
-        Theater("롯데시네마", "강남2점", "2",  false    ,37.5243393	,127.0294194,false),
-        Theater("롯데시네마", "강남3점", "3",  false    ,37.5228972	,127.0370162,false),
-        Theater("CGV", "강남1점", "5", false    ,37.5243393	,127.0294194,false),
+        Theater("CGV", "강남1점", "5", false, 37.4874592, 127.0471432, false),
+        Theater("CGV", "강남2점", "6", false, 37.516363, 127.0219782, false),
+        Theater("메가박스", "강남1점", "5", false, 37.5004008, 127.0270069, false),
+        Theater("메가박스", "강남2점", "4", false, 37.5128784, 127.0572911, false),
+        Theater("롯데시네마", "강남1점", "1", false, 37.5016424, 127.0263372, false),
+        Theater("롯데시네마", "강남2점", "2", false, 37.5243393, 127.0294194, false),
+        Theater("롯데시네마", "강남3점", "3", false, 37.5228972, 127.0370162, false),
+        Theater("CGV", "강남1점", "5", false, 37.5243393, 127.0294194, false),
+
 
         )
 
@@ -81,7 +85,7 @@ class SelectAreaActivity : AppCompatActivity() {
 
     lateinit var sidoAdapter: SidoAdapter
     lateinit var gugunAdapter: GugunAdapter
-    lateinit var theaterAdapter :TheaterAdapter
+    lateinit var theaterAdapter: TheaterAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,10 +98,13 @@ class SelectAreaActivity : AppCompatActivity() {
                         if (sidoAdapter.getClickedSido() != -1) {
                             sidoAdapter.setClicked(sidoAdapter.getClickedSido(), false)
                         }
+                        boolList[0] = true
                         sidoAdapter.setClicked(position, true)
                     } else if (sidoAdapter.getClicked(position)) {
                         sidoAdapter.setClicked(sidoAdapter.getClickedSido(), false)
+                        boolList[0] = false
                     }
+                    setButtonActive()
                 }
 
             })
@@ -115,11 +122,13 @@ class SelectAreaActivity : AppCompatActivity() {
                         if (gugunAdapter.getClickedGugun() != -1) {
                             gugunAdapter.setClicked(gugunAdapter.getClickedGugun(), false)
                         }
+                        boolList[1] = true
                         gugunAdapter.setClicked(position, true)
                     } else if (gugunAdapter.getClicked(position)) {
                         gugunAdapter.setClicked(gugunAdapter.getClickedGugun(), false)
+                        boolList[1] = false
                     }
-
+                    setButtonActive()
                 }
 
             })
@@ -137,11 +146,13 @@ class SelectAreaActivity : AppCompatActivity() {
                         if (theaterAdapter.getClickedTheater() != -1) {
                             theaterAdapter.setClicked(theaterAdapter.getClickedTheater(), false)
                         }
+                        boolList[2] = true
                         theaterAdapter.setClicked(position, true)
                     } else if (theaterAdapter.getClicked(position)) {
                         theaterAdapter.setClicked(theaterAdapter.getClickedTheater(), false)
+                        boolList[2] = false
                     }
-
+                    setButtonActive()
                 }
 
             })
@@ -169,6 +180,7 @@ class SelectAreaActivity : AppCompatActivity() {
                 act_select_area_rv_theaters.visibility = View.VISIBLE
             }
         }
+    }
 
 //        for(i in theaterList.indices){
 //            addMarker(theaterList[i])
@@ -190,8 +202,26 @@ class SelectAreaActivity : AppCompatActivity() {
 //            tag_marker
 //        }
 //    }
+
+
+    fun setButtonActive() {
+        var token = true
+        Log.e("bbb", boolList.toString())
+        for (i in boolList) {
+            if (!i) {
+                token = false
+                break
+            }
+
+        }
+        if (token) {
+            act_select_area_bt_theater_selected.setBackgroundColor(Color.parseColor("#f73859"))
+        } else {
+            act_select_area_bt_theater_selected.setBackgroundColor(Color.parseColor("#aaaaaa"))
+        }
     }
 }
+
 
 
 

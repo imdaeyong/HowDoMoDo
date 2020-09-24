@@ -1,5 +1,6 @@
 package com.ssafy.howdomodo.ui.main
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -23,15 +24,19 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
     private val vm: MainViewModel by viewModel()
+    private val mvm: MovieViewModel by viewModel()
+//    var movieList: List<Movie> = listOf(
+//        Movie("공작", "액션", 3.4, "url/image1"),
+//        Movie("미스터빈", "코미디", 2.1, "url/image2"),
+//        Movie("암살", "액션", 4.9, "url/image3"),
+//        Movie("괴물", "스릴러", 4.6, "url/image4")
+//    )
 
-    var movieList: List<Movie> = listOf(
-        Movie("공작", "액션", 3.4, "url/image1"),
-        Movie("미스터빈", "코미디", 2.1, "url/image2"),
-        Movie("암살", "액션", 4.9, "url/image3"),
-        Movie("괴물", "스릴러", 4.6, "url/image4")
-    )
+    var postingList = arrayOf("영화 테넷", "영화 인턴", "영화 공작")
+    var postList = arrayListOf<String>()
+    lateinit var postingAdapter: PostingAdapter
 
-    var postingList = arrayOf("테넷", "인턴", "공작")
+
     var univIdx = -1
 
     override fun onCreateView(
@@ -43,15 +48,30 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = MainAdapter(this.movieList)
 
-        act_main_rv_movie.adapter = adapter
+        mvm.getMovieData()
+
+
+        Log.d("TAEK",postList.size.toString())
+        // RecyclerView Apapter
+        val mainAdapter = MainAdapter()
+        movieObserve(mainAdapter)
+        act_main_rv_movie.adapter = mainAdapter
         act_main_rv_movie.layoutManager = LinearLayoutManager(this.context).also {
             it.orientation = LinearLayoutManager.HORIZONTAL
         }
         act_main_rv_movie.setHasFixedSize(true)
 
-        val postingAdapter = PostingAdapter()
+        // Blog Posting Adapter
+         postingAdapter = PostingAdapter(object :PostingViewHolder.ItemClickListener{
+            override fun onItemClick(position: Int) {
+                val intent =Intent(activity,WebviewActivity::class.java)
+                intent.putExtra("url",postingAdapter.blogData[position].link)
+                startActivity(intent)
+
+            }
+
+        })
         observe(postingAdapter)
         act_main_rv_posting.adapter = postingAdapter
         act_main_rv_posting.layoutManager = LinearLayoutManager(this.context).also {
@@ -59,11 +79,14 @@ class MainFragment : Fragment() {
         }
         act_main_rv_posting.setHasFixedSize(true)
 
+        // Spinner (Dropdown) Adapter
         act_main_spinner_posting.adapter = ArrayAdapter(
             this.requireContext(),
             android.R.layout.simple_spinner_dropdown_item,
-            postingList
+            postList
         )
+
+        Log.e("asdsad",postList.size.toString())
 
         //아이템 선택 리스너
 
@@ -79,32 +102,26 @@ class MainFragment : Fragment() {
                     position: Int,
                     p3: Long
                 ) {
-                    println("영화 제목: " + postingList[position])
-                    vm.getBlogData(postingList[position])
-//                    val postingAdapter = vm.blogData.value?.let { PostingAdapter(it) };
-//                    act_main_rv_posting.adapter = postingAdapter
-//                    act_main_rv_posting.layoutManager = LinearLayoutManager(context).also {
-//                        it.orientation = LinearLayoutManager.HORIZONTAL
-//                    }
-//                    act_main_rv_posting.setHasFixedSize(true)
-                    // 선텍한 영화의 Posting 목록을 보여주기
-//              summary.text = postingList[position];
-
-                    /*
-                    val button = Button(applicationContext)
-                    button.layoutParams = ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT)
-                    button.text = "상세보기"
-                    button.setOnClickListener {
-                        println("상세보기 액티비티 열기")
-                    }
-                    constraintLayout.addView(button)
-                     */
+                    println("영화 제목: " + postList[position])
+                    vm.getBlogData(postList[position])
                 }
-
-                // Naver API
-                // https://mrkevinna.github.io/Naver-Search-API%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%88%98%EC%A7%91/
             }
+    }
 
+    fun movieObserve(mainAdapter: MainAdapter){
+        mvm.movieData.observe(this, Observer {
+            val movieList = it
+            Log.d("TEST",movieList.size.toString())
+            mainAdapter.setMovieItemList(movieList)
+        })
+        mvm.spinnerCopyData.observe(this, Observer {
+            postList = it
+            act_main_spinner_posting.adapter = ArrayAdapter(
+                this.requireContext(),
+                android.R.layout.simple_spinner_dropdown_item,
+                postList
+            )
+        })
     }
 
     fun observe(postingAdapter: PostingAdapter){

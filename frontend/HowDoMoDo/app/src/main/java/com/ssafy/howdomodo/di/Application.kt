@@ -13,6 +13,7 @@ class Application : Application() {
 
             androidContext(this@Application)
             modules(listOf(naverRemoteDataAppModule,
+                movieRemoteDataAppModule,
                     remoteDataSourceAppModule,
                     repositoryAppModule,
                     viewModelAppModule,

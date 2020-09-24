@@ -189,7 +189,7 @@
         android:id="@+id/act_select_area_bt_theater_selected"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="#f73859"
+        android:background="#aaaaaa"
         android:gravity="center"
         android:text="시간 및 좌석 선택"
         android:textColor="#FFFFFF"
