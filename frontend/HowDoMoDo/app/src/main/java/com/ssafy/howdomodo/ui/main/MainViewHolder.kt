@@ -23,7 +23,7 @@ class MainViewHolder (v: View) : RecyclerView.ViewHolder(v) {
         for(i in item.genre_ids){
             genre+=genres.get(i)
             count++
-            if(count >1) break
+            if(count >1 || count == item.genre_ids.size) break
             genre +="/"
         }
         view.ll_main_tv_mvtype.text = genre
