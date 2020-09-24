@@ -1,5 +1,6 @@
 package com.ssafy.howdomodo.ui.main
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -33,6 +34,7 @@ class MainFragment : Fragment() {
 
     var postingList = arrayOf("영화 테넷", "영화 인턴", "영화 공작")
     var postList = arrayListOf<String>()
+    lateinit var postingAdapter: PostingAdapter
 
 
     var univIdx = -1
@@ -61,7 +63,15 @@ class MainFragment : Fragment() {
         act_main_rv_movie.setHasFixedSize(true)
 
         // Blog Posting Adapter
-        val postingAdapter = PostingAdapter()
+         postingAdapter = PostingAdapter(object :PostingViewHolder.ItemClickListener{
+            override fun onItemClick(position: Int) {
+                val intent =Intent(activity,WebviewActivity::class.java)
+                intent.putExtra("url",postingAdapter.blogData[position].bloggerlink)
+                startActivity(intent)
+
+            }
+
+        })
         observe(postingAdapter)
         act_main_rv_posting.adapter = postingAdapter
         act_main_rv_posting.layoutManager = LinearLayoutManager(this.context).also {

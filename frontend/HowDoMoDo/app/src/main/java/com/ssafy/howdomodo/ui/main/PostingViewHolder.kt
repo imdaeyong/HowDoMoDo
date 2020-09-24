@@ -10,11 +10,17 @@ import kotlinx.android.synthetic.main.item_main_posting.view.*
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class PostingViewHolder (v: View) : RecyclerView.ViewHolder(v) {
+class PostingViewHolder (v: View,private val itemClickListener: ItemClickListener) : RecyclerView.ViewHolder(v) {
     var view : View = v
 
     interface ItemClickListener {
-        fun onItemClick(position: Int,textView: TextView)
+        fun onItemClick(position: Int)
+    }
+
+    init {
+        view.ll_main_btn_posting.setOnClickListener {
+            itemClickListener.onItemClick(adapterPosition)
+        }
     }
 
     fun bind(item: Posting){

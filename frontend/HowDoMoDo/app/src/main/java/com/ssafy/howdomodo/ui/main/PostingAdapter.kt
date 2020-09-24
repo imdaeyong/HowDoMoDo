@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.data.datasource.model.Posting
 
-class PostingAdapter () : RecyclerView.Adapter<PostingViewHolder>()  {
+class PostingAdapter (private val clickListener: PostingViewHolder.ItemClickListener) : RecyclerView.Adapter<PostingViewHolder>()  {
 
-    private val blogData: ArrayList<Posting> = ArrayList()
+     val blogData: ArrayList<Posting> = ArrayList()
 
     fun setBlogItemList(newBlogData: List<Posting>) {
         with(blogData) {
@@ -27,8 +27,9 @@ class PostingAdapter () : RecyclerView.Adapter<PostingViewHolder>()  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostingViewHolder {
         val inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.item_main_posting, parent, false)
-        return PostingViewHolder(inflatedView);
+        return PostingViewHolder(inflatedView,clickListener)
     }
+
 
     override fun onBindViewHolder(holder: PostingViewHolder, position: Int) {
 
