@@ -96,7 +96,7 @@
             android:layout_height="40dp"
             android:entries="@array/movie"
             android:text="드롭다운"
-            android:textColor="#ffffff"
+            android:textColor="#FFFFFF"
             app:layout_constraintStart_toStartOf="@id/act_main_tv_posting"
             app:layout_constraintTop_toBottomOf="@id/act_main_tv_posting" />
 

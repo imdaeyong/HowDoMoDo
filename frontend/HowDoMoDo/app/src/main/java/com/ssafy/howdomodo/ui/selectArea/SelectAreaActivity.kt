@@ -1,5 +1,6 @@
 package com.ssafy.howdomodo.ui.selectArea
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -7,9 +8,11 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.howdomodo.R
+import com.ssafy.howdomodo.`object`.ObjectMovie
 import com.ssafy.howdomodo.data.datasource.model.Gugun
 import com.ssafy.howdomodo.data.datasource.model.Sido
 import com.ssafy.howdomodo.data.datasource.model.Theater
+import com.ssafy.howdomodo.ui.gwanSelect.GwanSelectActivity
 import kotlinx.android.synthetic.main.activity_select_area.*
 
 class SelectAreaActivity : AppCompatActivity() {
@@ -66,6 +69,10 @@ class SelectAreaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_area)
+
+        boolList[0]=false
+        boolList[1]=false
+        boolList[2]=false
 
         sidoAdapter = SidoAdapter(
             object : SidoAdapter.SidoViewHolder.SidoClickListener {
@@ -124,6 +131,8 @@ class SelectAreaActivity : AppCompatActivity() {
                         }
                         boolList[2] = true
                         theaterAdapter.setClicked(position, true)
+                        ObjectMovie.movieTheater =
+                            theaterAdapter.theaterData[position].kind + " " + theaterAdapter.theaterData[position].name
                     } else if(theaterAdapter.getClicked(position)) {
                         theaterAdapter.setClicked(theaterAdapter.getClickedTheater(), false)
                         boolList[2] = false
@@ -156,7 +165,10 @@ class SelectAreaActivity : AppCompatActivity() {
 //
 //        }
 
-
+        act_select_area_bt_theater_selected.setOnClickListener {
+            val intent = Intent(this, GwanSelectActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     fun setButtonActive() {
@@ -171,8 +183,10 @@ class SelectAreaActivity : AppCompatActivity() {
         }
         if (token) {
             act_select_area_bt_theater_selected.setBackgroundColor(Color.parseColor("#f73859"))
+            act_select_area_bt_theater_selected.isClickable = true
         } else {
             act_select_area_bt_theater_selected.setBackgroundColor(Color.parseColor("#aaaaaa"))
+            act_select_area_bt_theater_selected.isClickable = false
         }
     }
 }
