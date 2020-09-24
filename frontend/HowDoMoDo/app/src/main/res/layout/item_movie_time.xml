@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_movie_time_cl_box"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/movie_time_un_selected">
+
+        <TextView
+            android:id="@+id/item_movie_time_tv_start_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="18dp"
+            android:fontFamily="@font/noto_sans_kr_regular"
+            android:lineSpacingExtra="9sp"
+            android:text="13:10"
+            android:textColor="#333333"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_movie_time_tv_end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:lineSpacingExtra="5sp"
+            android:text="~15:15"
+            android:textColor="#707070"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/item_movie_time_tv_start_time"
+            app:layout_constraintStart_toStartOf="@id/item_movie_time_tv_start_time"
+            app:layout_constraintTop_toBottomOf="@id/item_movie_time_tv_start_time" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/item_movie_time_tv_percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="5dp"
+        android:lineSpacingExtra="6sp"
+        android:text="75%"
+        android:textColor="#f73859"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/item_movie_time_cl_box"
+        app:layout_constraintStart_toStartOf="@id/item_movie_time_cl_box"
+        app:layout_constraintTop_toBottomOf="@id/item_movie_time_cl_box" />
+</androidx.constraintlayout.widget.ConstraintLayout>

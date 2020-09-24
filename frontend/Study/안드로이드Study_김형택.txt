@@ -1,0 +1,11 @@
+java - new activity empty activity
+
+(.xml)
+EditText
+id - 
+top bottom
+start end
+start start end end
+
+Imageview
+Feat SignUp | 지라 번호
