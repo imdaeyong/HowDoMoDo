@@ -1,12 +1,13 @@
 package com.ssafy.howdomodo.service;
 
-import org.springframework.stereotype.Service;
-
 import com.ssafy.howdomodo.domain.Users;
 
-@Service("UserService")
 public interface UserService {
 	
-	public Users join(Users user);
+	public int join(Users user);
 	public Users findByUserEmail(String userEmail);
+	public String findByUserNick(String userNick);
+	public int updateUser(Users user);
+	public int updatePwd(Users user);
+	public Users findByUserCode(int userCode);
 }
