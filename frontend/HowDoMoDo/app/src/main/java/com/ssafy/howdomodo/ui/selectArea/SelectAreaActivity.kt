@@ -18,14 +18,14 @@ import net.daum.mf.map.api.MapView
 
 class SelectAreaActivity : AppCompatActivity() {
     var theaterList = arrayListOf<Theater>(
-        Theater("CGV", "강남1점", "5",  false,37.4874592	,127.0471432),
-        Theater("CGV", "강남2점", "6",  false    ,37.516363	,127.0219782),
-        Theater("메가박스", "강남1점", "5",  false    ,37.5004008	,127.0270069),
-        Theater("메가박스", "강남2점", "4",  false    ,37.5128784	,127.0572911),
-        Theater("롯데시네마", "강남1점", "1",  false    ,37.5016424	,127.0263372),
-        Theater("롯데시네마", "강남2점", "2",  false    ,37.5243393	,127.0294194),
-        Theater("롯데시네마", "강남3점", "3",  false    ,37.5228972	,127.0370162),
-        Theater("CGV", "강남1점", "5", false    ,37.5243393	,127.0294194),
+        Theater("CGV", "강남1점", "5",  false,37.4874592	,127.0471432,false),
+        Theater("CGV", "강남2점", "6",  false    ,37.516363	,127.0219782,false),
+        Theater("메가박스", "강남1점", "5",  false    ,37.5004008	,127.0270069,false),
+        Theater("메가박스", "강남2점", "4",  false    ,37.5128784	,127.0572911,false),
+        Theater("롯데시네마", "강남1점", "1",  false    ,37.5016424	,127.0263372,false),
+        Theater("롯데시네마", "강남2점", "2",  false    ,37.5243393	,127.0294194,false),
+        Theater("롯데시네마", "강남3점", "3",  false    ,37.5228972	,127.0370162,false),
+        Theater("CGV", "강남1점", "5", false    ,37.5243393	,127.0294194,false),
 
 
 
