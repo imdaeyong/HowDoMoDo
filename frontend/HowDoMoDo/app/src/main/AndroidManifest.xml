@@ -16,6 +16,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.mypage.privates.PrivateActivity"></activity>
+        <activity android:name=".ui.LoadingActivity"
+            android:theme="@style/Transparent"></activity>
         <activity android:name=".ui.main.WebviewActivity"></activity>
         <activity android:name=".ui.gwanSelect.GwanSelectActivity" />
         <activity android:name=".ui.signup.SignupActivity" />

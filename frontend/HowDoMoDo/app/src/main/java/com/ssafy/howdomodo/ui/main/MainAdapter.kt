@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.data.datasource.model.Movie
-import com.ssafy.howdomodo.data.datasource.model.Posting
 
-class MainAdapter () : RecyclerView.Adapter<MainViewHolder>()  {
+class MainAdapter(private val clickListener: MainViewHolder.ClickListener) :
+    RecyclerView.Adapter<MainViewHolder>() {
 
-    private val movieData: ArrayList<Movie> = ArrayList()
+    val movieData: ArrayList<Movie> = ArrayList()
 
     fun setMovieItemList(newMovieData: List<Movie>) {
         with(movieData) {
@@ -25,7 +25,7 @@ class MainAdapter () : RecyclerView.Adapter<MainViewHolder>()  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         val inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.item_main_movie, parent, false)
-        return MainViewHolder(inflatedView);
+        return MainViewHolder(inflatedView, clickListener)
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
