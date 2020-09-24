@@ -9,5 +9,5 @@ data class Posting(
         val title: String,
         val description: String,
         val postdate: String,
-        var bloggerlink: String
+        var link: String
 )

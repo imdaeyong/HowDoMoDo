@@ -66,7 +66,7 @@ class MainFragment : Fragment() {
          postingAdapter = PostingAdapter(object :PostingViewHolder.ItemClickListener{
             override fun onItemClick(position: Int) {
                 val intent =Intent(activity,WebviewActivity::class.java)
-                intent.putExtra("url",postingAdapter.blogData[position].bloggerlink)
+                intent.putExtra("url",postingAdapter.blogData[position].link)
                 startActivity(intent)
 
             }
