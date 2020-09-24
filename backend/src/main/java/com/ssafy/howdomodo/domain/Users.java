@@ -17,7 +17,7 @@ import lombok.Setter;
 @Setter
 @Repository
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Users {
+public class Users{
 
 	private int userCode;
 	private String userEmail;
@@ -26,5 +26,6 @@ public class Users {
 	private String userPw;
 	private int userGender;
 	private Date userBirth;
+	
 	
 }
