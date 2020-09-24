@@ -40,4 +40,4 @@ out/
 ### BigData ###
 *.csv
 *.xlsx
-
+*.json
