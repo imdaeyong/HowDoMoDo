@@ -20,8 +20,14 @@ class PostingViewHolder (v: View) : RecyclerView.ViewHolder(v) {
     fun bind(item: Posting){
         val title = item.title
         val re = "<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>".toRegex()
-        val changeTitle = title.replace(re, "")
-        val changeContent = item.description.replace(re, "")
+        val re2 = "&lt;".toRegex()
+        val re3 = "&gt;".toRegex()
+        var changeTitle = title.replace(re, "")
+        changeTitle = changeTitle.replace(re2, "")
+        changeTitle = changeTitle.replace(re3, "")
+        var changeContent = item.description.replace(re, "")
+        changeContent = changeContent.replace(re2, "")
+        changeContent = changeContent.replace(re3, "")
 
         view.ll_main_tv_posting_title.text = changeTitle
         view.ll_main_tv_posting_content.text = changeContent

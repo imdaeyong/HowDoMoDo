@@ -32,6 +32,9 @@ class MainFragment : Fragment() {
 //    )
 
     var postingList = arrayOf("영화 테넷", "영화 인턴", "영화 공작")
+    var postList = arrayListOf<String>()
+
+
     var univIdx = -1
 
     override fun onCreateView(
@@ -45,6 +48,9 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mvm.getMovieData()
+
+
+        Log.d("TAEK",postList.size.toString())
         // RecyclerView Apapter
         val mainAdapter = MainAdapter()
         movieObserve(mainAdapter)
@@ -67,8 +73,10 @@ class MainFragment : Fragment() {
         act_main_spinner_posting.adapter = ArrayAdapter(
             this.requireContext(),
             android.R.layout.simple_spinner_dropdown_item,
-            postingList
+            postList
         )
+
+        Log.e("asdsad",postList.size.toString())
 
         //아이템 선택 리스너
 
@@ -84,8 +92,8 @@ class MainFragment : Fragment() {
                     position: Int,
                     p3: Long
                 ) {
-                    println("영화 제목: " + postingList[position])
-                    vm.getBlogData(postingList[position])
+                    println("영화 제목: " + postList[position])
+                    vm.getBlogData(postList[position])
                 }
             }
     }
@@ -95,6 +103,14 @@ class MainFragment : Fragment() {
             val movieList = it
             Log.d("TEST",movieList.size.toString())
             mainAdapter.setMovieItemList(movieList)
+        })
+        mvm.spinnerCopyData.observe(this, Observer {
+            postList = it
+            act_main_spinner_posting.adapter = ArrayAdapter(
+                this.requireContext(),
+                android.R.layout.simple_spinner_dropdown_item,
+                postList
+            )
         })
     }
 

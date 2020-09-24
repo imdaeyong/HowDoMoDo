@@ -31,11 +31,9 @@ class PostingAdapter () : RecyclerView.Adapter<PostingViewHolder>()  {
     }
 
     override fun onBindViewHolder(holder: PostingViewHolder, position: Int) {
-        Log.e("Asd",position.toString())
 
         val item = blogData[position]
         holder.apply {
-            Log.e("Asd","ASd")
             bind(item)
         }
     }

@@ -11,6 +11,8 @@ class MovieViewModel (private val movieRepository: MovieRepository) : ViewModel(
 
     val isEmptyMovieData = MutableLiveData<Unit>()
     val movieData = MutableLiveData<List<Movie>>()
+    val spinnerData = arrayListOf<String>()
+    val spinnerCopyData =MutableLiveData<ArrayList<String>>()
     val errorToast = MutableLiveData<Throwable>()
 
     fun getMovieData(){
@@ -22,7 +24,12 @@ class MovieViewModel (private val movieRepository: MovieRepository) : ViewModel(
                 isEmptyMovieData.value = Unit
             }else{
                 movieData.value = it.results
+                for(item in it.results){
+                    Log.d("taek",item.title)
+                    spinnerData.add(item.title)
+                }
             }
+            spinnerCopyData.value = spinnerData
         },fail = {
             Log.e("error is :", it.toString())
             errorToast.value = it
