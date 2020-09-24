@@ -45,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
         nameViewModel.loginResponse.observe(this, Observer {
             // TODO: 2020/09/16 로그인 통신이 성공했을때의 로직을 짜라.
             val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("email", it.data.email)
+//            intent.putExtra("email", it.data.email)
             startActivity(intent)
             finish()
 
