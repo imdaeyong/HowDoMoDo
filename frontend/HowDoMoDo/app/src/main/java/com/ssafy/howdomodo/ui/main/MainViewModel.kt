@@ -5,8 +5,11 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ssafy.howdomodo.`object`.ObjectCollection
+import com.ssafy.howdomodo.data.datasource.model.Movie
 import com.ssafy.howdomodo.data.datasource.model.NaverApi
 import com.ssafy.howdomodo.data.datasource.model.Posting
+import com.ssafy.howdomodo.data.repository.MovieRepository
 import com.ssafy.howdomodo.data.repository.NaverRepository
 
 class MainViewModel (private val naverRepository: NaverRepository) : ViewModel(){
@@ -28,4 +31,5 @@ class MainViewModel (private val naverRepository: NaverRepository) : ViewModel()
             errorToast.value = it
         })
     }
+
 }

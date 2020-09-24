@@ -1,8 +1,8 @@
 package com.ssafy.howdomodo.data.datasource.model
 
 data class Movie(
-        val movieName: String,
-        val movieType: String,
-        val movieStar: Double,
-        var moviePoster: String
+        val title: String,
+        val genre_ids: List<Integer>,
+        val vote_average: Double,
+        var poster_path: String
 )

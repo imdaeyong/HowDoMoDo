@@ -7,6 +7,7 @@ import com.ssafy.howdomodo.data.datasource.remote.NaverRemoteDataSource
 class NaverRepository(private val naverRemoteDataSource: NaverRemoteDataSource) {
 
     fun getBlogData(title: String, success: (NaverApi) -> Unit, fail: (Throwable) -> Unit) {
-        naverRemoteDataSource.getBlogData(title,success,fail)
+        var search = "영화 "+title
+        naverRemoteDataSource.getBlogData(search,success,fail)
     }
 }
