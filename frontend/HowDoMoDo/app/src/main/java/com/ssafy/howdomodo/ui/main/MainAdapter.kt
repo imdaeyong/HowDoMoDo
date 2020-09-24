@@ -5,11 +5,22 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.data.datasource.model.Movie
+import com.ssafy.howdomodo.data.datasource.model.Posting
 
-class MainAdapter (private val itemList : List<Movie>) : RecyclerView.Adapter<MainViewHolder>()  {
+class MainAdapter () : RecyclerView.Adapter<MainViewHolder>()  {
+
+    private val movieData: ArrayList<Movie> = ArrayList()
+
+    fun setMovieItemList(newMovieData: List<Movie>) {
+        with(movieData) {
+            clear()
+            addAll(newMovieData)
+        }
+        notifyDataSetChanged()
+    }
 
     override fun getItemCount(): Int {
-        return itemList.size
+        return movieData.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
@@ -18,11 +29,9 @@ class MainAdapter (private val itemList : List<Movie>) : RecyclerView.Adapter<Ma
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        Log.e("Asd",position.toString())
-
-        val item = itemList[position]
+        val item = movieData[position]
         holder.apply {
-            Log.e("Asd","ASd")
+            Log.e("MainAdapter","MainAdapter")
             bind(item)
         }
     }

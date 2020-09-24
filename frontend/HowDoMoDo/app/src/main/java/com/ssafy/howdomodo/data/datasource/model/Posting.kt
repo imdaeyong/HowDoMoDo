@@ -8,5 +8,6 @@ data class Posting(
         val movieName: String,
         val title: String,
         val description: String,
+        val postdate: String,
         var bloggerlink: String
 )
