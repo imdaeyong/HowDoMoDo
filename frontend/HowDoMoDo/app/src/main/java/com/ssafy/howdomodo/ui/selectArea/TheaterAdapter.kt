@@ -80,14 +80,14 @@ class TheaterAdapter(private val onclick: TheaterViewHolder.TheaterClickListener
         fun bind(data: Theater) {
             var distance = data.distance + "km"
             var name = data.kind + " " + data.name
-            var photo = data.photo
-            var photo_iv = itemView.item_select_area_theater_iv_photo
+            var theater_lat = data.theater_lat
+            var theater_lng = data.theater_lng
+
+            
+
 
             itemView.item_select_area_theater_tv_name.text = name
             itemView.item_select_area_theater_tv_distance.text = distance
-
-
-
 
             if (data.kind == "CGV") {
                 itemView.item_select_area_theater_iv_photo.setImageResource(R.drawable.cgv)

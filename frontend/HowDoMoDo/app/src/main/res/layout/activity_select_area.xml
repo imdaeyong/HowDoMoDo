@@ -133,7 +133,9 @@
             android:layout_marginStart="9dp"
             android:layout_marginTop="22dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -147,9 +149,29 @@
             android:id="@+id/act_select_area_rv_theaters"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/act_select_area_sw_map" />
+
+
+        <RelativeLayout
+            android:id="@+id/act_select_area_rl_map_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/act_select_area_sw_map">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/act_select_area_rv_markers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+        </RelativeLayout>
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
