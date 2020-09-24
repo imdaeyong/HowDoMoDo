@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee"
+    tools:context=".ui.selectArea.SelectAreaActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/act_select_area_ll_first_bar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/act_select_area_tv_top_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="8sp"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="지역선택" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/act_select_area_ll_second_sub_bar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#000000"
+        app:layout_constraintStart_toStartOf="@+id/act_select_area_ll_first_bar"
+        app:layout_constraintTop_toBottomOf="@id/act_select_area_ll_first_bar">
+
+        <TextView
+            android:id="@+id/act_select_area_tv_select_sido"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="시 / 도"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/act_select_area_tv_select_gugun"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="구 / 군"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/act_select_area_ll_second_bar"
+        android:layout_width="match_parent"
+        android:layout_height="196dp"
+        app:layout_constraintStart_toStartOf="@id/act_select_area_ll_first_bar"
+        app:layout_constraintTop_toBottomOf="@id/act_select_area_ll_first_bar">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/act_select_rv_sidos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" />
+
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/act_select_rv_guguns"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/act_select_area_ll_third_bar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/act_select_area_ll_second_bar">
+
+        <Switch
+            android:id="@+id/act_select_area_sw_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="지도로 보기 활성화"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/act_select_area_rv_theaters"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            app:layout_constraintBottom_toTopOf="@id/act_select_area_bt_theater_selected"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <Button
+            android:id="@+id/act_select_area_bt_theater_selected"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="#f73859"
+            android:gravity="center"
+            android:text="시간 및 좌석 선택"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
