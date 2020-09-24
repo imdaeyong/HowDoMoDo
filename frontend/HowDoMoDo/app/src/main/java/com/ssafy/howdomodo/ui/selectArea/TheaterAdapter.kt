@@ -83,9 +83,6 @@ class TheaterAdapter(private val onclick: TheaterViewHolder.TheaterClickListener
             var theater_lat = data.theater_lat
             var theater_lng = data.theater_lng
 
-            
-
-
             itemView.item_select_area_theater_tv_name.text = name
             itemView.item_select_area_theater_tv_distance.text = distance
 

@@ -1,6 +1,7 @@
 package com.ssafy.howdomodo.ui.selectArea
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
@@ -27,40 +28,56 @@ class SelectAreaActivity : AppCompatActivity() {
         Theater("롯데시네마", "강남3점", "3",  false    ,37.5228972	,127.0370162,false),
         Theater("CGV", "강남1점", "5", false    ,37.5243393	,127.0294194,false),
 
-
-
-
-
         )
 
     var sidoList = arrayListOf<Sido>(
-        Sido("서울특별시", false),
+        Sido("서울", false),
         Sido("경기도", false),
         Sido("충청남도", false),
         Sido("충청북도", false),
         Sido("부산", false),
+        Sido("전라남도", false),
+        Sido("전라북도", false),
+        Sido("제주", false),
+        Sido("인천", false),
+        Sido("울산", false),
+        Sido("세종", false),
+        Sido("대전", false),
+        Sido("대구", false),
         Sido("강원도", false),
-        Sido("강원도", false),
-        Sido("강원도", false),
-        Sido("강원도", false),
-        Sido("강원도", false),
-        Sido("강원도", false),
-        Sido("강원도", false),
-        Sido("강원도", false),
-
-        )
+        Sido("경상남도", false),
+        Sido("경상북도", false),
+        Sido("광주", false),
+    )
 
     var gugunList = arrayListOf<Gugun>(
-        Gugun("강남", false),
-        Gugun("강남대로", false),
-        Gugun("강동", false),
-        Gugun("군자", false),
-        Gugun("천호", false),
-        Gugun("신림", false),
-        Gugun("건국대입구", false),
-        Gugun("서울대입구", false),
-        Gugun("사당", false),
-    )
+        Gugun("강남구", false),
+        Gugun("강동구", false),
+        Gugun("강북구", false),
+        Gugun("강서구", false),
+        Gugun("관악구", false),
+        Gugun("광진구", false),
+        Gugun("구로구", false),
+        Gugun("금천구", false),
+        Gugun("노원구", false),
+        Gugun("도봉구", false),
+        Gugun("동대문구", false),
+        Gugun("동작구", false),
+        Gugun("마포구", false),
+        Gugun("서대문구", false),
+        Gugun("서초구", false),
+        Gugun("성동구", false),
+        Gugun("성북구", false),
+        Gugun("송파구", false),
+        Gugun("양천구", false),
+        Gugun("영등포구", false),
+        Gugun("용산구", false),
+        Gugun("은평구", false),
+        Gugun("종로구", false),
+        Gugun("중구", false),
+        Gugun("중랑구", false),
+
+        )
 
     lateinit var sidoAdapter: SidoAdapter
     lateinit var gugunAdapter: GugunAdapter
@@ -74,11 +91,11 @@ class SelectAreaActivity : AppCompatActivity() {
             object : SidoAdapter.SidoViewHolder.SidoClickListener {
                 override fun onclick(position: Int, textView: TextView) {
                     if (!sidoAdapter.getClicked(position)) {
-                        if(sidoAdapter.getClickedSido()!=-1) {
+                        if (sidoAdapter.getClickedSido() != -1) {
                             sidoAdapter.setClicked(sidoAdapter.getClickedSido(), false)
                         }
                         sidoAdapter.setClicked(position, true)
-                    } else if(sidoAdapter.getClicked(position)) {
+                    } else if (sidoAdapter.getClicked(position)) {
                         sidoAdapter.setClicked(sidoAdapter.getClickedSido(), false)
                     }
                 }
@@ -95,11 +112,11 @@ class SelectAreaActivity : AppCompatActivity() {
             object : GugunViewHolder.GugunClickListener {
                 override fun onclick(position: Int, textView: TextView) {
                     if (!gugunAdapter.getClicked(position)) {
-                        if(gugunAdapter.getClickedGugun()!=-1) {
+                        if (gugunAdapter.getClickedGugun() != -1) {
                             gugunAdapter.setClicked(gugunAdapter.getClickedGugun(), false)
                         }
                         gugunAdapter.setClicked(position, true)
-                    } else if(gugunAdapter.getClicked(position)) {
+                    } else if (gugunAdapter.getClicked(position)) {
                         gugunAdapter.setClicked(gugunAdapter.getClickedGugun(), false)
                     }
 
@@ -117,11 +134,11 @@ class SelectAreaActivity : AppCompatActivity() {
             object : TheaterAdapter.TheaterViewHolder.TheaterClickListener {
                 override fun onclick(position: Int, textView: TextView) {
                     if (!theaterAdapter.getClicked(position)) {
-                        if(theaterAdapter.getClickedTheater()!=-1) {
+                        if (theaterAdapter.getClickedTheater() != -1) {
                             theaterAdapter.setClicked(theaterAdapter.getClickedTheater(), false)
                         }
                         theaterAdapter.setClicked(position, true)
-                    } else if(theaterAdapter.getClicked(position)) {
+                    } else if (theaterAdapter.getClicked(position)) {
                         theaterAdapter.setClicked(theaterAdapter.getClickedTheater(), false)
                     }
 
@@ -135,23 +152,46 @@ class SelectAreaActivity : AppCompatActivity() {
         act_select_area_rv_theaters.setHasFixedSize(true)
 
 
-
         var mapView = MapView(this)
         var mapViewController = act_select_area_rl_map_view as ViewGroup
         mapViewController.addView(mapView)
 
-        act_select_area_sw_map.setOnCheckedChangeListener{ buttonView, isChecked ->
-            if(isChecked) {
-                act_select_area_rl_map_view.visibility= View.VISIBLE
+
+        act_select_area_sw_map.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+
+//                supportFragmentManager.beginTransaction()
+//                    .replace(R.id.act_select_area_rl_map_view, MapsFragment()).commit()
+                act_select_area_rl_map_view.visibility = View.VISIBLE
                 act_select_area_rv_theaters.visibility = View.GONE
-            }else {
-                act_select_area_rl_map_view.visibility= View.GONE
+            } else {
+                act_select_area_rl_map_view.visibility = View.GONE
                 act_select_area_rv_theaters.visibility = View.VISIBLE
             }
-
-
         }
 
-
+//        for(i in theaterList.indices){
+//            addMarker(theaterList[i])
+//        }
+//
+//
+//
+//    }
+//    var marker_view = LayoutInflater.from(this).inflate(R.layout.activity_select_area, null)
+//
+//    fun setCustomMarkerView() {
+//        var tag_marker = marker_view.findViewById(R.id.item_select_area_marker_tv_marker_1) as TextView
+//    }
+//
+//    private fun addMarker(theater: Theater) {
+//        var list : List<Theater>? = null
+//        var markerOptions = MarkerO
+//        if(theater.isSelectedMarker){
+//            tag_marker
+//        }
+//    }
     }
 }
+
+
+
