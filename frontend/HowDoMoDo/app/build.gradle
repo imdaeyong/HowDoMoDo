@@ -33,6 +33,16 @@ android {
     androidExtensions {
         experimental = true
     }
+
+    //for Kakao map
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'x86_64', 'armeabi-v7a', 'armeabi'
+            universalApk false
+        }
+    }
 }
 
 dependencies {
@@ -83,6 +93,9 @@ dependencies {
     // Koin AndroidX Experimental features
     implementation "org.koin:koin-androidx-ext:$koin_version"
 
+    // for Kakao Map
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile files('libs/libDaumMapAndroid.jar')
 }
 repositories {
     mavenCentral()

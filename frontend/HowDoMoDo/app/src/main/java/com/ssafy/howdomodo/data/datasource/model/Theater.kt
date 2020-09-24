@@ -4,6 +4,8 @@ class Theater(
         val kind : String,
         val name : String,
         val distance : String,
-        var photo : String,
-        var isClicked : Boolean
+        var isClicked : Boolean,
+        var theater_lat : Double,
+        var theater_lng : Double,
+        var isSelectedMarker :Boolean,
 )
