@@ -35,5 +35,4 @@ class MainAdapter () : RecyclerView.Adapter<MainViewHolder>()  {
             bind(item)
         }
     }
-
 }

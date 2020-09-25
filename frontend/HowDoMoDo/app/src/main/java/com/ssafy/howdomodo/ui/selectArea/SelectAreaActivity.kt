@@ -13,6 +13,8 @@ import com.ssafy.howdomodo.data.datasource.model.Gugun
 import com.ssafy.howdomodo.data.datasource.model.Sido
 import com.ssafy.howdomodo.data.datasource.model.Theater
 import kotlinx.android.synthetic.main.activity_select_area.*
+import net.daum.mf.map.api.MapPOIItem
+import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 
 class SelectAreaActivity : AppCompatActivity() {
@@ -163,9 +165,25 @@ class SelectAreaActivity : AppCompatActivity() {
         act_select_area_rv_theaters.setHasFixedSize(true)
 
 
+        //Maps
         var mapView = MapView(this)
         var mapViewController = act_select_area_rl_map_view as ViewGroup
+        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.4874592, 127.0471432),true)
+        mapView.setZoomLevel(7,true)
+
+        var marker = MapPOIItem()
+        marker.itemName = "MegaBox"
+        marker.tag = 0
+        marker.mapPoint = MapPoint.mapPointWithGeoCoord(37.4874592, 127.0471432)
+        marker.markerType = MapPOIItem.MarkerType.BluePin
+        marker.selectedMarkerType = MapPOIItem.MarkerType.RedPin
+        mapView.addPOIItem(marker)
+        marker.customImageResourceId = R.drawable.cgv
+
+
+
         mapViewController.addView(mapView)
+
 
 
         act_select_area_sw_map.setOnCheckedChangeListener { buttonView, isChecked ->
@@ -212,7 +230,6 @@ class SelectAreaActivity : AppCompatActivity() {
                 token = false
                 break
             }
-
         }
         if (token) {
             act_select_area_bt_theater_selected.setBackgroundColor(Color.parseColor("#f73859"))
