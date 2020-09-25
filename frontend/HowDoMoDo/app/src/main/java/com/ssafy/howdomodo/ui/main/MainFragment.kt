@@ -56,8 +56,6 @@ class MainFragment : Fragment() {
         Loading.goLoading(view.context)
         mvm.getMovieData()
 
-
-        Log.d("TAEK", postList.size.toString())
         // RecyclerView Apapter
         mainAdapter = MainAdapter(object : MainViewHolder.ClickListener {
             override fun movieClick(position: Int) {
@@ -101,9 +99,8 @@ class MainFragment : Fragment() {
 //        act_main_spinner_posting.setSelection(0)
         Log.e("asdsad", postList.size.toString())
 
-        //아이템 선택 리스너
-
-
+        // Fragment Dialog URL
+        // https://youngest-programming.tistory.com/307
     }
 
     fun movieObserve(mainAdapter: MainAdapter) {
