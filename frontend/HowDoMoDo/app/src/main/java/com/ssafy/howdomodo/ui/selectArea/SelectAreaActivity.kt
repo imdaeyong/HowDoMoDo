@@ -4,6 +4,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +16,7 @@ import com.ssafy.howdomodo.data.datasource.model.Sido
 import com.ssafy.howdomodo.data.datasource.model.Theater
 import com.ssafy.howdomodo.ui.gwanSelect.GwanSelectActivity
 import kotlinx.android.synthetic.main.activity_select_area.*
+import net.daum.android.map.MapView
 
 class SelectAreaActivity : AppCompatActivity() {
     companion object {
@@ -148,22 +151,22 @@ class SelectAreaActivity : AppCompatActivity() {
         act_select_area_rv_theaters.setHasFixedSize(true)
 
 
-//
-//        var mapView = MapView(this)
-//        var mapViewController = act_select_area_rl_map_view as ViewGroup
-//        mapViewController.addView(mapView)
-//
-//        act_select_area_sw_map.setOnCheckedChangeListener{ buttonView, isChecked ->
-//            if(isChecked) {
-//                act_select_area_rl_map_view.visibility= View.VISIBLE
-//                act_select_area_rv_theaters.visibility = View.GONE
-//            }else {
-//                act_select_area_rl_map_view.visibility= View.GONE
-//                act_select_area_rv_theaters.visibility = View.VISIBLE
-//            }
-//
-//
-//        }
+
+        var mapView = MapView(this)
+        var mapViewController = act_select_area_rl_map_view as ViewGroup
+        mapViewController.addView(mapView)
+
+        act_select_area_sw_map.setOnCheckedChangeListener{ buttonView, isChecked ->
+            if(isChecked) {
+                act_select_area_rl_map_view.visibility= View.VISIBLE
+                act_select_area_rv_theaters.visibility = View.GONE
+            }else {
+                act_select_area_rl_map_view.visibility= View.GONE
+                act_select_area_rv_theaters.visibility = View.VISIBLE
+            }
+
+
+        }
 
         act_select_area_cl_btn_next.setOnClickListener {
             val intent = Intent(this, GwanSelectActivity::class.java)
