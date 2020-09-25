@@ -5,6 +5,14 @@
 
 <mapper namespace="com.ssafy.howdomodo.mapper.TheatersMapper">
 	<select id="getAllSido" resultType="com.ssafy.howdomodo.domain.Cities">
-		select * from cities;
+		select * from cities
+	</select>
+	
+	<select id="getCityId" resultType="Integer">
+		select cityId from cities where siName=#{siName} AND guName=#{guName}
+	</select>
+	
+	<select id="getTheaterInfo" resultType="com.ssafy.howdomodo.domain.Theaters">
+		select * from theaters where cityId=#{cityId}
 	</select>
 </mapper>
