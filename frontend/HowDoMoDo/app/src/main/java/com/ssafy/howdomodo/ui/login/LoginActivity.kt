@@ -14,6 +14,7 @@ import com.google.gson.JsonParser
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.ui.bottomtap.BottomTabActivity
 import com.ssafy.howdomodo.ui.main.MainActivity
+import com.ssafy.howdomodo.ui.signup.SignupActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONObject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -81,7 +82,7 @@ class LoginActivity : AppCompatActivity() {
         when(view.id){
             R.id.act_login_btn ->{
                 if(Login_Control().edit_check()) {
-                    Toast.makeText(applicationContext, act_login_et_id.text.toString() + " , " + act_login_et_password.text.toString(), Toast.LENGTH_LONG).show()
+//                    Toast.makeText(applicationContext, act_login_et_id.text.toString() + " , " + act_login_et_password.text.toString(), Toast.LENGTH_LONG).show()
 
                     val loginJsonObject = JSONObject()
                     loginJsonObject.put("userName", act_login_et_id.text.toString())
@@ -89,9 +90,14 @@ class LoginActivity : AppCompatActivity() {
                     val body = JsonParser.parseString(loginJsonObject.toString()) as JsonObject
 //                    nameViewModel.login(body)
 
-                    val intent = Intent(this,BottomTabActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                    if (act_login_et_id.text.toString() == "test" && act_login_et_password.text.toString() == "test") {
+                        val intent = Intent(this, BottomTabActivity::class.java)
+                        startActivity(intent)
+                        finish()
+
+                    } else {
+                        Toast.makeText(this, "아이디 및 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
+                    }
 //                    Login_Control().POST_login(act_login_et_id.text.toString(), act_login_et_password.text.toString())
                 }
             }
@@ -104,7 +110,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun Signup_Click_Listener(view :View){
-        val goSignUpActivity = Intent(this@LoginActivity, MainActivity::class.java)
+        val goSignUpActivity = Intent(this@LoginActivity, SignupActivity::class.java)
         startActivity(goSignUpActivity)
 
     }
