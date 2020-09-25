@@ -165,7 +165,7 @@ class SelectAreaActivity : AppCompatActivity() {
 //
 //        }
 
-        act_select_area_bt_theater_selected.setOnClickListener {
+        act_select_area_cl_btn_next.setOnClickListener {
             val intent = Intent(this, GwanSelectActivity::class.java)
             startActivity(intent)
         }
@@ -182,11 +182,11 @@ class SelectAreaActivity : AppCompatActivity() {
 
         }
         if (token) {
-            act_select_area_bt_theater_selected.setBackgroundColor(Color.parseColor("#f73859"))
-            act_select_area_bt_theater_selected.isClickable = true
+            act_select_area_cl_btn_next.setBackgroundColor(Color.parseColor("#f73859"))
+            act_select_area_cl_btn_next.isClickable = true
         } else {
-            act_select_area_bt_theater_selected.setBackgroundColor(Color.parseColor("#aaaaaa"))
-            act_select_area_bt_theater_selected.isClickable = false
+            act_select_area_cl_btn_next.setBackgroundColor(Color.parseColor("#aaaaaa"))
+            act_select_area_cl_btn_next.isClickable = false
         }
     }
 }

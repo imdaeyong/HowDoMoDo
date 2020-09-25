@@ -81,7 +81,7 @@ class LoginActivity : AppCompatActivity() {
         when(view.id){
             R.id.act_login_btn ->{
                 if(Login_Control().edit_check()) {
-                    Toast.makeText(applicationContext, act_login_et_id.text.toString() + " , " + act_login_et_password.text.toString(), Toast.LENGTH_LONG).show()
+//                    Toast.makeText(applicationContext, act_login_et_id.text.toString() + " , " + act_login_et_password.text.toString(), Toast.LENGTH_LONG).show()
 
                     val loginJsonObject = JSONObject()
                     loginJsonObject.put("userName", act_login_et_id.text.toString())
