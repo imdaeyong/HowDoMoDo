@@ -85,11 +85,18 @@ WSGI_APPLICATION = 'backend_api.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+# spring.datasource.url=jdbc:mariadb://j3a305.p.ssafy.io/movie_project?useUnicode=yes&characterEncoding=UTF-8
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME' : 'movie_project',
+        'USER' : 'root',
+        'PASSWORD' : 't34mplay3r!',
+        'HOST' : 'j3a305.p.ssafy.io',
+        'PORT' : '3306'
     }
 }
 

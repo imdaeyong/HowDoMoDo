@@ -21,7 +21,3 @@ urlpatterns = [
     # path('admin/', admin.site.ulrs),
     path('api/', include('api.urls')),
 ]
-
-# backend - 스프링 REST (로그인, 회원)
-# frontend - 안드로이드 app
-# backend_api - 장고 REST (크롤링, 추천서비스)

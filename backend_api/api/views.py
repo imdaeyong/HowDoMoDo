@@ -3,15 +3,16 @@
 # from api import views
 from django.views import View
 from django.http import HttpResponse, JsonResponse
-from .crawling.tests import test, runCGV
-from .crawling import run
+from api.crawling.run import getTheaterTimesTables
 
-def test1(View):
-    theaters = test()
-    return JsonResponse(theaters, json_dumps_params={'ensure_ascii': True})
+from api.models import TheatersUrls
 
-class getTheaterInfo(View):
-    # brand
-    # theater
-    # date
-    pass
+def getTimesTables(View):
+    brand = 'lotte'
+    name = '강동'
+
+    theaters = TheatersUrls.objects.get(brand=brand, name=name)
+    test = getTheaterTimesTables(brand=brand, name=name, time='20200927')
+    print(test)
+    result = {'brand':theaters.brand, 'name':theaters.name, 'url':theaters.url}
+    return JsonResponse(result, json_dumps_params={'ensure_ascii': True})
