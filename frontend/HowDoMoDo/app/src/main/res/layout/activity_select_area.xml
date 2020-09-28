@@ -102,7 +102,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical" />
+            android:orientation="vertical"
+            android:visibility="invisible"
+            />
 
 
     </LinearLayout>
@@ -122,7 +124,7 @@
         android:layout_height="0dp"
         android:background="#FFFFFF"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/act_select_area_bt_theater_selected"
+        app:layout_constraintBottom_toTopOf="@id/act_select_area_cl_btn_next"
         app:layout_constraintStart_toStartOf="@id/act_select_area_ll_second_bar"
         app:layout_constraintTop_toBottomOf="@id/act_select_area_cl_empty">
 
@@ -149,10 +151,11 @@
             android:id="@+id/act_select_area_rv_theaters"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/act_select_area_sw_map" />
+            app:layout_constraintTop_toBottomOf="@id/act_select_area_sw_map"
+            />
 
 
         <RelativeLayout
@@ -185,16 +188,26 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
-        android:id="@+id/act_select_area_bt_theater_selected"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/act_select_area_cl_btn_next"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="#aaaaaa"
-        android:gravity="center"
-        android:text="시간 및 좌석 선택"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:background="@drawable/next_btn_not_complete"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/act_select_area_bt_theater_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="8sp"
+            android:text="영화관 선택"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.ssafy.howdomodo.ui.selectArea
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -9,9 +10,11 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.howdomodo.R
+import com.ssafy.howdomodo.`object`.ObjectMovie
 import com.ssafy.howdomodo.data.datasource.model.Gugun
 import com.ssafy.howdomodo.data.datasource.model.Sido
 import com.ssafy.howdomodo.data.datasource.model.Theater
+import com.ssafy.howdomodo.ui.gwanSelect.GwanSelectActivity
 import kotlinx.android.synthetic.main.activity_select_area.*
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
@@ -93,6 +96,10 @@ class SelectAreaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_area)
 
+        boolList[0]=false
+        boolList[1]=false
+        boolList[2]=false
+
         sidoAdapter = SidoAdapter(
             object : SidoAdapter.SidoViewHolder.SidoClickListener {
                 override fun onclick(position: Int, textView: TextView) {
@@ -101,10 +108,13 @@ class SelectAreaActivity : AppCompatActivity() {
                             sidoAdapter.setClicked(sidoAdapter.getClickedSido(), false)
                         }
                         boolList[0] = true
+                        act_select_rv_guguns.visibility = View.VISIBLE
                         sidoAdapter.setClicked(position, true)
                     } else if (sidoAdapter.getClicked(position)) {
                         sidoAdapter.setClicked(sidoAdapter.getClickedSido(), false)
                         boolList[0] = false
+                        act_select_rv_guguns.visibility = View.GONE
+
                     }
                     setButtonActive()
                 }
@@ -125,10 +135,13 @@ class SelectAreaActivity : AppCompatActivity() {
                             gugunAdapter.setClicked(gugunAdapter.getClickedGugun(), false)
                         }
                         boolList[1] = true
+                        act_select_area_rv_theaters.visibility = View.VISIBLE
                         gugunAdapter.setClicked(position, true)
                     } else if (gugunAdapter.getClicked(position)) {
                         gugunAdapter.setClicked(gugunAdapter.getClickedGugun(), false)
                         boolList[1] = false
+                        act_select_area_rv_theaters.visibility = View.INVISIBLE
+
                     }
                     setButtonActive()
                 }
@@ -151,6 +164,8 @@ class SelectAreaActivity : AppCompatActivity() {
                         boolList[2] = true
                         theaterAdapter.setClicked(position, true)
                     } else if (theaterAdapter.getClicked(position)) {
+                        ObjectMovie.movieTheater =
+                            theaterAdapter.theaterData[position].kind + " " + theaterAdapter.theaterData[position].name
                         theaterAdapter.setClicked(theaterAdapter.getClickedTheater(), false)
                         boolList[2] = false
                     }
@@ -171,6 +186,7 @@ class SelectAreaActivity : AppCompatActivity() {
         mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.4874592, 127.0471432),true)
         mapView.setZoomLevel(7,true)
 
+        
         var marker = MapPOIItem()
         marker.itemName = "MegaBox"
         marker.tag = 0
@@ -198,29 +214,13 @@ class SelectAreaActivity : AppCompatActivity() {
                 act_select_area_rv_theaters.visibility = View.VISIBLE
             }
         }
+
+
+        act_select_area_cl_btn_next.setOnClickListener {
+            val intent = Intent(this, GwanSelectActivity::class.java)
+            startActivity(intent)
+        }
     }
-
-//        for(i in theaterList.indices){
-//            addMarker(theaterList[i])
-//        }
-//
-//
-//
-//    }
-//    var marker_view = LayoutInflater.from(this).inflate(R.layout.activity_select_area, null)
-//
-//    fun setCustomMarkerView() {
-//        var tag_marker = marker_view.findViewById(R.id.item_select_area_marker_tv_marker_1) as TextView
-//    }
-//
-//    private fun addMarker(theater: Theater) {
-//        var list : List<Theater>? = null
-//        var markerOptions = MarkerO
-//        if(theater.isSelectedMarker){
-//            tag_marker
-//        }
-//    }
-
 
     fun setButtonActive() {
         var token = true
@@ -232,9 +232,11 @@ class SelectAreaActivity : AppCompatActivity() {
             }
         }
         if (token) {
-            act_select_area_bt_theater_selected.setBackgroundColor(Color.parseColor("#f73859"))
+            act_select_area_cl_btn_next.setBackgroundColor(Color.parseColor("#f73859"))
+            act_select_area_cl_btn_next.isClickable = true
         } else {
-            act_select_area_bt_theater_selected.setBackgroundColor(Color.parseColor("#aaaaaa"))
+            act_select_area_cl_btn_next.setBackgroundColor(Color.parseColor("#aaaaaa"))
+            act_select_area_cl_btn_next.isClickable = false
         }
     }
 }

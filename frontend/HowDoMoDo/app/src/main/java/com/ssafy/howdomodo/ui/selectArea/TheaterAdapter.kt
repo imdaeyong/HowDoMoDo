@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.item_theater.view.*
 class TheaterAdapter(private val onclick: TheaterViewHolder.TheaterClickListener) :
     RecyclerView.Adapter<TheaterAdapter.TheaterViewHolder>() {
 
-    private val theaterData = ArrayList<Theater>()
+     val theaterData = ArrayList<Theater>()
 
 
     fun setTheaterData(newData: List<Theater>) {

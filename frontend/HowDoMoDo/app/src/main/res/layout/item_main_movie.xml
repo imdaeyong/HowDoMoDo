@@ -98,7 +98,7 @@
 
     <Button
         android:id="@+id/ll_main_btn_ticketing"
-        android:layout_height="wrap_content"
+        android:layout_height="34dp"
         android:layout_width="0dp"
         android:textSize="13sp"
         android:textColor="#ffffff"
