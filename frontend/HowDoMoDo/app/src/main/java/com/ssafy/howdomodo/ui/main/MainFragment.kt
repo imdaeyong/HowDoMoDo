@@ -7,10 +7,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +17,7 @@ import com.ssafy.howdomodo.`object`.ObjectMovie
 import com.ssafy.howdomodo.ui.Loading
 import com.ssafy.howdomodo.ui.selectArea.SelectAreaActivity
 import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.item_ticketing_dialog.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
@@ -56,15 +55,27 @@ class MainFragment : Fragment() {
         Loading.goLoading(view.context)
         mvm.getMovieData()
 
-
-        Log.d("TAEK", postList.size.toString())
         // RecyclerView Apapter
         mainAdapter = MainAdapter(object : MainViewHolder.ClickListener {
             override fun movieClick(position: Int) {
                 val movieTitle = mainAdapter.movieData[position].title
-                val intent = Intent(activity, SelectAreaActivity::class.java)
-                ObjectMovie.movieTitle = movieTitle
-                startActivity(intent)
+
+                // movieTitle을 Request 보내서 긍,부정 데이터를 받아온다.
+                val builder = AlertDialog.Builder(view.context)
+                val dialogView = layoutInflater.inflate(R.layout.item_ticketing_dialog, null)
+
+                builder.setView(dialogView)
+                    .setPositiveButton("예매") { dialogInterface, i ->
+//                        item_ticketing_dialog_positive_score.text =
+//                        item_ticketing_dialog_negative_score.text =
+                        val intent = Intent(activity, SelectAreaActivity::class.java)
+                        ObjectMovie.movieTitle = movieTitle
+                        startActivity(intent)
+                    }
+                    .setNegativeButton("취소") { dialogInterface, i ->
+                        /* 취소일 때 아무 액션이 없으므로 빈칸 */
+                    }
+                    .show()
             }
         })
         movieObserve(mainAdapter)
@@ -101,9 +112,8 @@ class MainFragment : Fragment() {
 //        act_main_spinner_posting.setSelection(0)
         Log.e("asdsad", postList.size.toString())
 
-        //아이템 선택 리스너
-
-
+        // Fragment Dialog URL
+        // https://youngest-programming.tistory.com/307
     }
 
     fun movieObserve(mainAdapter: MainAdapter) {
@@ -155,7 +165,7 @@ class MainFragment : Fragment() {
         })
     }
 
-    fun observe(postingAdapter: PostingAdapter){
+    fun observe(postingAdapter: PostingAdapter) {
         vm.blogData.observe(this, Observer {
             val blogList = it
             postingAdapter.setBlogItemList(blogList)
