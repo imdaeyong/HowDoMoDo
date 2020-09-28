@@ -7,7 +7,7 @@ import com.ssafy.howdomodo.data.datasource.remote.RemoteDataSource
 class LoginRepository(private val remoteDataSource: RemoteDataSource) {
     fun login(
         loginRequestBody: JsonObject,
-        success: (LoginResponse, String?) -> Unit,
+        success: (LoginResponse) -> Unit,
         fail: (Throwable) -> Unit
     ) = remoteDataSource.login(loginRequestBody, success, fail)
 }
