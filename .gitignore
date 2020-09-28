@@ -1,4 +1,45 @@
 /.metadata/
 
+<<<<<<< HEAD
 # tomcat config
 .Servers
+=======
+# Spring
+*.properties
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+
+### BigData ###
+*.csv
+*.xlsx
+*.json
+
+### mac ###
+*.DS_Store
