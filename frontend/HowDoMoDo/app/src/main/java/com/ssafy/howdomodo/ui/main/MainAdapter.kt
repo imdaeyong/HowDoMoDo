@@ -35,5 +35,4 @@ class MainAdapter(private val clickListener: MainViewHolder.ClickListener) :
             bind(item)
         }
     }
-
 }

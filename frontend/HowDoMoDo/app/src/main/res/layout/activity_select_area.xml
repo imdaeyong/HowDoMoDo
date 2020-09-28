@@ -102,7 +102,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical" />
+            android:orientation="vertical"
+            android:visibility="invisible"
+            />
 
 
     </LinearLayout>
@@ -149,10 +151,11 @@
             android:id="@+id/act_select_area_rv_theaters"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/act_select_area_sw_map" />
+            app:layout_constraintTop_toBottomOf="@id/act_select_area_sw_map"
+            />
 
 
         <RelativeLayout
@@ -164,11 +167,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/act_select_area_sw_map">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/act_select_area_rv_markers"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/act_select_area_rv_markers"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                />-->
+            <TextView
+                android:id="@+id/item_select_area_marker_tv_marker_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/cgv_marker"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         </RelativeLayout>
 

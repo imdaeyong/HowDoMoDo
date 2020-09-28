@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ssafy.howdomodo">
-
-    <uses-permission android:name="android.permission.INTERNET" />
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the "MyLocation" functionality.
+    -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".di.Application"
@@ -15,10 +20,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.mypage.privates.PrivateActivity"></activity>
-        <activity android:name=".ui.LoadingActivity"
-            android:theme="@style/Transparent"></activity>
-        <activity android:name=".ui.main.WebviewActivity"></activity>
+        <activity android:name=".ui.selectArea.SelectTheaterActivity"></activity>
+        <activity android:name=".ui.mypage.privates.PrivateActivity" />
+        <activity
+            android:name=".ui.LoadingActivity"
+            android:theme="@style/Transparent" />
+        <activity android:name=".ui.main.WebviewActivity" />
         <activity android:name=".ui.gwanSelect.GwanSelectActivity" />
         <activity android:name=".ui.signup.SignupActivity" />
         <activity android:name=".ui.main.MainActivity" />
@@ -34,8 +41,7 @@
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="0142d74e7b5714bfa92eb59c786d5fd4" />
-
+            android:value="5f64fe00cb27d83e5d796cf77e70959b" />
     </application>
 
 </manifest>
