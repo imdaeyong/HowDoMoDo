@@ -5,27 +5,60 @@
 '''
 
 from bs4 import BeautifulSoup
-import time
 from selenium import webdriver
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.common.keys import Keys
 
-def parseLotte(html):
+import time as time
+import platform
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+def get_browser():
+    # local browser path
+    local_path = '/Users/c0re/Documents/lab/sub2/phantomjs-2.1.1-macosx/bin/phantomjs'
+    remote_path = "/home/ubuntu/selenium/phantomjs-2.1.1-linux-x86_64/bin/phantomjs"
+    system = platform.system()
+
+    if system == 'Linux':
+        return webdriver.PhantomJS(remote_path)
+        # return webdriver.Remote('http://127.0.0.1:4444/wd/hub', DesiredCapabilities.CHROME)
+    else :
+        return webdriver.PhantomJS(local_path)
+
+
+def get_brand_url(brand, url):
+    brand_url = ''
+    if brand == 'lotte':
+        brand_url = 'https://www.lottecinema.co.kr/NLCHS/Cinema/Detail?'
+
+    elif brand == 'cgv':
+        brand_url = 'http://www.cgv.co.kr/'
+
+    elif brand == 'mega':
+        brand_url = 'https://www.megabox.co.kr/'
+
+    return brand_url + url
+
+
+def parse_lotte(html):
     lotte_theater_info = []  # return list
     soup = BeautifulSoup(html, "lxml")
     body = soup.body
 
-    div_time_select_wrap = body.find('div', attrs={'id': 'timeTable'}).find_all('div',
-                                                                                attrs={'class': 'time_select_wrap'})
+    div_time_select_wrap = body.find('div', attrs={'id': 'timeTable'})\
+                                .find_all('div',attrs={'class': 'time_select_wrap'})
 
     for div_time_select in div_time_select_wrap:
         div_movie_info = div_time_select.find('div', attrs={'class': 'list_tit'})
 
         # grade, title
-        grade = div_movie_info.find("span").text
-        title = div_movie_info.find("p").text
-
+        grade = div_movie_info[0].find("span").text
+        title = div_movie_info[0].find("p").text
         # screen
         screen = ",".join([_.text for _ in div_time_select.find_all("ul")[0].find_all("li")])
-
         # start_time, seat_count, hall
         li_theater_info_list = div_time_select.find_all("ul")[1]
 
@@ -52,19 +85,21 @@ def parseLotte(html):
             theater_info["seat_count"] = seat_count
             theater_info["seat_total"] = seat_total
             theater_info["hall"] = hall
+            print('dict: {}'.format(theater_info))
             lotte_theater_info.append(theater_info)
 
     return lotte_theater_info
 
-def parseCGV(html):
+
+def parse_cgv(html):
     cgv_theater_info_dict = {}  # return value
     theater_info_list = []
 
     soup = BeautifulSoup(html, 'lxml')
     body = soup.body
-    li_showtimes = body.find('div', attrs={'class': 'showtimes-wrap'}).find('div',
-                                                                            attrs={'class': 'sect-showtimes'}).find(
-        'ul').find_all('li', recursive=False)
+    li_showtimes = body.find('div', attrs={'class': 'showtimes-wrap'})\
+                        .find('div', attrs={'class': 'sect-showtimes'})\
+                        .find('ul').find_all('li', recursive=False)
 
     for li_showtime in li_showtimes:
         div_info_movie = li_showtime.find('div', attrs={'class': 'info-movie'})
@@ -99,7 +134,7 @@ def parseCGV(html):
     cgv_theater_info_dict['theaters'] = theater_info_list
     return cgv_theater_info_dict
 
-def parseMega(html):
+def parse_mega(html):
     mega_theater_info_dict = {}  # return value
     theater_info_list = []
 
@@ -127,8 +162,8 @@ def parseMega(html):
             for td_theater in td_theaters:
                 theater_info_dict = {}
                 # start_time, seat_count
-                start_time = td_theaters[0].find('p', attrs={'class': 'time'}).text
-                seat_count = td_theaters[0].find('p', attrs={'class': 'chair'}).text
+                start_time = td_theater.find('p', attrs={'class': 'time'}).text
+                seat_count = td_theater.find('p', attrs={'class': 'chair'}).text
                 # build theater
                 theater_info_dict['title'] = title
                 theater_info_dict['hall'] = hall
@@ -141,21 +176,153 @@ def parseMega(html):
     mega_theater_info_dict['theaters'] = theater_info_list
     return mega_theater_info_dict
 
-def getTheaterTimesTables(brand, name, time):
+
+def parse_naver(brand, name, title, day):
+    # brand(lotte, mega)
     brand = brand.lower()
+    # re brand, name
     if brand == 'lotte':
-        # lotter parse
-        pass
-
-    elif brand == 'cgv':
-        # cgv parse
-        pass
-
-    elif brand == 'mege':
-        # mega parse
-        pass
-
+        brand = '롯데시네마'
+        name = brand+'-'+name
     else :
-        pass
+        brand = '메가박스'
+        name = brand+' '+name
 
-    return 'run test getTimesTables'
+    url = 'https://ticket.movie.naver.com/Ticket/Reserve.aspx'
+    browser = get_browser()
+
+    try :
+
+        browser.get(url)
+        browser.implicitly_wait(10)
+
+        # step1. movie choice
+        # step1-1. get movie list
+        html = browser.page_source
+        soup = BeautifulSoup(html, 'lxml')
+        body = soup.body
+        movie_title_list = [_['title'] for _ in body.find('div', attrs={'id':'mlist'}).find('ul').find_all('li', recursive=False)]
+
+        if title in movie_title_list:
+            mIdx = movie_title_list.index(title)
+        else:
+            mIdx = 0 # testing code
+
+        elmt_mlist = browser.find_elements_by_xpath("//div[@id='mlist']/ul/li")
+        # step1-2. movie click
+        elmt_mlist[mIdx].click()
+
+        # step2. theater choice
+        # step2-1. theater list
+        html = browser.page_source
+        soup = BeautifulSoup(html, 'lxml')
+        body = soup.body
+        dl_area_list = body.find('div', attrs={'id':'area_tlist'}).find_all('dl')
+
+        areaIdx = 0
+        theaterIdx = 0
+        for idx, dl_area in enumerate(dl_area_list):
+            area = dl_area.find('dt').text
+            li_theaters = [_.find('em').contents[0] for _ in dl_area.find('dd').find('ul').find_all('li')]
+
+            if name in li_theaters:
+                areaIdx = idx
+                theaterIdx = li_theaters.index(name)
+        # step2-2. theater click
+        browser.find_elements_by_xpath("//div[@id='area_tlist']/dl")[areaIdx].find_elements_by_xpath("/dd/ul/li")[theaterIdx].click()
+
+        # step3. date choice
+        html = browser.page_source
+        soup = BeautifulSoup(html, 'lxml')
+        body = soup.body
+        tr_list = body.find('div', attrs={'id':'calendar'}).find('table').find('tbody').find_all('tr')
+        weekIdx = 0
+        for idx, tr_calendar in enumerate(tr_list):
+            tr_calendar.find_all('td', attrs={''})
+            if len(tr_calendar) > 0:
+                weekIdx = idx
+                day_list = ['{0:>02s}'.format(_.find('a').text) for _ in tr_list[weekIdx].find_all('td', attrs={'class': 'enable'})]
+                dayIdx = day_list.index(day[-2:])
+                break
+
+        if 'day_list' in globals():
+            # date click
+            browser.find_elements_by_xpath("//div[@id='calendar']/table/tbody/tr")[weekIdx].find_elements_by_xpath('td')[dayIdx].click()
+
+        html = browser.page_source
+        print(html)
+
+        return {'titles' : movie_title_list}
+
+    finally:
+        browser.quit()
+
+
+def get_theater_timestables(brand, url, stime):
+
+    brand = brand.lower()
+    url = get_brand_url(brand, url)
+    result = None
+    browser = get_browser()
+    browser.implicitly_wait(5)
+
+    try:
+        if brand == 'cgv':
+
+            if url[-1] != '=' :
+                pass
+
+            else :
+                url += stime
+                check_elmt = None
+
+                while check_elmt is None:
+                    browser.get(url)
+                    time.sleep(1)
+                    browser.implicitly_wait(10)
+                    ifrm_movie_time_table = browser.find_element_by_id("ifrm_movie_time_table")
+                    browser.switch_to_frame(ifrm_movie_time_table)
+                    browser.implicitly_wait(10)
+                    check_elmt = browser.find_elements_by_class_name('info-timetable')
+
+                html = browser.page_source
+                result = parse_cgv(html)
+                return result
+
+        elif brand == 'lotte':
+            # 계속 자바스크립트 모두 실행된 html 을 못받는 이슈!
+            check_elmt = None
+
+            while check_elmt is None:
+                browser.get(url)
+                time.sleep(3)
+                browser.implicitly_wait(10)
+                check_elmt = browser.find_element_by_id('contents')
+
+            html = browser.page_source
+            result = parse_lotte(html)
+
+        elif brand == 'mega':
+            check_elmt = None
+
+            while check_elmt is None:
+                browser.get(url)
+                time.sleep(1)
+                browser.implicitly_wait(10)
+                check_elmt = browser.find_element_by_id('contents')
+
+            html = browser.page_source
+            result = parse_mega(html)
+
+        return result
+
+    except Exception as e:
+        print(e)
+        logger.debug(e)
+
+    finally:
+        browser.quit()
+
+def get_tester():
+    result = parse_naver('lotte', '강동', '테넷', '20200928')
+    return result

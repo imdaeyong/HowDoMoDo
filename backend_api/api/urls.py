@@ -4,5 +4,6 @@ from . import views
 app_name = 'api'
 
 urlpatterns = [
-    path('timestables', views.getTimesTables),
+    path('a', views.tester),
+    path('timestables/<brand>/<name>/<stime>', views.get_times_tables),
 ]
