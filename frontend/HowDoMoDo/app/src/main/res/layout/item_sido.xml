@@ -4,7 +4,7 @@
     android:id="@+id/item_sido_cl_box"
     android:layout_width="match_parent"
     android:layout_height="40dp"
-    android:background="@drawable/select_area_tv_border">
+    >
 
     <TextView
         android:id="@+id/item_sido_tv_city"
