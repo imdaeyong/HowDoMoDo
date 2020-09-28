@@ -36,4 +36,9 @@
     <update id="updatePwd">
     	UPDATE users SET userPw = #{userPw} WHERE userEmail=#{userEmail}
     </update>
+    
+    <!-- 회원탈퇴 -->
+    <delete id="deleteByUserCode">
+    	DELETE FROM users where userCode=#{userCode}
+    </delete>
 </mapper>
