@@ -1,17 +1,9 @@
-/.metadata/
-
-# tomcat config
-.Servers
-
 HELP.md
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
-
-# Spring
-*.properties
 
 ### STS ###
 .apt_generated
@@ -40,12 +32,3 @@ out/
 
 ### VS Code ###
 .vscode/
-
-
-### BigData ###
-*.csv
-*.xlsx
-*.json
-
-### mac ###
-*.DS_Store
