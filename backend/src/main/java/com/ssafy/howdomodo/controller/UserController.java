@@ -35,10 +35,7 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin(origins = "*")
 @RequestMapping("/users")
 public class UserController {
-	
-	private static final String SUCCESS = "success";
-	private static final String FAIL = "fail";
-	
+
 //	private final PasswordEncoder passwordEncoder;
 //	private final JwtTokenProvider jwtTokenProvider;
 	

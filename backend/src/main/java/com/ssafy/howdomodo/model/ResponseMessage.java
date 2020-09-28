@@ -31,7 +31,13 @@ public class ResponseMessage {
     public static final String UNAUTHORIZED = "인증 실패";
     public static final String FORBIDDEN = "인가 실패";
     public static final String TOKEN_REFRESH = "토큰 갱신 성공";
-
+    
+    public static final String SEARCH_SIDO_INFO_SUCCESS = "시도구군 정보 조회 성공";
+    public static final String SEARCH_SIDO_INFO_FAIL = "시도구군 정보 조회 실패";
+    
+    public static final String SEARCH_THEATERS_INfO_NONE = "영화관 정보 없음";
+    public static final String SEARCH_THEATERS_INFO_SUCCESS = "영화관 정보 조회 성공";
+    
     public static final String INTERNAL_SERVER_ERROR = "서버 내부 에러";
     public static final String SERVICE_UNAVAILABLE = "현재 서비스를 사용하실 수 없습니다. 잠시후 다시 시도해 주세요.";
 

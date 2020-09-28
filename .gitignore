@@ -1,9 +1,15 @@
 /.metadata/
 
-<<<<<<< HEAD
 # tomcat config
 .Servers
-=======
+
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
 # Spring
 *.properties
 
@@ -34,7 +40,6 @@ out/
 
 ### VS Code ###
 .vscode/
-
 
 ### BigData ###
 *.csv
