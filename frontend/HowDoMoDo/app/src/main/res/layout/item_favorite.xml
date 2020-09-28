@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginBottom="2dp"
+    android:background="#0F1215">
+
+    <ImageView
+        android:id="@+id/item_select_area_theater_iv_photo"
+        android:layout_width="37dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="22dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_select_area_theater_tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/noto_sans_kr_medium"
+        android:lineSpacingExtra="6sp"
+        android:text="CGV"
+        android:textColor="#FFFFFF"
+        android:textSize="13sp"
+        app:layout_constraintStart_toEndOf="@id/item_select_area_theater_iv_photo"
+        app:layout_constraintTop_toTopOf="@id/item_select_area_theater_iv_photo" />
+
+    <TextView
+        android:id="@+id/item_select_area_theater_tv_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_kr_regular"
+        android:lineSpacingExtra="6sp"
+        android:text="3.5km"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/item_select_area_theater_iv_photo"
+        app:layout_constraintStart_toStartOf="@id/item_select_area_theater_tv_name" />
+
+    <ImageView
+        android:id="@+id/item_select_area_theater_iv_booking"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:layout_marginEnd="19dp"
+        android:src="@drawable/star_clicked"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/item_Theater_view_under_bar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/item_Theater_view_under_bar"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginEnd="19dp"
+        android:background="#8e8787"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/item_select_area_theater_iv_photo" />
+</androidx.constraintlayout.widget.ConstraintLayout>

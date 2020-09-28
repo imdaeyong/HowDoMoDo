@@ -1,5 +1,6 @@
 package com.ssafy.howdomodo.ui.gwanSelect
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,26 @@ class GwanAdapter : RecyclerView.Adapter<GwanViewHolder>() {
 
     fun setGwanListener(listener: GwanViewHolder.ClickListener) {
         this.listener = listener
+    }
+
+    fun getClickedMovieTime(): ArrayList<Int>? {
+        val list = ArrayList<Int>()
+        Log.e("data:",GwanAdapter.gwanData.toString())
+        for (i in GwanAdapter.gwanData.indices) {
+            for (j in GwanAdapter.gwanData[i].times.indices) {
+                if (GwanAdapter.gwanData[i].times[j].isClicked) {
+                    list.add(i)
+                    list.add(j)
+                    return list
+                }
+            }
+        }
+        return null
+    }
+
+    fun setClicked(parentPosition: Int, position: Int, status: Boolean) {
+        GwanAdapter.gwanData[parentPosition].times[position].isClicked = status
+        notifyDataSetChanged()
     }
 
     fun setGwanData(newData: List<Gwan>) {
@@ -55,10 +76,15 @@ class GwanViewHolder(itemView: View, private val listener: ClickListener) : Recy
             override fun timeClick(position: Int, parentPosition: Int) {
                 if (!movieTimeAdapter.getClicked(parentPosition, position)) {
                     val clicked = movieTimeAdapter.getClickedMovieTime()
-                    if (clicked != null) {
+                    if (clicked == null) {
+                        movieTimeAdapter.setClicked(parentPosition, position, true)
+                    } else {
                         movieTimeAdapter.setClicked(clicked[0], clicked[1], false)
+                        movieTimeAdapter.setClicked(parentPosition, position, true)
                     }
-                    movieTimeAdapter.setClicked(parentPosition, position, true)
+                    listener.onClick()
+                }else{
+                    movieTimeAdapter.setClicked(parentPosition, position, false)
                     listener.onClick()
                 }
             }

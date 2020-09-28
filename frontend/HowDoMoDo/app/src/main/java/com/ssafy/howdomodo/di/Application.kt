@@ -12,10 +12,12 @@ class Application : Application() {
         startKoin {
 
             androidContext(this@Application)
-            modules(listOf(
+            modules(listOf(naverRemoteDataAppModule,
+                movieRemoteDataAppModule,
                     remoteDataSourceAppModule,
                     repositoryAppModule,
-                    viewModelAppModule))
+                    viewModelAppModule,
+            ))
         }
     }
 }
