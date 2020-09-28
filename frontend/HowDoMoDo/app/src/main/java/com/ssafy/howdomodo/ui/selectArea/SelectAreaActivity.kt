@@ -20,6 +20,7 @@ import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 
+
 class SelectAreaActivity : AppCompatActivity() {
 
     companion object {
@@ -96,9 +97,9 @@ class SelectAreaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_area)
 
-        boolList[0]=false
-        boolList[1]=false
-        boolList[2]=false
+        boolList[0] = false
+        boolList[1] = false
+        boolList[2] = false
 
         sidoAdapter = SidoAdapter(
             object : SidoAdapter.SidoViewHolder.SidoClickListener {
@@ -183,19 +184,36 @@ class SelectAreaActivity : AppCompatActivity() {
         //Maps
         var mapView = MapView(this)
         var mapViewController = act_select_area_rl_map_view as ViewGroup
-        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.4874592, 127.0471432),true)
-        mapView.setZoomLevel(7,true)
+        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.4874592, 127.0471432), true)
+        mapView.setZoomLevel(7, true)
 
-        
-        var marker = MapPOIItem()
-        marker.itemName = "MegaBox"
-        marker.tag = 0
-        marker.mapPoint = MapPoint.mapPointWithGeoCoord(37.4874592, 127.0471432)
-        marker.markerType = MapPOIItem.MarkerType.BluePin
-        marker.selectedMarkerType = MapPOIItem.MarkerType.RedPin
-        mapView.addPOIItem(marker)
-        marker.customImageResourceId = R.drawable.cgv
 
+        for (i in theaterList.indices) {
+            var t = theaterList[i]
+            var marker = MapPOIItem()
+            marker.itemName = t.kind + " " + t.name
+            marker.tag = 0
+            marker.mapPoint = MapPoint.mapPointWithGeoCoord(t.theater_lat, t.theater_lng)
+            marker.markerType = MapPOIItem.MarkerType.CustomImage
+            marker.selectedMarkerType = MapPOIItem.MarkerType.RedPin
+
+            marker.setCustomImageResourceId(R.drawable.cgv_marker)
+            marker.isCustomImageAutoscale=false
+            marker.setCustomImageAnchor(0.5f, 1.0f)
+
+
+            mapView.addPOIItem(marker)
+        }
+
+
+//        var marker = MapPOIItem()
+//        marker.itemName = "MegaBox"
+//        marker.tag = 0
+//        marker.mapPoint = MapPoint.mapPointWithGeoCoord(37.4874592, 127.0471432)
+//        marker.markerType = MapPOIItem.MarkerType.BluePin
+//        marker.selectedMarkerType = MapPOIItem.MarkerType.RedPin
+//        mapView.addPOIItem(marker)
+//        marker.customImageResourceId = R.drawable.cgv
 
 
         mapViewController.addView(mapView)
