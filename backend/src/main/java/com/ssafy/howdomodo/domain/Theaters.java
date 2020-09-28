@@ -1,7 +1,5 @@
 package com.ssafy.howdomodo.domain;
 
-import java.util.Date;
-
 import org.springframework.stereotype.Repository;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -17,15 +15,13 @@ import lombok.Setter;
 @Setter
 @Repository
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Users{
-
-	private int userCode;
-	private String userEmail;
-	private String userName;
-	private String userNick;
-	private String userPw;
-	private int userGender;
-	private Date userBirth;
+public class Theaters {
 	
+	private int theaterId;
+	private int cityId;
+	private String theaterName;
+	private String theaterBrand;
+	private float theaterLat;
+	private float theaterLon;
 	
 }
