@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.howdomodo.domain.Cities;
+import com.ssafy.howdomodo.domain.FavoriteTheaters;
 import com.ssafy.howdomodo.domain.Theaters;
 import com.ssafy.howdomodo.mapper.TheatersMapper;
 
@@ -47,6 +48,40 @@ public class TheaterServiceImpl implements TheaterService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	@Override
+	public int addFavTheaters(FavoriteTheaters favoriteTheaters) {
+		try {
+			int res = theaterMapper.addFavTheaters(favoriteTheaters);
+			return res;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
+
+	@Override
+	public List<FavoriteTheaters> getFavList(int userCode) {
+		try {
+			List<FavoriteTheaters> list = theaterMapper.getFavList(userCode);
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public int deleteFavTheaters(int userCode, int theaterId) {
+		try {
+			int res = theaterMapper.deleteFavTheaters(userCode, theaterId);
+			return res;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1;
 		}
 	}
 
