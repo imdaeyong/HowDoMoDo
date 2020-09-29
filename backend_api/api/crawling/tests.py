@@ -5,10 +5,3 @@ from selenium.webdriver.common.keys import Keys
 
 import time as time
 import platform
-
-def parse_naver(brand, name, title, day):
-    try:
-        pass
-
-    finally:
-        pass
