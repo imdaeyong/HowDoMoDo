@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ import androidx.lifecycle.Observer
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import com.ssafy.howdomodo.R
+import com.ssafy.howdomodo.`object`.UserCollection
 import com.ssafy.howdomodo.ui.bottomtap.BottomTabActivity
 import com.ssafy.howdomodo.ui.main.MainActivity
 import com.ssafy.howdomodo.ui.signup.SignupActivity
@@ -46,8 +48,12 @@ class LoginActivity : AppCompatActivity() {
         })
         nameViewModel.loginResponse.observe(this, Observer {
             // TODO: 2020/09/16 로그인 통신이 성공했을때의 로직을 짜라.
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, BottomTabActivity::class.java)
 //            intent.putExtra("email", it.data.email)
+            UserCollection.userEmail = it.data!!.userEmail
+            UserCollection.userName = it.data.userName
+            UserCollection.userNick = it.data.userNick
+            Log.e("asdf",UserCollection.userEmail.toString())
             startActivity(intent)
             finish()
 
