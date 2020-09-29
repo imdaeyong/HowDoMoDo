@@ -22,8 +22,11 @@ def split_movies_by_no(title, response):
             for timetable in timetables:
                 dict_theater = {}
                 dict_theater['title'] = title
-                dict_theater['time'] = timetable[0]
-                dict_theater['count'] = timetable[1]
+                dict_theater['screen'] = timetable[0]
+                dict_theater['hall'] = timetable[1]
+                dict_theater['time'] = timetable[2]
+                dict_theater['count'] = timetable[3]
+                dict_theater['total'] = timetable[4]
                 result.append(dict_theater)
     return result
 
@@ -42,7 +45,11 @@ def get_time_table(movies):
     for movie in movies:
         time = movie["playStartTime"]
         seats = movie["restSeatCnt"]
-        tuple = (time, seats)
+        screen = movie["playKindNm"]
+        hall = movie["theabExpoNm"]
+        total = movie["totSeatCnt"]
+        tuple = (screen, hall, time, seats, total)
+        # print(tuple) # test code
         tuples.append(tuple)
     return tuples
 
@@ -65,5 +72,5 @@ def run(title, brchNo, date):
 
 
 if __name__ == "__main__":
-    test = run('그린랜드', '1372', '20200929') # test run
+    test = run('담보', '1372', '20200929') # test run
     print(test)
