@@ -84,4 +84,15 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public int deleteUser(int userCode) {
+		try {
+			int res = userMapper.deleteByUserCode(userCode);
+			return res;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}
+	}
+
 }
