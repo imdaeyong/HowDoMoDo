@@ -26,12 +26,13 @@
             android:name=".ui.LoadingActivity"
             android:theme="@style/Transparent" />
         <activity android:name=".ui.main.WebviewActivity" />
+        <activity android:name=".ui.theater.TheaterActivity" />
         <activity android:name=".ui.gwanSelect.GwanSelectActivity" />
         <activity android:name=".ui.signup.SignupActivity" />
-        <activity android:name=".ui.main.MainActivity" />
+        <activity android:name=".ui.login.LoginActivity" />
         <activity android:name=".ui.selectArea.SelectAreaActivity" />
         <activity android:name=".ui.bottomtap.BottomTabActivity" />
-        <activity android:name=".ui.login.LoginActivity">
+        <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
