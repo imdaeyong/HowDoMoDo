@@ -78,19 +78,19 @@ class TheaterAdapter(private val onclick: TheaterViewHolder.TheaterClickListener
 
 
         fun bind(data: Theater) {
-            var distance = data.distance + "km"
-            var name = data.kind + " " + data.name
-            var theater_lat = data.theater_lat
-            var theater_lng = data.theater_lng
+            var name = data.theaterBrand + " " + data.theaterName
+            var address = data.theaterAddress
+            var theater_lat = data.theaterLat
+            var theater_lng = data.theaterLng
 
             itemView.item_select_area_theater_tv_name.text = name
-            itemView.item_select_area_theater_tv_distance.text = distance
+            itemView.item_select_area_theater_tv_distance.text = address
 
-            if (data.kind == "CGV") {
+            if (data.theaterBrand == "CGV") {
                 itemView.item_select_area_theater_iv_photo.setImageResource(R.drawable.cgv)
-            }else if(data.kind == "메가박스") {
+            }else if(data.theaterBrand == "메가박스") {
                 itemView.item_select_area_theater_iv_photo.setImageResource(R.drawable.megabox)
-            }else if(data.kind == "롯데시네마") {
+            }else if(data.theaterBrand == "롯데시네마") {
                 itemView.item_select_area_theater_iv_photo.setImageResource(R.drawable.lottecinema)
             }
 

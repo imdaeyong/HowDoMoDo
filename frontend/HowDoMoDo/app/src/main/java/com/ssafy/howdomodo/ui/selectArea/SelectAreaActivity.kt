@@ -18,7 +18,6 @@ import com.ssafy.howdomodo.data.datasource.model.Gugun
 import com.ssafy.howdomodo.data.datasource.model.Sido
 import com.ssafy.howdomodo.data.datasource.model.Theater
 import com.ssafy.howdomodo.ui.gwanSelect.GwanSelectActivity
-import com.ssafy.howdomodo.ui.selectArea.SelectAreaActivity.Companion.boolList
 import kotlinx.android.synthetic.main.activity_select_area.*
 import net.daum.mf.map.api.CalloutBalloonAdapter
 import net.daum.mf.map.api.MapPOIItem
@@ -33,17 +32,16 @@ class SelectAreaActivity : AppCompatActivity() {
     }
 
     var theaterList = arrayListOf<Theater>(
-        Theater("CGV", "강남1점", "5", false, 37.4874592, 127.0471432, false),
-        Theater("CGV", "강남2점", "6", false, 37.516363, 127.0219782, false),
-        Theater("메가박스", "강남1점", "5", false, 37.5004008, 127.0270069, false),
-        Theater("메가박스", "강남2점", "4", false, 37.5128784, 127.0572911, false),
-        Theater("롯데시네마", "강남1점", "1", false, 37.5016424, 127.0263372, false),
-        Theater("롯데시네마", "강남2점", "2", false, 37.5243393, 127.0294194, false),
-        Theater("롯데시네마", "강남3점", "3", false, 37.5228972, 127.0370162, false),
-        Theater("CGV", "강남1점", "5", false, 37.5243393, 127.0294194, false),
+        Theater(1246, 175, "브로드웨이(신사)", "서울특별시 강남구 논현동 도산대로 8길 8", "롯데시네마",37.5164,127.022),
+        Theater(1247, 175, "도곡", "서울특별시 강남구 도곡동 174-3", "롯데시네마",37.4875,127.047),
+        Theater(1248,175,"청남씨네시티","서울특별시 강남구 도산대로 323, 씨네시티빌딩 14층","CGV",37.5229,127.037),
+        Theater(1249,175,"코엑스","서울특별시 강남구 삼성1동 봉은사로 524","메가박스",37.5129,127.057),
+        Theater(1250,175,"압구정","서울특별시 강남구 신사동 압구정로30길 45","CGV",37.5243,127.029),
+        Theater(1251,175,"de CHEF 압구정","서울특별시 강남구 신사동 압구정로30길 45","CGV",37.5243,127.029),
+        Theater(1252,175,"씨티(강남대로)","서울특별시 강남구 역삼1동 강남대로 422","메가박스",37.5004,127.027),
+        Theater(1253,175,"강남","서울특별시 강남구 역삼동 강남대로 438","CGV",37.5016,127.026),
 
-
-        )
+    )
 
     var sidoList = arrayListOf<Sido>(
         Sido("서울", false),
@@ -119,7 +117,7 @@ class SelectAreaActivity : AppCompatActivity() {
                     } else if (sidoAdapter.getClicked(position)) {
                         sidoAdapter.setClicked(sidoAdapter.getClickedSido(), false)
                         boolList[0] = false
-                        act_select_rv_guguns.visibility = View.GONE
+                        act_select_rv_guguns.visibility = View.
 
                     }
                     setButtonActive()
@@ -171,7 +169,7 @@ class SelectAreaActivity : AppCompatActivity() {
                         theaterAdapter.setClicked(position, true)
                     } else if (theaterAdapter.getClicked(position)) {
                         ObjectMovie.movieTheater =
-                            theaterAdapter.theaterData[position].kind + " " + theaterAdapter.theaterData[position].name
+                            theaterAdapter.theaterData[position].theaterBrand + " " + theaterAdapter.theaterData[position].theaterName
                         theaterAdapter.setClicked(theaterAdapter.getClickedTheater(), false)
                         boolList[2] = false
                     }
@@ -196,18 +194,20 @@ class SelectAreaActivity : AppCompatActivity() {
         for (i in theaterList.indices) {
             var t = theaterList[i]
             var marker = MapPOIItem()
-            marker.itemName = t.kind + " " + t.name
-            marker.tag = 0
-            marker.mapPoint = MapPoint.mapPointWithGeoCoord(t.theater_lat, t.theater_lng)
+            marker.itemName = t.theaterBrand + " " + t.theaterName
+            marker.tag = t.theaterId
+            marker.mapPoint = MapPoint.mapPointWithGeoCoord(t.theaterLat, t.theaterLng)
             marker.markerType = MapPOIItem.MarkerType.CustomImage
             marker.setCustomImageResourceId(R.drawable.cgv_marker_unselected)
+            marker.userObject = t
+
 
             marker.selectedMarkerType = MapPOIItem.MarkerType.CustomImage
             marker.customSelectedImageResourceId = R.drawable.cgv_marker
-            marker.isCustomImageAutoscale=false
+            marker.isCustomImageAutoscale = false
             marker.setCustomImageAnchor(0.5f, 1.0f)
 
-            mapView.setCalloutBalloonAdapter(CustomInfoWindow(context = this))
+            mapView.setCalloutBalloonAdapter(CustomInfoWindow(context=this,theater=t))
 
             mapView.addPOIItem(marker)
             mapView.fitMapViewAreaToShowAllPOIItems()
@@ -236,7 +236,6 @@ class SelectAreaActivity : AppCompatActivity() {
         }
 
 
-
     }
 
     fun setButtonActive() {
@@ -256,27 +255,35 @@ class SelectAreaActivity : AppCompatActivity() {
             act_select_area_cl_btn_next.isClickable = false
         }
     }
-    class CustomInfoWindow(private val context: Context) : CalloutBalloonAdapter {
+
+    class CustomInfoWindow(private val context: Context, val theater: Theater) :
+        CalloutBalloonAdapter {
         lateinit var mCalloutBalloon: View
+        var t = theater
 
         init {
-            mCalloutBalloon = LayoutInflater.from(context).inflate(R.layout.item_custom_infowindow, null)
-        }
-
-        fun CustomInfoWindow() {
-
+            mCalloutBalloon =
+                LayoutInflater.from(context).inflate(R.layout.item_custom_infowindow, null)
         }
 
 
         override fun getCalloutBalloon(poiItem: MapPOIItem): View {
-            (mCalloutBalloon.findViewById<View>(R.id.item_infowindow_iv_theater_image) as ImageView).setImageResource(
-                R.drawable.ic_launcher
-            )
-            (mCalloutBalloon.findViewById<View>(R.id.item_infowindow_tv_theater_title) as TextView).text =
-                poiItem.itemName
-            (mCalloutBalloon.findViewById<View>(R.id.item_infowindow_tv_theater_desc) as TextView).text =
-                "Custom CalloutBalloon"
-            Log.e("hihi",poiItem.toString())
+            var theater_img = R.drawable.ic_launcher
+
+            if (poiItem.itemName.contains("CGV")) {
+                theater_img = R.drawable.cgv
+            } else if (poiItem.itemName.contains("메가박스")) {
+                theater_img = R.drawable.megabox
+            } else if (poiItem.itemName.contains("롯데시네마")){
+                theater_img = R.drawable.lottecinema
+            }else {
+                theater_img = R.drawable.ic_launcher
+            }
+
+
+            (mCalloutBalloon.findViewById<View>(R.id.item_infowindow_iv_theater_image) as ImageView).setImageResource(theater_img)
+            (mCalloutBalloon.findViewById<View>(R.id.item_infowindow_tv_theater_title) as TextView).text = poiItem.itemName
+            (mCalloutBalloon.findViewById<View>(R.id.item_infowindow_tv_theater_desc) as TextView).text = ((poiItem.userObject) as Theater).theaterAddress
             return mCalloutBalloon
         }
 
