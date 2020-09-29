@@ -286,35 +286,48 @@
             app:layout_constraintStart_toStartOf="@+id/act_sign_up_tv_place_sex"
             app:layout_constraintTop_toBottomOf="@+id/act_sign_up_tv_place_sex">
 
-            <TextView
-                android:id="@+id/act_sign_up_tv_sex_female"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/act_sign_up_cl_gender_female"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="여성"
-                android:gravity="center"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/act_sign_up_tv_sex_male"
+                <TextView
+                    android:id="@+id/act_sign_up_tv_gender_female"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="여성"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/act_sign_up_cl_gender_male"
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="남성"
-                android:gravity="center"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_weight="1">
 
+                <TextView
+                    android:id="@+id/act_sign_up_tv_gender_male"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="남성"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
         <Button
             android:id="@+id/act_sign_up_bt_signup"
             android:layout_width="0dp"
-            android:layout_marginStart="22dp"
-            android:layout_marginEnd="22dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="22dp"
             android:text="가입하기"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

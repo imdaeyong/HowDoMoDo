@@ -8,7 +8,7 @@ import com.ssafy.howdomodo.data.datasource.model.SignUpResponse
 interface RemoteDataSource {
     fun login(
         loginRequestBody: JsonObject,
-        success: (LoginResponse, String?) -> Unit,
+        success: (LoginResponse) -> Unit,
         fail: (Throwable) -> Unit
     )
 
