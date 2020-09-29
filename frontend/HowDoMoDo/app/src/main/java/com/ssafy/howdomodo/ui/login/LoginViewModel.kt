@@ -1,5 +1,6 @@
 package com.ssafy.howdomodo.ui.login
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.JsonObject
@@ -12,10 +13,11 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     val loginError = MutableLiveData<String>()
 
     fun login(loginRequestBody: JsonObject) {
-        loginRepository.login(loginRequestBody, success = { response, header ->
+        Log.e("TEST1",loginRequestBody.get("userPw").toString())
+        loginRepository.login(loginRequestBody, success = { response ->
             loginResponse.value = response
-            getHeader.value = header
         }, fail = {
+            Log.e("TEST1","실패")
             loginError.value = it.message
         })
     }

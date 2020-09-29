@@ -110,7 +110,6 @@ class MainFragment : Fragment() {
 //        )
 //
 //        act_main_spinner_posting.setSelection(0)
-        Log.e("asdsad", postList.size.toString())
 
         // Fragment Dialog URL
         // https://youngest-programming.tistory.com/307

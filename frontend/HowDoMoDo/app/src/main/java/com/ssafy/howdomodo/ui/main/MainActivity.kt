@@ -12,6 +12,7 @@ import com.ssafy.howdomodo.ui.gwanSelect.GwanSelectActivity
 import com.ssafy.howdomodo.ui.login.LoginActivity
 import com.ssafy.howdomodo.ui.selectArea.SelectAreaActivity
 import com.ssafy.howdomodo.ui.signup.SignupActivity
+import com.ssafy.howdomodo.ui.theater.TheaterActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.security.MessageDigest
 
@@ -36,8 +37,8 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, GwanSelectActivity::class.java)
             startActivity(intent)
         }
-        act_main_btn_select_area.setOnClickListener {
-            val intent = Intent(this, SelectAreaActivity::class.java)
+        act_main_btn_theater.setOnClickListener {
+            val intent = Intent(this, TheaterActivity::class.java)
             startActivity(intent)
         }
         getAppKeyHash()

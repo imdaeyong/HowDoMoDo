@@ -1,6 +1,6 @@
 package com.ssafy.howdomodo.ui.login
 
-import android.content.Context
+import  android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -22,7 +22,7 @@ import org.json.JSONObject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
-    private val nameViewModel: LoginViewModel by viewModel()
+    private val loginViewModel: LoginViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,10 +33,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun observeData() {
-        nameViewModel.loginError.observe(this, Observer {
+        loginViewModel.loginError.observe(this, Observer {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
-        nameViewModel.getHeader.observe(this, Observer {
+        loginViewModel.getHeader.observe(this, Observer {
             // TODO: 2020/09/16 헤더를 넣어주는 로직을 짜야한다. SharedPreferences 를 사용하라.
             val token = it
             if(act_login_cb_auto_login.isChecked){
@@ -46,16 +46,27 @@ class LoginActivity : AppCompatActivity() {
                 editor.commit()
             }
         })
-        nameViewModel.loginResponse.observe(this, Observer {
+        loginViewModel.loginError.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        })
+        loginViewModel.loginResponse.observe(this, Observer {
             // TODO: 2020/09/16 로그인 통신이 성공했을때의 로직을 짜라.
-            val intent = Intent(this, BottomTabActivity::class.java)
+
+            if (loginViewModel.loginResponse.value?.status == 200) {
+                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, MainActivity::class.java)
+                UserCollection.userEmail = it.data!!.userEmail
+                UserCollection.userName = it.data.userName
+                UserCollection.userNick = it.data.userNick
+                startActivity(intent)
+                finish()
+            } else {
+
+            }
+//            val intent = Intent(this, MainActivity::class.java)
 //            intent.putExtra("email", it.data.email)
-            UserCollection.userEmail = it.data!!.userEmail
-            UserCollection.userName = it.data.userName
-            UserCollection.userNick = it.data.userNick
-            Log.e("asdf",UserCollection.userEmail.toString())
-            startActivity(intent)
-            finish()
+//            startActivity(intent)
+//            finish()
 
         })
 
@@ -91,19 +102,13 @@ class LoginActivity : AppCompatActivity() {
 //                    Toast.makeText(applicationContext, act_login_et_id.text.toString() + " , " + act_login_et_password.text.toString(), Toast.LENGTH_LONG).show()
 
                     val loginJsonObject = JSONObject()
-                    loginJsonObject.put("userName", act_login_et_id.text.toString())
-                    loginJsonObject.put("userPassword", act_login_et_password.text.toString())
+                    loginJsonObject.put("userEmail", act_login_et_id.text.toString())
+                    loginJsonObject.put("userPw", act_login_et_password.text.toString())
                     val body = JsonParser.parseString(loginJsonObject.toString()) as JsonObject
-//                    nameViewModel.login(body)
+                    Log.e("TEST", body.get("userEmail").toString())
+                    loginViewModel.login(body)
+                    observeData()
 
-                    if (act_login_et_id.text.toString() == "test" && act_login_et_password.text.toString() == "test") {
-                        val intent = Intent(this, BottomTabActivity::class.java)
-                        startActivity(intent)
-                        finish()
-
-                    } else {
-                        Toast.makeText(this, "아이디 및 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
-                    }
 //                    Login_Control().POST_login(act_login_et_id.text.toString(), act_login_et_password.text.toString())
                 }
             }

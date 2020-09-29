@@ -36,5 +36,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="장소 선택" />
-
+    <Button
+        android:id="@+id/act_main_btn_theater"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="극장 선택" />
 </LinearLayout>

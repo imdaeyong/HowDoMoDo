@@ -12,6 +12,6 @@ data class Users(
         val userName: String,
         val userNick: String,
         val userPw: String,
-        val userGender: String,
+        val userGender: Int,
         val userBirth: String
 )
