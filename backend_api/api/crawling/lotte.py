@@ -12,6 +12,7 @@ def split_movies_by_no(title, response):
             timetables = get_time_table(movies)
             for timetable in timetables:
                 dict_theater = {}
+                # test code
                 dict_theater['title'] = title
                 dict_theater['screen'] = timetable[0]
                 dict_theater['hall'] = timetable[1]
