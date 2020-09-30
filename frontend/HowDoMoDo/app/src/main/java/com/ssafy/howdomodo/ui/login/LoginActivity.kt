@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import com.ssafy.howdomodo.R
+import com.ssafy.howdomodo.`object`.UserCollection
 import com.ssafy.howdomodo.ui.bottomtap.BottomTabActivity
 import com.ssafy.howdomodo.ui.main.MainActivity
 import com.ssafy.howdomodo.ui.signup.SignupActivity
@@ -50,9 +51,14 @@ class LoginActivity : AppCompatActivity() {
         })
         loginViewModel.loginResponse.observe(this, Observer {
             // TODO: 2020/09/16 로그인 통신이 성공했을때의 로직을 짜라.
+
             if (loginViewModel.loginResponse.value?.status == 200) {
                 Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, BottomTabActivity::class.java)
+                UserCollection.userEmail = it.data!!.userEmail
+                UserCollection.userName = it.data.userName
+                UserCollection.userNick = it.data.userNick
+                UserCollection.userCode = it.data.userCode
                 startActivity(intent)
                 finish()
             } else {
@@ -100,7 +106,6 @@ class LoginActivity : AppCompatActivity() {
                     loginJsonObject.put("userEmail", act_login_et_id.text.toString())
                     loginJsonObject.put("userPw", act_login_et_password.text.toString())
                     val body = JsonParser.parseString(loginJsonObject.toString()) as JsonObject
-                    Log.e("TEST", body.get("userEmail").toString())
                     loginViewModel.login(body)
                     observeData()
 

@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.howdomodo.R
+import com.ssafy.howdomodo.`object`.UserCollection
+import kotlinx.android.synthetic.main.fragment_mypage.view.*
 import kotlinx.android.synthetic.main.item_my_page.view.*
 import kotlinx.android.synthetic.main.mypage_top.view.*
 

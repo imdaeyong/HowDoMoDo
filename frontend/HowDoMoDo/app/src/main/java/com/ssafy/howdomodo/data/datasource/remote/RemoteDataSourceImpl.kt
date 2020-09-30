@@ -3,7 +3,9 @@ package com.ssafy.howdomodo.data.datasource.remote
 import android.util.Log
 import com.google.gson.JsonObject
 import com.ssafy.howdomodo.data.datasource.model.LoginResponse
+import com.ssafy.howdomodo.data.datasource.model.MovieApi
 import com.ssafy.howdomodo.data.datasource.model.SignUpResponse
+import com.ssafy.howdomodo.data.datasource.model.Users
 import com.ssafy.howdomodo.data.datasource.remote.retrofit.NetworkServiceImpl
 import retrofit2.Call
 import retrofit2.Callback
@@ -51,6 +53,26 @@ class RemoteDataSourceImpl : RemoteDataSource {
                 response: Response<SignUpResponse>
             ) {
                 success(response.body()!!)
+            }
+        })
+    }
+
+    override fun userInfo(
+        userCode: Int,
+        success: (LoginResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    ) {
+        api.userInfo(userCode).enqueue(object : Callback<LoginResponse> {
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                fail(t)
+            }
+
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                if(response.body()!=null){
+                    success(response.body()!!)
+                }else{
+                    fail(Exception("유효한 정보가 없습니다"))
+                }
             }
         })
     }

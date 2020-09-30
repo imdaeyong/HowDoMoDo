@@ -122,55 +122,22 @@
         android:id="@+id/act_select_area_ll_third_bar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#FFFFFF"
+        android:background="#EEEEEE"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/act_select_area_cl_btn_next"
         app:layout_constraintStart_toStartOf="@id/act_select_area_ll_second_bar"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/act_select_area_cl_empty">
 
-        <Switch
-            android:id="@+id/act_select_area_sw_map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="9dp"
-            android:layout_marginTop="22dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="지도로 보기 활성화"
-            app:layout_constraintBottom_toBottomOf="@id/act_select_area_sw_map"
-            app:layout_constraintStart_toEndOf="@id/act_select_area_sw_map"
-            app:layout_constraintTop_toTopOf="@id/act_select_area_sw_map" />
-
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/act_select_area_rv_theaters"
-            android:layout_width="match_parent"
+            android:id="@+id/act_select_area_rv_store"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/act_select_area_sw_map"
-            />
-
-
-        <RelativeLayout
-            android:id="@+id/act_select_area_rl_map_view"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/act_select_area_sw_map">
-
-
-        </RelativeLayout>
-
-
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

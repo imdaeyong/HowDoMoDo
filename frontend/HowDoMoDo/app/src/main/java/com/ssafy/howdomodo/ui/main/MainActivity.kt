@@ -33,6 +33,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, BottomTabActivity::class.java)
             startActivity(intent)
         }
+        act_main_btn_select_area.setOnClickListener {
+            val intent = Intent(this, SelectAreaActivity::class.java)
+            startActivity(intent)
+        }
         act_main_btn_gwan.setOnClickListener {
             val intent = Intent(this, GwanSelectActivity::class.java)
             startActivity(intent)

@@ -1,29 +1,19 @@
 package com.ssafy.howdomodo.ui.selectArea
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.howdomodo.R
-import com.ssafy.howdomodo.`object`.ObjectMovie
-import com.ssafy.howdomodo.data.datasource.model.Gugun
-import com.ssafy.howdomodo.data.datasource.model.Sido
-import com.ssafy.howdomodo.data.datasource.model.Theater
+import com.ssafy.howdomodo.data.datasource.model.*
 import com.ssafy.howdomodo.ui.gwanSelect.GwanSelectActivity
-import com.ssafy.howdomodo.ui.theater.TheaterAdapter
 import kotlinx.android.synthetic.main.activity_select_area.*
-import net.daum.mf.map.api.CalloutBalloonAdapter
-import net.daum.mf.map.api.MapPOIItem
-import net.daum.mf.map.api.MapPoint
-import net.daum.mf.map.api.MapView
 
 
 class SelectAreaActivity : AppCompatActivity() {
@@ -44,58 +34,46 @@ class SelectAreaActivity : AppCompatActivity() {
 
         )
 
-    var sidoList = arrayListOf<Sido>(
-        Sido("서울", false),
-        Sido("경기도", false),
-        Sido("충청남도", false),
-        Sido("충청북도", false),
-        Sido("부산", false),
-        Sido("전라남도", false),
-        Sido("전라북도", false),
-        Sido("제주", false),
-        Sido("인천", false),
-        Sido("울산", false),
-        Sido("세종", false),
-        Sido("대전", false),
-        Sido("대구", false),
-        Sido("강원도", false),
-        Sido("경상남도", false),
-        Sido("경상북도", false),
-        Sido("광주", false),
+    val storeList = arrayListOf<Store>(
+        Store(
+            "식생활", 227, arrayListOf<StoreDetail>(
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("레스토랑", "식당", 154)
+            )
+        ),
+        Store(
+            "의생활", 135, arrayListOf<StoreDetail>(
+                StoreDetail("양복점", "가게", 444),
+                StoreDetail("기성복점", "아이들", 42)
+            )
+        )
     )
 
-    var gugunList = arrayListOf<Gugun>(
-        Gugun("강남구", false),
-        Gugun("강동구", false),
-        Gugun("강북구", false),
-        Gugun("강서구", false),
-        Gugun("관악구", false),
-        Gugun("광진구", false),
-        Gugun("구로구", false),
-        Gugun("금천구", false),
-        Gugun("노원구", false),
-        Gugun("도봉구", false),
-        Gugun("동대문구", false),
-        Gugun("동작구", false),
-        Gugun("마포구", false),
-        Gugun("서대문구", false),
-        Gugun("서초구", false),
-        Gugun("성동구", false),
-        Gugun("성북구", false),
-        Gugun("송파구", false),
-        Gugun("양천구", false),
-        Gugun("영등포구", false),
-        Gugun("용산구", false),
-        Gugun("은평구", false),
-        Gugun("종로구", false),
-        Gugun("중구", false),
-        Gugun("중랑구", false),
-
+    val regionData = arrayListOf<Region>(
+        Region(
+            "강원도",
+            arrayListOf(
+                City(101, "강릉시"),
+                City(102, "동해시"),
+                City(103, "속초시"),
+                City(104, "철원시")
+            )
+        ),
+        Region(
+            "경상남도",
+            arrayListOf(
+                City(105, "진주시"),
+                City(106, "창원시"),
+                City(107, "진해시"),
+                City(108, "김해시")
+            )
         )
+    )
 
-    lateinit var sidoAdapter: SidoAdapter
+
+    lateinit var siDoAdapter: SidoAdapter
     lateinit var gugunAdapter: GugunAdapter
-    lateinit var theaterAdapter: TheaterAdapter
+    lateinit var storeAdapter: StoreAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,30 +83,33 @@ class SelectAreaActivity : AppCompatActivity() {
         boolList[1] = false
         boolList[2] = false
 
-        sidoAdapter = SidoAdapter(
+        siDoAdapter = SidoAdapter(
             object : SidoAdapter.SidoViewHolder.SidoClickListener {
                 override fun onclick(position: Int, textView: TextView) {
-                    if (!sidoAdapter.getClicked(position)) {
-                        if (sidoAdapter.getClickedSido() != -1) {
-                            sidoAdapter.setClicked(sidoAdapter.getClickedSido(), false)
+                    if (!siDoAdapter.getClicked(position)) {
+                        if (siDoAdapter.getClickedSido() != -1) {
+                            siDoAdapter.setClicked(siDoAdapter.getClickedSido(), false)
                         }
                         boolList[0] = true
                         act_select_rv_guguns.visibility = View.VISIBLE
-                        sidoAdapter.setClicked(position, true)
-                    } else if (sidoAdapter.getClicked(position)) {
-                        sidoAdapter.setClicked(sidoAdapter.getClickedSido(), false)
+                        act_select_area_rv_store.visibility = View.INVISIBLE
+                        siDoAdapter.setClicked(position, true)
+                    } else if (siDoAdapter.getClicked(position)) {
+                        siDoAdapter.setClicked(siDoAdapter.getClickedSido(), false)
                         boolList[0] = false
                         act_select_rv_guguns.visibility = View.INVISIBLE
-
+                        act_select_area_rv_store.visibility = View.INVISIBLE
+                        act_select_area_ll_third_bar.setBackgroundColor(Color.parseColor("#EEEEEE"))
                     }
                     setButtonActive()
+                    gugunAdapter.setGuGunData(siDoAdapter.sidoData[position].guList)
+                    siDoAdapter.setClickOriginal(position)
                 }
 
             })
-        sidoAdapter.setSidoData(sidoList)
-        act_select_rv_sidos.adapter = sidoAdapter
-        var sidolm = LinearLayoutManager(this)
-        act_select_rv_sidos.layoutManager = sidolm
+        siDoAdapter.setSidoData(regionData)
+        act_select_rv_sidos.adapter = siDoAdapter
+        act_select_rv_sidos.layoutManager = LinearLayoutManager(this)
         act_select_rv_sidos.setHasFixedSize(true)
 
 
@@ -136,114 +117,115 @@ class SelectAreaActivity : AppCompatActivity() {
             object : GugunViewHolder.GugunClickListener {
                 override fun onclick(position: Int, textView: TextView) {
                     if (!gugunAdapter.getClicked(position)) {
-                        if (gugunAdapter.getClickedGugun() != -1) {
-                            gugunAdapter.setClicked(gugunAdapter.getClickedGugun(), false)
+                        if (gugunAdapter.getClickedGuGun() != -1) {
+                            gugunAdapter.setClicked(gugunAdapter.getClickedGuGun(), false)
                         }
                         boolList[1] = true
-                        act_select_area_rv_theaters.visibility = View.VISIBLE
+                        act_select_area_rv_store.visibility = View.VISIBLE
+                        act_select_area_ll_third_bar.setBackgroundColor(Color.parseColor("#FFFFFF"))
                         gugunAdapter.setClicked(position, true)
                     } else if (gugunAdapter.getClicked(position)) {
-                        gugunAdapter.setClicked(gugunAdapter.getClickedGugun(), false)
+                        gugunAdapter.setClicked(gugunAdapter.getClickedGuGun(), false)
                         boolList[1] = false
-                        act_select_area_rv_theaters.visibility = View.INVISIBLE
+                        act_select_area_rv_store.visibility = View.INVISIBLE
+                        act_select_area_ll_third_bar.setBackgroundColor(Color.parseColor("#EEEEEE"))
 
                     }
                     setButtonActive()
                 }
 
             })
-        gugunAdapter.setGugunData(gugunList)
         act_select_rv_guguns.adapter = gugunAdapter
-        var gugunlm = LinearLayoutManager(this)
-        act_select_rv_guguns.layoutManager = gugunlm
+        act_select_rv_guguns.layoutManager = LinearLayoutManager(this)
         act_select_rv_guguns.setHasFixedSize(true)
 
-
-        theaterAdapter = TheaterAdapter(
-            object :
-                TheaterAdapter.TheaterViewHolder.TheaterClickListener {
-                override fun onclick(position: Int, textView: TextView) {
-                    if (!theaterAdapter.getClicked(position)) {
-                        if (theaterAdapter.getClickedTheater() != -1) {
-                            theaterAdapter.setClicked(theaterAdapter.getClickedTheater(), false)
-                        }
-                        boolList[2] = true
-                        theaterAdapter.setClicked(position, true)
-                    } else if (theaterAdapter.getClicked(position)) {
-                        ObjectMovie.movieTheater =
-                            theaterAdapter.theaterData[position].theaterBrand + " " + theaterAdapter.theaterData[position].theaterName
-                        theaterAdapter.setClicked(theaterAdapter.getClickedTheater(), false)
-                        boolList[2] = false
-                    }
-                    setButtonActive()
+        storeAdapter = StoreAdapter(object : StoreViewHolder.OnClickListener {
+            override fun downUpClick(
+                recyclerView: RecyclerView,
+                position: Int,
+                downImage: ImageView
+            ) {
+                if (!storeAdapter.storeData[position].isClicked) {
+                    storeAdapter.setClicked(true, position)
+                    downImage.setImageResource(R.drawable.btn_up)
+                    recyclerView.visibility = View.VISIBLE
+                } else {
+                    storeAdapter.setClicked(false, position)
+                    downImage.setImageResource(R.drawable.btn_down)
+                    recyclerView.visibility = View.GONE
                 }
-
-            })
-        theaterAdapter.setTheaterData(theaterList)
-        act_select_area_rv_theaters.adapter = theaterAdapter
-        var theaterlm = LinearLayoutManager(this)
-        act_select_area_rv_theaters.layoutManager = theaterlm
-        act_select_area_rv_theaters.setHasFixedSize(true)
-
-
-        //Maps
-        var mapView = MapView(this)
-        var mapViewController = act_select_area_rl_map_view as ViewGroup
-        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.4874592, 127.0471432), true)
-        mapView.setZoomLevel(5, true)
-
-
-        for (i in theaterList.indices) {
-            var t = theaterList[i]
-            var marker_img = R.drawable.ic_launcher
-            var selected_marker_img = R.drawable.ic_launcher
-
-
-            if(t.theaterBrand=="CGV"){
-                marker_img = R.drawable.cgv_marker_unselected
-            }else if(t.theaterBrand=="메가박스"){
-                marker_img = R.drawable.megabox_marker_unselected
-            }else if(t.theaterBrand=="롯데시네마"){
-                marker_img = R.drawable.lotte_marker_unselected
-            }else {
-                marker_img=R.drawable.ic_launcher
             }
-
-            var marker = MapPOIItem()
-            marker.itemName = t.theaterBrand + " " + t.theaterName
-            marker.tag = t.theaterId
-            marker.mapPoint = MapPoint.mapPointWithGeoCoord(t.theaterLat, t.theaterLng)
-            marker.markerType = MapPOIItem.MarkerType.CustomImage
-            marker.setCustomImageResourceId(marker_img)
-            marker.userObject = t
+        })
+        storeAdapter.setStoreData(storeList)
 
 
-            marker.selectedMarkerType = MapPOIItem.MarkerType.CustomImage
-            marker.customSelectedImageResourceId = selected_marker_img
-            marker.isCustomImageAutoscale = false
-            marker.setCustomImageAnchor(0.5f, 1.0f)
+//        theaterAdapter = TheaterAdapter(
+//            object : TheaterAdapter.TheaterViewHolder.TheaterClickListener {
+//                override fun onclick(position: Int, textView: TextView) {
+//                    if (!theaterAdapter.getClicked(position)) {
+//                        if (theaterAdapter.getClickedTheater() != -1) {
+//                            theaterAdapter.setClicked(theaterAdapter.getClickedTheater(), false)
+//                        }
+//                        boolList[2] = true
+//                        theaterAdapter.setClicked(position, true)
+//                    } else if (theaterAdapter.getClicked(position)) {
+//                        ObjectMovie.movieTheater =
+//                            theaterAdapter.theaterData[position].kind + " " + theaterAdapter.theaterData[position].name
+//                        theaterAdapter.setClicked(theaterAdapter.getClickedTheater(), false)
+//                        boolList[2] = false
+//                    }
+//                    setButtonActive()
+//                }
+//
+//            })
+//        theaterAdapter.setTheaterData(theaterList)
+        act_select_area_rv_store.adapter = storeAdapter
+        act_select_area_rv_store.layoutManager = LinearLayoutManager(this)
+        act_select_area_rv_store.setHasFixedSize(true)
 
-            mapView.setCalloutBalloonAdapter(CustomInfoWindow(context=this,theater=t))
 
-            mapView.addPOIItem(marker)
-            mapView.fitMapViewAreaToShowAllPOIItems()
-        }
-
-        mapViewController.addView(mapView)
-
-
-        act_select_area_sw_map.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked) {
-
-//                supportFragmentManager.beginTransaction()
-//                    .replace(R.id.act_select_area_rl_map_view, MapsFragment()).commit()
-                act_select_area_rl_map_view.visibility = View.VISIBLE
-                act_select_area_rv_theaters.visibility = View.GONE
-            } else {
-                act_select_area_rl_map_view.visibility = View.GONE
-                act_select_area_rv_theaters.visibility = View.VISIBLE
-            }
-        }
+//        //Maps
+//        var mapView = MapView(this)
+//        var mapViewController = act_select_area_rl_map_view as ViewGroup
+//        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.4874592, 127.0471432), true)
+//        mapView.setZoomLevel(5, true)
+//
+//
+//        for (i in theaterList.indices) {
+//            var t = theaterList[i]
+//            var marker = MapPOIItem()
+//            marker.itemName = t.kind + " " + t.name
+//            marker.tag = 0
+//            marker.mapPoint = MapPoint.mapPointWithGeoCoord(t.theater_lat, t.theater_lng)
+//            marker.markerType = MapPOIItem.MarkerType.CustomImage
+//            marker.setCustomImageResourceId(R.drawable.cgv_marker_unselected)
+//
+//            marker.selectedMarkerType = MapPOIItem.MarkerType.CustomImage
+//            marker.customSelectedImageResourceId = R.drawable.cgv_marker
+//            marker.isCustomImageAutoscale=false
+//            marker.setCustomImageAnchor(0.5f, 1.0f)
+//
+//            mapView.setCalloutBalloonAdapter(CustomInfoWindow(context = this))
+//
+//            mapView.addPOIItem(marker)
+//            mapView.fitMapViewAreaToShowAllPOIItems()
+//        }
+//
+//        mapViewController.addView(mapView)
+//
+//
+//        act_select_area_sw_map.setOnCheckedChangeListener { buttonView, isChecked ->
+//            if (isChecked) {
+//
+////                supportFragmentManager.beginTransaction()
+////                    .replace(R.id.act_select_area_rl_map_view, MapsFragment()).commit()
+//                act_select_area_rl_map_view.visibility = View.VISIBLE
+//                act_select_area_rv_theaters.visibility = View.GONE
+//            } else {
+//                act_select_area_rl_map_view.visibility = View.GONE
+//                act_select_area_rv_theaters.visibility = View.VISIBLE
+//            }
+//        }
 
 
         act_select_area_cl_btn_next.setOnClickListener {
@@ -271,43 +253,35 @@ class SelectAreaActivity : AppCompatActivity() {
             act_select_area_cl_btn_next.isClickable = false
         }
     }
-
-    class CustomInfoWindow(private val context: Context, val theater: Theater) :
-        CalloutBalloonAdapter {
-        lateinit var mCalloutBalloon: View
-        var t = theater
-
-        init {
-            mCalloutBalloon =
-                LayoutInflater.from(context).inflate(R.layout.item_custom_infowindow, null)
-        }
-
-
-        override fun getCalloutBalloon(poiItem: MapPOIItem): View {
-            var theater_img = R.drawable.ic_launcher
-
-            if (poiItem.itemName.contains("CGV")) {
-                theater_img = R.drawable.cgv
-            } else if (poiItem.itemName.contains("메가박스")) {
-                theater_img = R.drawable.megabox
-            } else if (poiItem.itemName.contains("롯데시네마")){
-                theater_img = R.drawable.lottecinema
-            }else {
-                theater_img = R.drawable.ic_launcher
-            }
-
-
-            (mCalloutBalloon.findViewById<View>(R.id.item_infowindow_iv_theater_image) as ImageView).setImageResource(theater_img)
-            (mCalloutBalloon.findViewById<View>(R.id.item_infowindow_tv_theater_title) as TextView).text = poiItem.itemName
-            (mCalloutBalloon.findViewById<View>(R.id.item_infowindow_tv_theater_desc) as TextView).text = ((poiItem.userObject) as Theater).theaterAddress
-            return mCalloutBalloon
-        }
-
-        override fun getPressedCalloutBalloon(poiItem: MapPOIItem): View {
-            return mCalloutBalloon
-        }
-
-    }
+//    class CustomInfoWindow(private val context: Context) : CalloutBalloonAdapter {
+//        lateinit var mCalloutBalloon: View
+//
+//        init {
+//            mCalloutBalloon = LayoutInflater.from(context).inflate(R.layout.item_custom_infowindow, null)
+//        }
+//
+//        fun CustomInfoWindow() {
+//
+//        }
+//
+//
+//        override fun getCalloutBalloon(poiItem: MapPOIItem): View {
+//            (mCalloutBalloon.findViewById<View>(R.id.item_infowindow_iv_theater_image) as ImageView).setImageResource(
+//                R.drawable.ic_launcher
+//            )
+//            (mCalloutBalloon.findViewById<View>(R.id.item_infowindow_tv_theater_title) as TextView).text =
+//                poiItem.itemName
+//            (mCalloutBalloon.findViewById<View>(R.id.item_infowindow_tv_theater_desc) as TextView).text =
+//                "Custom CalloutBalloon"
+//            Log.e("hihi",poiItem.toString())
+//            return mCalloutBalloon
+//        }
+//
+//        override fun getPressedCalloutBalloon(poiItem: MapPOIItem): View {
+//            return mCalloutBalloon
+//        }
+//
+//    }
 
 }
 
