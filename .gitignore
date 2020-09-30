@@ -48,3 +48,8 @@ out/
 
 ### mac ###
 *.DS_Store
+
+### django ###
+.ipynb_checkpoints
+__pycache__
+venv
