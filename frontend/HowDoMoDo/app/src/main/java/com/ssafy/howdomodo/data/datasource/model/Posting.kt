@@ -1,9 +1,13 @@
 package com.ssafy.howdomodo.data.datasource.model
 
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
+
 data class Posting(
         val movieName: String,
-        val movieTitle: String,
-        val movieContent: String,
-        val movieDate: String,
-        var moviePostingURL: String
+        val title: String,
+        val description: String,
+        val postdate: String,
+        var link: String
 )
