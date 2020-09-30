@@ -24,15 +24,12 @@ class MyPageViewModel(private val mypageRepository: MyPageRepository) : ViewMode
     }
 
     fun userUpdate(jsonObject: JsonObject) {
-        Log.e("kkkk", jsonObject.get("userName").toString())
         mypageRepository.userUpdate(jsonObject,
             success = {
                 successMessage.value = it.message
-                Log.e("kkk", it.message)
             },
             fail = {
                 errorToast.value = it.message
-                Log.e("kk", "error")
             })
 
     }

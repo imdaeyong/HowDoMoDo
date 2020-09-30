@@ -83,12 +83,10 @@ class RemoteDataSourceImpl : RemoteDataSource {
     ) {
         api.userUpdate(signUpRequestBody).enqueue(object : Callback<SignUpResponse> {
             override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
-                Log.e("k","error")
                 fail(t)
             }
 
             override fun onResponse(
-
                 call: Call<SignUpResponse>,
                 response: Response<SignUpResponse>
             ) {

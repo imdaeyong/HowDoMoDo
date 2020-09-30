@@ -144,7 +144,6 @@ class MypageActivity : AppCompatActivity() {
         })
         mypageViewModel.successMessage.observe(this, Observer {
             if (it == "회원 정보 수정 성공") {
-                Log.e("kkkkk","Finish")
                 val intent = Intent(this, BottomTabActivity::class.java)
                 UserCollection.userName = act_mypage_update_et_name.text.toString()
                 UserCollection.userNick = act_mypage_update_et_nick.text.toString()

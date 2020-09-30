@@ -40,7 +40,6 @@ class MypageFragment : Fragment() {
         frag_my_tv_name.text = UserCollection.userName
 
         frag_my_tv_update.setOnClickListener{
-            Toast.makeText(this.context, "수정 클릭",Toast.LENGTH_SHORT)
             val mypageJsonObject = JSONObject()
             mypageJsonObject.put("userCode",UserCollection.userCode)
             val body = JsonParser.parseString(mypageJsonObject.toString()) as JsonObject
