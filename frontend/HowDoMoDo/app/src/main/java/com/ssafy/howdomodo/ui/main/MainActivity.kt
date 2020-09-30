@@ -41,6 +41,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, GwanSelectActivity::class.java)
             startActivity(intent)
         }
+        act_main_btn_select_area.setOnClickListener {
+            val intent = Intent(this, SelectAreaActivity::class.java)
+            startActivity(intent)
+        }
         act_main_btn_theater.setOnClickListener {
             val intent = Intent(this, TheaterActivity::class.java)
             startActivity(intent)
