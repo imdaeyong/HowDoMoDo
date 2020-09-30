@@ -40,21 +40,22 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_kr_regular"
         android:lineSpacingExtra="6sp"
-        android:text="3.5km"
+        android:text="영화관 주소"
         android:textColor="#707070"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@id/item_theater_tv_name"
-        app:layout_constraintBottom_toBottomOf="@id/item_theater_iv_photo"/>
+        app:layout_constraintBottom_toBottomOf="@id/item_theater_iv_photo"
+
+        />
 
     <ImageView
         android:id="@+id/item_theater_iv_favorite"
         android:layout_width="wrap_content"
         android:layout_height="37dp"
-        android:layout_marginEnd="19dp"
+        android:layout_marginEnd="13dp"
         android:src="@drawable/star_unclicked"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/item_Theater_view_under_bar"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/item_theater_tv_name" />
 
     <View
         android:id="@+id/item_Theater_view_under_bar"
