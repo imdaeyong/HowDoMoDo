@@ -41,7 +41,7 @@ class StoreDetailViewHolder(itemView: View) :
 
 
     fun bind(storeDetail: StoreDetail) {
-        itemView.item_store_detail_tv_text.text = storeDetail.cate + " " + storeDetail.cnt + "회"
+        itemView.item_store_detail_tv_text.text = storeDetail.jong + " " + storeDetail.cnt + "회"
     }
 
 }

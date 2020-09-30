@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_select_area.*
 class SelectAreaActivity : AppCompatActivity() {
 
     companion object {
-        val boolList = arrayListOf<Boolean>(false, false, false)
+        val boolList = arrayListOf<Boolean>(false, false)
     }
 
     var theaterList = arrayListOf<Theater>(
@@ -81,7 +81,6 @@ class SelectAreaActivity : AppCompatActivity() {
 
         boolList[0] = false
         boolList[1] = false
-        boolList[2] = false
 
         siDoAdapter = SidoAdapter(
             object : SidoAdapter.SidoViewHolder.SidoClickListener {
