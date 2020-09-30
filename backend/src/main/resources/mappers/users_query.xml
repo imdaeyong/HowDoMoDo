@@ -28,7 +28,7 @@
     
     <!-- 회원정보 수정 -->
     <update id="updateUser">
-    	UPDATE users SET userEmail=#{userEmail}, userName=#{userName}, userNick=#{userNick}, userBirth=#{userBirth}
+    	UPDATE users SET userName=#{userName}, userNick=#{userNick}, userBirth=#{userBirth}
     	WHERE userCode=#{userCode}
     </update>
     

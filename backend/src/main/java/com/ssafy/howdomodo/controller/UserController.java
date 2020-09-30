@@ -1,5 +1,6 @@
 package com.ssafy.howdomodo.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
@@ -115,7 +116,7 @@ public class UserController {
 		if(res == -1)
 			return new ResponseEntity<Response>(new Response(StatusCode.FORBIDDEN, ResponseMessage.FAIL_UPDATE_USER), HttpStatus.FORBIDDEN);
 		
-		return new ResponseEntity<Response>(new Response(StatusCode.OK, ResponseMessage.UPDATE_USER, user), HttpStatus.OK);
+		return new ResponseEntity<Response>(new Response(StatusCode.CREATED, ResponseMessage.UPDATE_USER), HttpStatus.CREATED);
 	}
 	
 	@ApiOperation(value="회원정보 조회")
