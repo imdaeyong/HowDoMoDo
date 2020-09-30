@@ -76,4 +76,22 @@ class RemoteDataSourceImpl : RemoteDataSource {
             }
         })
     }
+    override fun userUpdate(
+        signUpRequestBody: JsonObject,
+        success: (SignUpResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    ) {
+        api.userUpdate(signUpRequestBody).enqueue(object : Callback<SignUpResponse> {
+            override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
+                fail(t)
+            }
+
+            override fun onResponse(
+                call: Call<SignUpResponse>,
+                response: Response<SignUpResponse>
+            ) {
+                success(response.body()!!)
+            }
+        })
+    }
 }

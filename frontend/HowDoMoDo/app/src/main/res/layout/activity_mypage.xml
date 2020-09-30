@@ -273,7 +273,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/act_mypage_update_bt_signup"
+            android:id="@+id/act_mypage_update_bt_update"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="22dp"

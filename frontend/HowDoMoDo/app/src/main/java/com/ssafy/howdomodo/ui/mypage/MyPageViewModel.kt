@@ -14,14 +14,23 @@ class MyPageViewModel(private val mypageRepository: MyPageRepository) : ViewMode
     val mypageResponse = MutableLiveData<LoginResponse>()
 
     fun userInfo(userCode: Int) {
-//        Log.e("asd",userCode)
         mypageRepository.getInfo(
             userCode,
             success = { response ->
                 mypageResponse.value = response
             }, fail = {
-                Log.e("TEST1", "실패")
                 errorToast.value = it.message
             })
+    }
+
+    fun userUpdate(jsonObject: JsonObject) {
+        mypageRepository.userUpdate(jsonObject,
+            success = {
+                successMessage.value = it.message
+            },
+            fail = {
+                errorToast.value = it.message
+            })
+
     }
 }
