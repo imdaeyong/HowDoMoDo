@@ -1,5 +1,6 @@
 package com.ssafy.howdomodo.ui.theater
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -93,6 +94,12 @@ class TheaterAdapter(private val onclick: TheaterViewHolder.TheaterClickListener
                 itemView.item_theater_iv_photo.setImageResource(R.drawable.megabox)
             } else if (data.theaterBrand == "롯데시네마") {
                 itemView.item_theater_iv_photo.setImageResource(R.drawable.lottecinema)
+            }
+
+            if (data.isClicked) {
+                itemView.item_theater_cl_box.setBackgroundColor(Color.parseColor("#EEEEEE"))
+            } else {
+                itemView.item_theater_cl_box.setBackgroundColor(Color.parseColor("#FFFFFF"))
             }
 
         }
