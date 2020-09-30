@@ -1,45 +1,31 @@
 from pyspark.sql import SQLContext
-# from pyspark.sql.functions import *
 from pyspark import SparkContext
 from pyspark.sql.types import *
-# from functools import reduce
-# from pyspark.sql import DataFrame
 from pyspark.sql import SparkSession
 from pyspark.sql import Row
-import os
-
-# import time
 import pyspark
+
+import json
 
 class Recommand:
     spark = 0
     sqlContext = 0
     df_list = 0
-    # testnum = 0
-    #
-    # @staticmethod
-    # def test():
-    #     Recommand.testnum += 1
+    df_group = 0
+    code_df = 0
+    sc = None
 
     @staticmethod
     def create():
-
-        os.environ["PYSPARK_PYTHON"] = "/usr/bin/python3"
-        os.environ["PYSPARK_DRIVER_PYTHON"] = "/usr/bin/python3"
-
         # df 로드 및 group 단계까지 캐싱 처리
-        sc = SparkContext('local').getOrCreate()
-        Recommand.sqlContext = SQLContext(sc)
-        # Recommand.spark = SparkSession(sc)
-        Recommand.spark = SparkSession.builder.master("spark://spark-skp-master:7077").appName("pysprk")
-        Recommand.spark = Recommand.spark.config("spark.cores.max", "48")
-        Recommand.spark = Recommand.spark.config("spark.driver.memory", "32g")
-        Recommand.spark = Recommand.spark.config("spark.executor.memory", "32g")
-        Recommand.spark = Recommand.spark.config("spark.python.worker.memory", "32g")
-        Recommand.spark = Recommand.spark.getOrCreate()
+        if Recommand.sc is None:
+            Recommand.sc = SparkContext('local')
+        else:
+            Recommand.sc.stop()
+            Recommand.sc = SparkContext('local')
+        Recommand.sqlContext = SQLContext(Recommand.sc)
+        Recommand.spark = SparkSession(Recommand.sc)
         print("create 단계입니다")
-        # df_list = load_csv()
-        # return self.preprocessing(df_list)
 
     @staticmethod
     def load_csv():
@@ -72,6 +58,11 @@ class Recommand:
             df.persist()
             df_list.append(df)
             Recommand.df_list = df_list
+
+        Recommand.code_df = Recommand.sqlContext.read.format('com.databricks.spark.csv') \
+            .options(header='true', inferSchema='true') \
+            .load('C:/ssafy/2nd/s03p23a305/bigdata/analysis/new_codelist-UTF.csv') \
+            .cache()
 
     @staticmethod
     def preprocessing(df_list):
@@ -122,24 +113,62 @@ class Recommand:
         df_group = df_mapped.groupBy('gender', 'age', 'time', 'do', 'si', 'dong', 'code').sum('n')
 
         df_group = df_group.withColumnRenamed("sum(n)", "total").persist(pyspark.StorageLevel.DISK_ONLY)
-        # df_group.show()
-        df_group.registerTempTable("df_group")
+        Recommand.df_group = df_group
 
+
+    @staticmethod
+    def find_si(si_name):
+        Recommand.df_group.registerTempTable("df_group")
         print("si 찾기 단계입니다")
-        si = "'종로구'"
-        query = "select gender, age, time, code, total from df_group where si =" + si + " order by total desc"
+        si = "'%"+si_name+"%'"
+        query = "select gender, age, time, code, total from df_group where si like " + si + " order by total desc"
         selected_df = Recommand.sqlContext.sql(query).persist(pyspark.StorageLevel.DISK_ONLY)
-        # selected_df.show()
 
         print("통계 단계입니다")
         selected_df.registerTempTable("selected_df")
-        query = "select code, sum(total) as sum from selected_df group by code order by sum desc"
+        query = "select code, sum(total) as cnt from selected_df group by code order by cnt desc"
         sum_groupByDf = Recommand.sqlContext.sql(query).persist(pyspark.StorageLevel.DISK_ONLY)
-        return sum_groupByDf.take(3)
+        sum_groupByDf.collect()
+        return sum_groupByDf
+
+    @staticmethod
+    def df_to_dict(df):
+        join_df = df.join(Recommand.code_df, df.code == Recommand.code_df.code).select("selected_df.code", "cnt",
+                                                                                         "largeCate", "MediumCate",
+                                                                                         "smallCate", 'desc').orderBy("cnt", ascending=False)
 
 
+        total_df = join_df.groupBy("largeCate").sum("cnt").withColumnRenamed('sum(cnt)', 'cnt')
 
+        lc_list = []
+        sum_list = []
+        lc_row_list = total_df.select('largeCate').collect()
+        sum_row_list = total_df.select('cnt').collect()
 
+        for lc in lc_row_list:
+            lc_list.append(lc.largeCate)
 
+        for s in sum_row_list:
+            sum_list.append(s.cnt)
 
+        cate_dict = dict()
+        for lc in lc_list:
+            cate_dict[lc] = []
 
+        for row in join_df.rdd.collect():
+            largeCate = row[2]
+            MediumCate = row[3]
+            smallCate = row[4]
+            desc = row[5]
+            cnt = row[1]
+            cate_dict[largeCate].append({"desc": desc, "jong": smallCate, "cnt": cnt})
+
+        store_dict = dict()
+        store_dict['list'] = []
+        for idx, lc in enumerate(lc_list):
+            temp = {"kinds": lc, "totalCnt": sum_list[idx], "down": cate_dict[lc]}
+            store_dict['list'].append(temp)
+
+        # json_val = json.dumps(store_dict, ensure_ascii=False)
+
+        return store_dict
