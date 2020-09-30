@@ -48,7 +48,7 @@ class MypageFragment : Fragment() {
 //             정보조회 api 통신
             mypageViewModel.userInfo(UserCollection.userCode.toInt())
         }
-            observe()
+        observe()
 
         myPageAdapter = MyPageAdapter(object : MyPageViewHolder.ClickListener {
             override fun itemClick(position: Int) {
@@ -278,6 +278,9 @@ class MypageFragment : Fragment() {
             val intent = Intent(activity, MypageActivity::class.java)
             intent.putExtra("info", mypageViewModel.mypageResponse.value?.data)
             startActivity(intent)
+        })
+        mypageViewModel.errorToast.observe(this, Observer {
+            Toast.makeText(this.context, "Error", Toast.LENGTH_SHORT).show()
         })
     }
 }

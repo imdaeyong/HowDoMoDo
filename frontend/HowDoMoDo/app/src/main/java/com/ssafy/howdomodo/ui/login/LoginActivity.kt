@@ -64,11 +64,6 @@ class LoginActivity : AppCompatActivity() {
             } else {
 
             }
-//            val intent = Intent(this, MainActivity::class.java)
-//            intent.putExtra("email", it.data.email)
-//            startActivity(intent)
-//            finish()
-
         })
 
     }
@@ -109,10 +104,8 @@ class LoginActivity : AppCompatActivity() {
                     loginViewModel.login(body)
                     observeData()
 
-//                    Login_Control().POST_login(act_login_et_id.text.toString(), act_login_et_password.text.toString())
                 }
             }
-//            R.id.act_login_tv_sign_up ->startActivity(Intent(applicationContext, SignUpActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
         }
     }
 

@@ -26,4 +26,10 @@ interface RemoteDataSource {
         fail: (Throwable) -> Unit
     )
 
+    fun userUpdate(
+        signUpRequestBody: JsonObject,
+        success: (SignUpResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    )
+
 }
