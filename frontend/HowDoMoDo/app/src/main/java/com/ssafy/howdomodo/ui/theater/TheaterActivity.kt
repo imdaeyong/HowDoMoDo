@@ -125,7 +125,7 @@ class TheaterActivity : AppCompatActivity() {
 
     }
 
-    fun setButtonActive() {x    
+    fun setButtonActive() {
         var token = true
         Log.e("bbb", theater_select.toString())
         if (!theater_select) {
