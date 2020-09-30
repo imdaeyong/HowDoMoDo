@@ -15,4 +15,5 @@ public interface UsersMapper {
 	public int updateUser(Users user) throws SQLException;
 	public int updatePwd(Users user) throws SQLException;
 	public Users findByUserCode(int userCode) throws SQLException;
+	public int deleteByUserCode(int userCode) throws SQLException;
 }

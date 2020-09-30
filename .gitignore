@@ -44,7 +44,6 @@ out/
 ### BigData ###
 *.csv
 *.xlsx
-*.json
 
 ### mac ###
 *.DS_Store
@@ -53,3 +52,5 @@ out/
 .ipynb_checkpoints
 __pycache__
 venv
+*.json
+
