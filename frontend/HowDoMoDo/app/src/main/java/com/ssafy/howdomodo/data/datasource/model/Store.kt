@@ -13,6 +13,6 @@ data class Store(
 
 data class StoreDetail(
     val desc: String,
-    val cate: String,
+    val jong: String,
     val cnt: Int
 )
