@@ -11,7 +11,7 @@ import com.ssafy.howdomodo.data.datasource.remote.RemoteDataSource
 
 class MyPageRepository(private val remoteDataSource: RemoteDataSource) {
 
-    fun getInfo(userCode:String, success: (LoginResponse) -> Unit, fail: (Throwable) -> Unit) {
+    fun getInfo(userCode:Int, success: (LoginResponse) -> Unit, fail: (Throwable) -> Unit) {
         remoteDataSource.userInfo(userCode,success,fail)
     }
 }

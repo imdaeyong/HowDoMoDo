@@ -13,8 +13,8 @@ class MyPageViewModel(private val mypageRepository: MyPageRepository) : ViewMode
     val successMessage = MutableLiveData<String>()
     val mypageResponse = MutableLiveData<LoginResponse>()
 
-    fun userInfo(userCode: String) {
-        Log.e("asd",userCode)
+    fun userInfo(userCode: Int) {
+//        Log.e("asd",userCode)
         mypageRepository.getInfo(
             userCode,
             success = { response ->

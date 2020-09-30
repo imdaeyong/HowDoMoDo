@@ -58,7 +58,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
     }
 
     override fun userInfo(
-        userCode: String,
+        userCode: Int,
         success: (LoginResponse) -> Unit,
         fail: (Throwable) -> Unit
     ) {

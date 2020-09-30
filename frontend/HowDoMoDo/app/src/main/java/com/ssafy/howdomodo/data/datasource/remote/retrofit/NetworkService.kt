@@ -20,9 +20,9 @@ interface NetworkService {
     ): Call<SignUpResponse>
 
     // 회원 정보 조회
-    @GET("/users")
+    @GET("/users/{userCode}")
     fun userInfo(
-        @Query("userCode") userCode: String
+        @Path("userCode") userCode: Int
     ): Call<LoginResponse>
 
     // 회원 정보 수정

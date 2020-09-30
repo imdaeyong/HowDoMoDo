@@ -43,12 +43,12 @@ class MypageFragment : Fragment() {
             Toast.makeText(this.context, "수정 클릭",Toast.LENGTH_SHORT)
             val mypageJsonObject = JSONObject()
             mypageJsonObject.put("userCode",UserCollection.userCode)
-//            val body = JsonParser.parseString(mypageJsonObject.toString()) as JsonObject
+            val body = JsonParser.parseString(mypageJsonObject.toString()) as JsonObject
 
-            // 정보조회 api 통신
-//            mypageViewModel.userInfo(UserCollection.userCode)
-//            observe()
+//             정보조회 api 통신
+            mypageViewModel.userInfo(UserCollection.userCode.toInt())
         }
+            observe()
 
         myPageAdapter = MyPageAdapter(object : MyPageViewHolder.ClickListener {
             override fun itemClick(position: Int) {

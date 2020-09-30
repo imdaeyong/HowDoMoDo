@@ -9,4 +9,5 @@ val repositoryAppModule = module {
     single { GwanSelectRepository(get()) }
     single { NaverRepository(get()) }
     single { MovieRepository(get()) }
+    single { MyPageRepository(get()) }
 }
