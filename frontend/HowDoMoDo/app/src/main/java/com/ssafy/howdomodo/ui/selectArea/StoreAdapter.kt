@@ -10,16 +10,21 @@ import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.data.datasource.model.Store
 import kotlinx.android.synthetic.main.item_store.view.*
 
-class StoreAdapter(private val downClickListener: StoreViewHolder.DownClickListener) :
+class StoreAdapter(private val downClickListener: StoreViewHolder.OnClickListener) :
     RecyclerView.Adapter<StoreViewHolder>() {
 
-     val storeData = ArrayList<Store>()
+    val storeData = ArrayList<Store>()
 
     fun setStoreData(newData: List<Store>) {
         with(storeData) {
             clear()
             addAll(newData)
         }
+        notifyDataSetChanged()
+    }
+
+    fun setClicked(isClicked: Boolean, position: Int) {
+        storeData[position].isClicked = isClicked
         notifyDataSetChanged()
     }
 
@@ -37,16 +42,20 @@ class StoreAdapter(private val downClickListener: StoreViewHolder.DownClickListe
     }
 }
 
-class StoreViewHolder(itemView: View, private val downClickListener: DownClickListener) :
+class StoreViewHolder(itemView: View, private val downClickListener: OnClickListener) :
     RecyclerView.ViewHolder(itemView) {
 
-    interface DownClickListener {
-        fun onClick(recyclerView: RecyclerView, position: Int,downImage:ImageView)
+    interface OnClickListener {
+        fun downUpClick(recyclerView: RecyclerView, position: Int, downImage: ImageView)
     }
 
     init {
         itemView.item_store_iv_up_down.setOnClickListener {
-            downClickListener.onClick(itemView.item_store_rv_down, adapterPosition,itemView.item_store_iv_up_down)
+            downClickListener.downUpClick(
+                itemView.item_store_rv_down,
+                adapterPosition,
+                itemView.item_store_iv_up_down
+            )
         }
     }
 
@@ -60,7 +69,6 @@ class StoreViewHolder(itemView: View, private val downClickListener: DownClickLi
         storeDetailAdapter.setStoreDetailData(store.down)
         itemView.item_store_rv_down.adapter = storeDetailAdapter
         itemView.item_store_rv_down.layoutManager = LinearLayoutManager(itemView.context)
-
 
     }
 }

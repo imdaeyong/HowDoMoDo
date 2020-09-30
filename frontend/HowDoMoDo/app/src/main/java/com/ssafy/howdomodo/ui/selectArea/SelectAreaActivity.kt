@@ -31,8 +31,6 @@ class SelectAreaActivity : AppCompatActivity() {
         Theater("롯데시네마", "강남2점", "2", false, 37.5243393, 127.0294194, false),
         Theater("롯데시네마", "강남3점", "3", false, 37.5228972, 127.0370162, false),
         Theater("CGV", "강남1점", "5", false, 37.5243393, 127.0294194, false),
-
-
         )
 
     val storeList = arrayListOf<Store>(
@@ -50,58 +48,30 @@ class SelectAreaActivity : AppCompatActivity() {
         )
     )
 
-    var sidoList = arrayListOf<Sido>(
-        Sido("서울", false),
-        Sido("경기도", false),
-        Sido("충청남도", false),
-        Sido("충청북도", false),
-        Sido("부산", false),
-        Sido("전라남도", false),
-        Sido("전라북도", false),
-        Sido("제주", false),
-        Sido("인천", false),
-        Sido("울산", false),
-        Sido("세종", false),
-        Sido("대전", false),
-        Sido("대구", false),
-        Sido("강원도", false),
-        Sido("경상남도", false),
-        Sido("경상북도", false),
-        Sido("광주", false),
+    val regionData = arrayListOf<Region>(
+        Region(
+            "강원도",
+            arrayListOf(
+                City(101, "강릉시"),
+                City(102, "동해시"),
+                City(103, "속초시"),
+                City(104, "철원시")
+            )
+        ),
+        Region(
+            "경상남도",
+            arrayListOf(
+                City(105, "진주시"),
+                City(106, "창원시"),
+                City(107, "진해시"),
+                City(108, "김해시")
+            )
+        )
     )
 
-    var gugunList = arrayListOf<Gugun>(
-        Gugun("강남구", false),
-        Gugun("강동구", false),
-        Gugun("강북구", false),
-        Gugun("강서구", false),
-        Gugun("관악구", false),
-        Gugun("광진구", false),
-        Gugun("구로구", false),
-        Gugun("금천구", false),
-        Gugun("노원구", false),
-        Gugun("도봉구", false),
-        Gugun("동대문구", false),
-        Gugun("동작구", false),
-        Gugun("마포구", false),
-        Gugun("서대문구", false),
-        Gugun("서초구", false),
-        Gugun("성동구", false),
-        Gugun("성북구", false),
-        Gugun("송파구", false),
-        Gugun("양천구", false),
-        Gugun("영등포구", false),
-        Gugun("용산구", false),
-        Gugun("은평구", false),
-        Gugun("종로구", false),
-        Gugun("중구", false),
-        Gugun("중랑구", false),
 
-        )
-
-    lateinit var sidoAdapter: SidoAdapter
+    lateinit var siDoAdapter: SidoAdapter
     lateinit var gugunAdapter: GugunAdapter
-    lateinit var theaterAdapter: TheaterAdapter
     lateinit var storeAdapter: StoreAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -112,30 +82,33 @@ class SelectAreaActivity : AppCompatActivity() {
         boolList[1] = false
         boolList[2] = false
 
-        sidoAdapter = SidoAdapter(
+        siDoAdapter = SidoAdapter(
             object : SidoAdapter.SidoViewHolder.SidoClickListener {
                 override fun onclick(position: Int, textView: TextView) {
-                    if (!sidoAdapter.getClicked(position)) {
-                        if (sidoAdapter.getClickedSido() != -1) {
-                            sidoAdapter.setClicked(sidoAdapter.getClickedSido(), false)
+                    if (!siDoAdapter.getClicked(position)) {
+                        if (siDoAdapter.getClickedSido() != -1) {
+                            siDoAdapter.setClicked(siDoAdapter.getClickedSido(), false)
                         }
                         boolList[0] = true
                         act_select_rv_guguns.visibility = View.VISIBLE
-                        sidoAdapter.setClicked(position, true)
-                    } else if (sidoAdapter.getClicked(position)) {
-                        sidoAdapter.setClicked(sidoAdapter.getClickedSido(), false)
+                        act_select_area_rv_store.visibility = View.INVISIBLE
+                        siDoAdapter.setClicked(position, true)
+                    } else if (siDoAdapter.getClicked(position)) {
+                        siDoAdapter.setClicked(siDoAdapter.getClickedSido(), false)
                         boolList[0] = false
                         act_select_rv_guguns.visibility = View.INVISIBLE
-
+                        act_select_area_rv_store.visibility = View.INVISIBLE
+                        act_select_area_ll_third_bar.setBackgroundColor(Color.parseColor("#EEEEEE"))
                     }
                     setButtonActive()
+                    gugunAdapter.setGuGunData(siDoAdapter.sidoData[position].guList)
+                    siDoAdapter.setClickOriginal(position)
                 }
 
             })
-        sidoAdapter.setSidoData(sidoList)
-        act_select_rv_sidos.adapter = sidoAdapter
-        var sidolm = LinearLayoutManager(this)
-        act_select_rv_sidos.layoutManager = sidolm
+        siDoAdapter.setSidoData(regionData)
+        act_select_rv_sidos.adapter = siDoAdapter
+        act_select_rv_sidos.layoutManager = LinearLayoutManager(this)
         act_select_rv_sidos.setHasFixedSize(true)
 
 
@@ -143,36 +116,40 @@ class SelectAreaActivity : AppCompatActivity() {
             object : GugunViewHolder.GugunClickListener {
                 override fun onclick(position: Int, textView: TextView) {
                     if (!gugunAdapter.getClicked(position)) {
-                        if (gugunAdapter.getClickedGugun() != -1) {
-                            gugunAdapter.setClicked(gugunAdapter.getClickedGugun(), false)
+                        if (gugunAdapter.getClickedGuGun() != -1) {
+                            gugunAdapter.setClicked(gugunAdapter.getClickedGuGun(), false)
                         }
                         boolList[1] = true
                         act_select_area_rv_store.visibility = View.VISIBLE
+                        act_select_area_ll_third_bar.setBackgroundColor(Color.parseColor("#FFFFFF"))
                         gugunAdapter.setClicked(position, true)
                     } else if (gugunAdapter.getClicked(position)) {
-                        gugunAdapter.setClicked(gugunAdapter.getClickedGugun(), false)
+                        gugunAdapter.setClicked(gugunAdapter.getClickedGuGun(), false)
                         boolList[1] = false
                         act_select_area_rv_store.visibility = View.INVISIBLE
+                        act_select_area_ll_third_bar.setBackgroundColor(Color.parseColor("#EEEEEE"))
 
                     }
                     setButtonActive()
                 }
 
             })
-        gugunAdapter.setGugunData(gugunList)
         act_select_rv_guguns.adapter = gugunAdapter
-        var gugunlm = LinearLayoutManager(this)
-        act_select_rv_guguns.layoutManager = gugunlm
+        act_select_rv_guguns.layoutManager = LinearLayoutManager(this)
         act_select_rv_guguns.setHasFixedSize(true)
 
-        storeAdapter = StoreAdapter(object : StoreViewHolder.DownClickListener {
-            override fun onClick(recyclerView: RecyclerView, position: Int, downImage: ImageView) {
+        storeAdapter = StoreAdapter(object : StoreViewHolder.OnClickListener {
+            override fun downUpClick(
+                recyclerView: RecyclerView,
+                position: Int,
+                downImage: ImageView
+            ) {
                 if (!storeAdapter.storeData[position].isClicked) {
-                    storeAdapter.storeData[position].isClicked = true
+                    storeAdapter.setClicked(true, position)
                     downImage.setImageResource(R.drawable.btn_up)
                     recyclerView.visibility = View.VISIBLE
                 } else {
-                    storeAdapter.storeData[position].isClicked = false
+                    storeAdapter.setClicked(false, position)
                     downImage.setImageResource(R.drawable.btn_down)
                     recyclerView.visibility = View.GONE
                 }
