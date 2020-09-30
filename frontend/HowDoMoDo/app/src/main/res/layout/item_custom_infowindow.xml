@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/item_infowindow_iv_theater_image"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginRight="5dp"
             android:adjustViewBounds="true"
             android:src="@drawable/ic_launcher" >
@@ -27,7 +27,7 @@
 
             <TextView
                 android:id="@+id/item_infowindow_tv_theater_title"
-                android:layout_width="99dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:ellipsize="end"
