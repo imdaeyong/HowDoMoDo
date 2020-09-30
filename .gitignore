@@ -46,6 +46,3 @@ out/
 *.csv
 *.xlsx
 *.json
-
-### mac ###
-*.DS_Store
