@@ -46,10 +46,6 @@ class MyPageViewHolder(itemView: View, private val clickListener: ClickListener)
 
     fun bind(data: String) {
         itemView.item_my_page_tv_text.text = data
-        itemView.frag_my_tv_nickName.text = UserCollection.userNick
-        itemView.frag_my_tv_email.text = UserCollection.userEmail
-        itemView.frag_my_tv_name.text = UserCollection.userName
-
     }
 
 }

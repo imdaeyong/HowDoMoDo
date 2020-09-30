@@ -54,10 +54,11 @@ class LoginActivity : AppCompatActivity() {
 
             if (loginViewModel.loginResponse.value?.status == 200) {
                 Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, BottomTabActivity::class.java)
                 UserCollection.userEmail = it.data!!.userEmail
                 UserCollection.userName = it.data.userName
                 UserCollection.userNick = it.data.userNick
+                UserCollection.userCode = it.data.userCode
                 startActivity(intent)
                 finish()
             } else {
@@ -105,7 +106,6 @@ class LoginActivity : AppCompatActivity() {
                     loginJsonObject.put("userEmail", act_login_et_id.text.toString())
                     loginJsonObject.put("userPw", act_login_et_password.text.toString())
                     val body = JsonParser.parseString(loginJsonObject.toString()) as JsonObject
-                    Log.e("TEST", body.get("userEmail").toString())
                     loginViewModel.login(body)
                     observeData()
 
