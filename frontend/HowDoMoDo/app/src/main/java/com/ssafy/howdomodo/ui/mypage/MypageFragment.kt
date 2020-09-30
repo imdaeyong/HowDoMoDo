@@ -5,13 +5,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import com.ssafy.howdomodo.R
+import com.ssafy.howdomodo.`object`.ObjectCollection
+import com.ssafy.howdomodo.`object`.UserCollection
+import com.ssafy.howdomodo.ui.main.WebviewActivity
 import com.ssafy.howdomodo.ui.mypage.privates.PrivateActivity
 import kotlinx.android.synthetic.main.fragment_mypage.*
+import kotlinx.android.synthetic.main.fragment_mypage.view.*
+import org.json.JSONObject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MypageFragment : Fragment() {
+    private val mypageViewModel: MyPageViewModel by viewModel()
 
     lateinit var myPageAdapter: MyPageAdapter
     override fun onCreateView(
@@ -21,8 +32,23 @@ class MypageFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_mypage, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        frag_my_tv_nickName.text = UserCollection.userNick
+        frag_my_tv_email.text = UserCollection.userEmail
+        frag_my_tv_name.text = UserCollection.userName
+
+        frag_my_tv_update.setOnClickListener{
+            Toast.makeText(this.context, "수정 클릭",Toast.LENGTH_SHORT)
+            val mypageJsonObject = JSONObject()
+            mypageJsonObject.put("userCode",UserCollection.userCode)
+//            val body = JsonParser.parseString(mypageJsonObject.toString()) as JsonObject
+
+            // 정보조회 api 통신
+//            mypageViewModel.userInfo(UserCollection.userCode)
+//            observe()
+        }
 
         myPageAdapter = MyPageAdapter(object : MyPageViewHolder.ClickListener {
             override fun itemClick(position: Int) {
@@ -244,5 +270,14 @@ class MypageFragment : Fragment() {
         frag_my_rv_content.adapter = myPageAdapter
         frag_my_rv_content.layoutManager = LinearLayoutManager(view.context)
 
+    }
+
+    private fun observe(){
+        mypageViewModel.mypageResponse.observe(this, Observer {
+
+            val intent = Intent(activity, MypageActivity::class.java)
+            intent.putExtra("info", mypageViewModel.mypageResponse.value?.data)
+            startActivity(intent)
+        })
     }
 }
