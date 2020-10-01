@@ -31,6 +31,15 @@ class MyPageViewModel(private val mypageRepository: MyPageRepository) : ViewMode
             fail = {
                 errorToast.value = it.message
             })
+    }
 
+    fun userDelete(userCode: Int) {
+        mypageRepository.userDelete(userCode,
+            success = {
+                successMessage.value = it.message
+            },
+            fail = {
+                errorToast.value = it.message
+            })
     }
 }

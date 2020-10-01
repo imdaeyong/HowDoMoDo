@@ -30,4 +30,11 @@ interface NetworkService {
     fun userUpdate(
         @Body signUpRequestBody: JsonObject
     ): Call<SignUpResponse>
+
+    // 회원 탈퇴
+    // 회원 정보 조회
+    @DELETE("/users/{userCode}")
+    fun userDelete(
+        @Path("userCode") userCode: Int
+    ): Call<SignUpResponse>
 }
