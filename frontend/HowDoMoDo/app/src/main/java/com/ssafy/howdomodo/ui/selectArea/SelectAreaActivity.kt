@@ -39,6 +39,20 @@ class SelectAreaActivity : AppCompatActivity() {
         Store(
             "식생활", 227, arrayListOf<StoreDetail>(
                 StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
                 StoreDetail("레스토랑", "식당", 154)
             )
         ),
