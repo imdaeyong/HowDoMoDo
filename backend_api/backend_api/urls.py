@@ -20,6 +20,11 @@ from bigdata import views
 
 urlpatterns = [
     # path('admin/', admin.site.ulrs),
+<<<<<<< HEAD
     path('pyapi/', include('api.urls')),
     path('bigdata/', include('bigdata.urls'))
+=======
+    path('api/', include('api.urls')),
+    # path('bigdata/', include('bigdata.urls'))
+>>>>>>> bigdata_recommand
 ]
