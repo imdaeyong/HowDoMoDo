@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 
 
-app_name = 'api'
+app_name = 'pyapi'
 
 urlpatterns = [
     path('suns/<title>', views.suns),
