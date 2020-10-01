@@ -32,4 +32,10 @@ interface RemoteDataSource {
         fail: (Throwable) -> Unit
     )
 
+    fun userDelete(
+        userCode:Int,
+        success: (SignUpResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    )
+
 }

@@ -18,4 +18,11 @@ class MyPageRepository(private val remoteDataSource: RemoteDataSource) {
         success: (SignUpResponse) -> Unit,
         fail: (Throwable) -> Unit
     ) = remoteDataSource.userUpdate(signUpRequestBody, success, fail)
+
+    fun userDelete(
+        userCode: Int,
+        success: (SignUpResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    ) = remoteDataSource.userDelete(userCode, success, fail)
+
 }
