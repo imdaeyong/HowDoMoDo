@@ -1,5 +1,6 @@
 package com.ssafy.howdomodo.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,10 +37,7 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin(origins = "*")
 @RequestMapping("/users")
 public class UserController {
-	
-	private static final String SUCCESS = "success";
-	private static final String FAIL = "fail";
-	
+
 //	private final PasswordEncoder passwordEncoder;
 //	private final JwtTokenProvider jwtTokenProvider;
 	 
@@ -117,7 +116,7 @@ public class UserController {
 		if(res == -1)
 			return new ResponseEntity<Response>(new Response(StatusCode.FORBIDDEN, ResponseMessage.FAIL_UPDATE_USER), HttpStatus.FORBIDDEN);
 		
-		return new ResponseEntity<Response>(new Response(StatusCode.OK, ResponseMessage.UPDATE_USER, user), HttpStatus.OK);
+		return new ResponseEntity<Response>(new Response(StatusCode.CREATED, ResponseMessage.UPDATE_USER), HttpStatus.CREATED);
 	}
 	
 	@ApiOperation(value="회원정보 조회")
@@ -135,5 +134,15 @@ public class UserController {
 	public ResponseEntity logout(HttpSession session) {
 		session.invalidate();
 		return new ResponseEntity<Response>(new Response(StatusCode.OK, ResponseMessage.LOGOUT_SUCCESS), HttpStatus.OK);
+	}
+	
+	@ApiOperation(value="회원탈퇴")
+	@DeleteMapping("/{userCode}")
+	public ResponseEntity deleteUser(@PathVariable int userCode) {
+		int res = userService.deleteUser(userCode);
+		if(res == -1)
+			return new ResponseEntity<Response>(new Response(StatusCode.FORBIDDEN, ResponseMessage.FORBIDDEN), HttpStatus.FORBIDDEN);
+		
+		return new ResponseEntity<Response>(new Response(StatusCode.NO_CONTENT,ResponseMessage.DELETE_USER), HttpStatus.OK);
 	}
 }
