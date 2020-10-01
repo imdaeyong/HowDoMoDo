@@ -35,7 +35,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="지역선택" />
+            android:text="상영관 선택" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -139,7 +139,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:lineSpacingExtra="8sp"
-            android:text="시간 및 상영관 선택"
+            android:text="상영관 선택 완료"
             android:textColor="#ffffff"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"

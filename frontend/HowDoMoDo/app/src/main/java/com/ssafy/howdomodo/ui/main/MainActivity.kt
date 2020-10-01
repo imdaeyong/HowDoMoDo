@@ -48,6 +48,8 @@ class MainActivity : AppCompatActivity() {
         act_main_btn_theater.setOnClickListener {
             val intent = Intent(this, TheaterActivity::class.java)
             startActivity(intent)
+//            val movieSelecDialogFragment = MovieSelectDialogFragment().getInstance()
+//            movieSelecDialogFragment.show(supportFragmentManager,"movie_select")
         }
         getAppKeyHash()
     }

@@ -1,4 +1,4 @@
-package com.ssafy.howdomodo.ui.Favorite
+package com.ssafy.howdomodo.ui.favorite
 
 import android.os.Bundle
 import android.view.LayoutInflater
