@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.howdomodo.R
@@ -67,6 +68,7 @@ class TheaterAdapter(private val onclick: TheaterViewHolder.TheaterClickListener
 
         interface TheaterClickListener {
             fun onclick(position: Int, textView: TextView)
+            fun starClick(position: Int, starImageView: ImageView)
         }
 
         init {
@@ -76,6 +78,12 @@ class TheaterAdapter(private val onclick: TheaterViewHolder.TheaterClickListener
                     itemView.item_theater_tv_name
                 )
             }
+            itemView.item_theater_iv_favorite.setOnClickListener {
+                theaterClickListener.starClick(
+                    adapterPosition,
+                    itemView.item_theater_iv_favorite
+                )
+            }
         }
 
 
@@ -83,7 +91,7 @@ class TheaterAdapter(private val onclick: TheaterViewHolder.TheaterClickListener
             var name = data.theaterBrand + " " + data.theaterName
             var address = data.theaterAddress
             var theater_lat = data.theaterLat
-            var theater_lng = data.theaterLng
+            var theater_lng = data.theaterLon
 
             itemView.item_theater_tv_name.text = name
             itemView.item_theater_tv_desc.text = address

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.data.datasource.model.*
 import com.ssafy.howdomodo.ui.gwanSelect.GwanSelectActivity
+import com.ssafy.howdomodo.ui.theater.TheaterActivity
 import kotlinx.android.synthetic.main.activity_select_area.*
 
 
@@ -37,6 +38,20 @@ class SelectAreaActivity : AppCompatActivity() {
     val storeList = arrayListOf<Store>(
         Store(
             "식생활", 227, arrayListOf<StoreDetail>(
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
+                StoreDetail("식료품점", "가게", 133),
                 StoreDetail("식료품점", "가게", 133),
                 StoreDetail("레스토랑", "식당", 154)
             )
@@ -228,7 +243,7 @@ class SelectAreaActivity : AppCompatActivity() {
 
 
         act_select_area_cl_btn_next.setOnClickListener {
-            val intent = Intent(this, GwanSelectActivity::class.java)
+            val intent = Intent(this, TheaterActivity::class.java)
             startActivity(intent)
         }
 

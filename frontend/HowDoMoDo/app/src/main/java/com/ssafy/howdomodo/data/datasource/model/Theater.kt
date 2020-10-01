@@ -7,6 +7,6 @@ class Theater(
         var theaterAddress : String,
         val theaterBrand : String,
         var theaterLat : Double,
-        var theaterLng : Double,
+        var theaterLon : Double,
         var isClicked :Boolean =false
 )
