@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object NetworkServiceImpl {
-    private const val BASE_URL = "http://13.209.182.112354:3456/"
+    private const val BASE_URL = "http://j3a305.p.ssafy.io:8080/"
 
     private val okHttpClient: OkHttpClient =
             OkHttpClient.Builder().build()
