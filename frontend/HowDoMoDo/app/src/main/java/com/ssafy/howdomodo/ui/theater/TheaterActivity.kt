@@ -4,13 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.`object`.ObjectMovie
@@ -19,8 +20,13 @@ import com.ssafy.howdomodo.ui.gwanSelect.GwanSelectActivity
 import kotlinx.android.synthetic.main.activity_theater.*
 import net.daum.mf.map.api.CalloutBalloonAdapter
 import net.daum.mf.map.api.MapPOIItem
+import net.daum.mf.map.api.MapPoint
+import net.daum.mf.map.api.MapView
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TheaterActivity : AppCompatActivity() {
+    private val getTheatersViewModel: GetTheatersViewModel by viewModel()
+
     companion object {
         var theater_select = false
     }
@@ -42,6 +48,14 @@ class TheaterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_theater)
 
+        //해당 지역이 뭔지 받아오기.
+        if (intent.hasExtra("sido")) {
+            Toast.makeText(this@TheaterActivity, intent.getStringExtra("sido"), Toast.LENGTH_SHORT)
+                .show()
+        } else {
+            Toast.makeText(this@TheaterActivity, "전달된 지역 정보가 없습니다!", Toast.LENGTH_SHORT).show()
+        }
+
         theaterAdapter = TheaterAdapter(
             object :
                 TheaterAdapter.TheaterViewHolder.TheaterClickListener {
@@ -62,7 +76,8 @@ class TheaterActivity : AppCompatActivity() {
                 }
 
                 override fun starClick(position: Int, starImageView: ImageView) {
-                    Toast.makeText(this@TheaterActivity, position.toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@TheaterActivity, position.toString(), Toast.LENGTH_SHORT)
+                        .show()
                 }
             })
         theaterAdapter.setTheaterData(theaterList)
@@ -71,51 +86,51 @@ class TheaterActivity : AppCompatActivity() {
         act_theater_rv_theaters.layoutManager = theaterlm
         act_theater_rv_theaters.setHasFixedSize(true)
         //Maps
-//        var mapView = MapView(this)
-//        var mapViewController = act_theater_rl_map_view as ViewGroup
-//        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.4874592, 127.0471432), true)
-//        mapView.setZoomLevel(5, true)
-//
-//
-//        for (i in theaterList.indices) {
-//            var t = theaterList[i]
-//            var marker_img = R.drawable.ic_launcher
-//            var selected_marker_img = R.drawable.ic_launcher
-//
-//
-//            if (t.theaterBrand == "CGV") {
-//                marker_img = R.drawable.cgv_marker_unselected
-//                selected_marker_img = R.drawable.cgv_marker
-//            } else if (t.theaterBrand == "메가박스") {
-//                marker_img = R.drawable.megabox_marker_unselected
-//                selected_marker_img = R.drawable.megabox_marker
-//            } else if (t.theaterBrand == "롯데시네마") {
-//                marker_img = R.drawable.lotte_marker_unselected
-//                selected_marker_img = R.drawable.lotte_marker
-//            } else {
-//                marker_img = R.drawable.ic_launcher
-//            }
-//
-//            var marker = MapPOIItem()
-//            marker.itemName = t.theaterBrand + " " + t.theaterName
-//            marker.tag = t.theaterId
-//            marker.mapPoint = MapPoint.mapPointWithGeoCoord(t.theaterLat, t.theaterLng)
-//            marker.markerType = MapPOIItem.MarkerType.CustomImage
-//            marker.setCustomImageResourceId(marker_img)
-//            marker.userObject = t
-//
-//
-//            marker.selectedMarkerType = MapPOIItem.MarkerType.CustomImage
-//            marker.customSelectedImageResourceId = selected_marker_img
-//            marker.isCustomImageAutoscale = false
-//            marker.setCustomImageAnchor(0.5f, 1.0f)
-//
-//            mapView.setCalloutBalloonAdapter(CustomInfoWindow(context = this, theater = t))
-//
-//            mapView.addPOIItem(marker)
-//        }
-//        mapView.fitMapViewAreaToShowAllPOIItems()
-//        mapViewController.addView(mapView)
+        var mapView = MapView(this)
+        var mapViewController = act_theater_rl_map_view as ViewGroup
+        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.4874592, 127.0471432), true)
+        mapView.setZoomLevel(5, true)
+
+
+        for (i in theaterList.indices) {
+            var t = theaterList[i]
+            var marker_img = R.drawable.ic_launcher
+            var selected_marker_img = R.drawable.ic_launcher
+
+
+            if (t.theaterBrand == "CGV") {
+                marker_img = R.drawable.cgv_marker_unselected
+                selected_marker_img = R.drawable.cgv_marker
+            } else if (t.theaterBrand == "메가박스") {
+                marker_img = R.drawable.megabox_marker_unselected
+                selected_marker_img = R.drawable.megabox_marker
+            } else if (t.theaterBrand == "롯데시네마") {
+                marker_img = R.drawable.lotte_marker_unselected
+                selected_marker_img = R.drawable.lotte_marker
+            } else {
+                marker_img = R.drawable.ic_launcher
+            }
+
+            var marker = MapPOIItem()
+            marker.itemName = t.theaterBrand + " " + t.theaterName
+            marker.tag = t.theaterId
+            marker.mapPoint = MapPoint.mapPointWithGeoCoord(t.theaterLat, t.theaterLon)
+            marker.markerType = MapPOIItem.MarkerType.CustomImage
+            marker.setCustomImageResourceId(marker_img)
+            marker.userObject = t
+
+
+            marker.selectedMarkerType = MapPOIItem.MarkerType.CustomImage
+            marker.customSelectedImageResourceId = selected_marker_img
+            marker.isCustomImageAutoscale = false
+            marker.setCustomImageAnchor(0.5f, 1.0f)
+
+            mapView.setCalloutBalloonAdapter(CustomInfoWindow(context = this, theater = t))
+
+            mapView.addPOIItem(marker)
+        }
+        mapView.fitMapViewAreaToShowAllPOIItems()
+        mapViewController.addView(mapView)
 
 
         act_theater_cl_theater_selected.setOnClickListener {
@@ -123,17 +138,31 @@ class TheaterActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        observeData()
+    }
 
+    private fun observeData() {
+        getTheatersViewModel.getTheatersError.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        })
+
+        getTheatersViewModel.getTheatersResponse.observe(this, Observer {
+            //영화 리스트 가져왔을떄.
+
+            if (getTheatersViewModel.getTheatersResponse.value?.status == 200) {
+                Toast.makeText(this, "영화관 리스트 출력!", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, GwanSelectActivity::class.java)
+                intent.putExtra("hihi", "byebye")
+                startActivity(intent)
+                finish()
+            } else {
+                Toast.makeText(this, "TheaterActivity 164 L 에러!", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     fun setButtonActive() {
-        var token = true
-        Log.e("bbb", theater_select.toString())
-        if (!theater_select) {
-            token = false
-        }
-
-        if (token) {
+        if (theater_select) {
             act_theater_cl_theater_selected.setBackgroundColor(Color.parseColor("#f73859"))
             act_theater_cl_theater_selected.isClickable = true
         } else {
@@ -182,5 +211,7 @@ class TheaterActivity : AppCompatActivity() {
         }
 
     }
-
 }
+
+
+

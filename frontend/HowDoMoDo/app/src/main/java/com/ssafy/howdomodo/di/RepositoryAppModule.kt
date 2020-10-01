@@ -10,4 +10,5 @@ val repositoryAppModule = module {
     single { NaverRepository(get()) }
     single { MovieRepository(get()) }
     single { MyPageRepository(get()) }
+    single { GetTheatersRepository(get()) }
 }
