@@ -10,4 +10,5 @@ public interface UserService {
 	public int updateUser(Users user);
 	public int updatePwd(Users user);
 	public Users findByUserCode(int userCode);
+	public int deleteUser(int userCode);
 }

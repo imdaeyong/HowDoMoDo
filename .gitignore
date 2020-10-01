@@ -44,7 +44,13 @@ out/
 ### BigData ###
 *.csv
 *.xlsx
-*.json
 
 ### mac ###
 *.DS_Store
+
+### django ###
+.ipynb_checkpoints
+__pycache__
+venv
+*.json
+
