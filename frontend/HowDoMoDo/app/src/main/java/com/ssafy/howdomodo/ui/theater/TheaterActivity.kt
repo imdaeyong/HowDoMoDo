@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.`object`.ObjectMovie
 import com.ssafy.howdomodo.data.datasource.model.Theater
@@ -22,6 +25,7 @@ import net.daum.mf.map.api.CalloutBalloonAdapter
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
+import org.json.JSONObject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TheaterActivity : AppCompatActivity() {
@@ -29,6 +33,8 @@ class TheaterActivity : AppCompatActivity() {
 
     companion object {
         var theater_select = false
+        var selectSiName = "서울특별시"
+        var selectGuName = "영등포구"
     }
 
     var theaterList = arrayListOf<Theater>(
@@ -40,8 +46,7 @@ class TheaterActivity : AppCompatActivity() {
         Theater(1251, 175, "de CHEF 압구정", "서울특별시 강남구 신사동 압구정로30길 45", "CGV", 37.5243, 127.029),
         Theater(1252, 175, "씨티(강남대로)", "서울특별시 강남구 역삼1동 강남대로 422", "메가박스", 37.5004, 127.027),
         Theater(1253, 175, "강남", "서울특별시 강남구 역삼동 강남대로 438", "CGV", 37.5016, 127.026),
-
-        )
+    )
     lateinit var theaterAdapter: TheaterAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,12 +54,23 @@ class TheaterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_theater)
 
         //해당 지역이 뭔지 받아오기.
-        if (intent.hasExtra("sido")) {
-            Toast.makeText(this@TheaterActivity, intent.getStringExtra("sido"), Toast.LENGTH_SHORT)
+        if (intent.hasExtra("siName")) {
+            selectSiName = intent.getStringExtra("siName")!!
+            selectGuName = intent.getStringExtra("guName")!!
+            Toast.makeText(
+                this@TheaterActivity,
+                intent.getStringExtra("siName") + intent.getStringExtra("guName"),
+                Toast.LENGTH_SHORT
+            )
                 .show()
         } else {
-            Toast.makeText(this@TheaterActivity, "전달된 지역 정보가 없습니다!", Toast.LENGTH_SHORT).show()
+            Log.e("유사에러","이전 페이지에서 넘어온 시도데이터가 없음 - > 강남으로 디폴트 검색!")
         }
+
+        getTheatersViewModel.getTheaters(selectSiName, selectGuName)
+
+        observeData()
+
 
         theaterAdapter = TheaterAdapter(
             object :
@@ -89,7 +105,7 @@ class TheaterActivity : AppCompatActivity() {
         var mapView = MapView(this)
         var mapViewController = act_theater_rl_map_view as ViewGroup
         mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.4874592, 127.0471432), true)
-        mapView.setZoomLevel(5, true)
+        mapView.setZoomLevel(7, true)
 
 
         for (i in theaterList.indices) {
@@ -137,24 +153,18 @@ class TheaterActivity : AppCompatActivity() {
             val intent = Intent(this, GwanSelectActivity::class.java)
             startActivity(intent)
         }
-
-        observeData()
     }
 
     private fun observeData() {
         getTheatersViewModel.getTheatersError.observe(this, Observer {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
-
         getTheatersViewModel.getTheatersResponse.observe(this, Observer {
             //영화 리스트 가져왔을떄.
-
-            if (getTheatersViewModel.getTheatersResponse.value?.status == 200) {
+            if (it.status == 200) {
                 Toast.makeText(this, "영화관 리스트 출력!", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, GwanSelectActivity::class.java)
-                intent.putExtra("hihi", "byebye")
-                startActivity(intent)
-                finish()
+                theaterList = it.data!!
+                Log.e("영화관리스트",theaterList[0].toString())
             } else {
                 Toast.makeText(this, "TheaterActivity 164 L 에러!", Toast.LENGTH_SHORT).show()
             }

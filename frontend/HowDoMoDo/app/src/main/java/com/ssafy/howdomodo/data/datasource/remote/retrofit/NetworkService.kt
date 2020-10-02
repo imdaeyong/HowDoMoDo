@@ -39,9 +39,10 @@ interface NetworkService {
     ): Call<SignUpResponse>
 
     //시도, 구군별 영화관 리스트 조회
-    @POST("/theaters/bookmark")
+    @GET("/theaters/{siName}/{guName}")
     fun getTheaters(
-        @Body getTheatersRequestBody: JsonObject
+        @Path("siName") siName:String,
+        @Path("guName") guName:String
     ): Call<GetTheatersResponse>
 
 

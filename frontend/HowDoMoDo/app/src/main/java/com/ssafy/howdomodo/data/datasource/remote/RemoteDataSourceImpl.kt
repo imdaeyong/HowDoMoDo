@@ -114,11 +114,12 @@ class RemoteDataSourceImpl : RemoteDataSource {
     }
 
     override fun getTheaters(
-        getTheatersRequestBody: JsonObject,
+        siName:String,
+        guName:String,
         success: (GetTheatersResponse) -> Unit,
         fail: (Throwable) -> Unit
     ) {
-        api.getTheaters(getTheatersRequestBody).enqueue(object : Callback<GetTheatersResponse> {
+        api.getTheaters(siName,guName).enqueue(object : Callback<GetTheatersResponse> {
             override fun onFailure(call: Call<GetTheatersResponse>, t: Throwable) {
                 fail(t)
             }
@@ -127,9 +128,14 @@ class RemoteDataSourceImpl : RemoteDataSource {
                 call: Call<GetTheatersResponse>,
                 response: Response<GetTheatersResponse>
             ) {
-                success(response.body()!!)
+                if(response.body()!=null) {
+                    Log.e("remotedatasourceimpl", response.body().toString())
+                    success(response.body()!!)
+                }else {
+                    fail(Exception("유효한 데이터가 아닙니다"))
+                }
             }
         })
     }
-   
+
 }
