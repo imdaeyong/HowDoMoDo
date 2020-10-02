@@ -1,9 +1,9 @@
 package com.ssafy.howdomodo.data.datasource.remote.retrofit
 
 import com.google.gson.JsonObject
+import com.ssafy.howdomodo.data.datasource.model.GetTheatersResponse
 import com.ssafy.howdomodo.data.datasource.model.LoginResponse
 import com.ssafy.howdomodo.data.datasource.model.SignUpResponse
-import com.ssafy.howdomodo.data.datasource.model.Users
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -11,7 +11,7 @@ import retrofit2.http.*
 interface NetworkService {
     @POST("/users/login")
     fun login(
-            @Body loginRequestBody: JsonObject
+        @Body loginRequestBody: JsonObject
     ): Call<LoginResponse>
 
     @POST("/users/join")
@@ -37,4 +37,12 @@ interface NetworkService {
     fun userDelete(
         @Path("userCode") userCode: Int
     ): Call<SignUpResponse>
+
+    //시도, 구군별 영화관 리스트 조회
+    @POST("/theaters/bookmark")
+    fun getTheaters(
+        @Body getTheatersRequestBody: JsonObject
+    ): Call<GetTheatersResponse>
+
+
 }

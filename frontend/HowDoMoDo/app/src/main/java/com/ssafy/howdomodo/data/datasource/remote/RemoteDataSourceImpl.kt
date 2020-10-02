@@ -2,15 +2,13 @@ package com.ssafy.howdomodo.data.datasource.remote
 
 import android.util.Log
 import com.google.gson.JsonObject
+import com.ssafy.howdomodo.data.datasource.model.GetTheatersResponse
 import com.ssafy.howdomodo.data.datasource.model.LoginResponse
-import com.ssafy.howdomodo.data.datasource.model.MovieApi
 import com.ssafy.howdomodo.data.datasource.model.SignUpResponse
-import com.ssafy.howdomodo.data.datasource.model.Users
 import com.ssafy.howdomodo.data.datasource.remote.retrofit.NetworkServiceImpl
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.Exception
 
 class RemoteDataSourceImpl : RemoteDataSource {
     val api = NetworkServiceImpl.SERVICE
@@ -28,9 +26,9 @@ class RemoteDataSourceImpl : RemoteDataSource {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 Log.e("TEST2", response.body()?.data?.userEmail.toString())
 //                response.body()?.let { success(it)}
-                if(response.body()!=null){
+                if (response.body() != null) {
                     success(response.body()!!)
-                }else{
+                } else {
                     fail(Exception("유효한 정보가 없습니다"))
                 }
 //                success(response.body()!!)
@@ -68,14 +66,15 @@ class RemoteDataSourceImpl : RemoteDataSource {
             }
 
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                if(response.body()!=null){
+                if (response.body() != null) {
                     success(response.body()!!)
-                }else{
+                } else {
                     fail(Exception("유효한 정보가 없습니다"))
                 }
             }
         })
     }
+
     override fun userUpdate(
         signUpRequestBody: JsonObject,
         success: (SignUpResponse) -> Unit,
@@ -113,4 +112,24 @@ class RemoteDataSourceImpl : RemoteDataSource {
             }
         })
     }
+
+    override fun getTheaters(
+        getTheatersRequestBody: JsonObject,
+        success: (GetTheatersResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    ) {
+        api.getTheaters(getTheatersRequestBody).enqueue(object : Callback<GetTheatersResponse> {
+            override fun onFailure(call: Call<GetTheatersResponse>, t: Throwable) {
+                fail(t)
+            }
+
+            override fun onResponse(
+                call: Call<GetTheatersResponse>,
+                response: Response<GetTheatersResponse>
+            ) {
+                success(response.body()!!)
+            }
+        })
+    }
+   
 }
