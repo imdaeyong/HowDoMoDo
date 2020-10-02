@@ -45,6 +45,10 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     # CORS
     'corsheaders',
+    # celery, redis
+    'django_celery_beat',
+    'django_celery_results',
+    # big process application
 ]
 
 MIDDLEWARE = [
@@ -102,6 +106,14 @@ DATABASES = {
         'PORT' : '3306'
     }
 }
+
+# Celery
+CELERY_BROKER_URL = 'redis://j3a305.p.ssafy.io:6379'
+CELERY_RESULT_BACKEND = 'redis://j3a305.p.ssafy.io:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TAST_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Seoul' # Because Celery beat is scheduler define timezone
 
 
 # Password validation
