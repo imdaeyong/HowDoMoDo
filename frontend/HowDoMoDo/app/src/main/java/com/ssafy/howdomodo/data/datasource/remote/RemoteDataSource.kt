@@ -35,7 +35,8 @@ interface RemoteDataSource {
         fail: (Throwable) -> Unit
     )
     fun getTheaters(
-        getTheatersRequestBody:JsonObject,
+        siName:String,
+        guName:String,
         success: (GetTheatersResponse) -> Unit,
         fail: (Throwable) -> Unit
     )

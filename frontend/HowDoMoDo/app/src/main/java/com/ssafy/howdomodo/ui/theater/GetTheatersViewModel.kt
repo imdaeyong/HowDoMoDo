@@ -14,14 +14,12 @@ class GetTheatersViewModel(private val getTheatersRepository: GetTheatersReposit
     val getTheatersResponse = MutableLiveData<GetTheatersResponse>()
     val getTheatersError = MutableLiveData<String>()
 
-    fun getTheaters(getTheatersRequestBody: JsonObject) {
-        Log.e("getTheaterTest",getTheatersRequestBody.get("userCode").toString())
-        getTheatersRepository.getTheaters(getTheatersRequestBody, success = { response ->
+    fun getTheaters(siName: String, guName:String) {
+        getTheatersRepository.getTheaters(siName,guName, success = { response ->
                 getTheatersResponse.value = response
             },
             fail = {
                 Log.e("getTheaterTest","영화관 불러오는데 실패했어요 ㅠ")
-
                 getTheatersError.value = it.message
             })
     }
