@@ -34,4 +34,5 @@ class MainViewModel (private val naverRepository: NaverRepository) : ViewModel()
         loading.value = false
     }
 
+
 }
