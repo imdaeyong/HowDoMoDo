@@ -34,10 +34,11 @@ class TheaterActivity : AppCompatActivity() {
     companion object {
         var theater_select = false
         var selectSiName = "서울특별시"
-        var selectGuName = "영등포구"
+        var selectGuName = "강남구"
+        lateinit var theaterList : ArrayList<Theater>
     }
 
-    var theaterList = arrayListOf<Theater>(
+    var theaterList2 = arrayListOf<Theater>(
         Theater(1246, 175, "브로드웨이(신사)", "서울특별시 강남구 논현동 도산대로 8길 8", "롯데시네마", 37.5164, 127.022),
         Theater(1247, 175, "도곡", "서울특별시 강남구 도곡동 174-3", "롯데시네마", 37.4875, 127.047),
         Theater(1248, 175, "청남씨네시티", "서울특별시 강남구 도산대로 323, 씨네시티빌딩 14층", "CGV", 37.5229, 127.037),
@@ -64,7 +65,7 @@ class TheaterActivity : AppCompatActivity() {
             )
                 .show()
         } else {
-            Log.e("유사에러","이전 페이지에서 넘어온 시도데이터가 없음 - > 강남으로 디폴트 검색!")
+            Log.e("유사에러","이전 페이지에서 넘어온 시도데이터가 없음 - > 강남으로 디폴트 검색!" + selectSiName + selectGuName)
         }
 
         getTheatersViewModel.getTheaters(selectSiName, selectGuName)
@@ -96,8 +97,12 @@ class TheaterActivity : AppCompatActivity() {
                         .show()
                 }
             })
-        theaterAdapter.setTheaterData(theaterList)
-        act_theater_rv_theaters.adapter = theaterAdapter
+        if(theaterList!=null) {
+            theaterAdapter.setTheaterData(theaterList)
+        }else {
+            theaterAdapter.setTheaterData(theaterList2)
+        }
+            act_theater_rv_theaters.adapter = theaterAdapter
         var theaterlm = LinearLayoutManager(this)
         act_theater_rv_theaters.layoutManager = theaterlm
         act_theater_rv_theaters.setHasFixedSize(true)
@@ -164,7 +169,7 @@ class TheaterActivity : AppCompatActivity() {
             if (it.status == 200) {
                 Toast.makeText(this, "영화관 리스트 출력!", Toast.LENGTH_SHORT).show()
                 theaterList = it.data!!
-                Log.e("영화관리스트",theaterList[0].toString())
+                Log.e("영화관리스트", theaterList.toArray().toString())
             } else {
                 Toast.makeText(this, "TheaterActivity 164 L 에러!", Toast.LENGTH_SHORT).show()
             }
