@@ -32,7 +32,8 @@ ALLOWED_HOSTS = [
 
 
 # Application definition
-
+BROKER_URL = 'redis://j3a305.p.ssafy.io/:6379/0'
+CELERY_RESULT_BACKEND = 'redis://j3a305.p.ssafy.io:6379/0'
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
