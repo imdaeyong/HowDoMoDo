@@ -1,10 +1,7 @@
 package com.ssafy.howdomodo.data.datasource.remote
 
 import com.google.gson.JsonObject
-import com.ssafy.howdomodo.data.datasource.model.LoginResponse
-import com.ssafy.howdomodo.data.datasource.model.MovieApi
-import com.ssafy.howdomodo.data.datasource.model.SignUpResponse
-import com.ssafy.howdomodo.data.datasource.model.Users
+import com.ssafy.howdomodo.data.datasource.model.*
 
 
 interface RemoteDataSource {
@@ -35,6 +32,12 @@ interface RemoteDataSource {
     fun userDelete(
         userCode:Int,
         success: (SignUpResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    )
+    fun getTheaters(
+        siName:String,
+        guName:String,
+        success: (GetTheatersResponse) -> Unit,
         fail: (Throwable) -> Unit
     )
 

@@ -7,11 +7,15 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.`object`.ObjectMovie
 import com.ssafy.howdomodo.data.datasource.model.Theater
@@ -19,10 +23,18 @@ import com.ssafy.howdomodo.ui.gwanSelect.GwanSelectActivity
 import kotlinx.android.synthetic.main.activity_theater.*
 import net.daum.mf.map.api.CalloutBalloonAdapter
 import net.daum.mf.map.api.MapPOIItem
+import net.daum.mf.map.api.MapPoint
+import net.daum.mf.map.api.MapView
+import org.json.JSONObject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TheaterActivity : AppCompatActivity() {
+    private val getTheatersViewModel: GetTheatersViewModel by viewModel()
+
     companion object {
         var theater_select = false
+        var selectSiName = "서울특별시"
+        var selectGuName = "영등포구"
     }
 
     var theaterList = arrayListOf<Theater>(
@@ -34,13 +46,31 @@ class TheaterActivity : AppCompatActivity() {
         Theater(1251, 175, "de CHEF 압구정", "서울특별시 강남구 신사동 압구정로30길 45", "CGV", 37.5243, 127.029),
         Theater(1252, 175, "씨티(강남대로)", "서울특별시 강남구 역삼1동 강남대로 422", "메가박스", 37.5004, 127.027),
         Theater(1253, 175, "강남", "서울특별시 강남구 역삼동 강남대로 438", "CGV", 37.5016, 127.026),
-
-        )
+    )
     lateinit var theaterAdapter: TheaterAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_theater)
+
+        //해당 지역이 뭔지 받아오기.
+        if (intent.hasExtra("siName")) {
+            selectSiName = intent.getStringExtra("siName")!!
+            selectGuName = intent.getStringExtra("guName")!!
+            Toast.makeText(
+                this@TheaterActivity,
+                intent.getStringExtra("siName") + intent.getStringExtra("guName"),
+                Toast.LENGTH_SHORT
+            )
+                .show()
+        } else {
+            Log.e("유사에러","이전 페이지에서 넘어온 시도데이터가 없음 - > 강남으로 디폴트 검색!")
+        }
+
+        getTheatersViewModel.getTheaters(selectSiName, selectGuName)
+
+        observeData()
+
 
         theaterAdapter = TheaterAdapter(
             object :
@@ -62,7 +92,8 @@ class TheaterActivity : AppCompatActivity() {
                 }
 
                 override fun starClick(position: Int, starImageView: ImageView) {
-                    Toast.makeText(this@TheaterActivity, position.toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@TheaterActivity, position.toString(), Toast.LENGTH_SHORT)
+                        .show()
                 }
             })
         theaterAdapter.setTheaterData(theaterList)
@@ -71,69 +102,77 @@ class TheaterActivity : AppCompatActivity() {
         act_theater_rv_theaters.layoutManager = theaterlm
         act_theater_rv_theaters.setHasFixedSize(true)
         //Maps
-//        var mapView = MapView(this)
-//        var mapViewController = act_theater_rl_map_view as ViewGroup
-//        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.4874592, 127.0471432), true)
-//        mapView.setZoomLevel(5, true)
-//
-//
-//        for (i in theaterList.indices) {
-//            var t = theaterList[i]
-//            var marker_img = R.drawable.ic_launcher
-//            var selected_marker_img = R.drawable.ic_launcher
-//
-//
-//            if (t.theaterBrand == "CGV") {
-//                marker_img = R.drawable.cgv_marker_unselected
-//                selected_marker_img = R.drawable.cgv_marker
-//            } else if (t.theaterBrand == "메가박스") {
-//                marker_img = R.drawable.megabox_marker_unselected
-//                selected_marker_img = R.drawable.megabox_marker
-//            } else if (t.theaterBrand == "롯데시네마") {
-//                marker_img = R.drawable.lotte_marker_unselected
-//                selected_marker_img = R.drawable.lotte_marker
-//            } else {
-//                marker_img = R.drawable.ic_launcher
-//            }
-//
-//            var marker = MapPOIItem()
-//            marker.itemName = t.theaterBrand + " " + t.theaterName
-//            marker.tag = t.theaterId
-//            marker.mapPoint = MapPoint.mapPointWithGeoCoord(t.theaterLat, t.theaterLng)
-//            marker.markerType = MapPOIItem.MarkerType.CustomImage
-//            marker.setCustomImageResourceId(marker_img)
-//            marker.userObject = t
-//
-//
-//            marker.selectedMarkerType = MapPOIItem.MarkerType.CustomImage
-//            marker.customSelectedImageResourceId = selected_marker_img
-//            marker.isCustomImageAutoscale = false
-//            marker.setCustomImageAnchor(0.5f, 1.0f)
-//
-//            mapView.setCalloutBalloonAdapter(CustomInfoWindow(context = this, theater = t))
-//
-//            mapView.addPOIItem(marker)
-//        }
-//        mapView.fitMapViewAreaToShowAllPOIItems()
-//        mapViewController.addView(mapView)
+        var mapView = MapView(this)
+        var mapViewController = act_theater_rl_map_view as ViewGroup
+        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.4874592, 127.0471432), true)
+        mapView.setZoomLevel(7, true)
+
+
+        for (i in theaterList.indices) {
+            var t = theaterList[i]
+            var marker_img = R.drawable.ic_launcher
+            var selected_marker_img = R.drawable.ic_launcher
+
+
+            if (t.theaterBrand == "CGV") {
+                marker_img = R.drawable.cgv_marker_unselected
+                selected_marker_img = R.drawable.cgv_marker
+            } else if (t.theaterBrand == "메가박스") {
+                marker_img = R.drawable.megabox_marker_unselected
+                selected_marker_img = R.drawable.megabox_marker
+            } else if (t.theaterBrand == "롯데시네마") {
+                marker_img = R.drawable.lotte_marker_unselected
+                selected_marker_img = R.drawable.lotte_marker
+            } else {
+                marker_img = R.drawable.ic_launcher
+            }
+
+            var marker = MapPOIItem()
+            marker.itemName = t.theaterBrand + " " + t.theaterName
+            marker.tag = t.theaterId
+            marker.mapPoint = MapPoint.mapPointWithGeoCoord(t.theaterLat, t.theaterLon)
+            marker.markerType = MapPOIItem.MarkerType.CustomImage
+            marker.setCustomImageResourceId(marker_img)
+            marker.userObject = t
+
+
+            marker.selectedMarkerType = MapPOIItem.MarkerType.CustomImage
+            marker.customSelectedImageResourceId = selected_marker_img
+            marker.isCustomImageAutoscale = false
+            marker.setCustomImageAnchor(0.5f, 1.0f)
+
+            mapView.setCalloutBalloonAdapter(CustomInfoWindow(context = this, theater = t))
+
+            mapView.addPOIItem(marker)
+        }
+        mapView.fitMapViewAreaToShowAllPOIItems()
+        mapViewController.addView(mapView)
 
 
         act_theater_cl_theater_selected.setOnClickListener {
             val intent = Intent(this, GwanSelectActivity::class.java)
             startActivity(intent)
         }
+    }
 
-
+    private fun observeData() {
+        getTheatersViewModel.getTheatersError.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        })
+        getTheatersViewModel.getTheatersResponse.observe(this, Observer {
+            //영화 리스트 가져왔을떄.
+            if (it.status == 200) {
+                Toast.makeText(this, "영화관 리스트 출력!", Toast.LENGTH_SHORT).show()
+                theaterList = it.data!!
+                Log.e("영화관리스트",theaterList[0].toString())
+            } else {
+                Toast.makeText(this, "TheaterActivity 164 L 에러!", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     fun setButtonActive() {
-        var token = true
-        Log.e("bbb", theater_select.toString())
-        if (!theater_select) {
-            token = false
-        }
-
-        if (token) {
+        if (theater_select) {
             act_theater_cl_theater_selected.setBackgroundColor(Color.parseColor("#f73859"))
             act_theater_cl_theater_selected.isClickable = true
         } else {
@@ -182,5 +221,7 @@ class TheaterActivity : AppCompatActivity() {
         }
 
     }
-
 }
+
+
+

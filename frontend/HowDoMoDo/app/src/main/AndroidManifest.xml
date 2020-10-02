@@ -21,7 +21,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.mypage.MypageActivity"></activity>
-        <activity android:name=".ui.selectArea.SelectTheaterActivity" />
+<!--        <activity android:name=".ui.selectArea.SelectTheaterActivity" />-->
         <activity android:name=".ui.mypage.privates.PrivateActivity" />
         <activity
             android:name=".ui.LoadingActivity"
