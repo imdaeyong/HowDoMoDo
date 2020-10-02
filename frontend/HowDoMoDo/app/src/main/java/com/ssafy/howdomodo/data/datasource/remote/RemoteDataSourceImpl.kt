@@ -121,6 +121,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
     ) {
         api.getTheaters(siName,guName).enqueue(object : Callback<GetTheatersResponse> {
             override fun onFailure(call: Call<GetTheatersResponse>, t: Throwable) {
+                Log.e("remotedatasourceImpl", "failed!!!!")
                 fail(t)
             }
 
@@ -128,13 +129,17 @@ class RemoteDataSourceImpl : RemoteDataSource {
                 call: Call<GetTheatersResponse>,
                 response: Response<GetTheatersResponse>
             ) {
+                Log.e("remotedatasourceImpl", "onresponse join")
+
                 if(response.body()!=null) {
                     Log.e("remotedatasourceimpl", response.body().toString())
                     success(response.body()!!)
                 }else {
+                    Log.e("remotedatasourceimple","여기서에러임.")
                     fail(Exception("유효한 데이터가 아닙니다"))
                 }
             }
+
         })
     }
 
