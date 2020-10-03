@@ -276,7 +276,6 @@ class MypageFragment : Fragment() {
                     "회원탈퇴" -> {
                         // movieTitle을 Request 보내서 긍,부정 데이터를 받아온다.
 //                        Toast.makeText(view.context,"클릭",Toast.LENGTH_SHORT).show()
-                        Log.d("delete","왜안돼")
                         val dialog = MyDialog(view.context)
                         dialog.setOnOKClickedListener { content->
                             if(content == "확인"){

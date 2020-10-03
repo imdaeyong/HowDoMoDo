@@ -18,24 +18,19 @@ import com.ssafy.howdomodo.ui.Loading
 import com.ssafy.howdomodo.ui.selectArea.SelectAreaActivity
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.item_ticketing_dialog.*
+import kotlinx.android.synthetic.main.item_ticketing_dialog.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
     companion object {
         var movieDataBool = false
         var postDataBool = false
+        var moviePosition = 0
     }
 
     private val vm: MainViewModel by viewModel()
     private val mvm: MovieViewModel by viewModel()
-//    var movieList: List<Movie> = listOf(
-//        Movie("공작", "액션", 3.4, "url/image1"),
-//        Movie("미스터빈", "코미디", 2.1, "url/image2"),
-//        Movie("암살", "액션", 4.9, "url/image3"),
-//        Movie("괴물", "스릴러", 4.6, "url/image4")
-//    )
 
-    var postingList = arrayOf("영화 테넷", "영화 인턴", "영화 공작")
     var postList = arrayListOf<String>()
     lateinit var postingAdapter: PostingAdapter
     lateinit var mainAdapter: MainAdapter
@@ -56,26 +51,13 @@ class MainFragment : Fragment() {
         mvm.getMovieData()
 
         // RecyclerView Apapter
+
         mainAdapter = MainAdapter(object : MainViewHolder.ClickListener {
             override fun movieClick(position: Int) {
                 val movieTitle = mainAdapter.movieData[position].title
+                moviePosition = position
+                mvm.getMoviePsNs(movieTitle)
 
-                // movieTitle을 Request 보내서 긍,부정 데이터를 받아온다.
-                val builder = AlertDialog.Builder(view.context)
-                val dialogView = layoutInflater.inflate(R.layout.item_ticketing_dialog, null)
-
-                builder.setView(dialogView)
-                    .setPositiveButton("예매") { dialogInterface, i ->
-//                        item_ticketing_dialog_positive_score.text =
-//                        item_ticketing_dialog_negative_score.text =
-                        val intent = Intent(activity, SelectAreaActivity::class.java)
-                        ObjectMovie.movieTitle = movieTitle
-                        startActivity(intent)
-                    }
-                    .setNegativeButton("취소") { dialogInterface, i ->
-                        /* 취소일 때 아무 액션이 없으므로 빈칸 */
-                    }
-                    .show()
             }
         })
         movieObserve(mainAdapter)
@@ -134,7 +116,6 @@ class MainFragment : Fragment() {
 
         mvm.movieData.observe(this, Observer {
             val movieList = it
-            Log.d("TEST", movieList.size.toString())
             mainAdapter.setMovieItemList(movieList)
         })
         mvm.spinnerCopyData.observe(this, Observer {
@@ -162,6 +143,25 @@ class MainFragment : Fragment() {
                         vm.getBlogData(postList[position])
                     }
                 }
+        })
+        mvm.psnsData.observe(this, Observer {
+            // movieTitle을 Request 보내서 긍,부정 데이터를 받아온다.
+            val movieTitle = mainAdapter.movieData[moviePosition].title
+            val builder = AlertDialog.Builder(view!!.context)
+            val dialogView = layoutInflater.inflate(R.layout.item_ticketing_dialog, null)
+            var PsNs = "긍정 점수:"+it.ps + "% 부정 점수:"+it.ns+"%"
+            dialogView.item_ticketing_dialog_text.text = PsNs
+            builder.setView(dialogView)
+                .setPositiveButton("예매") { dialogInterface, i ->
+                    val intent = Intent(activity, SelectAreaActivity::class.java)
+                    ObjectMovie.movieTitle = movieTitle
+                    startActivity(intent)
+                }
+                .setNegativeButton("취소") { dialogInterface, i ->
+                    /* 취소일 때 아무 액션이 없으므로 빈칸 */
+                }
+                .show()
+
         })
     }
 

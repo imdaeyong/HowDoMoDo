@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ssafy.howdomodo.`object`.ObjectCollection
+import com.ssafy.howdomodo.data.datasource.model.BigDataPsNs
 import com.ssafy.howdomodo.data.datasource.model.Movie
 import com.ssafy.howdomodo.data.repository.MovieRepository
 
@@ -15,6 +16,7 @@ class MovieViewModel (private val movieRepository: MovieRepository) : ViewModel(
     val spinnerData = arrayListOf<String>()
     val spinnerCopyData =MutableLiveData<ArrayList<String>>()
     val errorToast = MutableLiveData<Throwable>()
+    val psnsData = MutableLiveData<BigDataPsNs>()
 
     fun getMovieData(){
         loading.value = true
@@ -27,7 +29,6 @@ class MovieViewModel (private val movieRepository: MovieRepository) : ViewModel(
             }else{
                 movieData.value = it.results
                 for(item in it.results){
-                    Log.d("taek",item.title)
                     spinnerData.add(item.title)
                 }
             }
@@ -38,5 +39,14 @@ class MovieViewModel (private val movieRepository: MovieRepository) : ViewModel(
         })
 
         loading.value = false
+    }
+
+    fun getMoviePsNs(title: String){
+        movieRepository.getMoviePsNs(title,success = {
+            psnsData.value = it
+        },fail = {
+            Log.e("error is :", it.toString())
+            errorToast.value = it
+        })
     }
 }
