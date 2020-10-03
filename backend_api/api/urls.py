@@ -10,4 +10,6 @@ urlpatterns = [
     path('', view.create_load),
     path('result/', view.preProcess),
     path('find_si/<str:siname>', view.find_si),
+    path('np/<str:title>', view.review_list),
+
 ]
