@@ -104,7 +104,8 @@ class MainFragment : Fragment() {
 
         // Spinner (Dropdown) Adapter
 //        act_main_spinner_posting.adapter = ArrayAdapter(
-//            this.requireContext(),
+//            this.requireContext
+//            (),
 //            android.R.layout.simple_spinner_dropdown_item,
 //            postList
 //        )

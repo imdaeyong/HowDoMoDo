@@ -1,6 +1,7 @@
 package com.ssafy.howdomodo.data.datasource.remote.retrofit
 
 import com.google.gson.JsonObject
+import com.ssafy.howdomodo.data.datasource.model.FavoritesResponse
 import com.ssafy.howdomodo.data.datasource.model.GetTheatersResponse
 import com.ssafy.howdomodo.data.datasource.model.LoginResponse
 import com.ssafy.howdomodo.data.datasource.model.SignUpResponse
@@ -45,5 +46,19 @@ interface NetworkService {
         @Path("guName") guName:String
     ): Call<GetTheatersResponse>
 
+    @GET("/theaters/bookmark/{userCode}")
+    fun favoritesInfo(
+        @Path("userCode") userCode : Int
+    ):Call<FavoritesResponse>
 
+    @POST("/theaters/bookmark")
+    fun favoritesAdd(
+        @Body favoritesRequestBody: JsonObject
+    ): Call<FavoritesResponse>
+
+    @DELETE("/theaters/bookmark/{userCode}/{theaterId}")
+    fun favoritesDelete(
+        @Path("userCode") userCode :Int,
+        @Path("theaterId") theaterId: Int
+    ):Call<FavoritesResponse>
 }

@@ -1,5 +1,6 @@
 package com.ssafy.howdomodo.data.datasource.remote
 
+import com.bumptech.glide.load.model.UnitModelLoader
 import com.google.gson.JsonObject
 import com.ssafy.howdomodo.data.datasource.model.*
 
@@ -39,6 +40,22 @@ interface RemoteDataSource {
         guName:String,
         success: (GetTheatersResponse) -> Unit,
         fail: (Throwable) -> Unit
+    )
+
+    fun favoritesInfo(
+        userCode:Int,
+        success :(FavoritesResponse) ->Unit,
+        fail : (Throwable) ->Unit
+    )
+    fun favoritesAdd(
+        favoritesRequestBody:JsonObject,
+        success :(FavoritesResponse) ->Unit,
+        fail : (Throwable) ->Unit
+    )fun favoritesDelete(
+        userCode:Int,
+        theaterId:Int,
+        success :(FavoritesResponse) ->Unit,
+        fail : (Throwable) ->Unit
     )
 
 }

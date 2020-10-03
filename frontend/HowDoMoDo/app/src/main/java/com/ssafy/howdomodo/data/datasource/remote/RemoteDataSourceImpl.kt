@@ -2,6 +2,7 @@ package com.ssafy.howdomodo.data.datasource.remote
 
 import android.util.Log
 import com.google.gson.JsonObject
+import com.ssafy.howdomodo.data.datasource.model.FavoritesResponse
 import com.ssafy.howdomodo.data.datasource.model.GetTheatersResponse
 import com.ssafy.howdomodo.data.datasource.model.LoginResponse
 import com.ssafy.howdomodo.data.datasource.model.SignUpResponse
@@ -141,6 +142,70 @@ class RemoteDataSourceImpl : RemoteDataSource {
             }
 
         })
+    }
+
+
+
+    override fun favoritesInfo(
+        userCode:Int,
+        success :(FavoritesResponse) ->Unit,
+        fail : (Throwable) ->Unit
+    ) {
+        api.favoritesInfo(userCode).enqueue(object : Callback<FavoritesResponse> {
+            override fun onFailure(call: Call<FavoritesResponse>, t: Throwable) {
+                fail(t)
+            }
+
+            override fun onResponse(call: Call<FavoritesResponse>, response: Response<FavoritesResponse>) {
+                if (response.body() != null) {
+                    success(response.body()!!)
+                } else {
+                    fail(Exception("유효한 즐겨찾기 정보가 없습니다"))
+                }
+            }
+        })
+    }
+
+    override fun favoritesAdd(
+        favoritesRequestBody:JsonObject,
+        success :(FavoritesResponse) ->Unit,
+        fail : (Throwable) ->Unit
+    ){
+        api.favoritesAdd(favoritesRequestBody).enqueue(object : Callback<FavoritesResponse> {
+            override fun onFailure(call: Call<FavoritesResponse>, t: Throwable) {
+                fail(t)
+            }
+
+            override fun onResponse(
+                call: Call<FavoritesResponse>,
+                response: Response<FavoritesResponse>
+            ) {
+                success(response.body()!!)
+            }
+        })
+    }
+
+
+    override fun favoritesDelete(
+        userCode:Int,
+        theaterId:Int,
+        success :(FavoritesResponse) ->Unit,
+        fail : (Throwable) ->Unit
+    ){
+
+        api.favoritesDelete(userCode,theaterId).enqueue(object : Callback<FavoritesResponse> {
+            override fun onFailure(call: Call<FavoritesResponse>, t: Throwable) {
+                fail(t)
+            }
+
+            override fun onResponse(
+                call: Call<FavoritesResponse>,
+                response: Response<FavoritesResponse>
+            ) {
+                success(response.body()!!)
+            }
+        })
+
     }
 
 }

@@ -96,11 +96,11 @@ class TheaterAdapter(private val onclick: TheaterViewHolder.TheaterClickListener
             itemView.item_theater_tv_name.text = name
             itemView.item_theater_tv_desc.text = address
 
-            if (data.theaterBrand == "CGV") {
+            if (data.theaterBrand.contains("CGV")) {
                 itemView.item_theater_iv_photo.setImageResource(R.drawable.cgv)
-            } else if (data.theaterBrand == "메가박스") {
+            } else if (data.theaterBrand.contains("메가박스")) {
                 itemView.item_theater_iv_photo.setImageResource(R.drawable.megabox)
-            } else if (data.theaterBrand == "롯데시네마") {
+            } else if (data.theaterBrand.contains("롯데시네마")) {
                 itemView.item_theater_iv_photo.setImageResource(R.drawable.lottecinema)
             }
 
