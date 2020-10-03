@@ -24,11 +24,13 @@ class Recommand():
         # df 로드 및 group 단계까지 캐싱 처리
         if cls.sc is None:
             cls.sc = SparkContext('local')
-        else:
-            cls.sc.stop()
-            cls.sc = SparkContext('local')
-        cls.sqlContext = SQLContext(cls.sc)
-        cls.spark = SparkSession(cls.sc)
+        # else:
+        #     cls.sc.stop()
+        #     cls.sc = SparkContext('local')
+        if cls.sqlContext is None:
+            cls.sqlContext = SQLContext(cls.sc)
+        if cls.spark is None:
+            cls.spark = SparkSession(cls.sc)
         print("create 단계입니다")
 
     @classmethod
@@ -56,8 +58,7 @@ class Recommand():
 
             # 활동 분류
             df = df.filter(df.가맹점업종코드.isin(activityList))
-
-            removeColList = ["회원_시도명", "회원_시군구명", "개인기업구분", "매출년월일", "결제금액", "결제건수"]
+            removeColList = ["성별", "연령", "승인시간대1", "회원_시도명", "회원_시군구명", "개인기업구분", "매출년월일", "결제금액", "결제건수"]
             for ls in removeColList:
                 df = df.drop(ls)
             df.persist()
@@ -83,56 +84,75 @@ class Recommand():
 
 
         print("rename 단계입니다")
-        df_all_renamed = df_all.withColumnRenamed("성별", "gender") \
-            .withColumnRenamed("연령", "age") \
-            .withColumnRenamed("승인시간대1", "time") \
-            .withColumnRenamed("가맹점_시도명", "do") \
+        df_all_renamed = df_all.withColumnRenamed("가맹점_시도명", "do") \
             .withColumnRenamed("가맹점_시군구명", "si") \
             .withColumnRenamed("가맹점_읍면동명", "dong") \
             .withColumnRenamed("가맹점업종코드", "code") \
             .withColumnRenamed("회원수", "n")
 
+        # df_all_renamed = df_all.withColumnRenamed("성별", "gender") \
+            # .withColumnRenamed("연령", "age") \
+            # .withColumnRenamed("승인시간대1", "time") \
+            # .withColumnRenamed("가맹점_시도명", "do") \
+            # .withColumnRenamed("가맹점_시군구명", "si") \
+            # .withColumnRenamed("가맹점_읍면동명", "dong") \
+            # .withColumnRenamed("가맹점업종코드", "code") \
+            # .withColumnRenamed("회원수", "n")
+
         print("mapping 단계입니다")
         rdd = df_all_renamed.rdd
-        rdd = rdd.map(lambda x: Row(gender=int(x[0][0]), \
-                                    age=int(x[1][0]), \
-                                    time=int(x[2]), \
-                                    do=x[3], \
-                                    si=x[4], \
-                                    dong=x[5], \
-                                    code=int(x[6]), \
-                                    n=int(x[7])))
+        # rdd = rdd.map(lambda x: Row(gender=int(x[0][0]), \
+        #                             age=int(x[1][0]), \
+        #                             time=int(x[2]), \
+        #                             do=x[3], \
+        #                             si=x[4], \
+        #                             dong=x[5], \
+        #                             code=int(x[6]), \
+        #                             n=int(x[7])))
+        rdd = rdd.map(lambda x: Row(do=x[0], \
+                                    si=x[1], \
+                                    dong=x[2], \
+                                    code=int(x[3]), \
+                                    n=int(x[4])))
+
         print("schema 생성 단계입니다")
-        schema = StructType([StructField("gender", StringType(), True), \
-                             StructField("age", StringType(), True), \
-                             StructField("time", IntegerType(), True), \
-                             StructField("do", StringType(), True), \
+        schema = StructType([StructField("do", StringType(), True), \
                              StructField("si", StringType(), True), \
                              StructField("dong", StringType(), True), \
                              StructField("code", IntegerType(), True), \
                              StructField("n", IntegerType(), True)])
+        # schema = StructType([StructField("gender", StringType(), True), \
+        #                      StructField("age", StringType(), True), \
+        #                      StructField("time", IntegerType(), True), \
+        #                      StructField("do", StringType(), True), \
+        #                      StructField("si", StringType(), True), \
+        #                      StructField("dong", StringType(), True), \
+        #                      StructField("code", IntegerType(), True), \
+        #                      StructField("n", IntegerType(), True)])
 
         df_mapped = cls.spark.createDataFrame(rdd, schema).persist(pyspark.StorageLevel.DISK_ONLY)
         df_mapped.registerTempTable("df_tmp")
 
         print("grouping 단계입니다")
-        df_group = df_mapped.groupBy('gender', 'age', 'time', 'do', 'si', 'dong', 'code').sum('n')
+        # df_group = df_mapped.groupBy('gender', 'age', 'time', 'do', 'si', 'dong', 'code').sum('n')
+        df_group = df_mapped.groupBy('do', 'si', 'dong', 'code').sum('n')
 
         df_group = df_group.withColumnRenamed("sum(n)", "total").persist(pyspark.StorageLevel.DISK_ONLY)
         cls.df_group = df_group
 
     @classmethod
-    def find_si(cls, si_name):
+    def preAnalysis(cls, si_name):
         cls.df_group.registerTempTable("df_group")
         print("si 찾기 단계입니다")
         si = "'%"+si_name+"%'"
-        query = "select gender, age, time, code, total from df_group where si like " + si + " order by total desc"
+        # query = "select gender, age, time, code, total from df_group where si like " + si + " order by total desc"
+        query = "select code, total from df_group where si like " + si + " order by total desc"
         selected_df = cls.sqlContext.sql(query).persist(pyspark.StorageLevel.DISK_ONLY)
 
         print("통계 단계입니다")
         selected_df.registerTempTable("selected_df")
         query = "select code, sum(total) as cnt from selected_df group by code order by cnt desc"
-        sum_groupByDf = cls.sqlContext.sql(query).persist(pyspark.StorageLevel.DISK_ONLY)
+        sum_groupByDf = cls.sqlContext.sql(query).persist(pyspark.StorageLevel.MEMORY_AND_DISK)
         temp = cls.df_to_dict(sum_groupByDf)
         cls.result_dict[si_name] = temp
         # return sum_groupByDf
