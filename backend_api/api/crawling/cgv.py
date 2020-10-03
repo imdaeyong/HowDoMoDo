@@ -96,10 +96,11 @@ def run(title, areacode, theatercode, date):
 
         if title == div_title:
             timetable = get_timetable(div_title, movie)
-            result.append(timetable)
+            # result.append(timetable)
+            result = timetable
     # print(result)
     return result
 
 if __name__ == "__main__":
-    test = run('테넷', '01', '0056', '20201005') # test run
+    test = run('테넷', '01', '0056', '20201003') # test run
     print(test)
