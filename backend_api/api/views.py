@@ -14,6 +14,7 @@ def suns(request, title):
 
 def get_times_tables(request, brand, name, date, title):
     try:
+        name = name if brand.lower() != 'cgv' else 'CGV' + name # if brand is 'cgv' rename
         theaters = TheatersUrls.objects.get(brand=brand, name=name)
         result = get_theater_timestables(brand=brand, url=theaters.url, title=title, date=date)
         return JsonResponse(result, json_dumps_params={'ensure_ascii': True})
