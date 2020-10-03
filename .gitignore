@@ -53,4 +53,4 @@ out/
 __pycache__
 venv
 *.json
-
+pytorch_model.bin

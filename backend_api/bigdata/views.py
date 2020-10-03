@@ -1,8 +1,13 @@
 
 from django.http import HttpResponse, JsonResponse
 from . import recommand_activity
+from . import npmodel
 import time
+
 from rest_framework import status
+import requests
+from bs4 import BeautifulSoup
+
 
 def create_load(request):
 
@@ -47,4 +52,46 @@ def find_si(request, siname):
     storedict = recommand.result_dict[siname]
     print("time :", time.time() - start)  # 현재시각 - 시작시간 = 실행 시간
     return JsonResponse(storedict,  json_dumps_params={'ensure_ascii': False}, status=status.HTTP_200_OK)
+
+
+
+def np_init(request):
+    np = npmodel.npmodel
+    np.init()
+    test = {"message": "ok"}
+    return JsonResponse(test, json_dumps_params={'ensure_ascii': True}, status=status.HTTP_200_OK)
+
+def review_list(request, code):
+    pagelist = [1, 2]
+    review_ls = []
+    for page in pagelist:
+        url = "https://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=" + code + "&type=after&page=" + str(page)
+        resp = requests.get(url)
+        html = BeautifulSoup(resp.content, 'html.parser')
+
+        score_result = html.find('div', {'class': 'score_result'})
+        lis = score_result.findAll('li')
+
+        for idx, li in enumerate(lis):
+            review_text = li.find('p').getText()
+            review_text = review_text.replace('\n', '')
+            review_text = review_text.replace('\t', '')
+            review_text = review_text.replace('\r', '')
+            review_text = review_text.replace('관람객', '')
+            if (review_text != ''):
+                review_ls.append(review_text)
+
+    np = npmodel.npmodel
+    np_result = []
+    for review in review_ls:
+        rs = np.test_sentences(review)
+        np_result.append(rs)
+
+    total = len(np_result)
+    p = np_result.count(1)
+    n = np_result.count(0)
+
+    result = {"ps": round(p/float(total), 1), "ns": round(n/float(total), 1)}
+    return JsonResponse(result, json_dumps_params={'ensure_ascii': True}, status=status.HTTP_200_OK)
+
 
