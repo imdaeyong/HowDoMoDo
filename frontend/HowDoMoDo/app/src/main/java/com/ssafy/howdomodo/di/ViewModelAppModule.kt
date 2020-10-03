@@ -1,5 +1,6 @@
 package com.ssafy.howdomodo.di
 
+import com.ssafy.howdomodo.ui.favorite.FavoritesViewModel
 import com.ssafy.howdomodo.ui.gwanSelect.GwanSelectViewModel
 import com.ssafy.howdomodo.ui.login.LoginViewModel
 import com.ssafy.howdomodo.ui.main.MainViewModel
@@ -18,4 +19,5 @@ val viewModelAppModule = module {
     viewModel { MovieViewModel(get()) }
     viewModel { MyPageViewModel(get()) }
     viewModel { GetTheatersViewModel(get()) }
+    viewModel { FavoritesViewModel(get()) }
 }

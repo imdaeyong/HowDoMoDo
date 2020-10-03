@@ -84,6 +84,18 @@ class MainFragment : Fragment() {
         }
         act_main_rv_posting.setHasFixedSize(true)
 
+        // Spinner (Dropdown) Adapter
+//        act_main_spinner_posting.adapter = ArrayAdapter(
+//            this.requireContext
+//            (),
+//            android.R.layout.simple_spinner_dropdown_item,
+//            postList
+//        )
+//
+//        act_main_spinner_posting.setSelection(0)
+
+        // Fragment Dialog URL
+        // https://youngest-programming.tistory.com/307
     }
 
     fun movieObserve(mainAdapter: MainAdapter) {
