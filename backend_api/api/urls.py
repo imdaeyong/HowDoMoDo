@@ -9,6 +9,6 @@ urlpatterns = [
     path('timestables/<brand>/<name>/<date>/<title>', views.get_times_tables),
     path('', view.create_load),
     path('preProcess/', view.preProcess),
-    path('preAnalysis', view.preAnalysis),
+    path('preAnalysis/', view.preAnalysis),
     path('find_si/<str:siname>', view.find_si),
 ]
