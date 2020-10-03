@@ -44,7 +44,6 @@ out/
 ### BigData ###
 *.csv
 *.xlsx
-*.json
 
 ### mac ###
 *.DS_Store
@@ -54,3 +53,4 @@ out/
 __pycache__
 venv
 *.json
+

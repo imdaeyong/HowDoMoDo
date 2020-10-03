@@ -15,4 +15,20 @@
 	<select id="getTheaterInfo" resultType="com.ssafy.howdomodo.domain.Theaters">
 		select * from theaters where cityId=#{cityId}
 	</select>
+	
+	<!-- 즐겨찾기 영화관 정보 저장 -->
+	<insert id="addFavTheaters" parameterType="com.ssafy.howdomodo.domain.FavoriteTheaters">
+		INSERT INTO favoriteTheaters (userCode, theaterId, theaterName, theaterBrand)
+				VALUES (#{userCode}, #{theaterId}, #{theaterName}, #{theaterBrand})
+	</insert>
+	
+	<!-- 회원의 즐겨찾기 정보 조회 -->
+	<select id="getFavList" resultType="com.ssafy.howdomodo.domain.FavoriteTheaters">
+		SELECT * from favoriteTheaters WHERE userCode=#{userCode}
+	</select>
+	
+	<!-- 회원의 즐겨찾기 영화관 삭제 -->
+	<delete id="deleteFavTheaters">
+		DELETE FROM favoriteTheaters WHERE userCode=#{userCode} AND theaterId=#{theaterId}
+	</delete>
 </mapper>

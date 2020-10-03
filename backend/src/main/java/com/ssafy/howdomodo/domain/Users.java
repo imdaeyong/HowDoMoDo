@@ -25,7 +25,7 @@ public class Users{
 	private String userNick;
 	private String userPw;
 	private int userGender;
-	private Date userBirth;
+	private String userBirth;
 	
 	
 }

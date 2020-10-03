@@ -5,32 +5,37 @@ from pyspark.sql import SparkSession
 from pyspark.sql import Row
 import pyspark
 
-import json
+import os
 
-class Recommand:
-    spark = 0
-    sqlContext = 0
-    df_list = 0
-    df_group = 0
-    code_df = 0
-    sc = None
+class Recommand():
+    instance = None
+    spark, sc, sqlContext = None, None, None
+    df_list, df_group, code_df = None, None, None
+    result_dict = dict()
 
-    @staticmethod
-    def create():
+    def __new__(cls):
+        if not cls.instance:
+            cls.instance = object.__new__(cls)
+            print("instance 생성!")
+        return cls.instance
+
+    @classmethod
+    def create(cls):
         # df 로드 및 group 단계까지 캐싱 처리
-        if Recommand.sc is None:
-            Recommand.sc = SparkContext('local')
+        if cls.sc is None:
+            cls.sc = SparkContext('local')
         else:
-            Recommand.sc.stop()
-            Recommand.sc = SparkContext('local')
-        Recommand.sqlContext = SQLContext(Recommand.sc)
-        Recommand.spark = SparkSession(Recommand.sc)
+            cls.sc.stop()
+            cls.sc = SparkContext('local')
+        cls.sqlContext = SQLContext(cls.sc)
+        cls.spark = SparkSession(cls.sc)
         print("create 단계입니다")
 
-    @staticmethod
-    def load_csv():
+    @classmethod
+    def load_csv(cls):
         print("csv 로딩 단계입니다")
-        csv_list = ["09", "10", "11", "12"]
+        # csv_list = ["09", "10", "11", "12"]
+        csv_list = ["09", "10"]
         df_list = []
         activityList = [1001, 1003, 1004, 1007, 1008, 1010, 1099, 1101, 1102, 1104, 1105, 1199, 1201, 1202, 1203, 1204,
                         1205, 1206, 1207, 1208, 1299, 2002, 2003, 2004, 2099, 2104, 2107, 2109, 2110, 2111, 2112, 2113,
@@ -40,9 +45,9 @@ class Recommand:
                         6112, 6299, 7101, 7102, 7103, 7105, 7106, 7108, 7199]
 
         for listname in csv_list:
-            df = Recommand.sqlContext.read.format('com.databricks.spark.csv') \
+            df = cls.sqlContext.read.format('com.databricks.spark.csv') \
                 .options(header='true', inferSchema='true') \
-                .load('C:/ssafy/2nd/s03p23a305/bigdata/analysis/2019-' + listname + '-UTF.csv') \
+                .load('bigdata/2019-' + listname + '-UTF.csv') \
                 .cache()
 
             # 기업 데이터 제거
@@ -57,19 +62,20 @@ class Recommand:
                 df = df.drop(ls)
             df.persist()
             df_list.append(df)
-            Recommand.df_list = df_list
 
-        Recommand.code_df = Recommand.sqlContext.read.format('com.databricks.spark.csv') \
+        cls.df_list = df_list
+
+        cls.code_df = cls.sqlContext.read.format('com.databricks.spark.csv') \
             .options(header='true', inferSchema='true') \
-            .load('C:/ssafy/2nd/s03p23a305/bigdata/analysis/new_codelist-UTF.csv') \
+            .load('bigdata/new_codelist-UTF.csv') \
             .cache()
 
-    @staticmethod
-    def preprocessing(df_list):
+    @classmethod
+    def preprocessing(cls):
         print("preprocessing 입니다")
         print("union 단계입니다")
-        df_all = df_list[0]
-        for idx, df in enumerate(df_list):
+        df_all = cls.df_list[0]
+        for idx, df in enumerate(cls.df_list):
             if (idx == 0):
                 continue
             print(idx)
@@ -106,37 +112,36 @@ class Recommand:
                              StructField("code", IntegerType(), True), \
                              StructField("n", IntegerType(), True)])
 
-        df_mapped = Recommand.spark.createDataFrame(rdd, schema).persist(pyspark.StorageLevel.DISK_ONLY)
+        df_mapped = cls.spark.createDataFrame(rdd, schema).persist(pyspark.StorageLevel.DISK_ONLY)
         df_mapped.registerTempTable("df_tmp")
 
         print("grouping 단계입니다")
         df_group = df_mapped.groupBy('gender', 'age', 'time', 'do', 'si', 'dong', 'code').sum('n')
 
         df_group = df_group.withColumnRenamed("sum(n)", "total").persist(pyspark.StorageLevel.DISK_ONLY)
-        Recommand.df_group = df_group
+        cls.df_group = df_group
 
-
-    @staticmethod
-    def find_si(si_name):
-        Recommand.df_group.registerTempTable("df_group")
+    @classmethod
+    def find_si(cls, si_name):
+        cls.df_group.registerTempTable("df_group")
         print("si 찾기 단계입니다")
         si = "'%"+si_name+"%'"
         query = "select gender, age, time, code, total from df_group where si like " + si + " order by total desc"
-        selected_df = Recommand.sqlContext.sql(query).persist(pyspark.StorageLevel.DISK_ONLY)
+        selected_df = cls.sqlContext.sql(query).persist(pyspark.StorageLevel.DISK_ONLY)
 
         print("통계 단계입니다")
         selected_df.registerTempTable("selected_df")
         query = "select code, sum(total) as cnt from selected_df group by code order by cnt desc"
-        sum_groupByDf = Recommand.sqlContext.sql(query).persist(pyspark.StorageLevel.DISK_ONLY)
-        sum_groupByDf.collect()
-        return sum_groupByDf
+        sum_groupByDf = cls.sqlContext.sql(query).persist(pyspark.StorageLevel.DISK_ONLY)
+        temp = cls.df_to_dict(sum_groupByDf)
+        cls.result_dict[si_name] = temp
+        # return sum_groupByDf
 
-    @staticmethod
-    def df_to_dict(df):
-        join_df = df.join(Recommand.code_df, df.code == Recommand.code_df.code).select("selected_df.code", "cnt",
+    @classmethod
+    def df_to_dict(cls, df):
+        join_df = df.join(cls.code_df, df.code == cls.code_df.code).select("selected_df.code", "cnt",
                                                                                          "largeCate", "MediumCate",
                                                                                          "smallCate", 'desc').orderBy("cnt", ascending=False)
-
 
         total_df = join_df.groupBy("largeCate").sum("cnt").withColumnRenamed('sum(cnt)', 'cnt')
 
@@ -157,7 +162,7 @@ class Recommand:
 
         for row in join_df.rdd.collect():
             largeCate = row[2]
-            MediumCate = row[3]
+            # mediumCate = row[3]
             smallCate = row[4]
             desc = row[5]
             cnt = row[1]
@@ -168,7 +173,6 @@ class Recommand:
         for idx, lc in enumerate(lc_list):
             temp = {"kinds": lc, "totalCnt": sum_list[idx], "down": cate_dict[lc]}
             store_dict['list'].append(temp)
-
         # json_val = json.dumps(store_dict, ensure_ascii=False)
 
         return store_dict
