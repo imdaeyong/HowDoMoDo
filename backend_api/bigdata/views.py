@@ -39,8 +39,9 @@ def find_si(request, siname):
     start = time.time()
     recommand = recommand_activity.Recommand()
     print(recommand)
-    df = recommand.find_si(siname)
-    storedict = recommand_activity.Recommand.df_to_dict(df)
+    # df = recommand.find_si(siname)
+    # storedict = recommand_activity.Recommand.df_to_dict(df)
+    storedict = recommand.result_dict[siname]
     print("time :", time.time() - start)  # 현재시각 - 시작시간 = 실행 시간
     return JsonResponse(storedict,   json_dumps_params={'ensure_ascii': False})
 

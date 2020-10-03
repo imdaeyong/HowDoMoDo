@@ -11,6 +11,7 @@ class Recommand():
     instance = None
     spark, sc, sqlContext = None, None, None
     df_list, df_group, code_df = None, None, None
+    result_dict = dict()
 
     def __new__(cls):
         if not cls.instance:
@@ -132,8 +133,9 @@ class Recommand():
         selected_df.registerTempTable("selected_df")
         query = "select code, sum(total) as cnt from selected_df group by code order by cnt desc"
         sum_groupByDf = cls.sqlContext.sql(query).persist(pyspark.StorageLevel.DISK_ONLY)
-        sum_groupByDf.collect()
-        return sum_groupByDf
+        temp = cls.df_to_dict(sum_groupByDf)
+        cls.result_dict[si_name] = temp
+        # return sum_groupByDf
 
     @classmethod
     def df_to_dict(cls, df):
