@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.ui.bottomtap.BottomTabActivity
+import com.ssafy.howdomodo.ui.chat.ChatActivity
 import com.ssafy.howdomodo.ui.gwanSelect.GwanSelectActivity
 import com.ssafy.howdomodo.ui.login.LoginActivity
 import com.ssafy.howdomodo.ui.selectArea.SelectAreaActivity
@@ -50,6 +51,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
 //            val movieSelecDialogFragment = MovieSelectDialogFragment().getInstance()
 //            movieSelecDialogFragment.show(supportFragmentManager,"movie_select")
+        }
+        act_main_btn_Chat.setOnClickListener{
+            val intent = Intent(this, ChatActivity::class.java)
+            startActivity(intent)
         }
         getAppKeyHash()
     }
