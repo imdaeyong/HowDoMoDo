@@ -1,10 +1,7 @@
 package com.ssafy.howdomodo.data.datasource.remote.retrofit
 
 import com.google.gson.JsonObject
-import com.ssafy.howdomodo.data.datasource.model.FavoritesResponse
-import com.ssafy.howdomodo.data.datasource.model.GetTheatersResponse
-import com.ssafy.howdomodo.data.datasource.model.LoginResponse
-import com.ssafy.howdomodo.data.datasource.model.SignUpResponse
+import com.ssafy.howdomodo.data.datasource.model.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -57,7 +54,15 @@ interface NetworkService {
 
     @DELETE("/theaters/bookmark/{userCode}/{theaterId}")
     fun favoritesDelete(
-        @Path("userCode") userCode :Int,
+        @Path("userCode") userCode: Int,
         @Path("theaterId") theaterId: Int
-    ):Call<FavoritesResponse>
+    ): Call<FavoritesResponse>
+
+    @GET("/theaters")
+    fun getSiDo(): Call<AreaResponse>
+
+    @GET("/theaters/{siName}")
+    fun getGuGun(
+        @Path("siName") siName: String
+    ): Call<AreaResponse>
 }

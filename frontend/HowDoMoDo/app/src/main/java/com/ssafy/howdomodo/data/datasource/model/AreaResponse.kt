@@ -8,7 +8,6 @@ class AreaResponse(
 
 data class Region(
     val siName: String,
-    val guList: ArrayList<City>,
     var isClicked: Boolean = false
 )
 

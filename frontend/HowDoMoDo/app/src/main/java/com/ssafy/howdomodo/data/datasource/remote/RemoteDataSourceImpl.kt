@@ -2,10 +2,7 @@ package com.ssafy.howdomodo.data.datasource.remote
 
 import android.util.Log
 import com.google.gson.JsonObject
-import com.ssafy.howdomodo.data.datasource.model.FavoritesResponse
-import com.ssafy.howdomodo.data.datasource.model.GetTheatersResponse
-import com.ssafy.howdomodo.data.datasource.model.LoginResponse
-import com.ssafy.howdomodo.data.datasource.model.SignUpResponse
+import com.ssafy.howdomodo.data.datasource.model.*
 import com.ssafy.howdomodo.data.datasource.remote.retrofit.NetworkServiceImpl
 import retrofit2.Call
 import retrofit2.Callback
@@ -208,4 +205,31 @@ class RemoteDataSourceImpl : RemoteDataSource {
 
     }
 
+    override fun getSiDo(success: (AreaResponse) -> Unit, fail: (Throwable) -> Unit) {
+        api.getSiDo().enqueue(object : Callback<AreaResponse> {
+            override fun onResponse(call: Call<AreaResponse>, response: Response<AreaResponse>) {
+                success(response.body()!!)
+            }
+
+            override fun onFailure(call: Call<AreaResponse>, t: Throwable) {
+                fail(t)
+            }
+        })
+    }
+
+    override fun getGuGun(
+        siName: String,
+        success: (AreaResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    ) {
+        api.getGuGun(siName).enqueue(object : Callback<AreaResponse> {
+            override fun onResponse(call: Call<AreaResponse>, response: Response<AreaResponse>) {
+                success(response.body()!!)
+            }
+
+            override fun onFailure(call: Call<AreaResponse>, t: Throwable) {
+                fail(t)
+            }
+        })
+    }
 }

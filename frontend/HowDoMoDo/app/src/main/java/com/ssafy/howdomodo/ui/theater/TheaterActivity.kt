@@ -129,62 +129,62 @@ class TheaterActivity : AppCompatActivity() {
                 var theaterlm = LinearLayoutManager(this)
                 act_theater_rv_theaters.layoutManager = theaterlm
                 act_theater_rv_theaters.setHasFixedSize(true)
-                //Maps
-
-                mapView = MapView(this)
-                var mapViewController = act_theater_rl_map_view as ViewGroup
-                mapView.setMapCenterPoint(
-                    MapPoint.mapPointWithGeoCoord(37.4874592, 127.0471432),
-                    true
-                )
-                mapView.setZoomLevel(7, true)
-
-
-                for (i in theaterList.indices) {
-                    var t = theaterList[i]
-                    var marker_img = R.drawable.ic_launcher
-                    var selected_marker_img = R.drawable.ic_launcher
-
-                    if (t.theaterBrand.contains("CGV")) {
-                        marker_img = R.drawable.cgv_marker_unselected
-                        selected_marker_img = R.drawable.cgv_marker
-                    } else if (t.theaterBrand.contains("메가박스")) {
-                        marker_img = R.drawable.megabox_marker_unselected
-                        selected_marker_img = R.drawable.megabox_marker
-                    } else if (t.theaterBrand.contains("롯데시네마")) {
-                        marker_img = R.drawable.lotte_marker_unselected
-                        selected_marker_img = R.drawable.lotte_marker
-                    } else {
-                        marker_img = R.drawable.ic_launcher
-                    }
-
-                    var marker = MapPOIItem()
-                    marker.itemName = t.theaterBrand + " " + t.theaterName
-                    marker.tag = t.theaterId
-                    marker.mapPoint = MapPoint.mapPointWithGeoCoord(t.theaterLat, t.theaterLon)
-                    marker.markerType = MapPOIItem.MarkerType.CustomImage
-                    marker.setCustomImageResourceId(marker_img)
-                    marker.userObject = t
-
-
-                    marker.selectedMarkerType = MapPOIItem.MarkerType.CustomImage
-                    marker.customSelectedImageResourceId = selected_marker_img
-                    marker.isCustomImageAutoscale = false
-                    marker.setCustomImageAnchor(0.5f, 1.0f)
-
-                    mapView.setCalloutBalloonAdapter(
-                        CustomInfoWindow(
-                            context = this,
-                            theater = t,
-                            m = marker
-                        )
-                    )
-
-                    mapView.addPOIItem(marker)
-                }
-                mapView.fitMapViewAreaToShowAllPOIItems()
-                mapViewController.addView(mapView)
-
+//                //Maps
+//
+//                mapView = MapView(this)
+//                var mapViewController = act_theater_rl_map_view as ViewGroup
+//                mapView.setMapCenterPoint(
+//                    MapPoint.mapPointWithGeoCoord(37.4874592, 127.0471432),
+//                    true
+//                )
+//                mapView.setZoomLevel(7, true)
+//
+//
+//                for (i in theaterList.indices) {
+//                    var t = theaterList[i]
+//                    var marker_img = R.drawable.ic_launcher
+//                    var selected_marker_img = R.drawable.ic_launcher
+//
+//                    if (t.theaterBrand.contains("CGV")) {
+//                        marker_img = R.drawable.cgv_marker_unselected
+//                        selected_marker_img = R.drawable.cgv_marker
+//                    } else if (t.theaterBrand.contains("메가박스")) {
+//                        marker_img = R.drawable.megabox_marker_unselected
+//                        selected_marker_img = R.drawable.megabox_marker
+//                    } else if (t.theaterBrand.contains("롯데시네마")) {
+//                        marker_img = R.drawable.lotte_marker_unselected
+//                        selected_marker_img = R.drawable.lotte_marker
+//                    } else {
+//                        marker_img = R.drawable.ic_launcher
+//                    }
+//
+//                    var marker = MapPOIItem()
+//                    marker.itemName = t.theaterBrand + " " + t.theaterName
+//                    marker.tag = t.theaterId
+//                    marker.mapPoint = MapPoint.mapPointWithGeoCoord(t.theaterLat, t.theaterLon)
+//                    marker.markerType = MapPOIItem.MarkerType.CustomImage
+//                    marker.setCustomImageResourceId(marker_img)
+//                    marker.userObject = t
+//
+//
+//                    marker.selectedMarkerType = MapPOIItem.MarkerType.CustomImage
+//                    marker.customSelectedImageResourceId = selected_marker_img
+//                    marker.isCustomImageAutoscale = false
+//                    marker.setCustomImageAnchor(0.5f, 1.0f)
+//
+//                    mapView.setCalloutBalloonAdapter(
+//                        CustomInfoWindow(
+//                            context = this,
+//                            theater = t,
+//                            m = marker
+//                        )
+//                    )
+//
+//                    mapView.addPOIItem(marker)
+//                }
+//                mapView.fitMapViewAreaToShowAllPOIItems()
+//                mapViewController.addView(mapView)
+//
 
             } else {
                 Toast.makeText(this, "TheaterActivity observeData 에러!", Toast.LENGTH_SHORT).show()

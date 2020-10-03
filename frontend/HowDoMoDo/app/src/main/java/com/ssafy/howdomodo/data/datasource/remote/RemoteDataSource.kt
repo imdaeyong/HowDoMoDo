@@ -1,6 +1,5 @@
 package com.ssafy.howdomodo.data.datasource.remote
 
-import com.bumptech.glide.load.model.UnitModelLoader
 import com.google.gson.JsonObject
 import com.ssafy.howdomodo.data.datasource.model.*
 
@@ -56,6 +55,17 @@ interface RemoteDataSource {
         theaterId:Int,
         success :(FavoritesResponse) ->Unit,
         fail : (Throwable) ->Unit
+    )
+
+    fun getSiDo(
+        success: (AreaResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    )
+
+    fun getGuGun(
+        siName:String,
+        success: (AreaResponse) -> Unit,
+        fail: (Throwable) -> Unit
     )
 
 }
