@@ -38,6 +38,15 @@ public class ResponseMessage {
     public static final String SEARCH_THEATERS_INfO_NONE = "영화관 정보 없음";
     public static final String SEARCH_THEATERS_INFO_SUCCESS = "영화관 정보 조회 성공";
     
+    public static final String ADD_SUCCESS = "등록 성공";
+    public static final String ADD_FAIL = "등록 실패";
+    public static final String DELETE_SUCCESS = "삭제 성공";
+    public static final String DELETE_FAIL = "삭제 실패";
+    
+    public static final String SEARCH_FAV_THEATERS_NONE = "아직 즐겨찾기된 영화관 정보가 없습니다.";
+    public static final String SEARCH_FAV_THEATERS_SUCCESS = "즐겨찾기 정보 조회 성공";
+    public static final String SEARCH_FAIL = "조회 실패";
+    
     public static final String INTERNAL_SERVER_ERROR = "서버 내부 에러";
     public static final String SERVICE_UNAVAILABLE = "현재 서비스를 사용하실 수 없습니다. 잠시후 다시 시도해 주세요.";
 
