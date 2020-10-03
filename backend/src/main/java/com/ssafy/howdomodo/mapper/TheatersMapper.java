@@ -5,17 +5,12 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
 
-import com.ssafy.howdomodo.domain.Cities;
 import com.ssafy.howdomodo.domain.FavoriteTheaters;
 import com.ssafy.howdomodo.domain.Theaters;
 
 @Mapper
 public interface TheatersMapper {
-
-	List<Cities> getAllSido() throws SQLException;
 
 	int getCityId(@Param("siName") String siName,@Param("guName") String guName) throws SQLException;
 
@@ -26,5 +21,9 @@ public interface TheatersMapper {
 	List<FavoriteTheaters> getFavList(int userCode) throws SQLException;
 
 	int deleteFavTheaters(@Param("userCode") int userCode, @Param("theaterId") int theaterId) throws SQLException;
+
+	List<String> readSiInfo() throws SQLException;
+
+	List<String> readGuInfo(String siName) throws SQLException;
 
 }
