@@ -13,7 +13,7 @@ class MovieRepository(private val movieRemoteDataSource: MovieRemoteDataSource) 
         movieRemoteDataSource.getMovieData(key,region,success,fail)
     }
 
-    fun getMoviePsNs(id:Int,  success: (BigDataPsNs) -> Unit, fail: (Throwable) -> Unit) {
-        movieRemoteDataSource.getMoviePsNs(id, success, fail)
+    fun getMoviePsNs(title:String,  success: (BigDataPsNs) -> Unit, fail: (Throwable) -> Unit) {
+        movieRemoteDataSource.getMoviePsNs(title, success, fail)
     }
 }

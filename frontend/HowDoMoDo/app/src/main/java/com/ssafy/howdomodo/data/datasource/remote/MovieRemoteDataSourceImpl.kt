@@ -27,11 +27,11 @@ class MovieRemoteDataSourceImpl : MovieRemoteDataSource {
     }
 
     override fun getMoviePsNs(
-        id: Int,
+        title: String,
         onResponse: (BigDataPsNs) -> Unit,
         onFailure: (Throwable) -> Unit
     ) {
-        BigDataSevicelmpl.service.getMoviePsNs(id).enqueue(
+        BigDataSevicelmpl.service.getMoviePsNs(title).enqueue(
             object : retrofit2.Callback<BigDataPsNs> {
                 override fun onFailure(call: Call<BigDataPsNs>, t: Throwable) {
                     onFailure(t)
