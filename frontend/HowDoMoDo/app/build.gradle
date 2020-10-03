@@ -98,6 +98,9 @@ dependencies {
     // for Kakao Map
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/libDaumMapAndroid.jar')
+
+    // socket 통신
+    implementation 'com.github.nkzawa:socket.io-client:0.3.0'
 }
 repositories {
     mavenCentral()
