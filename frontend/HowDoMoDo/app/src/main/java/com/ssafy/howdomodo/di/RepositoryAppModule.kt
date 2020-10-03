@@ -11,4 +11,5 @@ val repositoryAppModule = module {
     single { MovieRepository(get()) }
     single { MyPageRepository(get()) }
     single { GetTheatersRepository(get()) }
+    single { FavoritesRepository(get()) }
 }
