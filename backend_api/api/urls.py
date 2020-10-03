@@ -11,4 +11,6 @@ urlpatterns = [
     path('preProcess/', view.preProcess),
     path('preAnalysis', view.preAnalysis),
     path('find_si/<str:siname>', view.find_si),
+    path('np/<str:title>', view.review_list),
+
 ]
