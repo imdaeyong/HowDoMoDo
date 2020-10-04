@@ -109,7 +109,11 @@ class TheaterAdapter(private val onclick: TheaterViewHolder.TheaterClickListener
             } else {
                 itemView.item_theater_cl_box.setBackgroundColor(Color.parseColor("#FFFFFF"))
             }
-
+            if(data.fav){
+                itemView.item_theater_iv_favorite.setImageResource(R.drawable.star_clicked)
+            }else{
+                itemView.item_theater_iv_favorite.setImageResource(R.drawable.star_unclicked)
+            }
         }
     }
 }

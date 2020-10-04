@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.`object`.ObjectMovie
+import com.ssafy.howdomodo.`object`.TheaterCollection
 import com.ssafy.howdomodo.ui.Loading
 import com.ssafy.howdomodo.ui.selectArea.SelectAreaActivity
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -145,6 +146,9 @@ class MainFragment : Fragment() {
                 }
         })
         mvm.psnsData.observe(this, Observer {
+            TheaterCollection.mvTitle = mainAdapter.movieData[moviePosition].title
+            TheaterCollection.mvPoster = mainAdapter.movieData[moviePosition].poster_path
+
             // movieTitle을 Request 보내서 긍,부정 데이터를 받아온다.
             val movieTitle = mainAdapter.movieData[moviePosition].title
             val builder = AlertDialog.Builder(view!!.context)

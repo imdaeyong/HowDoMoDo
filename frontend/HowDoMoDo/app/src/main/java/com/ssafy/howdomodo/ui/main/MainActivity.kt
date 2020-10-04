@@ -14,6 +14,7 @@ import com.ssafy.howdomodo.ui.login.LoginActivity
 import com.ssafy.howdomodo.ui.selectArea.SelectAreaActivity
 import com.ssafy.howdomodo.ui.signup.SignupActivity
 import com.ssafy.howdomodo.ui.theater.TheaterActivity
+import com.ssafy.howdomodo.ui.theater.TicketInfoActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.security.MessageDigest
 
@@ -54,6 +55,11 @@ class MainActivity : AppCompatActivity() {
         }
         act_main_btn_Chat.setOnClickListener{
             val intent = Intent(this, ChatActivity::class.java)
+            startActivity(intent)
+        }
+
+        act_main_btn_theater_info.setOnClickListener{
+            val intent = Intent(this, TicketInfoActivity::class.java)
             startActivity(intent)
         }
         getAppKeyHash()

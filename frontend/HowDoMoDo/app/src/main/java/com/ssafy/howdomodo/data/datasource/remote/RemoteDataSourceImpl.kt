@@ -115,10 +115,11 @@ class RemoteDataSourceImpl : RemoteDataSource {
     override fun getTheaters(
         siName:String,
         guName:String,
+        userCode:Int,
         success: (GetTheatersResponse) -> Unit,
         fail: (Throwable) -> Unit
     ) {
-        api.getTheaters(siName,guName).enqueue(object : Callback<GetTheatersResponse> {
+        api.getTheaters(siName,guName,userCode).enqueue(object : Callback<GetTheatersResponse> {
             override fun onFailure(call: Call<GetTheatersResponse>, t: Throwable) {
                 Log.e("remotedatasourceImpl", "failed!!!!")
                 fail(t)
@@ -141,8 +142,6 @@ class RemoteDataSourceImpl : RemoteDataSource {
 
         })
     }
-
-
 
     override fun favoritesInfo(
         userCode:Int,
@@ -171,6 +170,8 @@ class RemoteDataSourceImpl : RemoteDataSource {
     ){
         api.favoritesAdd(favoritesRequestBody).enqueue(object : Callback<FavoritesResponse> {
             override fun onFailure(call: Call<FavoritesResponse>, t: Throwable) {
+                Log.e("remotedatasourceimpl","즐겨찾기 추가 실패")
+
                 fail(t)
             }
 
@@ -178,6 +179,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                 call: Call<FavoritesResponse>,
                 response: Response<FavoritesResponse>
             ) {
+                Log.e("remotedatasourceimpl","즐겨찾기 추가 성공")
                 success(response.body()!!)
             }
         })
@@ -187,6 +189,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
     override fun favoritesDelete(
         userCode:Int,
         theaterId:Int,
+
         success :(FavoritesResponse) ->Unit,
         fail : (Throwable) ->Unit
     ){

@@ -10,8 +10,8 @@ class GetTheatersViewModel(private val getTheatersRepository: GetTheatersReposit
     val getTheatersResponse = MutableLiveData<GetTheatersResponse>()
     val getTheatersError = MutableLiveData<String>()
 
-    fun getTheaters(siName: String, guName: String) {
-        getTheatersRepository.getTheaters(siName, guName, success = { response ->
+    fun getTheaters(siName: String, guName: String,userCode:Int) {
+        getTheatersRepository.getTheaters(siName, guName,userCode, success = { response ->
             getTheatersResponse.value = response
 
             Log.e("getTheaterTest", "getTheaters성공!")

@@ -37,6 +37,7 @@ interface RemoteDataSource {
     fun getTheaters(
         siName:String,
         guName:String,
+        userCode:Int,
         success: (GetTheatersResponse) -> Unit,
         fail: (Throwable) -> Unit
     )

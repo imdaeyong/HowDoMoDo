@@ -36,10 +36,11 @@ interface NetworkService {
     ): Call<SignUpResponse>
 
     //시도, 구군별 영화관 리스트 조회
-    @GET("/theaters/{siName}/{guName}")
+    @GET("/theaters/{siName}/{guName}/{userCode}")
     fun getTheaters(
         @Path("siName") siName:String,
-        @Path("guName") guName:String
+        @Path("guName") guName:String,
+        @Path("userCode") userCode:Int
     ): Call<GetTheatersResponse>
 
     @GET("/theaters/bookmark/{userCode}")
