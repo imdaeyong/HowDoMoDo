@@ -7,4 +7,5 @@ object TheaterCollection {
     var mvTheater: String = ""
     var mvTheaterNum: String = ""
     var mvDate: String = ""
+    var mvTheaterName: String = ""
 }
