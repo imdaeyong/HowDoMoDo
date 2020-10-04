@@ -7,9 +7,3 @@ data class Gwan(
         val times: ArrayList<MovieTime>
 )
 
-data class MovieTime(
-        val startTime: String,
-        val endTime: String,
-        val percent: Int,
-        var isClicked: Boolean
-)

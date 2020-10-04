@@ -255,4 +255,34 @@ class RemoteDataSourceImpl : RemoteDataSource {
             }
         })
     }
+
+    override fun getGwanData(
+        brand: String,
+        theaterName: String,
+        date: String,
+        movieTitle: String,
+        success: (GwanResponse) -> Unit,
+        fail: (Throwable) -> Unit,
+        ifNull: () -> Unit
+    ) {
+        api2.getGwanData(brand, theaterName, date, movieTitle)
+            .enqueue(object : Callback<GwanResponse> {
+                override fun onResponse(
+                    call: Call<GwanResponse>,
+                    response: Response<GwanResponse>
+                ) {
+                    Log.e("qwe", response.body().toString())
+                    if (response.body()!!.status == 200) {
+                        success(response.body()!!)
+
+                    } else {
+                        ifNull()
+                    }
+                }
+
+                override fun onFailure(call: Call<GwanResponse>, t: Throwable) {
+                    fail(t)
+                }
+            })
+    }
 }
