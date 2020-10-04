@@ -6,6 +6,7 @@ import com.ssafy.howdomodo.ui.login.LoginViewModel
 import com.ssafy.howdomodo.ui.main.MainViewModel
 import com.ssafy.howdomodo.ui.main.MovieViewModel
 import com.ssafy.howdomodo.ui.mypage.MyPageViewModel
+import com.ssafy.howdomodo.ui.selectArea.SelectAreaViewModel
 import com.ssafy.howdomodo.ui.signup.SignUpViewModel
 import com.ssafy.howdomodo.ui.theater.GetTheatersViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -20,4 +21,5 @@ val viewModelAppModule = module {
     viewModel { MyPageViewModel(get()) }
     viewModel { GetTheatersViewModel(get()) }
     viewModel { FavoritesViewModel(get()) }
+    viewModel { SelectAreaViewModel(get()) }
 }

@@ -55,7 +55,21 @@ interface NetworkService {
 
     @DELETE("/theaters/bookmark/{userCode}/{theaterId}")
     fun favoritesDelete(
-        @Path("userCode") userCode :Int,
+        @Path("userCode") userCode: Int,
         @Path("theaterId") theaterId: Int
-    ):Call<FavoritesResponse>
+    ): Call<FavoritesResponse>
+
+    @GET("/theaters")
+    fun getSiDo(): Call<AreaResponse>
+
+    @GET("/theaters/{siName}")
+    fun getGuGun(
+        @Path("siName") siName: String
+    ): Call<AreaResponse>
+
+    @GET("/pyapi/find_si/{siName}")
+    fun getCardData(
+        @Path("siName") siName: String
+    ): Call<CardDataResponse>
+
 }

@@ -10,6 +10,7 @@ import retrofit2.Response
 
 class RemoteDataSourceImpl : RemoteDataSource {
     val api = NetworkServiceImpl.SERVICE
+    val api2 = NetworkServiceImpl.SERVICE2
 
     override fun login(
         loginRequestBody: JsonObject,
@@ -208,4 +209,50 @@ class RemoteDataSourceImpl : RemoteDataSource {
 
     }
 
+    override fun getSiDo(success: (AreaResponse) -> Unit, fail: (Throwable) -> Unit) {
+        api.getSiDo().enqueue(object : Callback<AreaResponse> {
+            override fun onResponse(call: Call<AreaResponse>, response: Response<AreaResponse>) {
+                success(response.body()!!)
+            }
+
+            override fun onFailure(call: Call<AreaResponse>, t: Throwable) {
+                fail(t)
+            }
+        })
+    }
+
+    override fun getGuGun(
+        siName: String,
+        success: (AreaResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    ) {
+        api.getGuGun(siName).enqueue(object : Callback<AreaResponse> {
+            override fun onResponse(call: Call<AreaResponse>, response: Response<AreaResponse>) {
+                success(response.body()!!)
+            }
+
+            override fun onFailure(call: Call<AreaResponse>, t: Throwable) {
+                fail(t)
+            }
+        })
+    }
+
+    override fun getCardData(
+        siName: String,
+        success: (CardDataResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    ) {
+        api2.getCardData(siName).enqueue(object : Callback<CardDataResponse> {
+            override fun onResponse(
+                call: Call<CardDataResponse>,
+                response: Response<CardDataResponse>
+            ) {
+                success(response.body()!!)
+            }
+
+            override fun onFailure(call: Call<CardDataResponse>, t: Throwable) {
+                fail(t)
+            }
+        })
+    }
 }

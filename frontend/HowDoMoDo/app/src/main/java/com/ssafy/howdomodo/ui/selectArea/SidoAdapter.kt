@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.data.datasource.model.Region
-import com.ssafy.howdomodo.data.datasource.model.Sido
 import kotlinx.android.synthetic.main.item_sido.view.*
 
 class SidoAdapter(private val onclick: SidoViewHolder.SidoClickListener) :
@@ -17,13 +16,13 @@ class SidoAdapter(private val onclick: SidoViewHolder.SidoClickListener) :
     val sidoData = ArrayList<Region>()
 
 
-    fun setClickOriginal(position: Int){
-        val cityList = sidoData[position].guList
-        for(i in cityList.indices){
-            cityList[i].isClicked = false
-        }
-        notifyDataSetChanged()
-    }
+//    fun setClickOriginal(position: Int){
+//        val cityList = sidoData[position].guList
+//        for(i in cityList.indices){
+//            cityList[i].isClicked = false
+//        }
+//        notifyDataSetChanged()
+//    }
 
     fun setSidoData(newData: List<Region>) {
         with(sidoData) {
@@ -82,7 +81,7 @@ class SidoAdapter(private val onclick: SidoViewHolder.SidoClickListener) :
         }
 
         fun bind(data: Region) {
-            var sido = data.siName
+            var sido = data.name
             itemView.item_sido_tv_city.text = sido
             if (data.isClicked) {
                 itemView.item_sido_cl_box.setBackgroundResource(R.drawable.item_sido_selected)
