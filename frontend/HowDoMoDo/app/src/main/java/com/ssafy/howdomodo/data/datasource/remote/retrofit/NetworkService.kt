@@ -72,4 +72,11 @@ interface NetworkService {
         @Path("siName") siName: String
     ): Call<CardDataResponse>
 
+    @GET("/pyapi/timestables/{brand}/{theaterName}/{date}/{movieTitle}")
+    fun getGwanData(
+        @Path("brand") brand: String,
+        @Path("theaterName") theaterName: String,
+        @Path("date") date: String,
+        @Path("movieTitle") movieTitle: String
+    ): Call<GwanResponse>
 }

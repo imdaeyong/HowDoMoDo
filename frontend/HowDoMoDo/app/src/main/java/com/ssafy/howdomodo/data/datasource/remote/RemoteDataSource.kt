@@ -64,7 +64,7 @@ interface RemoteDataSource {
     )
 
     fun getGuGun(
-        siName:String,
+        siName: String,
         success: (AreaResponse) -> Unit,
         fail: (Throwable) -> Unit
     )
@@ -75,4 +75,13 @@ interface RemoteDataSource {
         fail: (Throwable) -> Unit
     )
 
+    fun getGwanData(
+        brand: String,
+        theaterName: String,
+        date: String,
+        movieTitle: String,
+        success: (GwanResponse) -> Unit,
+        fail: (Throwable) -> Unit,
+        ifNull: () -> Unit
+    )
 }

@@ -2,16 +2,24 @@ package com.ssafy.howdomodo.ui.gwanSelect
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.`object`.ObjectMovie
 import com.ssafy.howdomodo.data.datasource.model.Gwan
 import com.ssafy.howdomodo.data.datasource.model.MovieTime
 import kotlinx.android.synthetic.main.activity_gwan_select.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.text.SimpleDateFormat
 
 class GwanSelectActivity : AppCompatActivity() {
+
+    private val viewModel: GwanSelectViewModel by viewModel()
+
     private val data = listOf<List<Gwan>>(
         listOf(
             Gwan(
@@ -151,7 +159,8 @@ class GwanSelectActivity : AppCompatActivity() {
                     MovieTime("10:25", "12:25", 84, false)
                 )
             )
-        ), listOf(
+        ),
+        listOf(
             Gwan(
                 "2D", 8, 44,
                 arrayListOf<MovieTime>(
@@ -185,13 +194,13 @@ class GwanSelectActivity : AppCompatActivity() {
         setContentView(R.layout.activity_gwan_select)
 
         gwanAdapter = GwanAdapter()
-        gwanAdapter.setGwanData(data[0])
+        viewModel.getGwanData("CGV", "강남", "20201005", "담보")
         act_gwan_rv_gwan.layoutManager = LinearLayoutManager(this)
         act_gwan_rv_gwan.setHasFixedSize(true)
 
         act_gwan_tv_movie_title.text = ObjectMovie.movieTitle
         act_gwan_tv_theater_name.text = ObjectMovie.movieTheater
-
+        setObserve()
 
         dayAdapter = DayAdapter(object : DayViewHolder.DayClickListener {
             override fun onclick(position: Int, textView: TextView) {
@@ -201,10 +210,17 @@ class GwanSelectActivity : AppCompatActivity() {
                         gwanAdapter.setClicked(clicked[0], clicked[1], false)
                     }
                     btnToggle()
+                    val timeFormat = SimpleDateFormat("yyyyMMdd")
+                    Log.e("tt", timeFormat.format(Week.times[position].dayDate).toString())
 
                     dayAdapter.setClicked(dayAdapter.getClickedDay(), false)
                     dayAdapter.setClicked(position, true)
-                    gwanAdapter.setGwanData(data[position])
+                    viewModel.getGwanData(
+                        "CGV",
+                        "강남",
+                        timeFormat.format(Week.times[position].dayDate).toString(),
+                        "담보"
+                    )
                 }
             }
         })
@@ -215,7 +231,7 @@ class GwanSelectActivity : AppCompatActivity() {
 
 
         act_gwan_rv_gwan.adapter = gwanAdapter
-        gwanAdapter.setGwanListener(object : GwanViewHolder.ClickListener{
+        gwanAdapter.setGwanListener(object : GwanViewHolder.ClickListener {
             override fun onClick() {
                 btnToggle()
                 gwanAdapter.notifyDataSetChanged()
@@ -224,13 +240,25 @@ class GwanSelectActivity : AppCompatActivity() {
         })
 
 
-
     }
-    fun btnToggle(){
+
+    private fun setObserve() {
+        viewModel.gwanData.observe(this, Observer {
+            gwanAdapter.setGwanData(it)
+            act_gwan_cl_no_gwan.visibility = View.GONE
+
+        })
+        viewModel.gwanNull.observe(this, Observer {
+//            Toast.makeText(this, "빈값입니다", Toast.LENGTH_SHORT).show()
+            act_gwan_cl_no_gwan.visibility = View.VISIBLE
+        })
+    }
+
+    fun btnToggle() {
         val clicked = gwanAdapter.getClickedMovieTime()
         if (clicked == null) {
             act_gwan_cl_btn_next.setBackgroundColor(Color.parseColor("#aaaaaa"))
-        }else{
+        } else {
             act_gwan_cl_btn_next.setBackgroundColor(Color.parseColor("#f73859"))
         }
     }
