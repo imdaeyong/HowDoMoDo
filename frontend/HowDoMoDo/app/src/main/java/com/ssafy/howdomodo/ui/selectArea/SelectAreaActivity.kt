@@ -122,7 +122,9 @@ class SelectAreaActivity : AppCompatActivity() {
                         act_select_area_rv_store.visibility = View.INVISIBLE
                         act_select_area_ll_third_bar.setBackgroundColor(Color.parseColor("#EEEEEE"))
                     }
+                    boolList[1] = false
                     setButtonActive()
+                    viewModel.getGuGun(siDoAdapter.sidoData[position].name)
 //                    gugunAdapter.setGuGunData(siDoAdapter.sidoData[position].guList)
 //                    siDoAdapter.setClickOriginal(position)
                 }
@@ -153,6 +155,7 @@ class SelectAreaActivity : AppCompatActivity() {
 
                     }
                     setButtonActive()
+                    viewModel.getCardData(gugunAdapter.cityData[position].name)
                 }
 
             })
@@ -177,7 +180,7 @@ class SelectAreaActivity : AppCompatActivity() {
                 }
             }
         })
-        storeAdapter.setStoreData(storeList)
+//        storeAdapter.setStoreData(storeList)
         act_select_area_rv_store.adapter = storeAdapter
         act_select_area_rv_store.layoutManager = LinearLayoutManager(this)
         act_select_area_rv_store.setHasFixedSize(true)
@@ -191,9 +194,16 @@ class SelectAreaActivity : AppCompatActivity() {
 
     }
 
-    fun setObserve() {
+    private fun setObserve() {
         viewModel.siDoData.observe(this, Observer {
             siDoAdapter.setSidoData(it)
+        })
+
+        viewModel.guGunData.observe(this, Observer {
+            gugunAdapter.setGuGunData(it)
+        })
+        viewModel.cardData.observe(this, Observer {
+            storeAdapter.setStoreData(it)
         })
     }
 

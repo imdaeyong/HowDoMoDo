@@ -7,15 +7,17 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.howdomodo.R
+import com.ssafy.howdomodo.data.datasource.model.Action
+import com.ssafy.howdomodo.data.datasource.model.Region
 import com.ssafy.howdomodo.data.datasource.model.Store
 import kotlinx.android.synthetic.main.item_store.view.*
 
 class StoreAdapter(private val downClickListener: StoreViewHolder.OnClickListener) :
     RecyclerView.Adapter<StoreViewHolder>() {
 
-    val storeData = ArrayList<Store>()
+    val storeData = ArrayList<Action>()
 
-    fun setStoreData(newData: List<Store>) {
+    fun setStoreData(newData: List<Action>) {
         with(storeData) {
             clear()
             addAll(newData)
@@ -61,7 +63,7 @@ class StoreViewHolder(itemView: View, private val downClickListener: OnClickList
 
     lateinit var storeDetailAdapter: StoreDetailAdapter
 
-    fun bind(store: Store) {
+    fun bind(store: Action) {
         itemView.item_store_tv_title.text = store.kinds
         itemView.item_store_tv_cnt.text = "사용횟수 ${store.totalCnt}회"
 

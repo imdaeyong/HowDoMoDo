@@ -5,14 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.howdomodo.R
-import com.ssafy.howdomodo.data.datasource.model.StoreDetail
+import com.ssafy.howdomodo.data.datasource.model.Down
 import kotlinx.android.synthetic.main.item_store_detail.view.*
 
 class StoreDetailAdapter() :
     RecyclerView.Adapter<StoreDetailViewHolder>() {
-    private val storeDetailData = ArrayList<StoreDetail>()
+    private val storeDetailData = ArrayList<Down>()
 
-    fun setStoreDetailData(newData: List<StoreDetail>) {
+    fun setStoreDetailData(newData: List<Down>) {
         with(storeDetailData) {
             clear()
             addAll(newData)
@@ -39,8 +39,7 @@ class StoreDetailViewHolder(itemView: View) :
     RecyclerView.ViewHolder(itemView) {
 
 
-
-    fun bind(storeDetail: StoreDetail) {
+    fun bind(storeDetail: Down) {
         itemView.item_store_detail_tv_text.text = storeDetail.jong + " " + storeDetail.cnt + "회"
     }
 

@@ -81,7 +81,7 @@ class SidoAdapter(private val onclick: SidoViewHolder.SidoClickListener) :
         }
 
         fun bind(data: Region) {
-            var sido = data.siName
+            var sido = data.name
             itemView.item_sido_tv_city.text = sido
             if (data.isClicked) {
                 itemView.item_sido_cl_box.setBackgroundResource(R.drawable.item_sido_selected)

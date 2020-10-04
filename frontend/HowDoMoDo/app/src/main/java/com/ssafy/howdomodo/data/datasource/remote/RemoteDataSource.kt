@@ -68,4 +68,10 @@ interface RemoteDataSource {
         fail: (Throwable) -> Unit
     )
 
+    fun getCardData(
+        siName: String,
+        success: (CardDataResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    )
+
 }

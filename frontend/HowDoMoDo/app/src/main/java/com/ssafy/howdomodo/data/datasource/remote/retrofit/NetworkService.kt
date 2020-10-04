@@ -65,4 +65,10 @@ interface NetworkService {
     fun getGuGun(
         @Path("siName") siName: String
     ): Call<AreaResponse>
+
+    @GET("/pyapi/find_si/{siName}")
+    fun getCardData(
+        @Path("siName") siName: String
+    ): Call<CardDataResponse>
+
 }
