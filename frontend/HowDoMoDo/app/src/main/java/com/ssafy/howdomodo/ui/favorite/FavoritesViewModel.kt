@@ -1,5 +1,6 @@
 package com.ssafy.howdomodo.ui.favorite
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.JsonObject
@@ -25,9 +26,11 @@ class FavoritesViewModel(private val favoritesRepository: FavoritesRepository) :
         favoritesRepository.favoritesAdd(favoritesRequestBody,
             success = {
                 successMessage.value = it.message
+                Log.e("favoritesAdd","성공!!!!")
             },
             fail = {
                 favoritesError.value = it.message
+                Log.e("favoritesAdd","성공!!!!")
             })
     }
 

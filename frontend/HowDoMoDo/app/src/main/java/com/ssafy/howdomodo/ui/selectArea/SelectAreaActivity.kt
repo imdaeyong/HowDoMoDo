@@ -23,18 +23,6 @@ class SelectAreaActivity : AppCompatActivity() {
         val boolList = arrayListOf<Boolean>(false, false)
     }
 
-    var theaterList = arrayListOf<Theater>(
-        Theater(1246, 175, "브로드웨이(신사)", "서울특별시 강남구 논현동 도산대로 8길 8", "롯데시네마",37.5164,127.022),
-        Theater(1247, 175, "도곡", "서울특별시 강남구 도곡동 174-3", "롯데시네마",37.4875,127.047),
-        Theater(1248,175,"청남씨네시티","서울특별시 강남구 도산대로 323, 씨네시티빌딩 14층","CGV",37.5229,127.037),
-        Theater(1249,175,"코엑스","서울특별시 강남구 삼성1동 봉은사로 524","메가박스",37.5129,127.057),
-        Theater(1250,175,"압구정","서울특별시 강남구 신사동 압구정로30길 45","CGV",37.5243,127.029),
-        Theater(1251,175,"de CHEF 압구정","서울특별시 강남구 신사동 압구정로30길 45","CGV",37.5243,127.029),
-        Theater(1252,175,"씨티(강남대로)","서울특별시 강남구 역삼1동 강남대로 422","메가박스",37.5004,127.027),
-        Theater(1253,175,"강남","서울특별시 강남구 역삼동 강남대로 438","CGV",37.5016,127.026),
-
-        )
-
     val storeList = arrayListOf<Store>(
         Store(
             "식생활", 227, arrayListOf<StoreDetail>(
