@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.data.datasource.model.Theater
 import kotlinx.android.synthetic.main.item_favorite.view.*
+import kotlinx.android.synthetic.main.item_theater.view.*
 
 class FavoritesAdapter(private val onclick: FavoritesViewHolder.FavoritesClickListener) :
     RecyclerView.Adapter<FavoritesAdapter.FavoritesViewHolder>() {
@@ -91,8 +92,6 @@ class FavoritesAdapter(private val onclick: FavoritesViewHolder.FavoritesClickLi
         fun bind(data: Theater) {
             var name = data.theaterBrand + " " + data.theaterName
             var address = data.theaterAddress
-            var theater_lat = data.theaterLat
-            var theater_lng = data.theaterLon
 
             itemView.item_favorite_theater_tv_name.text = name
             itemView.item_favorite_theater_tv_desc.text = address
@@ -112,7 +111,6 @@ class FavoritesAdapter(private val onclick: FavoritesViewHolder.FavoritesClickLi
                 itemView.item_favorite_cl_box.setBackgroundColor(Color.parseColor("#00000000"))
                 itemView.item_favorite_theater_tv_name.setTextColor(Color.parseColor("#ffffff"))
             }
-
         }
     }
 }

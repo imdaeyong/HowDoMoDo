@@ -12,10 +12,11 @@ class GetTheatersRepository(private val remoteDataSource: RemoteDataSource) {
     fun getTheaters(
         siName: String,
         guName: String,
+        userCode :Int,
         success: (GetTheatersResponse) -> Unit,
         fail: (Throwable) -> Unit
     ) {
-        remoteDataSource.getTheaters(siName, guName, success, fail)
+        remoteDataSource.getTheaters(siName, guName,userCode, success, fail)
     }
 
 }

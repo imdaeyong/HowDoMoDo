@@ -1,6 +1,5 @@
 package com.ssafy.howdomodo.ui.favorite
 
-//import com.ssafy.howdomodo.ui.theater.favoritesViewModel
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.howdomodo.R
-import com.ssafy.howdomodo.`object`.UserCollection
 import com.ssafy.howdomodo.data.datasource.model.Theater
 import com.ssafy.howdomodo.ui.Favorites.FavoritesAdapter
 import kotlinx.android.synthetic.main.fragment_favorite.*
@@ -24,17 +22,14 @@ class FavoriteFragment : Fragment() {
     private val favoritesViewModel: FavoritesViewModel by viewModel()
 
     companion object {
-        var theater_select = false
-        lateinit var selectedTheater: Theater
-        var userCode = "825425162"
-        lateinit var favoritesAdapter: FavoritesAdapter
+        var favorite_select = false
+        lateinit var selectedfavorite: Theater
+        var userCode = 658903366
+        lateinit var favoritesList: ArrayList<Theater>
 
     }
-    var favoritesList = arrayListOf<Theater>(
-        Theater(1246, 175, "브로드웨이(신사)", "서울특별시 강남구 논현동 도산대로 8길 8", "롯데시네마", 37.5164, 127.022),
-        Theater(1247, 175, "도곡", "서울특별시 강남구 도곡동 174-3", "롯데시네마", 37.4875, 127.047),
-        Theater(1248, 175, "청남씨네시티", "서울특별시 강남구 도산대로 323, 씨네시티빌딩 14층", "CGV", 37.5229, 127.037),
-    )
+
+    var emptyList = arrayListOf<Theater>()
 
     lateinit var favoritesAdapter: FavoritesAdapter
 
@@ -51,23 +46,31 @@ class FavoriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 //        favoritesViewModel.favoritesInfo(UserCollection.userCode.toInt())
-        favoritesViewModel.favoritesInfo(userCode.toInt())
+
+        favoritesViewModel.favoritesInfo(userCode)
 
         observeData()
     }
 
 
-    private fun observeData() {
+    fun observeData() {
         favoritesViewModel.favoritesError.observe(this, Observer {
             Log.e("즐겨찾기", "favorites observe 오류")
         })
         favoritesViewModel.favoritesResponse.observe(this, Observer {
             //영화 리스트 가져왔을떄.
+
+            Log.e("즐겨찾기", "observe접속")
             if (it.status == 200) {
                 Log.e("즐겨찾기", "통신 성공적")
-                if(it.data!=null)
-                {
+
+                if (it.data != null) {
                     favoritesList = it.data!!
+                } else {
+                    favoritesList = emptyList
+                }
+
+                if (favoritesList == emptyList) {
                     frag_fav_tv_warning.visibility = View.VISIBLE
                 }
                 favoritesAdapter = FavoritesAdapter(
@@ -82,39 +85,44 @@ class FavoriteFragment : Fragment() {
                                     )
                                 }
                                 favoritesAdapter.setClicked(position, true)
-                                theater_select = true
-                                selectedTheater = favoritesList[position]
+                                favorite_select = true
+                                selectedfavorite = favoritesList[position]
+
                             } else if (favoritesAdapter.getClicked(position)) {
-//                                    ObjectMovie.movieTheater =  theaterAdapter.theaterData[position].theaterBrand + " " + theaterAdapter.theaterData[position].theaterName
                                 favoritesAdapter.setClicked(
                                     favoritesAdapter.getClickedFavorites(),
                                     false
                                 )
-                                theater_select = false
+                                favorite_select = false
                             }
-//                                setButtonActive()
+                            Toast.makeText(context, position.toString(), Toast.LENGTH_SHORT)
                         }
 
                         override fun starClick(position: Int, starImageView: ImageView) {
-                            Toast.makeText(
-                                view?.context,
-                                position.toString(),
-                                Toast.LENGTH_SHORT
-                            )
-                                .show()
+                            Toast.makeText(context, position.toString(), Toast.LENGTH_SHORT)
+                            Log.e("즐겨찾기 삭제", "starclick접속")
+                            isStarClicked(position, starImageView)
                         }
                     })
+
+                favoritesList = it.data!!
                 favoritesAdapter.setFavoritesData(favoritesList)
                 frag_fav_rv_favorite.adapter = favoritesAdapter
-                var theaterlm = LinearLayoutManager(this.context)
-                frag_fav_rv_favorite.layoutManager = theaterlm
+                var favoritelm = LinearLayoutManager(this.context)
+                frag_fav_rv_favorite.layoutManager = favoritelm
                 frag_fav_rv_favorite.setHasFixedSize(true)
-
-
             }
-
         }
         )
+    }
+
+    fun isStarClicked(position: Int, starImageView: ImageView) {
+        var f_t = favoritesList[position]
+        starImageView.setImageResource(R.drawable.star_unclicked)
+        favoritesViewModel.favoritesDelete(userCode, f_t.theaterId)
+        favoritesList.removeAt(position)
+
+//        favoritesViewModel.favoritesInfo(userCode)
     }
 }
 

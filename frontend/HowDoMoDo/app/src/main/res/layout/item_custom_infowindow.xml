@@ -43,58 +43,40 @@
                 android:id="@+id/item_infowindow_tv_theater_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
+                android:ellipsize="marquee"
                 android:singleLine="true"
                 android:text="custom marker desc."
                 android:textColor="#ff7f7f7f"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                />
         </LinearLayout>
     </LinearLayout>
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <LinearLayout
         android:id="@+id/item_infowindow_cl_btn_holder"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         >
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/item_infowindow_cl_find_way_bycar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
         <Button
             android:id="@+id/item_infowindow_btn_find_way_bycar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="🚗길찾기"
+            android:layout_weight="1"
             android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
         <Button
             android:id="@+id/item_infowindow_btn_find_way_bywalk"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="🚶‍♂길찾기"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_weight="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="parent"
             android:gravity="center"
             />
-        <Button
-            android:id="@+id/item_infowindow_btn_find_way_bymap"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="지도에서 보기"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="parent"
-            android:gravity="center"
-
-            />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    </LinearLayout>
 </LinearLayout>

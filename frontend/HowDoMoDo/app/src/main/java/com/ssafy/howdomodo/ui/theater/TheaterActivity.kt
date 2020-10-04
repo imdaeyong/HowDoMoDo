@@ -8,30 +8,38 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.`object`.ObjectMovie
 import com.ssafy.howdomodo.data.datasource.model.Theater
+import com.ssafy.howdomodo.ui.favorite.FavoritesViewModel
 import com.ssafy.howdomodo.ui.gwanSelect.GwanSelectActivity
 import kotlinx.android.synthetic.main.activity_theater.*
 import net.daum.mf.map.api.CalloutBalloonAdapter
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
+import org.json.JSONObject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 class TheaterActivity : AppCompatActivity() {
     private val getTheatersViewModel: GetTheatersViewModel by viewModel()
+    private val favoritesViewModel: FavoritesViewModel by viewModel()
 
     companion object {
         var theater_select = false
         var selectSiName = "서울특별시"
         var selectGuName = "영등포구"
+        var userCode = 658903366
         lateinit var selectedTheater: Theater
         lateinit var mapView: MapView
         var theaterList = ArrayList<Theater>()
@@ -53,6 +61,7 @@ class TheaterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_theater)
 
+//        userCode= UserCollection.userCode.toInt()
         //해당 지역이 뭔지 받아오기.
         if (intent.hasExtra("siName")) {
             selectSiName = intent.getStringExtra("siName")!!
@@ -64,15 +73,16 @@ class TheaterActivity : AppCompatActivity() {
             )
                 .show()
         } else {
-            Log.e("유사에러", "이전 페이지에서 넘어온 시도데이터가 없음 - > 디폴트 검색!" + selectSiName + selectGuName)
+            Log.e(
+                "유사에러",
+                "이전 페이지에서 넘어온 시도데이터가 없음 - > 디폴트 검색!" + selectSiName + selectGuName + userCode
+            )
         }
 
         act_theater_tv_search.text = selectSiName + " " + selectGuName
-        getTheatersViewModel.getTheaters(selectSiName, selectGuName)
+        getTheatersViewModel.getTheaters(selectSiName, selectGuName, userCode)
 
         observeData()
-
-
 
         act_theater_cl_theater_selected.setOnClickListener {
             val intent = Intent(this, GwanSelectActivity::class.java)
@@ -121,6 +131,8 @@ class TheaterActivity : AppCompatActivity() {
                                 Toast.LENGTH_SHORT
                             )
                                 .show()
+                            theaterList[position].fav = !theaterList[position].fav
+                            isStarCheck(position, starImageView)
                         }
                     })
                 theaterList = it.data!!
@@ -129,8 +141,8 @@ class TheaterActivity : AppCompatActivity() {
                 var theaterlm = LinearLayoutManager(this)
                 act_theater_rv_theaters.layoutManager = theaterlm
                 act_theater_rv_theaters.setHasFixedSize(true)
-                //Maps
 
+                //Maps
                 mapView = MapView(this)
                 var mapViewController = act_theater_rl_map_view as ViewGroup
                 mapView.setMapCenterPoint(
@@ -163,7 +175,7 @@ class TheaterActivity : AppCompatActivity() {
                     marker.tag = t.theaterId
                     marker.mapPoint = MapPoint.mapPointWithGeoCoord(t.theaterLat, t.theaterLon)
                     marker.markerType = MapPOIItem.MarkerType.CustomImage
-                    marker.setCustomImageResourceId(marker_img)
+                    marker.customImageResourceId = marker_img
                     marker.userObject = t
 
 
@@ -188,7 +200,6 @@ class TheaterActivity : AppCompatActivity() {
 
             } else {
                 Toast.makeText(this, "TheaterActivity observeData 에러!", Toast.LENGTH_SHORT).show()
-
             }
         })
     }
@@ -200,6 +211,27 @@ class TheaterActivity : AppCompatActivity() {
                 selectedTheater.theaterLon
             ), true
         )
+    }
+
+    fun isStarCheck(position: Int, stariv: ImageView) {
+        var t = theaterList[position]
+        if (t.fav) {
+            var favoriteJson = JSONObject()
+            favoriteJson.put("userCode", userCode)
+            favoriteJson.put("theaterId", t.theaterId)
+            favoriteJson.put("theaterName", t.theaterName)
+            favoriteJson.put("theaterBrand", t.theaterBrand)
+
+            var body = JsonParser.parseString(favoriteJson.toString()) as JsonObject
+
+            Log.e("isstarcheck", body.toString())
+
+            favoritesViewModel.favoritesAdd(body)
+            stariv.setImageResource(R.drawable.star_clicked)
+        } else {
+            favoritesViewModel.favoritesDelete(userCode, t.theaterId)
+            stariv.setImageResource(R.drawable.star_unclicked)
+        }
     }
 
     fun setButtonActive() {
@@ -221,7 +253,6 @@ class TheaterActivity : AppCompatActivity() {
                 LayoutInflater.from(context).inflate(R.layout.item_custom_infowindow, null)
         }
 
-
         override fun getCalloutBalloon(poiItem: MapPOIItem): View {
             var theater_img = R.drawable.ic_launcher
 
@@ -237,7 +268,6 @@ class TheaterActivity : AppCompatActivity() {
                 theater_img = R.drawable.ic_launcher
             }
 
-
             (mCalloutBalloon.findViewById<View>(R.id.item_infowindow_iv_theater_image) as ImageView).setImageResource(
                 theater_img
             )
@@ -247,6 +277,7 @@ class TheaterActivity : AppCompatActivity() {
 
             (mCalloutBalloon.findViewById<View>(R.id.item_infowindow_tv_theater_desc) as TextView).text =
                 ((poiItem.userObject) as Theater).theaterAddress
+
             return mCalloutBalloon
         }
 
@@ -256,6 +287,3 @@ class TheaterActivity : AppCompatActivity() {
 
     }
 }
-
-
-

@@ -1,10 +1,7 @@
 package com.ssafy.howdomodo.data.repository
 
 import com.google.gson.JsonObject
-import com.ssafy.howdomodo.data.datasource.model.FavoritesResponse
-import com.ssafy.howdomodo.data.datasource.model.GetTheatersResponse
-import com.ssafy.howdomodo.data.datasource.model.LoginResponse
-import com.ssafy.howdomodo.data.datasource.model.SignUpResponse
+import com.ssafy.howdomodo.data.datasource.model.*
 import com.ssafy.howdomodo.data.datasource.remote.RemoteDataSource
 
 class FavoritesRepository(private val remoteDataSource: RemoteDataSource) {
