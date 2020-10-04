@@ -4,9 +4,6 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ssafy.howdomodo.mapper.TheatersMapper">
-	<select id="getAllSido" resultType="com.ssafy.howdomodo.domain.Cities">
-		select * from cities
-	</select>
 	
 	<select id="getCityId" resultType="Integer">
 		select cityId from cities where siName=#{siName} AND guName=#{guName}
@@ -31,4 +28,15 @@
 	<delete id="deleteFavTheaters">
 		DELETE FROM favoriteTheaters WHERE userCode=#{userCode} AND theaterId=#{theaterId}
 	</delete>
+	
+	<!-- 시 정보 조회 -->
+	<select id="readSiInfo" resultType="String">
+		SELECT DISTINCT(siName) from cities
+	</select>
+	
+	<!-- 구 정보 조회 -->
+	<select id="readGuInfo" resultType="String">
+		SELECT guName from cities where siName=#{siName}
+	</select>
+	
 </mapper>
