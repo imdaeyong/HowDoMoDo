@@ -37,7 +37,7 @@ class TheaterActivity : AppCompatActivity() {
     companion object {
         var theater_select = false
         var selectSiName = "서울특별시"
-        var selectGuName = "영등포구"
+        var selectGuName = "강남구"
         var userCode = 658903366
         lateinit var selectedTheater: Theater
         lateinit var mapView: MapView

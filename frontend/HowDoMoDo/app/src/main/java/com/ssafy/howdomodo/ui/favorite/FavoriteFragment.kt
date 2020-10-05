@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.howdomodo.R
+import com.ssafy.howdomodo.`object`.UserCollection
 import com.ssafy.howdomodo.data.datasource.model.Theater
 import com.ssafy.howdomodo.ui.Favorites.FavoritesAdapter
 import kotlinx.android.synthetic.main.fragment_favorite.*
@@ -33,7 +34,6 @@ class FavoriteFragment : Fragment() {
 
     lateinit var favoritesAdapter: FavoritesAdapter
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,6 +45,9 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if(UserCollection.userCode!=null && UserCollection.userCode!=""){
+            userCode = UserCollection.userCode.toInt()
+        }
 //        favoritesViewModel.favoritesInfo(UserCollection.userCode.toInt())
 
         favoritesViewModel.favoritesInfo(userCode)
@@ -70,9 +73,6 @@ class FavoriteFragment : Fragment() {
                     favoritesList = emptyList
                 }
 
-                if (favoritesList == emptyList) {
-                    frag_fav_tv_warning.visibility = View.VISIBLE
-                }
                 favoritesAdapter = FavoritesAdapter(
                     object :
                         FavoritesAdapter.FavoritesViewHolder.FavoritesClickListener {
@@ -105,12 +105,15 @@ class FavoriteFragment : Fragment() {
                         }
                     })
 
-                favoritesList = it.data!!
                 favoritesAdapter.setFavoritesData(favoritesList)
                 frag_fav_rv_favorite.adapter = favoritesAdapter
                 var favoritelm = LinearLayoutManager(this.context)
                 frag_fav_rv_favorite.layoutManager = favoritelm
                 frag_fav_rv_favorite.setHasFixedSize(true)
+
+                if (favoritesList == emptyList) {
+                    frag_fav_tv_warning.visibility = View.VISIBLE
+                }
             }
         }
         )
@@ -119,10 +122,11 @@ class FavoriteFragment : Fragment() {
     fun isStarClicked(position: Int, starImageView: ImageView) {
         var f_t = favoritesList[position]
         starImageView.setImageResource(R.drawable.star_unclicked)
+        Toast.makeText(this.context, favoritesList[position].theaterBrand+favoritesList[position].theaterName+"즐겨찾기 삭제!",Toast.LENGTH_SHORT)
         favoritesViewModel.favoritesDelete(userCode, f_t.theaterId)
         favoritesList.removeAt(position)
-
-//        favoritesViewModel.favoritesInfo(userCode)
+        favoritesViewModel.favoritesInfo(userCode)
+        observeData()
     }
 }
 

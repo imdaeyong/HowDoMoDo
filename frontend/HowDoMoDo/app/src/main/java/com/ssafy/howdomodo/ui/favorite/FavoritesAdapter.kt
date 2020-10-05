@@ -80,7 +80,7 @@ class FavoritesAdapter(private val onclick: FavoritesViewHolder.FavoritesClickLi
                     itemView.item_favorite_theater_tv_name
                 )
             }
-            itemView.item_favorite_theater_iv_photo.setOnClickListener {
+            itemView.item_favorite_theater_iv_star.setOnClickListener {
                 favoritesClickListener.starClick(
                     adapterPosition,
                     itemView.item_favorite_theater_iv_star
