@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.howdomodo.R
+import com.ssafy.howdomodo.`object`.TheaterCollection
 import com.ssafy.howdomodo.`object`.UserCollection
 import com.ssafy.howdomodo.data.datasource.model.Theater
 import com.ssafy.howdomodo.ui.Favorites.FavoritesAdapter
@@ -76,7 +77,11 @@ class FavoriteFragment : Fragment() {
                 favoritesAdapter = FavoritesAdapter(
                     object :
                         FavoritesAdapter.FavoritesViewHolder.FavoritesClickListener {
-                        override fun onclick(position: Int, textView: TextView) {}
+                        override fun onclick(position: Int, textView: TextView) {
+                            TheaterCollection.mvTheater = favoritesList[position].theaterBrand + " " + favoritesList[position].theaterName
+                            TheaterCollection.mvTheaterName = favoritesList[position].theaterBrand
+
+                        }
                         override fun starClick(position: Int, starImageView: ImageView) {
                             Toast.makeText(context, position.toString(), Toast.LENGTH_SHORT)
                             Log.e("즐겨찾기 삭제", "starclick접속")
