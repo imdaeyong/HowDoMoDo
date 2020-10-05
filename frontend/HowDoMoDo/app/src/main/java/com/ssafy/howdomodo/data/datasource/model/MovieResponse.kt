@@ -3,6 +3,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 
-data class MovieApi (
-    val results : List<Movie>
+data class MovieResponse (
+    val status :Int,
+    val movie : List<Movie>
 )

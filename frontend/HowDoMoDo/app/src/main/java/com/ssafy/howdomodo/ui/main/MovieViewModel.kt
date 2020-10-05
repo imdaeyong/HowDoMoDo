@@ -22,18 +22,18 @@ class MovieViewModel (private val movieRepository: MovieRepository) : ViewModel(
         loading.value = true
         val key = ObjectCollection.MOVIE_API_KEY
         val region = "ko"
-        Log.d("TEST",key)
-        movieRepository.getMovieData(key,region,success = {
-            if(it.results.isEmpty()){
+        Log.d("TEST", key)
+        movieRepository.getMovieData(key, region, success = {
+            if (it.movie.isEmpty()) {
                 isEmptyMovieData.value = Unit
-            }else{
-                movieData.value = it.results
-                for(item in it.results){
+            } else {
+                movieData.value = it.movie
+                for (item in it.movie) {
                     spinnerData.add(item.title)
                 }
             }
             spinnerCopyData.value = spinnerData
-        },fail = {
+        }, fail = {
             Log.e("error is :", it.toString())
             errorToast.value = it
         })
@@ -41,12 +41,34 @@ class MovieViewModel (private val movieRepository: MovieRepository) : ViewModel(
         loading.value = false
     }
 
-    fun getMoviePsNs(title: String){
-        movieRepository.getMoviePsNs(title,success = {
+    fun getMoviePsNs(title: String) {
+        movieRepository.getMoviePsNs(title, success = {
             psnsData.value = it
-        },fail = {
+        }, fail = {
             Log.e("error is :", it.toString())
             errorToast.value = it
         })
+    }
+
+    fun getNewMoviedata() {
+        loading.value = true
+        movieRepository.getNewMovie(
+            success = {
+                if (it.movie.isEmpty()) {
+                    isEmptyMovieData.value = Unit
+                } else {
+                    movieData.value = it.movie
+                    for (item in it.movie) {
+                        spinnerData.add(item.title)
+                    }
+                }
+                spinnerCopyData.value = spinnerData
+
+            },
+            fail = {
+                errorToast.value = it
+            })
+        loading.value = false
+
     }
 }

@@ -3,7 +3,6 @@ package com.ssafy.howdomodo.ui.main
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,6 @@ import com.ssafy.howdomodo.`object`.TheaterCollection
 import com.ssafy.howdomodo.ui.Loading
 import com.ssafy.howdomodo.ui.selectArea.SelectAreaActivity
 import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.android.synthetic.main.item_ticketing_dialog.*
 import kotlinx.android.synthetic.main.item_ticketing_dialog.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -49,7 +47,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         Loading.goLoading(view.context)
-        mvm.getMovieData()
+        mvm.getNewMoviedata()
 
         // RecyclerView Apapter
 
@@ -147,7 +145,7 @@ class MainFragment : Fragment() {
         })
         mvm.psnsData.observe(this, Observer {
             TheaterCollection.mvTitle = mainAdapter.movieData[moviePosition].title
-            TheaterCollection.mvPoster = mainAdapter.movieData[moviePosition].poster_path
+            TheaterCollection.mvPoster = mainAdapter.movieData[moviePosition].posterPath
 
             // movieTitle을 Request 보내서 긍,부정 데이터를 받아온다.
             val movieTitle = mainAdapter.movieData[moviePosition].title
