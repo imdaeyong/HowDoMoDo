@@ -1,32 +1,21 @@
 package com.ssafy.howdomodo.ui.mypage
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import com.ssafy.howdomodo.R
-import com.ssafy.howdomodo.`object`.ObjectCollection
-import com.ssafy.howdomodo.`object`.ObjectMovie
 import com.ssafy.howdomodo.`object`.UserCollection
-import com.ssafy.howdomodo.ui.bottomtap.BottomTabActivity
 import com.ssafy.howdomodo.ui.login.LoginActivity
-import com.ssafy.howdomodo.ui.main.WebviewActivity
 import com.ssafy.howdomodo.ui.mypage.privates.PrivateActivity
-import com.ssafy.howdomodo.ui.selectArea.SelectAreaActivity
-import kotlinx.android.synthetic.main.activity_mypage.*
 import kotlinx.android.synthetic.main.fragment_mypage.*
-import kotlinx.android.synthetic.main.fragment_mypage.view.*
-import kotlinx.android.synthetic.main.item_mypage_delete_dialog.*
 import org.json.JSONObject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -295,6 +284,10 @@ MypageFragment : Fragment() {
 //                        val dialogView =
 //                            layoutInflater.inflate(R.layout.item_mypage_delete_dialog, null)
 //                        builder.setView(dialogView).show()
+                    }
+                    "비밀번호 재설정" -> {
+                        val intent = Intent(activity, UpdatePwActivity::class.java)
+                        startActivity(intent)
                     }
                 }
             }

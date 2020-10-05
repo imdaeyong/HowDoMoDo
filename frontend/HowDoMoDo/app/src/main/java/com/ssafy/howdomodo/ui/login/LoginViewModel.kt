@@ -25,9 +25,13 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     }
 
     fun findPW(userEmail: String, userName: String) {
-        loginRepository.findPW(userEmail,userName,success = {
-            tempPw.value = it.data.toString()
+        Log.e("TEST2","들어옴")
+        loginRepository.findPW(userEmail,userName,success = {response ->
+            tempPw.value = response.data
+            Log.e("TEST2", tempPw.value!!)
+
         }, fail = {
+            Log.e("TEST2","Error")
             findError.value = it.message
         })
     }

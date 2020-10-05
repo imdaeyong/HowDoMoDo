@@ -23,8 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.login.FindPwActivity"></activity>
-        <activity android:name=".ui.theater.TicketInfoActivity"></activity>
+        <activity android:name=".ui.mypage.UpdatePwActivity"></activity>
+        <activity android:name=".ui.login.FindPwActivity" />
+        <activity android:name=".ui.theater.TicketInfoActivity" />
         <activity android:name=".ui.chat.ChatActivity" />
         <activity android:name=".ui.chat.ChatRoomActivity" />
         <activity android:name=".ui.mypage.MypageActivity" /> <!-- <activity android:name=".ui.selectArea.SelectTheaterActivity" /> -->

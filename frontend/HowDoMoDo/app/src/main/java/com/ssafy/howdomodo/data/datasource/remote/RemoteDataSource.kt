@@ -44,9 +44,23 @@ interface RemoteDataSource {
     fun findPW(
         userEmail: String,
         userName: String,
-        success: (LoginResponse) -> Unit,
+        success: (PwResponse) -> Unit,
         fail: (Throwable) -> Unit
     )
+
+    fun checkPW(
+        userEmail: String,
+        originPwd: String,
+        success: (SignUpResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    )
+
+    fun updatePW(
+        signUpRequestBody: JsonObject,
+        success: (SignUpResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    )
+
 
     fun getTheaters(
         siName:String,

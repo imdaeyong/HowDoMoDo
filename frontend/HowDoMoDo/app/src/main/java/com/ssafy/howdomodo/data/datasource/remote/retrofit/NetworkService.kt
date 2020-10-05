@@ -46,7 +46,20 @@ interface NetworkService {
     fun findPW(
         @Path("userEmail") userEmail: String,
         @Path("userName") userName: String
-    ): Call<LoginResponse>
+    ): Call<PwResponse>
+
+    // 비밀번호 재설정을 위한 비밀번호 체크
+    @GET("/users/pw/{userEmail}/{originPwd}")
+    fun checkPW(
+        @Path("userEmail") userEmail: String,
+        @Path("originPwd") originPwd: String
+    ): Call<SignUpResponse>
+
+    // 비밀번호 재설정
+    @PUT("/users/pw")
+    fun updatePW(
+        @Body signUpRequestBody: JsonObject
+    ): Call<SignUpResponse>
 
     //시도, 구군별 영화관 리스트 조회
     @GET("/theaters/{siName}/{guName}/{userCode}")

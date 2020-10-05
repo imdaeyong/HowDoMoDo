@@ -11,6 +11,7 @@ import com.ssafy.howdomodo.data.repository.SignUpRepository
 class MyPageViewModel(private val mypageRepository: MyPageRepository) : ViewModel() {
     val errorToast = MutableLiveData<String>()
     val successMessage = MutableLiveData<String>()
+    val checkMessage = MutableLiveData<String>()
     val mypageResponse = MutableLiveData<LoginResponse>()
 
     fun userInfo(userCode: Int) {
@@ -45,6 +46,26 @@ class MyPageViewModel(private val mypageRepository: MyPageRepository) : ViewMode
 
     fun userNickCheck(userNick: String) {
         mypageRepository.userNickCheck(userNick,
+            success = {
+                successMessage.value = it.message
+            },
+            fail = {
+                errorToast.value = it.message
+            })
+    }
+
+    fun checkPW(userEmail: String, originPwd: String) {
+        mypageRepository.checkPW(userEmail, originPwd,
+            success = {
+                checkMessage.value = it.message
+            },
+            fail = {
+                errorToast.value = it.message
+            })
+    }
+
+    fun updatePW(jsonObject: JsonObject) {
+        mypageRepository.updatePW(jsonObject,
             success = {
                 successMessage.value = it.message
             },
