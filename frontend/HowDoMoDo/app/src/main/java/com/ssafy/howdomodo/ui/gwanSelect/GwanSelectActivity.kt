@@ -29,8 +29,14 @@ class GwanSelectActivity : AppCompatActivity() {
         act_gwan_rv_gwan.layoutManager = LinearLayoutManager(this)
         act_gwan_rv_gwan.setHasFixedSize(true)
 
-        act_gwan_tv_movie_title.text = ObjectMovie.movieTitle
-        act_gwan_tv_theater_name.text = ObjectMovie.movieTheater
+        when (TheaterCollection.age) {
+            "12" -> act_gwan_iv_movie_age.setImageResource(R.drawable.age_twelve)
+            "15" -> act_gwan_iv_movie_age.setImageResource(R.drawable.age_fifteen)
+            "19" -> act_gwan_iv_movie_age.setImageResource(R.drawable.age_nineteen)
+            "전체" -> act_gwan_iv_movie_age.setImageResource(R.drawable.age_all)
+        }
+        act_gwan_tv_movie_title.text = TheaterCollection.mvTitle
+        act_gwan_tv_theater_name.text = TheaterCollection.mvTheater
         setObserve()
         val timeStr = SimpleDateFormat("yyyy-MM-dd hh:mm")
         TheaterCollection.mvDate =
@@ -39,7 +45,7 @@ class GwanSelectActivity : AppCompatActivity() {
         val brand = TheaterCollection.mvTheaterName
         val theaterName = TheaterCollection.mvTheater.split(" ")[1]
 
-        Log.e("gwan",ObjectMovie.movieTitle +" " + brand + " " + theaterName)
+        Log.e("gwan", ObjectMovie.movieTitle + " " + brand + " " + theaterName)
         viewModel.getGwanData(
             brand,
             theaterName,

@@ -8,4 +8,5 @@ object TheaterCollection {
     var mvTheaterNum: String = ""
     var mvDate: String = ""
     var mvTheaterName: String = ""
+    var age: String = ""
 }
