@@ -26,7 +26,6 @@ class GwanSelectActivity : AppCompatActivity() {
 
 
         gwanAdapter = GwanAdapter()
-        viewModel.getGwanData("CGV", "강남", "20201005", "담보")
         act_gwan_rv_gwan.layoutManager = LinearLayoutManager(this)
         act_gwan_rv_gwan.setHasFixedSize(true)
 
@@ -36,6 +35,14 @@ class GwanSelectActivity : AppCompatActivity() {
         val timeStr = SimpleDateFormat("yyyy-MM-dd hh:mm")
         TheaterCollection.mvDate =
             timeStr.format(Week.times[0].dayDate).toString()
+        val brand = TheaterCollection.mvTheater.split(" ")[0]
+        val theaterName = TheaterCollection.mvTheater.split(" ")[0]
+        viewModel.getGwanData(
+            brand,
+            theaterName,
+            timeStr.format(Week.times[0].dayDate).toString(),
+            TheaterCollection.mvTitle
+        )
         dayAdapter = DayAdapter(object : DayViewHolder.DayClickListener {
             override fun onclick(position: Int, textView: TextView) {
                 if (!dayAdapter.getClicked(position)) {
@@ -54,10 +61,10 @@ class GwanSelectActivity : AppCompatActivity() {
                     dayAdapter.setClicked(dayAdapter.getClickedDay(), false)
                     dayAdapter.setClicked(position, true)
                     viewModel.getGwanData(
-                        "CGV",
-                        "강남",
+                        brand,
+                        theaterName,
                         timeFormat.format(Week.times[position].dayDate).toString(),
-                        "담보"
+                        TheaterCollection.mvTitle
                     )
                 }
             }
