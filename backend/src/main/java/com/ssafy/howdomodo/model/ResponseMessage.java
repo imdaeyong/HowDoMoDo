@@ -45,6 +45,7 @@ public class ResponseMessage {
     public static final String DELETE_FAIL = "삭제 실패";
     
     public static final String SEARCH_FAV_THEATERS_NONE = "아직 즐겨찾기된 영화관 정보가 없습니다.";
+    public static final String SEARCH_FAV_THEATERS_EXIST = "이미 즐겨찾기된 영화관 입니다.";
     public static final String SEARCH_FAV_THEATERS_SUCCESS = "즐겨찾기 정보 조회 성공";
     public static final String SEARCH_FAIL = "조회 실패";
     
