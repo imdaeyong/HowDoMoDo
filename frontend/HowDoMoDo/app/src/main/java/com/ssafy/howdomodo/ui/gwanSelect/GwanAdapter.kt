@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.howdomodo.R
+import com.ssafy.howdomodo.`object`.TheaterCollection
 import com.ssafy.howdomodo.data.datasource.model.TimeTable
 import kotlinx.android.synthetic.main.item_gwan.view.*
 
@@ -88,6 +89,9 @@ class GwanViewHolder(itemView: View, private val listener: ClickListener) : Recy
                         movieTimeAdapter.setClicked(parentPosition, position, false)
                         listener.onClick()
                     }
+                    TheaterCollection.mvType = GwanAdapter.gwanData[parentPosition].screen
+                    TheaterCollection.mvTheaterNum = GwanAdapter.gwanData[parentPosition].hall
+                    Log.e("screent",TheaterCollection.mvTheaterNum)
                 }
             })
         movieTimeAdapter.setTimeData(data.timeList)
