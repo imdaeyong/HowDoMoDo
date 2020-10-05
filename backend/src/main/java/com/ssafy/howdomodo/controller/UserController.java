@@ -1,9 +1,7 @@
 package com.ssafy.howdomodo.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +35,6 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin(origins = "*")
 @RequestMapping("/users")
 public class UserController {
-
-//	private final PasswordEncoder passwordEncoder;
-//	private final JwtTokenProvider jwtTokenProvider;
 	 
 	@Autowired
 	private final UserService userService;
@@ -50,12 +45,19 @@ public class UserController {
 	@ApiOperation(value = "회원가입")
 	@PostMapping("/join")
 	public ResponseEntity singUp(@RequestBody Users user) {
-
+		
+		// 이메일 닉네임 중복체크 한번 더 수행 후 회원가입 진행
+		if(userService.findByUserEmail(user.getUserEmail()) != null)
+			return new ResponseEntity<Response>(new Response(StatusCode.FORBIDDEN, ResponseMessage.ALREADY_USER), HttpStatus.OK);
+		if(userService.findByUserNick(user.getUserNick()) != null)
+			return new ResponseEntity<Response>(new Response(StatusCode.FORBIDDEN, ResponseMessage.SEARCH_NICKNAME_EXIST), HttpStatus.OK);
+		
 		UUID uuid = UUID.randomUUID();
 		int userUuid = Math.abs(uuid.hashCode());
 		user.setUserCode(userUuid);
 		user.setUserPw(securityUtil.encryptSHA256(user.getUserPw()));
-		if (userService.join(user) == -1) {
+		int res = userService.join(user);
+		if ( res == -1) {
 			throw new RestException(ResponseMessage.FAIL_CREATE_USER, HttpStatus.FORBIDDEN);
 		}
 		

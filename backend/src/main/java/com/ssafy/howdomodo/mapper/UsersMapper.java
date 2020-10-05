@@ -10,6 +10,7 @@ import com.ssafy.howdomodo.domain.Users;
 public interface UsersMapper {
 	
 	public int join(Users user) throws SQLException;
+	public int addRole(int userCode, String roles) throws SQLException;
 	public Users findByUserEmail(String userEmail) throws SQLException;
 	public String findByUserNick(String userNick) throws SQLException;
 	public int updateUser(Users user) throws SQLException;
