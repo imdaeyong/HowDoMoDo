@@ -12,6 +12,7 @@ public class ResponseMessage {
     public static final String CREATE_CODE = "인증번호 생성";
     public static final String RESET_PWD = "비밀번호 재설정 성공";
     public static final String FAIL_RESET_PWD = "비밀번호 재설정 실패";
+    public static final String TMP_PWD = "임시비밀번호 발급 완료";
     public static final String SEARCH_NICKNAME_NONE = "닉네임 사용 가능";
     public static final String SEARCH_NICKNAME_EXIST = "이미 존재하는 닉네임입니다.";
     public static final String SEARCH_NICKNAME_SUCCESS = "닉네임으로 조회 성공";

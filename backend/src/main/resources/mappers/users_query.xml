@@ -11,12 +11,6 @@
                         VALUES (#{userCode}, #{userEmail}, #{userName}, #{userNick}, #{userPw}, #{userGender}, #{userBirth})
     </insert>
     
-    <!-- 회원가입 시 Role 정보 저장 -->
-    <insert id="addRole">
-        INSERT INTO users_roles (userCode, roles)
-                        VALUES (#{userCode}, #{roles})
-    </insert>
-    
     <!-- email로 회원정보 찾기 -->
     <select id="findByUserEmail" parameterType="string" resultType="com.ssafy.howdomodo.domain.Users">
     	select * from users where userEmail=#{userEmail}
@@ -30,6 +24,11 @@
     <!-- 닉네임 중복체크 -->
     <select id="findByUserNick" parameterType="string" resultType="string">
     	select userNick from users where userNick=#{userNick}
+    </select>
+    
+    <!-- userEmail과 userName으로 회원정보 찾기 -->
+    <select id="findByUserEmailAndName" resultType="com.ssafy.howdomodo.domain.Users">
+    	SELECT * from users where userEmail=#{userEmail} AND userName=#{userName}
     </select>
     
     <!-- 회원정보 수정 -->
