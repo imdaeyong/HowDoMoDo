@@ -107,12 +107,14 @@ class LoginActivity : AppCompatActivity() {
 //                    Login_Control().POST_login(act_login_et_id.text.toString(), act_login_et_password.text.toString())
                 }
             }
+
 //            R.id.act_login_tv_sign_up ->startActivity(Intent(applicationContext, SignUpActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
         }
     }
 
     fun Findpw_Click_Listener(view :View){
-
+        val intent = Intent(this,FindPwActivity::class.java)
+        startActivity(intent)
     }
 
     fun Signup_Click_Listener(view :View){

@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.selectArea.SelectTheaterActivity"></activity>
+        <activity android:name=".ui.login.FindPwActivity"></activity>
+        <activity android:name=".ui.selectArea.SelectTheaterActivity" />
         <activity android:name=".ui.mypage.privates.PrivateActivity" />
         <activity
             android:name=".ui.LoadingActivity"
