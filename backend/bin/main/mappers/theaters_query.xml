@@ -19,6 +19,11 @@
 				VALUES (#{userCode}, #{theaterId}, #{theaterName}, #{theaterBrand})
 	</insert>
 	
+	<!-- 영화관 즐겨찾기 중복 체크 -->
+	<select id="checkFavTheaters" resultType="com.ssafy.howdomodo.domain.FavoriteTheaters">
+		SELECT * from favoriteTheaters where userCode=#{userCode} AND theaterId=#{theaterId}
+	</select>
+	
 	<!-- 회원의 즐겨찾기 정보 조회 -->
 	<select id="getFavList" resultType="com.ssafy.howdomodo.domain.FavoriteTheaters">
 		SELECT * from favoriteTheaters WHERE userCode=#{userCode}

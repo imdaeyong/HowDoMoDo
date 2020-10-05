@@ -94,4 +94,15 @@ public class TheaterServiceImpl implements TheaterService {
 		}
 	}
 
+	@Override
+	public FavoriteTheaters checkFavTheaters(int userCode, int theaterId) {
+		try {
+			FavoriteTheaters favTheater = theaterMapper.checkFavTheaters(userCode, theaterId);
+			return favTheater;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

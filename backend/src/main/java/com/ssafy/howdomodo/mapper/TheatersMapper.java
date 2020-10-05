@@ -26,4 +26,6 @@ public interface TheatersMapper {
 
 	List<String> readGuInfo(String siName) throws SQLException;
 
+	FavoriteTheaters checkFavTheaters(@Param("userCode") int userCode, @Param("theaterId") int theaterId) throws SQLException;
+
 }
