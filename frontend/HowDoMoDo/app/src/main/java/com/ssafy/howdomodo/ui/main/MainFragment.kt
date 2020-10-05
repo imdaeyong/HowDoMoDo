@@ -6,7 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -150,12 +153,13 @@ class MainFragment : Fragment() {
         mvm.psnsData.observe(this, Observer {
             TheaterCollection.mvTitle = mainAdapter.movieData[moviePosition].title
             TheaterCollection.mvPoster = mainAdapter.movieData[moviePosition].posterPath
+            TheaterCollection.age = mainAdapter.movieData[moviePosition].age
 
             // movieTitle을 Request 보내서 긍,부정 데이터를 받아온다.
             val movieTitle = mainAdapter.movieData[moviePosition].title
             val builder = AlertDialog.Builder(view!!.context)
             val dialogView = layoutInflater.inflate(R.layout.item_ticketing_dialog, null)
-            var PsNs = "긍정 점수:"+it.ps + "% 부정 점수:"+it.ns+"%"
+            var PsNs = "긍정 점수:" + it.ps + "% 부정 점수:" + it.ns + "%"
             dialogView.item_ticketing_dialog_text.text = PsNs
             builder.setView(dialogView)
                 .setPositiveButton("예매") { dialogInterface, i ->
