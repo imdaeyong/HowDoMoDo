@@ -10,7 +10,7 @@ import retrofit2.http.Query
 interface BigDataService {
 
 //    @GET("/bigdata/pn/{title}")
-    @GET("/pyapi/suns/{title}")
+    @GET("/pyapi/np/{title}")
     fun getMoviePsNs(
         @Path("title") movieTitle: String
         ): Call<BigDataPsNs>
