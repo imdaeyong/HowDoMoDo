@@ -6,9 +6,9 @@ import retrofit2.http.Path
 interface BigDataService {
 
 //    @GET("/bigdata/pn/{title}")
-    @GET("/pyapi/np/{title}")
+    @GET("/pyapi/np/{code}")
     fun getMoviePsNs(
-        @Path("title") movieTitle: String
+        @Path("code") movieCode: String
         ): Call<BigDataPsNs>
 
 }

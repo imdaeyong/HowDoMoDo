@@ -46,6 +46,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        act_theater_iv_back.setColorFilter(Color.WHITE)
         Loading.goLoading(view.context)
         mvm.getNewMoviedata()
 
@@ -53,9 +54,9 @@ class MainFragment : Fragment() {
 
         mainAdapter = MainAdapter(object : MainViewHolder.ClickListener {
             override fun movieClick(position: Int) {
-                val movieTitle = mainAdapter.movieData[position].title
+                val movieCode = mainAdapter.movieData[position].id
                 moviePosition = position
-                mvm.getMoviePsNs(movieTitle)
+                mvm.getMoviePsNs(movieCode)
 
             }
         })

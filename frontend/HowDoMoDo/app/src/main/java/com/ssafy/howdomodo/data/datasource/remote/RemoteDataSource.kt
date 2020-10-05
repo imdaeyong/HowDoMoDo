@@ -34,6 +34,13 @@ interface RemoteDataSource {
         success: (SignUpResponse) -> Unit,
         fail: (Throwable) -> Unit
     )
+
+    fun userNickCheck(
+        userNick:String,
+        success: (SignUpResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    )
+
     fun getTheaters(
         siName:String,
         guName:String,

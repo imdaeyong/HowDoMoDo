@@ -1,11 +1,13 @@
 package com.ssafy.howdomodo.data.datasource.remote
 import BigDataSevicelmpl
 import MovieSevicelmpl
+import android.util.Log
 import com.ssafy.howdomodo.data.datasource.model.BigDataPsNs
 import com.ssafy.howdomodo.data.datasource.model.MovieResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class MovieRemoteDataSourceImpl : MovieRemoteDataSource {
     override fun getMovieData(
@@ -31,17 +33,20 @@ class MovieRemoteDataSourceImpl : MovieRemoteDataSource {
     }
 
     override fun getMoviePsNs(
-        title: String,
+        code: String,
         onResponse: (BigDataPsNs) -> Unit,
         onFailure: (Throwable) -> Unit
     ) {
-        BigDataSevicelmpl.service.getMoviePsNs(title).enqueue(
+        Log.e("TT1",code)
+        BigDataSevicelmpl.service.getMoviePsNs(code).enqueue(
             object : retrofit2.Callback<BigDataPsNs> {
                 override fun onFailure(call: Call<BigDataPsNs>, t: Throwable) {
+                    Log.e("TT2",t.toString())
                     onFailure(t)
                 }
 
                 override fun onResponse(call: Call<BigDataPsNs>, response: Response<BigDataPsNs>) {
+                    Log.e("TT3",response.message())
                     onResponse(response.body()!!)
                 }
             }
