@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.data.datasource.model.Store
 import com.ssafy.howdomodo.data.datasource.model.StoreDetail
-import com.ssafy.howdomodo.data.datasource.model.Theater
 import com.ssafy.howdomodo.ui.theater.TheaterActivity
 import kotlinx.android.synthetic.main.activity_select_area.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -26,6 +25,8 @@ class SelectAreaActivity : AppCompatActivity() {
         val boolList = arrayListOf<Boolean>(false, false)
     }
 
+    var siName = ""
+    var guName = ""
     val viewModel: SelectAreaViewModel by viewModel()
 
     val storeList = arrayListOf<Store>(
@@ -112,6 +113,7 @@ class SelectAreaActivity : AppCompatActivity() {
                     }
                     boolList[1] = false
                     setButtonActive()
+                    siName = siDoAdapter.sidoData[position].name
                     viewModel.getGuGun(siDoAdapter.sidoData[position].name)
 //                    gugunAdapter.setGuGunData(siDoAdapter.sidoData[position].guList)
 //                    siDoAdapter.setClickOriginal(position)
@@ -144,6 +146,7 @@ class SelectAreaActivity : AppCompatActivity() {
                     }
                     setButtonActive()
                     viewModel.getCardData(gugunAdapter.cityData[position].name)
+                    guName = gugunAdapter.cityData[position].name
                 }
 
             })
@@ -177,6 +180,10 @@ class SelectAreaActivity : AppCompatActivity() {
 
         act_select_area_cl_btn_next.setOnClickListener {
             val intent = Intent(this, TheaterActivity::class.java)
+            intent.putExtra("siName", siName)
+            intent.putExtra("guName", guName)
+            Log.e("si", siName)
+            Log.e("gu", guName)
             startActivity(intent)
         }
 

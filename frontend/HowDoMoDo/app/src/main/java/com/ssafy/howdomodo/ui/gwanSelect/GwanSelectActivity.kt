@@ -33,7 +33,9 @@ class GwanSelectActivity : AppCompatActivity() {
         act_gwan_tv_movie_title.text = ObjectMovie.movieTitle
         act_gwan_tv_theater_name.text = ObjectMovie.movieTheater
         setObserve()
-
+        val timeStr = SimpleDateFormat("yyyy-MM-dd hh:mm")
+        TheaterCollection.mvDate =
+            timeStr.format(Week.times[0].dayDate).toString()
         dayAdapter = DayAdapter(object : DayViewHolder.DayClickListener {
             override fun onclick(position: Int, textView: TextView) {
                 if (!dayAdapter.getClicked(position)) {
@@ -43,7 +45,7 @@ class GwanSelectActivity : AppCompatActivity() {
                     }
                     btnToggle()
                     val timeFormat = SimpleDateFormat("yyyyMMdd")
-                    val timeStr = SimpleDateFormat("yyyy-MM-dd hh:mm")
+
                     Log.e("tt", timeFormat.format(Week.times[position].dayDate).toString())
                     TheaterCollection.mvDate =
                         timeStr.format(Week.times[position].dayDate).toString()
