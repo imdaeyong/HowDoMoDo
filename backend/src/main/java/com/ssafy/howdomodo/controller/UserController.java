@@ -140,10 +140,11 @@ public class UserController {
 	
 	@ApiOperation(value="회원탈퇴")
 	@DeleteMapping("/{userCode}")
-	public ResponseEntity deleteUser(@PathVariable int userCode) {
+	public ResponseEntity deleteUser(@PathVariable int userCode, HttpSession session) {
 		int res = userService.deleteUser(userCode);
+		session.invalidate();
 		if(res == -1)
-			return new ResponseEntity<Response>(new Response(StatusCode.FORBIDDEN, ResponseMessage.FORBIDDEN), HttpStatus.FORBIDDEN);
+			return new ResponseEntity<Response>(new Response(StatusCode.FORBIDDEN, ResponseMessage.DELETE_FAIL), HttpStatus.FORBIDDEN);
 		
 		return new ResponseEntity<Response>(new Response(StatusCode.NO_CONTENT,ResponseMessage.DELETE_USER), HttpStatus.OK);
 	}
