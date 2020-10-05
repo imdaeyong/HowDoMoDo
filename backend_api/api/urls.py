@@ -12,5 +12,5 @@ urlpatterns = [
     path('preAnalysis/', view.preAnalysis),
     path('find_si/<str:siname>', view.find_si),
     path('np/<str:title>', view.review_list),
-
+    path('current', views.get_current),
 ]
