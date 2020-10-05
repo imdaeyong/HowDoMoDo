@@ -32,13 +32,11 @@ class MypageActivity : AppCompatActivity() {
         Update_Control().edit_init()
 
         observe()
-
+        var nickCheck = false
         act_mypage_update_bt_nick_duplicate.setOnClickListener {
-            var email = act_mypage_update_et_nick.text.toString()
+            var nick = act_mypage_update_et_nick.text.toString()
             var dialog = AlertDialog.Builder(this)
-            dialog.setTitle("중복체크")
-            dialog.setMessage(email)
-            dialog.show()
+            mypageViewModel.userNickCheck(nick)
 //            verifyEmail(email)
         }
 
@@ -92,29 +90,30 @@ class MypageActivity : AppCompatActivity() {
         }
 
         act_mypage_update_bt_update.setOnClickListener {
-            if(Update_Control().edit_check()) {
-                var nick = act_mypage_update_et_nick.text.toString()
-                var name = act_mypage_update_et_name.text.toString()
-                var pass = act_mypage_update_et_pass.text.toString()
-                var birth = act_mypage_update_et_birth.text.toString()
-                val jsonObject = JSONObject()
-                jsonObject.put("userCode",UserCollection.userCode)
-                jsonObject.put("userPw", pass)
-                jsonObject.put("userName", name)
-                jsonObject.put("userBirth", birth)
-                jsonObject.put("userEmail", UserCollection.userEmail)
-                jsonObject.put("userNick", nick)
-                val body = JsonParser.parseString(jsonObject.toString()) as JsonObject
-                mypageViewModel.userUpdate(body)
+            if(act_mypage_update_bt_nick_duplicate.text == "체크완료"){
+                if(Update_Control().edit_check()) {
+                    var nick = act_mypage_update_et_nick.text.toString()
+                    var name = act_mypage_update_et_name.text.toString()
+                    var pass = act_mypage_update_et_pass.text.toString()
+                    var birth = act_mypage_update_et_birth.text.toString()
+                    val jsonObject = JSONObject()
+                    jsonObject.put("userCode",UserCollection.userCode)
+                    jsonObject.put("userPw", pass)
+                    jsonObject.put("userName", name)
+                    jsonObject.put("userBirth", birth)
+                    jsonObject.put("userEmail", UserCollection.userEmail)
+                    jsonObject.put("userNick", nick)
+                    val body = JsonParser.parseString(jsonObject.toString()) as JsonObject
+                    mypageViewModel.userUpdate(body)
+                }
             }
-
         }
 
     }
     inner class EditListener : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
             if(!s.isNullOrEmpty())
-                act_mypage_update_bt_update.isEnabled = !act_mypage_update_et_nick.text.isNullOrEmpty() && !act_mypage_update_et_name.text.isNullOrEmpty() && !act_mypage_update_et_pass.text.isNullOrEmpty() && !act_mypage_update_et_pass_check.text.isNullOrEmpty() && !act_mypage_update_et_birth.text.isNullOrEmpty()
+                act_mypage_update_bt_update.isEnabled = !act_mypage_update_et_nick.text.isNullOrEmpty() && !act_mypage_update_et_name.text.isNullOrEmpty() && !act_mypage_update_et_pass.text.isNullOrEmpty() && !act_mypage_update_et_birth.text.isNullOrEmpty()
             else
                 act_mypage_update_bt_update.isEnabled = false
         }
@@ -126,12 +125,12 @@ class MypageActivity : AppCompatActivity() {
             act_mypage_update_et_nick.addTextChangedListener(EditListener())
             act_mypage_update_et_name.addTextChangedListener(EditListener())
             act_mypage_update_et_pass.addTextChangedListener(EditListener())
-            act_mypage_update_et_pass_check.addTextChangedListener(EditListener())
             act_mypage_update_et_birth.addTextChangedListener(EditListener())
+
         }
 
         fun edit_check(): Boolean {
-            if (act_mypage_update_et_nick.text.isNullOrEmpty() && act_mypage_update_et_name.text.isNullOrEmpty() && act_mypage_update_et_pass.text.isNullOrEmpty() && act_mypage_update_et_pass_check.text.isNullOrEmpty() && act_mypage_update_et_birth.text.isNullOrEmpty()) {
+            if (act_mypage_update_et_nick.text.isNullOrEmpty() && act_mypage_update_et_name.text.isNullOrEmpty() && act_mypage_update_et_pass.text.isNullOrEmpty() && act_mypage_update_et_birth.text.isNullOrEmpty()) {
                 Toast.makeText(applicationContext, "모든 정보를 입력해주세요", Toast.LENGTH_LONG).show()
                 return false
             }
@@ -143,14 +142,29 @@ class MypageActivity : AppCompatActivity() {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
         mypageViewModel.successMessage.observe(this, Observer {
+            Log.e("TEST",it)
             if (it == "회원 정보 수정 성공") {
                 val intent = Intent(this, BottomTabActivity::class.java)
                 UserCollection.userName = act_mypage_update_et_name.text.toString()
                 UserCollection.userNick = act_mypage_update_et_nick.text.toString()
                 startActivity(intent)
                 finish()
+            }else if(it == "닉네임 사용 가능"){
+                act_mypage_update_bt_nick_duplicate.setText("체크완료")
+                act_mypage_update_bt_nick_duplicate.setBackgroundColor(Color.GRAY)
+                var dialog = AlertDialog.Builder(this)
+                dialog.setTitle("중복체크")
+                dialog.setMessage(it)
+                dialog.show()
+            }else if(it == "이미 존재하는 닉네임입니다."){
+                var dialog = AlertDialog.Builder(this)
+                dialog.setTitle("중복체크")
+                dialog.setMessage(it)
+                dialog.show()
             }
         })
+
+
     }
 
 }

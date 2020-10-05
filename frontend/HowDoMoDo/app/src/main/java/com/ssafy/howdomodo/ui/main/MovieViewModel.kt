@@ -41,8 +41,8 @@ class MovieViewModel (private val movieRepository: MovieRepository) : ViewModel(
         loading.value = false
     }
 
-    fun getMoviePsNs(title: String) {
-        movieRepository.getMoviePsNs(title, success = {
+    fun getMoviePsNs(code: String) {
+        movieRepository.getMoviePsNs(code, success = {
             psnsData.value = it
         }, fail = {
             Log.e("error is :", it.toString())

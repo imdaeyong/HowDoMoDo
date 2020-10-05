@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object MovieSevicelmpl {
     private const val BASE_URL = "https://api.themoviedb.org"
-    private const val BASE_URL2 = "http://j3a305.p.ssafy.io:9090/"
+    private const val BASE_URL2 = "http://j3a305.p.ssafy.io:8000/"
 
     private val retrofit: Retrofit = Retrofit.Builder().baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())

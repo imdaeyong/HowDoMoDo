@@ -25,4 +25,9 @@ class MyPageRepository(private val remoteDataSource: RemoteDataSource) {
         fail: (Throwable) -> Unit
     ) = remoteDataSource.userDelete(userCode, success, fail)
 
+    fun userNickCheck(
+        userNick: String,
+        success: (SignUpResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    ) = remoteDataSource.userNickCheck(userNick, success, fail)
 }
