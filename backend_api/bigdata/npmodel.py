@@ -3,7 +3,6 @@ import torch
 
 from transformers import BertTokenizer
 from transformers import BertForSequenceClassification, AdamW, BertConfig
-from transformers import get_linear_schedule_with_warmup
 from torch.utils.data import TensorDataset, DataLoader, RandomSampler, SequentialSampler
 from keras.preprocessing.sequence import pad_sequences
 from sklearn.model_selection import train_test_split
@@ -30,24 +29,24 @@ class npmodel():
     @classmethod
     def init(cls):
         # GPU 디바이스 이름 구함
-        device_name = tf.test.gpu_device_name()
+        #device_name = tf.test.gpu_device_name()
 
         # GPU 디바이스 이름 검사
-        if device_name == '/device:GPU:0':
-            print('Found GPU at: {}'.format(device_name))
-        else:
-            raise SystemError('GPU device not found')
+        #if device_name == '/device:GPU:0':
+        #    print('Found GPU at: {}'.format(device_name))
+        #else:
+        #    raise SystemError('GPU device not found')
 
         if torch.cuda.is_available():
             cls.device = torch.device("cuda")
             print('There are %d GPU(s) available.' % torch.cuda.device_count())
-            print('We will use the GPU:', torch.cuda.get_device_name(0))
+        #    print('We will use the GPU:', torch.cuda.get_device_name(0))
         else:
             cls.device = torch.device("cpu")
             print('No GPU available, using the CPU instead.')
 
-        cls.model = BertForSequenceClassification.from_pretrained("model/")
-        cls.model.cuda()
+        cls.model = BertForSequenceClassification.from_pretrained('/home/ubuntu/app/s03p23a305/backend_api/bigdata/model/')
+        #cls.model.cuda()
 
         cls.tokenizer = BertTokenizer.from_pretrained('bert-base-multilingual-cased', do_lower_case=False)
 
