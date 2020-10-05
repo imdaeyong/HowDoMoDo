@@ -118,23 +118,13 @@ class TheaterActivity : AppCompatActivity(), POIItemEventListener{
         }
 
         act_theater_tv_search.text = selectSiName + " " + selectGuName
-//            act_theater_tv_search.text = cur_lat.toString() + " " + cur_lng.toString()
-//            act_theater_tv_search.setOnClickListener(
-//                View.OnClickListener {
-//
-//                        Log.i("click","infowindow클릭이벤트")
-//
-//                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("kakaomap://route?sp=37.537229,127.005515&ep=37.4979502,127.0276368&by=CAR"))
-//                        startActivity(intent)
-//                    }
-//
-//                )
 
         getTheatersViewModel.getTheaters(selectSiName, selectGuName, userCode)
 
         observeData()
 
         act_theater_cl_theater_selected.setOnClickListener {
+            Log.e("clicked!",TheaterCollection.mvTheater)
             val intent = Intent(this, GwanSelectActivity::class.java)
             startActivity(intent)
         }
@@ -288,7 +278,7 @@ class TheaterActivity : AppCompatActivity(), POIItemEventListener{
     fun setButtonActive() {
         if (theater_select) {
             act_theater_cl_theater_selected.setBackgroundColor(Color.parseColor("#f73859"))
-            var theaterName = selectedTheater.theaterBrand+" "+ selectedTheater.theaterName
+            var theaterName = selectedTheater.theaterBrand.trim()+" "+ selectedTheater.theaterName
 
             TheaterCollection.mvTheater = theaterName
 
