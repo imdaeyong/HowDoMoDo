@@ -76,28 +76,7 @@ class FavoriteFragment : Fragment() {
                 favoritesAdapter = FavoritesAdapter(
                     object :
                         FavoritesAdapter.FavoritesViewHolder.FavoritesClickListener {
-                        override fun onclick(position: Int, textView: TextView) {
-                            if (!favoritesAdapter.getClicked(position)) {
-                                if (favoritesAdapter.getClickedFavorites() != -1) {
-                                    favoritesAdapter.setClicked(
-                                        favoritesAdapter.getClickedFavorites(),
-                                        false
-                                    )
-                                }
-                                favoritesAdapter.setClicked(position, true)
-                                favorite_select = true
-                                selectedfavorite = favoritesList[position]
-
-                            } else if (favoritesAdapter.getClicked(position)) {
-                                favoritesAdapter.setClicked(
-                                    favoritesAdapter.getClickedFavorites(),
-                                    false
-                                )
-                                favorite_select = false
-                            }
-                            Toast.makeText(context, position.toString(), Toast.LENGTH_SHORT)
-                        }
-
+                        override fun onclick(position: Int, textView: TextView) {}
                         override fun starClick(position: Int, starImageView: ImageView) {
                             Toast.makeText(context, position.toString(), Toast.LENGTH_SHORT)
                             Log.e("즐겨찾기 삭제", "starclick접속")
@@ -126,7 +105,7 @@ class FavoriteFragment : Fragment() {
         favoritesViewModel.favoritesDelete(userCode, f_t.theaterId)
         favoritesList.removeAt(position)
         favoritesViewModel.favoritesInfo(userCode)
-        observeData()
+//        observeData()
     }
 }
 

@@ -102,6 +102,8 @@ class TheaterAdapter(private val onclick: TheaterViewHolder.TheaterClickListener
                 itemView.item_theater_iv_photo.setImageResource(R.drawable.megabox)
             } else if (data.theaterBrand.contains("롯데시네마")) {
                 itemView.item_theater_iv_photo.setImageResource(R.drawable.lottecinema)
+            } else{
+                itemView.item_theater_iv_photo.setImageResource(R.drawable.cgv)
             }
 
             if (data.isClicked) {
