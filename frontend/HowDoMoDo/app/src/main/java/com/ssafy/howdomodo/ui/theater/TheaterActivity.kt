@@ -288,10 +288,17 @@ class TheaterActivity : AppCompatActivity(), POIItemEventListener{
     fun setButtonActive() {
         if (theater_select) {
             act_theater_cl_theater_selected.setBackgroundColor(Color.parseColor("#f73859"))
-            TheaterCollection.mvTheater = selectedTheater.theaterBrand+" "+ selectedTheater.theaterName
-            if(selectedTheater.theaterBrand.contains("메가박스")) TheaterCollection.mvTheaterName = "mega"
-            else if(selectedTheater.theaterBrand.contains("롯데시네마"))TheaterCollection.mvTheaterName = "lotte"
-            else TheaterCollection.mvTheaterName = "cgv"
+            var theaterName = selectedTheater.theaterBrand+" "+ selectedTheater.theaterName
+
+            TheaterCollection.mvTheater = theaterName
+
+            if(selectedTheater.theaterBrand.contains("메가박스")) {
+                TheaterCollection.mvTheaterName = "mega"
+            }else if(selectedTheater.theaterBrand.contains("롯데시네마")){
+                TheaterCollection.mvTheaterName = "lotte"
+            }else {
+                TheaterCollection.mvTheaterName = "cgv"
+            }
             act_theater_cl_theater_selected.isClickable = true
 
         } else {
