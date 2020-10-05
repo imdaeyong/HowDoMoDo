@@ -24,13 +24,11 @@ class RemoteDataSourceImpl : RemoteDataSource {
 
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 Log.e("TEST2", response.body()?.data?.userEmail.toString())
-//                response.body()?.let { success(it)}
                 if (response.body() != null) {
                     success(response.body()!!)
                 } else {
                     fail(Exception("유효한 정보가 없습니다"))
                 }
-//                success(response.body()!!)
             }
         })
     }
@@ -118,6 +116,69 @@ class RemoteDataSourceImpl : RemoteDataSource {
         fail: (Throwable) -> Unit
     ) {
         api.userNickCheck(userNick).enqueue(object : Callback<SignUpResponse> {
+            override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
+                fail(t)
+            }
+
+            override fun onResponse(
+                call: Call<SignUpResponse>,
+                response: Response<SignUpResponse>
+            ) {
+                success(response.body()!!)
+            }
+        })
+    }
+
+    override fun findPW(
+        userEmail: String,
+        userName: String,
+        success: (PwResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    ) {
+        api.findPW(userEmail,userName).enqueue(object : Callback<PwResponse> {
+
+            override fun onFailure(call: Call<PwResponse>, t: Throwable) {
+                Log.e("asdf",userEmail+" x")
+                fail(t)
+            }
+
+            override fun onResponse(call: Call<PwResponse>, response: Response<PwResponse>) {
+                Log.e("asdf",userEmail+" o")
+                if (response.body() != null) {
+                    success(response.body()!!)
+                } else {
+                    fail(Exception("유효한 정보가 없습니다"))
+                }
+            }
+        })
+    }
+
+    override fun checkPW(
+        userEmail: String,
+        originPwd: String,
+        success: (SignUpResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    ) {
+        api.checkPW(userEmail,originPwd).enqueue(object : Callback<SignUpResponse> {
+            override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
+                fail(t)
+            }
+
+            override fun onResponse(
+                call: Call<SignUpResponse>,
+                response: Response<SignUpResponse>
+            ) {
+                success(response.body()!!)
+            }
+        })
+    }
+
+    override fun updatePW(
+        signUpRequestBody: JsonObject,
+        success: (SignUpResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    ) {
+        api.updatePW(signUpRequestBody).enqueue(object : Callback<SignUpResponse> {
             override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
                 fail(t)
             }

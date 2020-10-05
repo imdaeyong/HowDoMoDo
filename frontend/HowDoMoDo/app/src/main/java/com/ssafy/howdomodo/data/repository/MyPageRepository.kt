@@ -30,4 +30,17 @@ class MyPageRepository(private val remoteDataSource: RemoteDataSource) {
         success: (SignUpResponse) -> Unit,
         fail: (Throwable) -> Unit
     ) = remoteDataSource.userNickCheck(userNick, success, fail)
+
+    fun checkPW(
+        userEmail: String,
+        originPwd: String,
+        success: (SignUpResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    ) = remoteDataSource.checkPW(userEmail,originPwd,success, fail)
+
+    fun updatePW(
+        signUpRequestBody: JsonObject,
+        success: (SignUpResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    ) = remoteDataSource.updatePW(signUpRequestBody, success, fail)
 }

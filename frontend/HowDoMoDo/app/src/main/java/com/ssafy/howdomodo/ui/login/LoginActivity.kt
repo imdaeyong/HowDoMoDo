@@ -110,7 +110,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun Findpw_Click_Listener(view :View){
-
+        val intent = Intent(this,FindPwActivity::class.java)
+        startActivity(intent)
     }
 
     fun Signup_Click_Listener(view :View){
