@@ -4,6 +4,7 @@
 from django.views import View
 from django.http import HttpResponse, JsonResponse
 from api.crawling.movies import get_theater_timestables
+from api.crawling.current import get_current_movie_list
 
 from api.models import TheatersUrls
 
@@ -20,4 +21,15 @@ def get_times_tables(request, brand, name, date, title):
         return JsonResponse(result, json_dumps_params={'ensure_ascii': True})
     except Exception as e:
         result = {'status':404, 'message':'Backend 확인 해주세요'}
+        return JsonResponse(result, json_dumps_params={'ensure_ascii': True})
+
+def get_current(request):
+    try:
+        result = {}
+        movie = get_current_movie_list()
+        result['status'] = 200
+        result['movie'] = movie
+        return JsonResponse(result, json_dumps_params={'ensure_ascii': True})
+    except Exception as e:
+        result = {'status': 404, 'message': 'Backend 확인 해주세요'}
         return JsonResponse(result, json_dumps_params={'ensure_ascii': True})
