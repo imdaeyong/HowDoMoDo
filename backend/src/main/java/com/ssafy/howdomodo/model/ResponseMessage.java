@@ -9,15 +9,12 @@ public class ResponseMessage {
     public static final String READ_USER = "회원 정보 조회 성공";
     public static final String NOT_FOUND_USER = "회원을 찾을 수 없습니다.";
     
-    public static final String CREATE_CODE = "인증번호 생성";
     public static final String RESET_PWD = "비밀번호 재설정 성공";
     public static final String FAIL_RESET_PWD = "비밀번호 재설정 실패";
     public static final String SEARCH_NICKNAME_NONE = "닉네임 사용 가능";
     public static final String SEARCH_NICKNAME_EXIST = "이미 존재하는 닉네임입니다.";
     public static final String SEARCH_NICKNAME_SUCCESS = "닉네임으로 조회 성공";
     public static final String SEARCH_NICKNAME_FAIL = "닉네임으로 조회 실패";
-    public static final String SEARCH_ALLUSERS_FAIL = "전체 회원 목록 조회 실패";
-    public static final String SEARCH_ALLUSERS_SUCCESS = "전체 회원 목록 조회 성공";
     
     public static final String UNUSED_USER = "사용 가능한 Email입니다";
     public static final String ALREADY_USER = "이미 존재하는 Email입니다.";
@@ -26,11 +23,6 @@ public class ResponseMessage {
     public static final String UPDATE_USER = "회원 정보 수정 성공";
     public static final String FAIL_UPDATE_USER = "회원 정보 수정 실패";
     public static final String DELETE_USER = "회원 탈퇴 성공";
-    
-    public static final String AUTHORIZED = "인증 성공";
-    public static final String UNAUTHORIZED = "인증 실패";
-    public static final String FORBIDDEN = "인가 실패";
-    public static final String TOKEN_REFRESH = "토큰 갱신 성공";
     
     public static final String SEARCH_SIDO_INFO_SUCCESS = "시도구군 정보 조회 성공";
     public static final String SEARCH_SIDO_INFO_FAIL = "시도구군 정보 조회 실패";
@@ -44,6 +36,7 @@ public class ResponseMessage {
     public static final String DELETE_FAIL = "삭제 실패";
     
     public static final String SEARCH_FAV_THEATERS_NONE = "아직 즐겨찾기된 영화관 정보가 없습니다.";
+    public static final String SEARCH_FAV_THEATERS_EXIST = "이미 즐겨찾기된 영화관 입니다.";
     public static final String SEARCH_FAV_THEATERS_SUCCESS = "즐겨찾기 정보 조회 성공";
     public static final String SEARCH_FAIL = "조회 실패";
     

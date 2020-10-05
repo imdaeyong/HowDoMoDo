@@ -18,6 +18,7 @@ public class UserServiceImpl implements UserService {
 	public int join(Users user) {
 		try {
 			int res = userMapper.join(user);
+			res += userMapper.addRole(user.getUserCode(), "ROLE_USER");
 			return res;
 		} catch (SQLException e) {
 			e.printStackTrace();
