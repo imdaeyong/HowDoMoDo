@@ -36,7 +36,7 @@ class GwanSelectActivity : AppCompatActivity() {
         TheaterCollection.mvDate =
             timeStr.format(Week.times[0].dayDate).toString()
         val brand = TheaterCollection.mvTheater.split(" ")[0]
-        val theaterName = TheaterCollection.mvTheater.split(" ")[0]
+        val theaterName = TheaterCollection.mvTheater.split(" ")[1]
         viewModel.getGwanData(
             brand,
             theaterName,
