@@ -170,7 +170,7 @@ public class UserController {
 			else
 				pwd += tmp;
 		}
-		System.out.println(pwd);
+//		System.out.println(pwd);
 		Users user = userService.findByUserEmailAndName(userEmail, userName);
 		user.setUserPw(securityUtil.encryptSHA256(pwd));
 		int res = userService.updatePwd(user);
