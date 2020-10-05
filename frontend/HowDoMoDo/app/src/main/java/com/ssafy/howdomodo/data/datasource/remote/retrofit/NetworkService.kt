@@ -41,6 +41,13 @@ interface NetworkService {
         @Path("nickName") nickName: String
     ): Call<SignUpResponse>
 
+    // 비밀번호 찾기
+    @GET("/users/findPw/{userEmail}/{userName}")
+    fun findPW(
+        @Path("userEmail") userEmail: String,
+        @Path("userName") userName: String
+    ): Call<LoginResponse>
+
     //시도, 구군별 영화관 리스트 조회
     @GET("/theaters/{siName}/{guName}/{userCode}")
     fun getTheaters(

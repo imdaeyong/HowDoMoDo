@@ -10,4 +10,11 @@ class LoginRepository(private val remoteDataSource: RemoteDataSource) {
         success: (LoginResponse) -> Unit,
         fail: (Throwable) -> Unit
     ) = remoteDataSource.login(loginRequestBody, success, fail)
+
+    fun findPW(
+        userEmail: String,
+        userName: String,
+        success: (LoginResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    )= remoteDataSource.findPW(userEmail, userName, success, fail)
 }

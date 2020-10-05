@@ -41,6 +41,13 @@ interface RemoteDataSource {
         fail: (Throwable) -> Unit
     )
 
+    fun findPW(
+        userEmail: String,
+        userName: String,
+        success: (LoginResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    )
+
     fun getTheaters(
         siName:String,
         guName:String,

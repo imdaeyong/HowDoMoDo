@@ -24,13 +24,11 @@ class RemoteDataSourceImpl : RemoteDataSource {
 
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 Log.e("TEST2", response.body()?.data?.userEmail.toString())
-//                response.body()?.let { success(it)}
                 if (response.body() != null) {
                     success(response.body()!!)
                 } else {
                     fail(Exception("유효한 정보가 없습니다"))
                 }
-//                success(response.body()!!)
             }
         })
     }
@@ -127,6 +125,27 @@ class RemoteDataSourceImpl : RemoteDataSource {
                 response: Response<SignUpResponse>
             ) {
                 success(response.body()!!)
+            }
+        })
+    }
+
+    override fun findPW(
+        userEmail: String,
+        userName: String,
+        success: (LoginResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    ) {
+        api.findPW(userEmail,userName).enqueue(object : Callback<LoginResponse> {
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                fail(t)
+            }
+
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                if (response.body() != null) {
+                    success(response.body()!!)
+                } else {
+                    fail(Exception("유효한 정보가 없습니다"))
+                }
             }
         })
     }
