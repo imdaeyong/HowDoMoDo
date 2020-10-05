@@ -278,7 +278,7 @@ class TheaterActivity : AppCompatActivity(), POIItemEventListener{
     fun setButtonActive() {
         if (theater_select) {
             act_theater_cl_theater_selected.setBackgroundColor(Color.parseColor("#f73859"))
-            var theaterName = selectedTheater.theaterBrand+" "+ selectedTheater.theaterName
+            var theaterName = selectedTheater.theaterBrand.trim()+" "+ selectedTheater.theaterName
 
             TheaterCollection.mvTheater = theaterName
 
