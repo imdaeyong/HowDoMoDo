@@ -55,6 +55,9 @@ class MainFragment : Fragment() {
         mainAdapter = MainAdapter(object : MainViewHolder.ClickListener {
             override fun movieClick(position: Int) {
                 val movieCode = mainAdapter.movieData[position].id
+                TheaterCollection.mvPoster = mainAdapter.movieData[position].posterPath
+                TheaterCollection.mvTitle = mainAdapter.movieData[position].title
+
                 moviePosition = position
                 mvm.getMoviePsNs(movieCode)
 

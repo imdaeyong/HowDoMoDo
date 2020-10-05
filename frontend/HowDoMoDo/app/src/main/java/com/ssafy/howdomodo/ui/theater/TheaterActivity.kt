@@ -1,8 +1,13 @@
 package com.ssafy.howdomodo.ui.theater
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
+import android.location.LocationManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,12 +17,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.`object`.ObjectMovie
+import com.ssafy.howdomodo.`object`.TheaterCollection
+import com.ssafy.howdomodo.`object`.UserCollection
 import com.ssafy.howdomodo.data.datasource.model.Theater
 import com.ssafy.howdomodo.ui.favorite.FavoritesViewModel
 import com.ssafy.howdomodo.ui.gwanSelect.GwanSelectActivity
@@ -26,11 +35,12 @@ import net.daum.mf.map.api.CalloutBalloonAdapter
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
+import net.daum.mf.map.api.MapView.POIItemEventListener
 import org.json.JSONObject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
-class TheaterActivity : AppCompatActivity() {
+class TheaterActivity : AppCompatActivity(), POIItemEventListener{
     private val getTheatersViewModel: GetTheatersViewModel by viewModel()
     private val favoritesViewModel: FavoritesViewModel by viewModel()
 
@@ -42,6 +52,8 @@ class TheaterActivity : AppCompatActivity() {
         lateinit var selectedTheater: Theater
         lateinit var mapView: MapView
         var theaterList = ArrayList<Theater>()
+        var cur_lat = 99.999
+        var cur_lng = 99.999
     }
 
     //    var theaterList = arrayListOf<Theater>(
@@ -60,8 +72,10 @@ class TheaterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_theater)
 
-//        userCode= UserCollection.userCode.toInt()
-        //해당 지역이 뭔지 받아오기.
+        if(UserCollection.userCode!=null &&UserCollection.userCode!="") {
+            userCode = UserCollection.userCode.toInt()
+        }
+            //해당 지역이 뭔지 받아오기.
         if (intent.hasExtra("siName")) {
             selectSiName = intent.getStringExtra("siName")!!
             selectGuName = intent.getStringExtra("guName")!!
@@ -78,7 +92,44 @@ class TheaterActivity : AppCompatActivity() {
             )
         }
 
+        //현재위치 불러오기.
+        var locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if (Build.VERSION.SDK_INT >= 23 &&
+            ContextCompat.checkSelfPermission(
+                applicationContext,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this@TheaterActivity,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                0
+            )
+        } else {
+            when {
+                locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) -> {
+                    var current_location =
+                        locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                    cur_lat = current_location?.latitude!!
+                    cur_lng = current_location.longitude
+
+                }
+            }
+        }
+
         act_theater_tv_search.text = selectSiName + " " + selectGuName
+//            act_theater_tv_search.text = cur_lat.toString() + " " + cur_lng.toString()
+//            act_theater_tv_search.setOnClickListener(
+//                View.OnClickListener {
+//
+//                        Log.i("click","infowindow클릭이벤트")
+//
+//                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("kakaomap://route?sp=37.537229,127.005515&ep=37.4979502,127.0276368&by=CAR"))
+//                        startActivity(intent)
+//                    }
+//
+//                )
+
         getTheatersViewModel.getTheaters(selectSiName, selectGuName, userCode)
 
         observeData()
@@ -150,7 +201,6 @@ class TheaterActivity : AppCompatActivity() {
                 )
                 mapView.setZoomLevel(7, true)
 
-
                 for (i in theaterList.indices) {
                     var t = theaterList[i]
                     var marker_img = R.drawable.ic_launcher
@@ -166,7 +216,8 @@ class TheaterActivity : AppCompatActivity() {
                         marker_img = R.drawable.lotte_marker_unselected
                         selected_marker_img = R.drawable.lotte_marker
                     } else {
-                        marker_img = R.drawable.ic_launcher
+                        marker_img = R.drawable.cgv_marker_unselected
+                        selected_marker_img = R.drawable.cgv_marker
                     }
 
                     var marker = MapPOIItem()
@@ -190,10 +241,11 @@ class TheaterActivity : AppCompatActivity() {
                             m = marker
                         )
                     )
-
                     mapView.addPOIItem(marker)
                 }
                 mapView.fitMapViewAreaToShowAllPOIItems()
+                mapView.setPOIItemEventListener(this)
+
                 mapViewController.addView(mapView)
 
 
@@ -236,7 +288,12 @@ class TheaterActivity : AppCompatActivity() {
     fun setButtonActive() {
         if (theater_select) {
             act_theater_cl_theater_selected.setBackgroundColor(Color.parseColor("#f73859"))
+            TheaterCollection.mvTheater = selectedTheater.theaterBrand+" "+ selectedTheater.theaterName
+            if(selectedTheater.theaterBrand.contains("메가박스")) TheaterCollection.mvTheaterName = "mega"
+            else if(selectedTheater.theaterBrand.contains("롯데시네마"))TheaterCollection.mvTheaterName = "lotte"
+            else TheaterCollection.mvTheaterName = "cgv"
             act_theater_cl_theater_selected.isClickable = true
+
         } else {
             act_theater_cl_theater_selected.setBackgroundColor(Color.parseColor("#aaaaaa"))
             act_theater_cl_theater_selected.isClickable = false
@@ -245,18 +302,28 @@ class TheaterActivity : AppCompatActivity() {
 
     class CustomInfoWindow(private val context: Context, val theater: Theater, var m: MapPOIItem) :
         CalloutBalloonAdapter {
-        lateinit var mCalloutBalloon: View
+        var mCalloutBalloon: View
 
         init {
             mCalloutBalloon =
                 LayoutInflater.from(context).inflate(R.layout.item_custom_infowindow, null)
+
+            mCalloutBalloon.findViewById<View>(R.id.item_infowindow_btn_find_way_bycar).setOnClickListener(
+                View.OnClickListener {
+                    Log.i("click","infowindow클릭이벤트")
+
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("kakaomap://route?sp="+"37.537229"+","+"127.005515"+"&ep="+"37.4979502"+","+"127.0276368"+"&by=CAR"))
+                    this.context.startActivity(intent)
+                }
+
+            )
+
         }
 
-        override fun getCalloutBalloon(poiItem: MapPOIItem): View {
-            var theater_img = R.drawable.ic_launcher
 
-//            Log.e("name",poiItem.itemName)
-//            Log.e("address",((poiItem.userObject) as Theater).theaterAddress)
+        override fun getCalloutBalloon(poiItem: MapPOIItem): View {
+            var theater_img: Int
+
             if (poiItem.itemName.contains("CGV")) {
                 theater_img = R.drawable.cgv
             } else if (poiItem.itemName.contains("메가박스")) {
@@ -264,14 +331,14 @@ class TheaterActivity : AppCompatActivity() {
             } else if (poiItem.itemName.contains("롯데시네마")) {
                 theater_img = R.drawable.lottecinema
             } else {
-                theater_img = R.drawable.ic_launcher
+                theater_img = R.drawable.cgv
             }
+
 
             (mCalloutBalloon.findViewById<View>(R.id.item_infowindow_iv_theater_image) as ImageView).setImageResource(
                 theater_img
             )
             (mCalloutBalloon.findViewById<View>(R.id.item_infowindow_tv_theater_title) as TextView).text =
-//                ((poiItem.userObject) as Theater).theaterBrand+ " " +((poiItem.userObject) as Theater).theaterName
                 poiItem.itemName
 
             (mCalloutBalloon.findViewById<View>(R.id.item_infowindow_tv_theater_desc) as TextView).text =
@@ -283,6 +350,38 @@ class TheaterActivity : AppCompatActivity() {
         override fun getPressedCalloutBalloon(poiItem: MapPOIItem): View {
             return mCalloutBalloon
         }
+    }
+
+    override fun onCalloutBalloonOfPOIItemTouched(mapView: MapView?, mappoiItem: MapPOIItem?) {
+        Toast.makeText(    this,
+            "Clicked " + mappoiItem?.getItemName() + " Callout Balloon",
+            Toast.LENGTH_SHORT
+        ).show()
 
     }
+
+    override fun onCalloutBalloonOfPOIItemTouched(
+            mapView: MapView?,
+            p1: MapPOIItem?,
+                p2: MapPOIItem.CalloutBalloonButtonType?
+        ) {
+        var end_lat = p1?.mapPoint?.mapPointGeoCoord?.latitude
+        var end_lng = p1?.mapPoint?.mapPointGeoCoord?.longitude
+
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("kakaomap://route?sp="+ cur_lat+","+ cur_lng+"&ep="+end_lat+","+end_lng +"&by=CAR"))
+        startActivity(intent)
+
+        Toast.makeText(    this,
+            "카카오맵으로 연결 " + p1?.itemName + "길찾기",
+            Toast.LENGTH_SHORT
+        ).show()
+
+    }
+
+    override fun onDraggablePOIItemMoved(p0: MapView?, p1: MapPOIItem?, p2: MapPoint?) {
+    }
+
+    override fun onPOIItemSelected(p0: MapView?, p1: MapPOIItem?) {
+    }
+
 }
