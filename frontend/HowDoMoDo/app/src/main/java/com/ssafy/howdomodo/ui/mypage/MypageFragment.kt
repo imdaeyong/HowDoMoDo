@@ -30,7 +30,8 @@ import kotlinx.android.synthetic.main.item_mypage_delete_dialog.*
 import org.json.JSONObject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MypageFragment : Fragment() {
+class
+MypageFragment : Fragment() {
     private val mypageViewModel: MyPageViewModel by viewModel()
 
     lateinit var myPageAdapter: MyPageAdapter
@@ -62,7 +63,9 @@ class MypageFragment : Fragment() {
             override fun itemClick(position: Int) {
                 when (myPageAdapter.mineList[position]) {
                     "로그아웃" -> {
-
+                        val intent = Intent(activity,LoginActivity::class.java)
+                        startActivity(intent)
+                        activity!!.finish()
                     }
                     "오픈소스 라이선스" -> {
                         val intent = Intent(activity, PrivateActivity::class.java)
