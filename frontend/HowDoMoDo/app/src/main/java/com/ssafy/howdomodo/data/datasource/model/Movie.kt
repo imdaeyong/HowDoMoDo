@@ -6,5 +6,5 @@ data class Movie(
         val age:String,
         val voteAverage: Double,
         var posterPath: String,
-        var id: Int
+        var id: String
 )

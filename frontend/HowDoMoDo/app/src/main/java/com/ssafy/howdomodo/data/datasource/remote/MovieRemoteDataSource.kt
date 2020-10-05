@@ -12,7 +12,7 @@ interface MovieRemoteDataSource {
     )
 
     fun getMoviePsNs(
-        title: String,
+        code: String,
         onResponse: (BigDataPsNs) -> Unit,
         onFailure: (Throwable) -> Unit
     )
