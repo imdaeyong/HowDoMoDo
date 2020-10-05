@@ -112,6 +112,25 @@ class RemoteDataSourceImpl : RemoteDataSource {
         })
     }
 
+    override fun userNickCheck(
+        userNick: String,
+        success: (SignUpResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    ) {
+        api.userNickCheck(userNick).enqueue(object : Callback<SignUpResponse> {
+            override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
+                fail(t)
+            }
+
+            override fun onResponse(
+                call: Call<SignUpResponse>,
+                response: Response<SignUpResponse>
+            ) {
+                success(response.body()!!)
+            }
+        })
+    }
+
     override fun getTheaters(
         siName:String,
         guName:String,

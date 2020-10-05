@@ -62,17 +62,19 @@
                 android:textSize="15sp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
+        <Button
             android:id="@+id/act_mypage_update_bt_nick_duplicate"
-            android:layout_width="75dp"
+            android:layout_width="80dp"
             android:layout_height="36dp"
             android:layout_marginStart="19dp"
             android:scaleType="fitXY"
-            android:src="@drawable/btn_jungbok"
+            android:background="@drawable/login_btn_login_border"
+            android:textColor="#FFFFFF"
             android:text="중복확인"
             app:layout_constraintBottom_toBottomOf="@id/act_mypage_update_cl_nick"
             app:layout_constraintStart_toEndOf="@id/act_mypage_update_cl_nick"
             app:layout_constraintTop_toTopOf="@id/act_mypage_update_cl_nick" />
+
 
         <TextView
             android:id="@+id/act_mypage_update_tv_place_name"
@@ -150,30 +152,7 @@
                 android:textSize="15sp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/act_mypage_update_cl_pass_check"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_marginTop="6dp"
-            android:background="@drawable/sign_up_et_border"
-            app:layout_constraintEnd_toEndOf="@id/act_mypage_update_bt_nick_duplicate"
-            app:layout_constraintStart_toStartOf="@+id/act_mypage_update_cl_pass"
-            app:layout_constraintTop_toBottomOf="@+id/act_mypage_update_cl_pass"
 
-            >
-
-            <EditText
-                android:id="@+id/act_mypage_update_et_pass_check"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:hint="비밀번호 재확인"
-                android:inputType="textPassword"
-                android:lineSpacingExtra="9sp"
-                android:paddingLeft="7dp"
-                android:textColor="#333333"
-                android:textSize="15sp" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <TextView
@@ -187,7 +166,7 @@
             android:textColor="#333333"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/act_mypage_update_cl_pass_check" />
+            app:layout_constraintTop_toBottomOf="@id/act_mypage_update_cl_pass" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/act_mypage_update_cl_birth"
@@ -279,7 +258,9 @@
             android:layout_marginStart="22dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="22dp"
+            android:background="@drawable/item_sido_selected"
             android:text="수정하기"
+            android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/act_mypage_update_ll_sex" />

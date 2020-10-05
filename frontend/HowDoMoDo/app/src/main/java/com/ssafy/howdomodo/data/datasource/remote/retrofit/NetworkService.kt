@@ -35,6 +35,12 @@ interface NetworkService {
         @Path("userCode") userCode: Int
     ): Call<SignUpResponse>
 
+    // 닉네임 중복 체크
+    @GET("/users/check/{nickName}")
+    fun userNickCheck(
+        @Path("nickName") nickName: String
+    ): Call<SignUpResponse>
+
     //시도, 구군별 영화관 리스트 조회
     @GET("/theaters/{siName}/{guName}/{userCode}")
     fun getTheaters(
@@ -79,4 +85,5 @@ interface NetworkService {
         @Path("date") date: String,
         @Path("movieTitle") movieTitle: String
     ): Call<GwanResponse>
+
 }
