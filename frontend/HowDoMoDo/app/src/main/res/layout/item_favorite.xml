@@ -7,10 +7,11 @@
     android:layout_marginTop="2dp"
     android:layout_marginEnd="4dp"
     android:layout_marginBottom="2dp"
-    android:background="#0F1215">
+    android:id="@+id/item_favorite_cl_box"
+    >
 
     <ImageView
-        android:id="@+id/item_select_area_theater_iv_photo"
+        android:id="@+id/item_favorite_theater_iv_photo"
         android:layout_width="37dp"
         android:layout_height="37dp"
         android:layout_marginStart="22dp"
@@ -20,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/item_select_area_theater_tv_name"
+        android:id="@+id/item_favorite_theater_tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -29,11 +30,11 @@
         android:text="CGV"
         android:textColor="#FFFFFF"
         android:textSize="13sp"
-        app:layout_constraintStart_toEndOf="@id/item_select_area_theater_iv_photo"
-        app:layout_constraintTop_toTopOf="@id/item_select_area_theater_iv_photo" />
+        app:layout_constraintStart_toEndOf="@id/item_favorite_theater_iv_photo"
+        app:layout_constraintTop_toTopOf="@id/item_favorite_theater_iv_photo" />
 
     <TextView
-        android:id="@+id/item_select_area_theater_tv_distance"
+        android:id="@+id/item_favorite_theater_tv_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_kr_regular"
@@ -41,11 +42,11 @@
         android:text="3.5km"
         android:textColor="#FFFFFF"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@id/item_select_area_theater_iv_photo"
-        app:layout_constraintStart_toStartOf="@id/item_select_area_theater_tv_name" />
+        app:layout_constraintBottom_toBottomOf="@id/item_favorite_theater_iv_photo"
+        app:layout_constraintStart_toStartOf="@id/item_favorite_theater_tv_name" />
 
     <ImageView
-        android:id="@+id/item_select_area_theater_iv_booking"
+        android:id="@+id/item_favorite_theater_iv_star"
         android:layout_width="wrap_content"
         android:layout_height="37dp"
         android:layout_marginEnd="19dp"
@@ -62,5 +63,5 @@
         android:background="#8e8787"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/item_select_area_theater_iv_photo" />
+        app:layout_constraintStart_toStartOf="@id/item_favorite_theater_iv_photo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

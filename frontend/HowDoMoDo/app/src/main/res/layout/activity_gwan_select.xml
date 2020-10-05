@@ -35,7 +35,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="지역선택" />
+            android:text="상영관 선택" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -128,6 +128,27 @@
         app:layout_constraintTop_toBottomOf="@id/act_gwan_cl_day" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/act_gwan_cl_no_gwan"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@id/act_gwan_cl_btn_next"
+        app:layout_constraintTop_toBottomOf="@id/act_gwan_cl_day">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/noto_sans_kr_regular"
+            android:text="상영중인 영화관이 없습니다."
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/act_gwan_cl_btn_next"
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -139,7 +160,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:lineSpacingExtra="8sp"
-            android:text="시간 및 상영관 선택"
+            android:text="상영관 선택 완료"
             android:textColor="#ffffff"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"

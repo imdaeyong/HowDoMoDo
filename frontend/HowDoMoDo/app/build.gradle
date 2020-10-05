@@ -53,6 +53,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'androidx.fragment:fragment-ktx:1.1.0'
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -97,6 +98,9 @@ dependencies {
     // for Kakao Map
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/libDaumMapAndroid.jar')
+
+    // socket 통신
+    implementation 'com.github.nkzawa:socket.io-client:0.3.0'
 }
 repositories {
     mavenCentral()

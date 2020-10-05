@@ -8,10 +8,13 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.ui.bottomtap.BottomTabActivity
+import com.ssafy.howdomodo.ui.chat.ChatActivity
 import com.ssafy.howdomodo.ui.gwanSelect.GwanSelectActivity
 import com.ssafy.howdomodo.ui.login.LoginActivity
 import com.ssafy.howdomodo.ui.selectArea.SelectAreaActivity
 import com.ssafy.howdomodo.ui.signup.SignupActivity
+import com.ssafy.howdomodo.ui.theater.TheaterActivity
+import com.ssafy.howdomodo.ui.theater.TicketInfoActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.security.MessageDigest
 
@@ -32,12 +35,31 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, BottomTabActivity::class.java)
             startActivity(intent)
         }
+        act_main_btn_select_area.setOnClickListener {
+            val intent = Intent(this, SelectAreaActivity::class.java)
+            startActivity(intent)
+        }
         act_main_btn_gwan.setOnClickListener {
             val intent = Intent(this, GwanSelectActivity::class.java)
             startActivity(intent)
         }
         act_main_btn_select_area.setOnClickListener {
             val intent = Intent(this, SelectAreaActivity::class.java)
+            startActivity(intent)
+        }
+        act_main_btn_theater.setOnClickListener {
+            val intent = Intent(this, TheaterActivity::class.java)
+            startActivity(intent)
+//            val movieSelecDialogFragment = MovieSelectDialogFragment().getInstance()
+//            movieSelecDialogFragment.show(supportFragmentManager,"movie_select")
+        }
+        act_main_btn_Chat.setOnClickListener{
+            val intent = Intent(this, ChatActivity::class.java)
+            startActivity(intent)
+        }
+
+        act_main_btn_theater_info.setOnClickListener{
+            val intent = Intent(this, TicketInfoActivity::class.java)
             startActivity(intent)
         }
         getAppKeyHash()

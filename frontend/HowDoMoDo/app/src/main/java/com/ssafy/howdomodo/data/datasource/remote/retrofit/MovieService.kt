@@ -1,4 +1,4 @@
-import com.ssafy.howdomodo.data.datasource.model.MovieApi
+import com.ssafy.howdomodo.data.datasource.model.MovieResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -9,6 +9,9 @@ interface MovieService {
     fun getMovie(
         @Query("api_key") key: String,
         @Query("language") keyword: String,
-        ): Call<MovieApi>
+        ): Call<MovieResponse>
 
+    @GET("/pyapi/current")
+    fun getNewMovie(
+    ): Call<MovieResponse>
 }
