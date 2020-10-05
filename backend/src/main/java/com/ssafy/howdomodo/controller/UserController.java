@@ -100,6 +100,16 @@ public class UserController {
 		return new ResponseEntity<Response>(new Response(StatusCode.OK, ResponseMessage.LOGIN_SUCCESS, member),HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="비밀번호 재설정을 위한 비밀번호 체크")
+	@GetMapping("/pw/{userCode}/{originPwd}")
+	public ResponseEntity checkOriginPwd(@PathVariable int userCode, @PathVariable String originPwd) {
+		originPwd = securityUtil.encryptSHA256(originPwd);
+		if(userService.findByUserCode(userCode).getUserPw().equals(originPwd))
+			return new ResponseEntity<Response>(new Response(StatusCode.OK, ResponseMessage.AUTHORIZED), HttpStatus.OK);
+		
+		return new ResponseEntity<Response>(new Response(StatusCode.UNAUTHORIZED, ResponseMessage.UNAUTHORIZED), HttpStatus.UNAUTHORIZED);
+	}
+	
 	@ApiOperation(value="비밀번호 재설정")
 	@PutMapping("/pw")
 	public ResponseEntity resetPw(@RequestBody Users user) {
