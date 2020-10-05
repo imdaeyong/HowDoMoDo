@@ -63,10 +63,12 @@ def np_init(request):
     return JsonResponse(test, json_dumps_params={'ensure_ascii': True}, status=status.HTTP_200_OK)
 
 def review_list(request, code):
+    title_code = {'뮬란' : '167491', '에이바' : '195377', '테넷':'190010', '아웃포스트':'195450', '그린랜드':'195983', '극장판 포켓몬스터: 뮤츠의 역습 EVOLUTION':'187305', '고스트 오브 워':'195425'}
+    titlecode = title_code[code]
     pagelist = [1, 2]
-    review_ls = []
+    review_lls =[]
     for page in pagelist:
-        url = "https://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=" + code + "&type=after&page=" + str(page)
+        url = "https://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=" + titlecode + "&type=after&page=" + str(page)
         resp = requests.get(url)
         html = BeautifulSoup(resp.content, 'html.parser')
 
@@ -74,6 +76,7 @@ def review_list(request, code):
         lis = score_result.findAll('li')
 
         for idx, li in enumerate(lis):
+            review_ls = []
             review_text = li.find('p').getText()
             review_text = review_text.replace('\n', '')
             review_text = review_text.replace('\t', '')
@@ -81,18 +84,21 @@ def review_list(request, code):
             review_text = review_text.replace('관람객', '')
             if (review_text != ''):
                 review_ls.append(review_text)
-
+                review_lls.append(review_ls)
     np = npmodel.npmodel
     np_result = []
-    for review in review_ls:
+    for review in review_lls:
         rs = np.test_sentences(review)
         np_result.append(rs)
 
     total = len(np_result)
     p = np_result.count(1)
     n = np_result.count(0)
-
-    result = {"ps": round(p/float(total), 1), "ns": round(n/float(total), 1)}
+    print(p)
+    print(n)
+    print(total)
+    print(np_result)
+    result = {"ps": round(p/float(total), 2), "ns": round(n/float(total), 2)}
     return JsonResponse(result, json_dumps_params={'ensure_ascii': True}, status=status.HTTP_200_OK)
 
 
