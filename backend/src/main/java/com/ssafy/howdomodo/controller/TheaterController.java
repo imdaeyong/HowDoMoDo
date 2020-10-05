@@ -78,11 +78,15 @@ public class TheaterController {
 	@ApiOperation(value="영화관 즐겨찾기 등록")
 	@PostMapping("/bookmark")
 	public ResponseEntity addFavTheaters(@RequestBody FavoriteTheaters favoriteTheaters) {
-		int res = theaterService.addFavTheaters(favoriteTheaters);
-		if(res == -1)
-			throw new RestException(ResponseMessage.ADD_FAIL, HttpStatus.FORBIDDEN);
-		
-		return new ResponseEntity<Response>(new Response(StatusCode.CREATED, ResponseMessage.ADD_SUCCESS), HttpStatus.OK);
+		if(theaterService.checkFavTheaters(favoriteTheaters.getUserCode(), favoriteTheaters.getTheaterId()) == null) {
+			int res = theaterService.addFavTheaters(favoriteTheaters);
+			if(res == -1)
+				throw new RestException(ResponseMessage.ADD_FAIL, HttpStatus.FORBIDDEN);
+
+			return new ResponseEntity<Response>(new Response(StatusCode.CREATED, ResponseMessage.ADD_SUCCESS), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Response>(new Response(StatusCode.BAD_REQUEST, ResponseMessage.SEARCH_FAV_THEATERS_EXIST), HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@ApiOperation(value="회원의 즐겨찾기 조회")

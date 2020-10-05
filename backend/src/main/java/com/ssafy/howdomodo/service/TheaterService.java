@@ -20,4 +20,6 @@ public interface TheaterService {
 	public List<String> readSiInfo();
 
 	public List<String> readGuInfo(String siName);
+
+	public FavoriteTheaters checkFavTheaters(int userCode, int theaterId);
 }
