@@ -100,6 +100,16 @@ public class UserController {
 		return new ResponseEntity<Response>(new Response(StatusCode.OK, ResponseMessage.LOGIN_SUCCESS, member),HttpStatus.OK);
 	}
 	
+	@ApiOperation(value="비밀번호 재설정을 위한 비밀번호 체크")
+	@GetMapping("/pw/{userEmail}/{originPwd}")
+	public ResponseEntity checkOriginPwd(@PathVariable String userEmail, @PathVariable String originPwd) {
+		originPwd = securityUtil.encryptSHA256(originPwd);
+		if(userService.findByUserEmail(userEmail).getUserPw().equals(originPwd))
+			return new ResponseEntity<Response>(new Response(StatusCode.OK, ResponseMessage.AUTHORIZED), HttpStatus.OK);
+		
+		return new ResponseEntity<Response>(new Response(StatusCode.UNAUTHORIZED, ResponseMessage.UNAUTHORIZED), HttpStatus.UNAUTHORIZED);
+	}
+	
 	@ApiOperation(value="비밀번호 재설정")
 	@PutMapping("/pw")
 	public ResponseEntity resetPw(@RequestBody Users user) {
@@ -147,5 +157,26 @@ public class UserController {
 			return new ResponseEntity<Response>(new Response(StatusCode.FORBIDDEN, ResponseMessage.DELETE_FAIL), HttpStatus.FORBIDDEN);
 		
 		return new ResponseEntity<Response>(new Response(StatusCode.NO_CONTENT,ResponseMessage.DELETE_USER), HttpStatus.OK);
+	}
+	
+	@ApiOperation(value="비밀번호 찾기")
+	@GetMapping("/findPw/{userEmail}/{userName}")
+	public ResponseEntity findPwd(@PathVariable String userEmail, @PathVariable String userName) {
+		String pwd = "";
+		for (int i = 0; i < 8; i++) {
+			char tmp = (char)(Math.random()*26 + 97);
+			if(i > 3)
+				pwd += (int)(Math.random() * 10);
+			else
+				pwd += tmp;
+		}
+		System.out.println(pwd);
+		Users user = userService.findByUserEmailAndName(userEmail, userName);
+		user.setUserPw(securityUtil.encryptSHA256(pwd));
+		int res = userService.updatePwd(user);
+		if(res == -1)
+			return new ResponseEntity<Response>(new Response(StatusCode.FORBIDDEN, ResponseMessage.FAIL_RESET_PWD), HttpStatus.FORBIDDEN);
+		
+		return new ResponseEntity<Response>(new Response(StatusCode.OK, ResponseMessage.TMP_PWD, pwd), HttpStatus.OK);	
 	}
 }

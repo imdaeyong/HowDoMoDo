@@ -1,6 +1,7 @@
 package com.ssafy.howdomodo.service;
 
 import java.sql.SQLException;
+import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,6 @@ public class UserServiceImpl implements UserService {
 	public int join(Users user) {
 		try {
 			int res = userMapper.join(user);
-			res += userMapper.addRole(user.getUserCode(), "ROLE_USER");
 			return res;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -96,4 +96,14 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public Users findByUserEmailAndName(String userEmail, String userName) {
+		try {
+			Users user = userMapper.findByUserEmailAndName(userEmail, userName);
+			return user;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

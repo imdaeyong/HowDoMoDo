@@ -7,6 +7,7 @@ public interface UserService {
 	public int join(Users user);
 	public Users findByUserEmail(String userEmail);
 	public String findByUserNick(String userNick);
+	public Users findByUserEmailAndName(String userEmail, String userName);
 	public int updateUser(Users user);
 	public int updatePwd(Users user);
 	public Users findByUserCode(int userCode);
