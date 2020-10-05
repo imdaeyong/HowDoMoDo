@@ -52,7 +52,7 @@ class MovieSelectDialogFragment : DialogFragment() {
     ): View? {
         val inflatedView = inflater.inflate(R.layout.dialog_movie_select, container, false)
         setBackground()
-        mvm.getMovieData()
+        mvm.getNewMoviedata()
         mainAdapter = MainAdapter(object : MainViewHolder.ClickListener {
             override fun movieClick(position: Int) {
                 val movieTitle = mainAdapter.movieData[position].title
