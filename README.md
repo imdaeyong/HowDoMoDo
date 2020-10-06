@@ -87,14 +87,14 @@
 
 - **Commit Message Rule**
 
-  `{상태} {기능} | {JIRA issue ID`
+  `{상태} {기능} | {JIRA issue ID}`
 
   - ex)  `Feat Login Function | S03P11A305-1`
 - ex) `Update Movie Function Communication | S03P11A305-2` `  
   
-`[마무리] | {날짜 }| README.md`
+`[마무리] | {날짜 }| {JIRA issue ID}`
   
-- ex) `[마무리] | 2020.07.21 | README.md`
+- ex) `[마무리] | 2020.07.21 | S03P11A305-1`
   
 `[MR] | '{소스브랜치}' into '{타겟브랜치}'`
   
