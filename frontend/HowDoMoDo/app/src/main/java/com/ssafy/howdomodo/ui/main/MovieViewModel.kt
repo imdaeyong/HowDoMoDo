@@ -17,6 +17,7 @@ class MovieViewModel (private val movieRepository: MovieRepository) : ViewModel(
     val spinnerCopyData =MutableLiveData<ArrayList<String>>()
     val errorToast = MutableLiveData<Throwable>()
     val psnsData = MutableLiveData<BigDataPsNs>()
+    val psNsLoading =MutableLiveData<Unit>()
 
     fun getMovieData(){
         loading.value = true
@@ -44,6 +45,8 @@ class MovieViewModel (private val movieRepository: MovieRepository) : ViewModel(
     fun getMoviePsNs(code: String) {
         movieRepository.getMoviePsNs(code, success = {
             psnsData.value = it
+            psNsLoading.value = Unit
+
         }, fail = {
             Log.e("error is :", it.toString())
             errorToast.value = it
