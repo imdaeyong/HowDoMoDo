@@ -15,6 +15,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.`object`.ObjectMovie
+import com.ssafy.howdomodo.`object`.TheaterCollection
+import com.ssafy.howdomodo.ui.gwanSelect.GwanSelectActivity
 import com.ssafy.howdomodo.ui.main.MainAdapter
 import com.ssafy.howdomodo.ui.main.MainViewHolder
 import com.ssafy.howdomodo.ui.main.MovieViewModel
@@ -65,8 +67,9 @@ class MovieSelectDialogFragment : DialogFragment() {
                     .setPositiveButton("예매") { dialogInterface, i ->
 //                        item_ticketing_dialog_positive_score.text =
 //                        item_ticketing_dialog_negative_score.text =
-                        val intent = Intent(activity, SelectAreaActivity::class.java)
-                        ObjectMovie.movieTitle = movieTitle
+                        val intent = Intent(activity, GwanSelectActivity::class.java)
+                        TheaterCollection.mvPoster = mainAdapter.movieData[position].posterPath
+                        TheaterCollection.mvTitle = mainAdapter.movieData[position].title
                         dismiss()
                         startActivity(intent)
                     }

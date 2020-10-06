@@ -36,7 +36,19 @@ interface RemoteDataSource {
     )
 
     fun userNickCheck(
-        userNick:String,
+        nickname:String,
+        success: (SignUpResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    )
+
+    fun userEmailCheck(
+        email: String,
+        success: (SignUpResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    )
+
+    fun nickDuplicateCheck(
+        userNick: String,
         success: (SignUpResponse) -> Unit,
         fail: (Throwable) -> Unit
     )

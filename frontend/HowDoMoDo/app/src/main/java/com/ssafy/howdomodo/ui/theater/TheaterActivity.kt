@@ -28,6 +28,7 @@ import com.ssafy.howdomodo.`object`.ObjectMovie
 import com.ssafy.howdomodo.`object`.TheaterCollection
 import com.ssafy.howdomodo.`object`.UserCollection
 import com.ssafy.howdomodo.data.datasource.model.Theater
+import com.ssafy.howdomodo.ui.BasicActivity
 import com.ssafy.howdomodo.ui.favorite.FavoritesViewModel
 import com.ssafy.howdomodo.ui.gwanSelect.GwanSelectActivity
 import kotlinx.android.synthetic.main.activity_theater.*
@@ -40,7 +41,7 @@ import org.json.JSONObject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
-class TheaterActivity : AppCompatActivity(), POIItemEventListener{
+class TheaterActivity : BasicActivity(), POIItemEventListener{
     private val getTheatersViewModel: GetTheatersViewModel by viewModel()
     private val favoritesViewModel: FavoritesViewModel by viewModel()
 
@@ -71,6 +72,11 @@ class TheaterActivity : AppCompatActivity(), POIItemEventListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_theater)
+        actList.add(this)
+
+        act_theater_iv_back.setOnClickListener{
+            finish()
+        }
 
         if(UserCollection.userCode!=null &&UserCollection.userCode!="") {
             userCode = UserCollection.userCode.toInt()
@@ -128,6 +134,7 @@ class TheaterActivity : AppCompatActivity(), POIItemEventListener{
             val intent = Intent(this, GwanSelectActivity::class.java)
             startActivity(intent)
         }
+        act_theater_cl_theater_selected.isClickable = false
     }
 
     private fun observeData() {
