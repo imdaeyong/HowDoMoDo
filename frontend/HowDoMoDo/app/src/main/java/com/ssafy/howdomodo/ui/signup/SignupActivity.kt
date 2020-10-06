@@ -43,6 +43,7 @@ class SignupActivity : AppCompatActivity() {
 
         act_sign_up_cl_email_duplicate_check.setOnClickListener {
             var email = act_sign_up_et_email.text.toString()
+            Log.e("email중복버튼클릭",email)
             if(email!=""){
                 signUpViewModel.userEmailCheck(email)
 //                var err = signUpViewModel.errorToast.value
@@ -59,6 +60,7 @@ class SignupActivity : AppCompatActivity() {
 
         act_sign_up_cl_nick_duplicate_check.setOnClickListener {
             var nick = act_sign_up_et_nick.text.toString()
+            Log.e("nick중복버튼클릭",nick)
             if(nick!=""){
                 signUpViewModel.userNickCheck(nick)
             }else{
@@ -169,6 +171,18 @@ class SignupActivity : AppCompatActivity() {
                 val goLogin = Intent(this, LoginActivity::class.java)
                 startActivity(goLogin)
                 finish()
+            } else if (it.contains("Email")&&it.contains("가능")) {
+                var dialog = AlertDialog.Builder(this)
+                dialog.setTitle("아메일 중복 확인 결과")
+                dialog.setMessage("사용할 수 있는 이메일입니다!")
+                dialog.show()
+                act_sign_up_et_email.isEnabled = false
+                act_sign_up_cl_email_duplicate_check.isClickable = false
+                act_sign_up_cl_email_duplicate_check.setBackgroundColor(Color.parseColor("#F73859"))
+                act_sign_up_tv_email_duplicate_check.setTextColor(Color.parseColor("#FFFFFF"))
+                act_sign_up_tv_email_duplicate_check.setText("확인 완료")
+                duplicateEmailCheck = true
+
             } else if (it.contains("닉네임")&&it.contains("가능")) {
                 var dialog = AlertDialog.Builder(this)
                 dialog.setTitle("닉네임 중복 확인 결과")
@@ -180,19 +194,8 @@ class SignupActivity : AppCompatActivity() {
                 act_sign_up_tv_nick_duplicate_check.setTextColor(Color.parseColor("#FFFFFF"))
                 act_sign_up_tv_nick_duplicate_check.setText("확인 완료")
                 duplicateNickCheck = true
-             } else if (it.contains("Email")&&it.contains("가능")) {
-                var dialog = AlertDialog.Builder(this)
-                dialog.setTitle("아메일 중복 확인 결과")
-                dialog.setMessage("사용할 수 있는 이메일입니다!")
-                dialog.show()
-                act_sign_up_et_email.isEnabled = false
-                act_sign_up_cl_email_duplicate_check.isClickable = false
-                act_sign_up_cl_email_duplicate_check.setBackgroundColor(Color.parseColor("#F73859"))
-                act_sign_up_tv_email_duplicate_check.setTextColor(Color.parseColor("#FFFFFF"))
-                act_sign_up_tv_email_duplicate_check.setText("확인 완료")
-                duplicateEmailCheck = true
-            }else {
-                Toast.makeText(this, "잠시 후 다시 시도해주세요",Toast.LENGTH_SHORT)
+            } else {
+                Toast.makeText(this, "잘못된 접근입니다.",Toast.LENGTH_SHORT)
             }
         })
     }
