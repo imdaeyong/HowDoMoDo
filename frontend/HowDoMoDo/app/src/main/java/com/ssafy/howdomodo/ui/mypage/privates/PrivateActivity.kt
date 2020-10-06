@@ -14,7 +14,7 @@ class PrivateActivity : AppCompatActivity() {
 
         val title = intent.getStringExtra("title")
         val text = intent.getStringExtra("text")
-        Log.e("we",text.toString())
+        //Log.e("we",text.toString())
         act_private_top.my_page_top_tv_title.text = title
         act_private_tv_text.text = text
 

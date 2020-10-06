@@ -1,5 +1,6 @@
 package com.ssafy.howdomodo.ui.signup
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.JsonObject
@@ -15,6 +16,31 @@ class SignUpViewModel(private val signUpRepository: SignUpRepository) : ViewMode
                 successMessage.value = it.message
             },
             fail = {
+                errorToast.value = it.message
+            })
+    }
+
+    fun userEmailCheck(email: String) {
+        signUpRepository.userEmailCheck(email,
+            success = {
+                //Log.e("userEmailCheck","success"+successMessage.value)
+                successMessage.value = it.message
+            },
+            fail = {
+                //Log.e("userEmailCheck","fail"+email)
+
+                errorToast.value = it.message
+            })
+    }
+
+    fun userNickCheck(nickname: String) {
+        signUpRepository.userNickCheck(nickname,
+            success = {
+                //Log.e("userNickCheck","success"+successMessage.value)
+                successMessage.value = it.message
+            },
+            fail = {
+                //Log.e("userNickCheck","fail"+nickname)
                 errorToast.value = it.message
             })
     }
