@@ -16,6 +16,7 @@ import com.ssafy.howdomodo.`object`.TheaterCollection
 import com.ssafy.howdomodo.`object`.UserCollection
 import com.ssafy.howdomodo.data.datasource.model.Theater
 import com.ssafy.howdomodo.ui.Favorites.FavoritesAdapter
+import com.ssafy.howdomodo.ui.theater.TheaterActivity
 import kotlinx.android.synthetic.main.fragment_favorite.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -78,9 +79,18 @@ class FavoriteFragment : Fragment() {
                     object :
                         FavoritesAdapter.FavoritesViewHolder.FavoritesClickListener {
                         override fun onclick(position: Int, textView: TextView) {
-                            TheaterCollection.mvTheater =
-                                favoritesList[position].theaterBrand + " " + favoritesList[position].theaterName
-                            TheaterCollection.mvTheaterName = favoritesList[position].theaterBrand
+                            var theaterName = favoritesList[position].theaterBrand.trim() + " " + favoritesList[position].theaterName
+
+                            TheaterCollection.mvTheater = theaterName
+
+                            if(theaterName.contains("메가박스")) {
+                                TheaterCollection.mvTheaterName = "mega"
+                            }else if(theaterName.contains("롯데시네마")){
+                                TheaterCollection.mvTheaterName = "lotte"
+                            }else {
+                                TheaterCollection.mvTheaterName = "cgv"
+                            }
+
                             val movieSelecDialogFragment = MovieSelectDialogFragment().getInstance()
                             movieSelecDialogFragment.show(fragmentManager!!, "movie_select")
 
