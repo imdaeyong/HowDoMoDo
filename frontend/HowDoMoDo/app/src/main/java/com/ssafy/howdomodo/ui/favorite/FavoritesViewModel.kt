@@ -26,11 +26,11 @@ class FavoritesViewModel(private val favoritesRepository: FavoritesRepository) :
         favoritesRepository.favoritesAdd(favoritesRequestBody,
             success = {
                 successMessage.value = it.message
-                Log.e("favoritesAdd","성공!!!!")
+                //Log.e("favoritesAdd","성공!!!!")
             },
             fail = {
                 favoritesError.value = it.message
-                Log.e("favoritesAdd","성공!!!!")
+                //Log.e("favoritesAdd","성공!!!!")
             })
     }
 

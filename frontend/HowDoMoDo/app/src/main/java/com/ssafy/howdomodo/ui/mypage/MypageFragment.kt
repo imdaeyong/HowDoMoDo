@@ -1,6 +1,8 @@
 package com.ssafy.howdomodo.ui.mypage
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,9 +21,9 @@ import kotlinx.android.synthetic.main.fragment_mypage.*
 import org.json.JSONObject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class
-MypageFragment : Fragment() {
+class MypageFragment : Fragment() {
     private val mypageViewModel: MyPageViewModel by viewModel()
+    private lateinit var sharedPreferences: SharedPreferences
 
     lateinit var myPageAdapter: MyPageAdapter
     override fun onCreateView(
@@ -52,7 +54,13 @@ MypageFragment : Fragment() {
             override fun itemClick(position: Int) {
                 when (myPageAdapter.mineList[position]) {
                     "로그아웃" -> {
-                        val intent = Intent(activity,LoginActivity::class.java)
+                        val intent = Intent(activity, LoginActivity::class.java)
+
+                        sharedPreferences =
+                            activity!!.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
+                        val editor = sharedPreferences.edit()
+                        editor.clear()
+                        editor.commit()
                         startActivity(intent)
                         activity!!.finish()
                     }
@@ -269,11 +277,16 @@ MypageFragment : Fragment() {
                         // movieTitle을 Request 보내서 긍,부정 데이터를 받아온다.
 //                        Toast.makeText(view.context,"클릭",Toast.LENGTH_SHORT).show()
                         val dialog = MyDialog(view.context)
-                        dialog.setOnOKClickedListener { content->
-                            if(content == "확인"){
+                        dialog.setOnOKClickedListener { content ->
+                            if (content == "확인") {
                                 // 탈퇴
+                                sharedPreferences =
+                                    activity!!.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
+                                val editor = sharedPreferences.edit()
+                                editor.clear()
+                                editor.commit()
                                 mypageViewModel.userDelete(UserCollection.userCode.toInt())
-                            }else{
+                            } else {
                                 Toast.makeText(view.context, "취소", Toast.LENGTH_SHORT).show()
                             }
                         }

@@ -189,8 +189,8 @@ class SelectAreaActivity : BasicActivity() {
             val intent = Intent(this, TheaterActivity::class.java)
             intent.putExtra("siName", siName)
             intent.putExtra("guName", guName)
-            Log.e("si", siName)
-            Log.e("gu", guName)
+            //Log.e("si", siName)
+            //Log.e("gu", guName)
             startActivity(intent)
         }
         act_select_area_cl_btn_next.isClickable=false
@@ -212,7 +212,7 @@ class SelectAreaActivity : BasicActivity() {
 
     fun setButtonActive() {
         var token = true
-        Log.e("bbb", boolList.toString())
+        //Log.e("bbb", boolList.toString())
         for (i in boolList) {
             if (!i) {
                 token = false

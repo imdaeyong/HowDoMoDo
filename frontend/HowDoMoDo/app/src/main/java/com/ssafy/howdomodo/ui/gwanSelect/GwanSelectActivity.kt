@@ -52,7 +52,7 @@ class GwanSelectActivity : BasicActivity() {
         val brand = TheaterCollection.mvTheaterName
         val theaterName = TheaterCollection.mvTheater.split(" ")[1]
 
-        Log.e("gwan", ObjectMovie.movieTitle + " " + brand + " " + theaterName)
+        //Log.e("gwan", ObjectMovie.movieTitle + " " + brand + " " + theaterName)
         viewModel.getGwanData(
             brand,
             theaterName,
@@ -69,7 +69,7 @@ class GwanSelectActivity : BasicActivity() {
                     btnToggle()
                     val timeFormat = SimpleDateFormat("yyyyMMdd")
 
-                    Log.e("tt", timeFormat.format(Week.times[position].dayDate).toString())
+                    //Log.e("tt", timeFormat.format(Week.times[position].dayDate).toString())
                     TheaterCollection.mvDate =
                         timeStr.format(Week.times[position].dayDate).toString()
 

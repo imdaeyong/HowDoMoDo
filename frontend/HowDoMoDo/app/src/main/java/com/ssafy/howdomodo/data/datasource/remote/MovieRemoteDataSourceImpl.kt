@@ -37,16 +37,16 @@ class MovieRemoteDataSourceImpl : MovieRemoteDataSource {
         onResponse: (BigDataPsNs) -> Unit,
         onFailure: (Throwable) -> Unit
     ) {
-        Log.e("TT1",code)
+//        Log.e("TT1",code)
         BigDataSevicelmpl.service.getMoviePsNs(code).enqueue(
             object : retrofit2.Callback<BigDataPsNs> {
                 override fun onFailure(call: Call<BigDataPsNs>, t: Throwable) {
-                    Log.e("TT2",t.toString())
+//                    Log.e("TT2",t.toString())
                     onFailure(t)
                 }
 
                 override fun onResponse(call: Call<BigDataPsNs>, response: Response<BigDataPsNs>) {
-                    Log.e("TT3",response.message())
+                    //Log.e("TT3",response.message())
                     onResponse(response.body()!!)
                 }
             }

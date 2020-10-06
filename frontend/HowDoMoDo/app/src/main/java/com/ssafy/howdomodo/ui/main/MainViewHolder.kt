@@ -46,7 +46,7 @@ class MainViewHolder(v: View, private val clickListener: ClickListener) :
     fun bind(item: Movie) {
 //        var posterURL = "https://image.tmdb.org/t/p/w500/" + item.posterPath
         Glide.with(view.context).load(item.posterPath).into(view.ll_main_iv_poster)
-        Log.e("movieID", item.id.toString())
+        //Log.e("movieID", item.id.toString())
         view.ll_main_tv_name.text = item.title
 //        var genre = ""
 //        var count = 0
