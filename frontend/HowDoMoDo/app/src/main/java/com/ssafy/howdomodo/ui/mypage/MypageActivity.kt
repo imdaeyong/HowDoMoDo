@@ -65,7 +65,7 @@ class MypageActivity : AppCompatActivity() {
             maleCheck=true
             act_mypage_update_cl_gender_male.setBackgroundResource(R.drawable.item_sido_selected)
             act_mypage_update_tv_gender_male.setTextColor(Color.parseColor("#fff4eb"))
-            Toast.makeText(this, "남자클릭",Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "남자클릭",Toast.LENGTH_SHORT).show()
 
             if (femaleCheck) {
                 femaleCheck=false
@@ -79,7 +79,7 @@ class MypageActivity : AppCompatActivity() {
             femaleCheck=true
             act_mypage_update_cl_gender_female.setBackgroundResource(R.drawable.item_sido_selected)
             act_mypage_update_tv_gender_female.setTextColor(Color.parseColor("#fff4eb"))
-            Toast.makeText(this, "여자클릭",Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "여자클릭",Toast.LENGTH_SHORT).show()
 
             if (maleCheck) {
                 maleCheck=false

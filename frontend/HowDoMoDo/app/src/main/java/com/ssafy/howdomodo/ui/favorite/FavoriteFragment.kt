@@ -97,7 +97,7 @@ class FavoriteFragment : Fragment() {
                         }
 
                         override fun starClick(position: Int, starImageView: ImageView) {
-                            Toast.makeText(context, position.toString(), Toast.LENGTH_SHORT)
+//                            Toast.makeText(context, position.toString(), Toast.LENGTH_SHORT)
                             //Log.e("즐겨찾기 삭제", "starclick접속")
                             isStarClicked(position, starImageView)
                         }

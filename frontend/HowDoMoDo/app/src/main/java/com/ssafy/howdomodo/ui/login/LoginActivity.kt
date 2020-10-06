@@ -35,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun observeData() {
         loginViewModel.loginError.observe(this, Observer {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
         loginViewModel.getHeader.observe(this, Observer {
             // TODO: 2020/09/16 헤더를 넣어주는 로직을 짜야한다. SharedPreferences 를 사용하라.
@@ -48,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
             }
         })
         loginViewModel.loginError.observe(this, Observer {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
         loginViewModel.loginResponse.observe(this, Observer {
             // TODO: 2020/09/16 로그인 통신이 성공했을때의 로직을 짜라.
