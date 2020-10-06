@@ -21,7 +21,9 @@ public class Theaters {
 	private int cityId;
 	private String theaterName;
 	private String theaterBrand;
-	private float theaterLat;
-	private float theaterLon;
+	private String theaterAddress;
+	private double theaterLat;
+	private double theaterLon;
+	private boolean isFav;
 	
 }

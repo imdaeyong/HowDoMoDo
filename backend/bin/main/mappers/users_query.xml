@@ -26,9 +26,14 @@
     	select userNick from users where userNick=#{userNick}
     </select>
     
+    <!-- userEmail과 userName으로 회원정보 찾기 -->
+    <select id="findByUserEmailAndName" resultType="com.ssafy.howdomodo.domain.Users">
+    	SELECT * from users where userEmail=#{userEmail} AND userName=#{userName}
+    </select>
+    
     <!-- 회원정보 수정 -->
     <update id="updateUser">
-    	UPDATE users SET userEmail=#{userEmail}, userName=#{userName}, userNick=#{userNick}, userBirth=#{userBirth}
+    	UPDATE users SET userName=#{userName}, userNick=#{userNick}, userBirth=#{userBirth}
     	WHERE userCode=#{userCode}
     </update>
     
@@ -36,4 +41,9 @@
     <update id="updatePwd">
     	UPDATE users SET userPw = #{userPw} WHERE userEmail=#{userEmail}
     </update>
+    
+    <!-- 회원탈퇴 -->
+    <delete id="deleteByUserCode">
+    	DELETE FROM users where userCode=#{userCode}
+    </delete>
 </mapper>
