@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
@@ -21,10 +22,7 @@ import com.ssafy.howdomodo.`object`.ObjectMovie
 import com.ssafy.howdomodo.`object`.TheaterCollection
 import com.ssafy.howdomodo.ui.Loading
 import com.ssafy.howdomodo.ui.gwanSelect.GwanSelectActivity
-import com.ssafy.howdomodo.ui.main.MainAdapter
-import com.ssafy.howdomodo.ui.main.MainFragment
-import com.ssafy.howdomodo.ui.main.MainViewHolder
-import com.ssafy.howdomodo.ui.main.MovieViewModel
+import com.ssafy.howdomodo.ui.main.*
 import com.ssafy.howdomodo.ui.selectArea.SelectAreaActivity
 import kotlinx.android.synthetic.main.dialog_movie_select.view.*
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -126,21 +124,21 @@ class MovieSelectDialogFragment : DialogFragment() {
 
             // movieTitle을 Request 보내서 긍,부정 데이터를 받아온다.
             val movieTitle = mainAdapter.movieData[MainFragment.moviePosition].title
-            val builder = AlertDialog.Builder(view!!.context)
             val dialogView = layoutInflater.inflate(R.layout.item_ticketing_dialog, null)
             var PsNs = "긍정 점수:" + it.ps + "% 부정 점수:" + it.ns + "%"
-            dialogView.item_ticketing_dialog_text.text = PsNs
-            builder.setView(dialogView)
-                .setPositiveButton("예매") { dialogInterface, i ->
-                    val intent = Intent(activity, GwanSelectActivity::class.java)
+
+            val dialog = PsnsDialog(view!!.context)
+//            item_psns_content.text = PsNs
+            dialog.setOnOKClickedListener { content->
+                if(content == "확인"){
+                    val intent = Intent(activity, SelectAreaActivity::class.java)
                     ObjectMovie.movieTitle = movieTitle
                     startActivity(intent)
+                }else{
+                    Toast.makeText(view!!.context, "취소", Toast.LENGTH_SHORT).show()
                 }
-                .setNegativeButton("취소") { dialogInterface, i ->
-                    /* 취소일 때 아무 액션이 없으므로 빈칸 */
-                }
-                .show()
-
+            }
+            dialog.start(PsNs)
         })
     }
 }
