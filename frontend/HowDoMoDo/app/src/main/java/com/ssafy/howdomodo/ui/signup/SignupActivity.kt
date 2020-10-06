@@ -3,6 +3,7 @@ package com.ssafy.howdomodo.ui.signup
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -44,6 +45,13 @@ class SignupActivity : AppCompatActivity() {
             var email = act_sign_up_et_email.text.toString()
             if(email!=""){
                 signUpViewModel.userEmailCheck(email)
+//                var err = signUpViewModel.errorToast.value
+//                var data = signUpViewModel.successMessage.value
+//                if(err!=null) {
+//                    Log.e("emailcheck", err!!)
+//                    Toast.makeText(this,"오류가 발생했습니다",Toast.LENGTH_SHORT)
+//                }else if(data!=null){
+
             }else{
                 Toast.makeText(this,"이메일을 입력해주세요!",Toast.LENGTH_SHORT)
             }
@@ -155,6 +163,7 @@ class SignupActivity : AppCompatActivity() {
             Toast.makeText(this, errormsg, Toast.LENGTH_SHORT).show()
         })
         signUpViewModel.successMessage.observe(this, Observer {
+            Log.e("signupActivity",it)
             if (it == "회원 가입 성공") {
                 // 회원가입 성공!!!
                 val goLogin = Intent(this, LoginActivity::class.java)

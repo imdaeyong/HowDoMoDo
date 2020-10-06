@@ -204,18 +204,19 @@ class TheaterActivity : BasicActivity(), POIItemEventListener{
                     var selected_marker_img = R.drawable.ic_launcher
 
                     if (t.theaterBrand.contains("CGV")) {
-                        marker_img = R.drawable.cgv_marker_unselected
+                        marker_img = R.drawable.cgv_marker
                         selected_marker_img = R.drawable.cgv_marker
                     } else if (t.theaterBrand.contains("메가박스")) {
-                        marker_img = R.drawable.megabox_marker_unselected
+                        marker_img = R.drawable.megabox_marker
                         selected_marker_img = R.drawable.megabox_marker
                     } else if (t.theaterBrand.contains("롯데시네마")) {
-                        marker_img = R.drawable.lotte_marker_unselected
+                        marker_img = R.drawable.lotte_marker
                         selected_marker_img = R.drawable.lotte_marker
                     } else {
-                        marker_img = R.drawable.cgv_marker_unselected
+                        marker_img = R.drawable.cgv_marker
                         selected_marker_img = R.drawable.cgv_marker
                     }
+
 
                     var marker = MapPOIItem()
                     marker.itemName = t.theaterBrand + " " + t.theaterName
