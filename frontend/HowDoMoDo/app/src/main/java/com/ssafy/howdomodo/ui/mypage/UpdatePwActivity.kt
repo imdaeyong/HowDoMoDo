@@ -23,24 +23,14 @@ class UpdatePwActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_update_pw)
-
+        observe()
         act_update_pw_btn.setOnClickListener{
             var email = UserCollection.userEmail
             var bpwd = act_update_pw_et_before.text.toString()
-            var apwd = act_update_pw_et_after.text.toString()
             mypageViewModel.checkPW(email,bpwd)
-            observe()
 
-            if(checkBoolean){
-                val loginJsonObject = JSONObject()
-                loginJsonObject.put("userEmail", email)
-                loginJsonObject.put("userPw", apwd)
-                val body = JsonParser.parseString(loginJsonObject.toString()) as JsonObject
-                mypageViewModel.updatePW(body)
-                observe()
-            }else{
-                Toast.makeText(it.context,"이전 비밀번호를 확인하세요",Toast.LENGTH_LONG).show()
-            }
+
+
         }
     }
 
@@ -49,13 +39,24 @@ class UpdatePwActivity : AppCompatActivity() {
             Log.e("TEST",it)
             if(it == "인증 성공"){
                 checkBoolean = true
+                if(checkBoolean){
+                    var email = UserCollection.userEmail
+                    var apwd = act_update_pw_et_after.text.toString()
+                    val loginJsonObject = JSONObject()
+                    loginJsonObject.put("userEmail", email)
+                    loginJsonObject.put("userPw", apwd)
+                    val body = JsonParser.parseString(loginJsonObject.toString()) as JsonObject
+                    mypageViewModel.updatePW(body)
+                }else{
+                    Toast.makeText(this,"이전 비밀번호를 확인하세요",Toast.LENGTH_LONG).show()
+                }
             }
         })
         mypageViewModel.successMessage.observe(this, Observer {
             Log.e("TEST",it)
             if(it == "비밀번호 재설정 성공"){
                 Toast.makeText(this,it,Toast.LENGTH_LONG).show()
-                val intent = Intent(this, MypageActivity::class.java)
+                val intent = Intent(this, BottomTabActivity::class.java)
                 startActivity(intent)
                 finish()
             }
