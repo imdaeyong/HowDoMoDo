@@ -35,7 +35,7 @@ class TicketInfoActivity : AppCompatActivity() {
 
         act_ticket_info_cl_btn_next.setOnClickListener{
             Log.e("TEST",TheaterCollection.mvTheater)
-            if(TheaterCollection.mvTheater.contains("cgv")){
+            if(TheaterCollection.mvTheater.contains("CGV")){
                 if(getPackageList(cgv)){
                     val intent = this.getPackageManager().getLaunchIntentForPackage(cgv);
                     intent!!.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

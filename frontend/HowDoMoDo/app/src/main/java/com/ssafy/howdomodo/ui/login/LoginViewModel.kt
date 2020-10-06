@@ -15,23 +15,18 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     val findError = MutableLiveData<String>()
 
     fun login(loginRequestBody: JsonObject) {
-        Log.e("TEST1",loginRequestBody.get("userPw").toString())
         loginRepository.login(loginRequestBody, success = { response ->
             loginResponse.value = response
         }, fail = {
-            Log.e("TEST1","실패")
             loginError.value = it.message
         })
     }
 
     fun findPW(userEmail: String, userName: String) {
-        Log.e("TEST2","들어옴")
         loginRepository.findPW(userEmail,userName,success = {response ->
             tempPw.value = response.data
-            Log.e("TEST2", tempPw.value!!)
 
         }, fail = {
-            Log.e("TEST2","Error")
             findError.value = it.message
         })
     }
