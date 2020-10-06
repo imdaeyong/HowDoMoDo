@@ -24,7 +24,7 @@ class GwanAdapter : RecyclerView.Adapter<GwanViewHolder>() {
 
     fun getClickedMovieTime(): ArrayList<Int>? {
         val list = ArrayList<Int>()
-        Log.e("data:",GwanAdapter.gwanData.toString())
+        //Log.e("data:",GwanAdapter.gwanData.toString())
         for (i in GwanAdapter.gwanData.indices) {
             for (j in GwanAdapter.gwanData[i].timeList.indices) {
                 if (GwanAdapter.gwanData[i].timeList[j].isClicked) {
@@ -91,7 +91,7 @@ class GwanViewHolder(itemView: View, private val listener: ClickListener) : Recy
                     }
                     TheaterCollection.mvType = GwanAdapter.gwanData[parentPosition].screen
                     TheaterCollection.mvTheaterNum = GwanAdapter.gwanData[parentPosition].hall
-                    Log.e("screent",TheaterCollection.mvTheaterNum)
+                    //Log.e("screent",TheaterCollection.mvTheaterNum)
                 }
             })
         movieTimeAdapter.setTimeData(data.timeList)

@@ -23,10 +23,10 @@ class SelectAreaViewModel(private val selectAreaRepository: SelectAreaRepository
                 temp.add(Region(i))
             }
             siDoData.value = temp
-            Log.e("sido", siDoData.value.toString())
+            //Log.e("sido", siDoData.value.toString())
         }, fail = {
             siDoError.value = it.message
-            Log.e("asd", it.message.toString())
+            //Log.e("asd", it.message.toString())
         })
     }
 

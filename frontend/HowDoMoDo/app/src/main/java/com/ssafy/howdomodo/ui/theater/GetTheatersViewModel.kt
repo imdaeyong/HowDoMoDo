@@ -14,10 +14,10 @@ class GetTheatersViewModel(private val getTheatersRepository: GetTheatersReposit
         getTheatersRepository.getTheaters(siName, guName,userCode, success = { response ->
             getTheatersResponse.value = response
 
-            Log.e("getTheaterTest", "getTheaters성공!")
+//            //Log.e("getTheaterTest", "getTheaters성공!")
         },
             fail = {
-                Log.e("getTheaterTest", "영화관 불러오는데 실패했어요 ㅠ")
+//                //Log.e("getTheaterTest", "영화관 불러오는데 실패했어요 ㅠ")
                 getTheatersError.value = it.message
             })
     }

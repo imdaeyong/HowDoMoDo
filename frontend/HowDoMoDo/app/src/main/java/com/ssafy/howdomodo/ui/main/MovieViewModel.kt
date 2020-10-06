@@ -35,7 +35,7 @@ class MovieViewModel (private val movieRepository: MovieRepository) : ViewModel(
             }
             spinnerCopyData.value = spinnerData
         }, fail = {
-            Log.e("error is :", it.toString())
+            //Log.e("error is :", it.toString())
             errorToast.value = it
         })
 
@@ -48,7 +48,7 @@ class MovieViewModel (private val movieRepository: MovieRepository) : ViewModel(
             psNsLoading.value = Unit
 
         }, fail = {
-            Log.e("error is :", it.toString())
+            //Log.e("error is :", it.toString())
             errorToast.value = it
         })
     }

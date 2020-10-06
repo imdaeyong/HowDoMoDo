@@ -69,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
                     editor.putString("userNick", it.data.userNick)
                     editor.putString("userCode", it.data.userCode)
                     editor.commit()
-                    Log.e("qwewq", "QWEqwe")
+                    //Log.e("qwewq", "QWEqwe")
                 }else{
                     sharedPreferences = getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
                     val editor = sharedPreferences.edit()

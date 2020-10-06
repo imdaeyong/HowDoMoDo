@@ -23,7 +23,7 @@ class WebviewActivity : AppCompatActivity() {
             useWideViewPort = true
             setSupportZoom(false)
         }
-        Log.e("test",url!!)
+        //Log.e("test",url!!)
         wb_page.loadUrl(url!!)
     }
 }

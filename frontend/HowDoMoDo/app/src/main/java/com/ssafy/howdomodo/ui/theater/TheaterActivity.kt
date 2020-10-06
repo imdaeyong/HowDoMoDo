@@ -92,7 +92,7 @@ class TheaterActivity : BasicActivity(), POIItemEventListener{
             )
                 .show()
         } else {
-            Log.e(
+            //Log.e(
                 "유사에러",
                 "이전 페이지에서 넘어온 시도데이터가 없음 - > 디폴트 검색!" + selectSiName + selectGuName + userCode
             )
@@ -130,7 +130,7 @@ class TheaterActivity : BasicActivity(), POIItemEventListener{
         observeData()
 
         act_theater_cl_theater_selected.setOnClickListener {
-            Log.e("clicked!",TheaterCollection.mvTheater)
+            //Log.e("clicked!",TheaterCollection.mvTheater)
             val intent = Intent(this, GwanSelectActivity::class.java)
             startActivity(intent)
         }
@@ -272,7 +272,7 @@ class TheaterActivity : BasicActivity(), POIItemEventListener{
 
             var body = JsonParser.parseString(favoriteJson.toString()) as JsonObject
 
-            Log.e("isstarcheck", body.toString())
+            //Log.e("isstarcheck", body.toString())
 
             favoritesViewModel.favoritesAdd(body)
             stariv.setImageResource(R.drawable.star_clicked)

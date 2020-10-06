@@ -36,7 +36,7 @@ class UpdatePwActivity : AppCompatActivity() {
 
     private fun observe(){
         mypageViewModel.checkMessage.observe(this, Observer {
-            Log.e("TEST",it)
+            //Log.e("TEST",it)
             if(it == "인증 성공"){
                 checkBoolean = true
                 if(checkBoolean){
@@ -53,7 +53,7 @@ class UpdatePwActivity : AppCompatActivity() {
             }
         })
         mypageViewModel.successMessage.observe(this, Observer {
-            Log.e("TEST",it)
+            //Log.e("TEST",it)
             if(it == "비밀번호 재설정 성공"){
                 Toast.makeText(this,it,Toast.LENGTH_LONG).show()
                 val intent = Intent(this, BottomTabActivity::class.java)

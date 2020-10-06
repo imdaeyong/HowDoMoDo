@@ -142,7 +142,7 @@ class MypageActivity : AppCompatActivity() {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
         mypageViewModel.successMessage.observe(this, Observer {
-            Log.e("TEST",it)
+            //Log.e("TEST",it)
             if (it == "회원 정보 수정 성공") {
                 val intent = Intent(this, BottomTabActivity::class.java)
                 UserCollection.userName = act_mypage_update_et_name.text.toString()

@@ -22,13 +22,13 @@ class FindPwActivity : AppCompatActivity() {
         act_find_pw_btn.setOnClickListener{
             var email = act_find_pw_et_id.text.toString()
             var name = act_find_pw_et_name.text.toString()
-            Log.e("TEST1",email+" "+name)
+            //Log.e("TEST1",email+" "+name)
             loginViewModel.findPW(email,name)
         }
     }
     private fun observe() {
         loginViewModel.tempPw.observe(this, Observer {
-            Log.e("Final","??")
+            //Log.e("Final","??")
             var dialog = AlertDialog.Builder(this)
             dialog.setTitle("임시 비밀번호")
             dialog.setMessage(it)

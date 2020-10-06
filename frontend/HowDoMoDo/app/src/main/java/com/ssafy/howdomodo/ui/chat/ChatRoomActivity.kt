@@ -77,7 +77,7 @@ class ChatRoomActivity: AppCompatActivity() {
             try {
                 userId.put("username", preferences.getString("name", "") + " Connected")
                 userId.put("roomName", "room_example")
-                Log.e("username",preferences.getString("name", "") + " Connected")
+                //Log.e("username",preferences.getString("name", "") + " Connected")
 
                 //socket.emit은 메세지 전송임
                 mSocket.emit("connect user", userId)
@@ -104,7 +104,7 @@ class ChatRoomActivity: AppCompatActivity() {
             val profile_image: String
             val date_time: String
             try {
-                Log.e("asdasd", data.toString())
+                //Log.e("asdasd", data.toString())
                 name = data.getString("name")
                 script = data.getString("script")
                 profile_image = data.getString("profile_image")
@@ -114,7 +114,7 @@ class ChatRoomActivity: AppCompatActivity() {
                 val format = Chat(name, script, profile_image, date_time)
                 mAdapter.addItem(format)
                 mAdapter.notifyDataSetChanged()
-                Log.e("new me",name )
+                //Log.e("new me",name )
             } catch (e: Exception) {
                 return@Runnable
             }
@@ -168,8 +168,8 @@ class ChatRoomActivity: AppCompatActivity() {
         } catch (e: JSONException) {
             e.printStackTrace()
         }
-        Log.e("챗룸", "sendMessage: 1" + mSocket.emit("chat message", jsonObject))
-        Log.e("sendmmm",preferences.getString("name", "")!! )
+        //Log.e("챗룸", "sendMessage: 1" + mSocket.emit("chat message", jsonObject))
+        //Log.e("sendmmm",preferences.getString("name", "")!! )
 
     }
 

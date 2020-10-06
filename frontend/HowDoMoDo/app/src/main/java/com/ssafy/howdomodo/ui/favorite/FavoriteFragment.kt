@@ -60,14 +60,14 @@ class FavoriteFragment : Fragment() {
 
     fun observeData() {
         favoritesViewModel.favoritesError.observe(this, Observer {
-            Log.e("즐겨찾기", "favorites observe 오류")
+            //Log.e("즐겨찾기", "favorites observe 오류")
         })
         favoritesViewModel.favoritesResponse.observe(this, Observer {
             //영화 리스트 가져왔을떄.
 
-            Log.e("즐겨찾기", "observe접속")
+            //Log.e("즐겨찾기", "observe접속")
             if (it.status == 200) {
-                Log.e("즐겨찾기", "통신 성공적")
+                //Log.e("즐겨찾기", "통신 성공적")
 
                 if (it.data != null) {
                     favoritesList = it.data!!
@@ -98,7 +98,7 @@ class FavoriteFragment : Fragment() {
 
                         override fun starClick(position: Int, starImageView: ImageView) {
                             Toast.makeText(context, position.toString(), Toast.LENGTH_SHORT)
-                            Log.e("즐겨찾기 삭제", "starclick접속")
+                            //Log.e("즐겨찾기 삭제", "starclick접속")
                             isStarClicked(position, starImageView)
                         }
                     })

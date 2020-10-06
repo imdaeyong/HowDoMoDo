@@ -23,7 +23,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
             }
 
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                Log.e("TEST2", response.body()?.data?.userEmail.toString())
+                //Log.e("TEST2", response.body()?.data?.userEmail.toString())
                 if (response.body() != null) {
                     success(response.body()!!)
                 } else {
@@ -136,7 +136,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
         success: (SignUpResponse) -> Unit,
         fail: (Throwable) -> Unit
     ) {
-        Log.e("userNickCheck","들어옴"+nickname)
+        //Log.e("userNickCheck","들어옴"+nickname)
         api.userNickCheck(nickname).enqueue(object : Callback<SignUpResponse> {
             override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
                 fail(t)
@@ -147,7 +147,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                 response: Response<SignUpResponse>
             ) {
 
-                Log.e("userNickCheck","onResponse"+response.toString())
+                //Log.e("userNickCheck","onResponse"+response.toString())
                 success(response.body()!!)
             }
         })
@@ -162,12 +162,12 @@ class RemoteDataSourceImpl : RemoteDataSource {
         api.findPW(userEmail,userName).enqueue(object : Callback<PwResponse> {
 
             override fun onFailure(call: Call<PwResponse>, t: Throwable) {
-                Log.e("asdf",userEmail+" x")
+                //Log.e("asdf",userEmail+" x")
                 fail(t)
             }
 
             override fun onResponse(call: Call<PwResponse>, response: Response<PwResponse>) {
-                Log.e("asdf",userEmail+" o")
+                //Log.e("asdf",userEmail+" o")
                 if (response.body() != null) {
                     success(response.body()!!)
                 } else {
@@ -231,7 +231,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
     ) {
         api.getTheaters(siName,guName,userCode).enqueue(object : Callback<GetTheatersResponse> {
             override fun onFailure(call: Call<GetTheatersResponse>, t: Throwable) {
-                Log.e("remotedatasourceImpl", "failed!!!!")
+                //Log.e("remotedatasourceImpl", "failed!!!!")
                 fail(t)
             }
 
@@ -239,13 +239,13 @@ class RemoteDataSourceImpl : RemoteDataSource {
                 call: Call<GetTheatersResponse>,
                 response: Response<GetTheatersResponse>
             ) {
-                Log.e("remotedatasourceImpl", "onresponse join")
+                //Log.e("remotedatasourceImpl", "onresponse join")
 
                 if(response.body()!=null) {
-                    Log.e("remotedatasourceimpl", response.body().toString())
+                    //Log.e("remotedatasourceimpl", response.body().toString())
                     success(response.body()!!)
                 }else {
-                    Log.e("remotedatasourceimple","여기서에러임.")
+                    //Log.e("remotedatasourceimple","여기서에러임.")
                     fail(Exception("유효한 데이터가 아닙니다"))
                 }
             }
@@ -280,7 +280,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
     ){
         api.favoritesAdd(favoritesRequestBody).enqueue(object : Callback<FavoritesResponse> {
             override fun onFailure(call: Call<FavoritesResponse>, t: Throwable) {
-                Log.e("remotedatasourceimpl","즐겨찾기 추가 실패")
+                //Log.e("remotedatasourceimpl","즐겨찾기 추가 실패")
 
                 fail(t)
             }
@@ -289,7 +289,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                 call: Call<FavoritesResponse>,
                 response: Response<FavoritesResponse>
             ) {
-                Log.e("remotedatasourceimpl","즐겨찾기 추가 성공")
+                //Log.e("remotedatasourceimpl","즐겨찾기 추가 성공")
                 success(response.body()!!)
             }
         })
@@ -381,7 +381,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                     call: Call<GwanResponse>,
                     response: Response<GwanResponse>
                 ) {
-                    Log.e("qwe", response.body().toString())
+                    //Log.e("qwe", response.body().toString())
                     if (response.body()!!.status == 200) {
                         success(response.body()!!)
 
