@@ -278,12 +278,6 @@ MypageFragment : Fragment() {
                             }
                         }
                         dialog.start("탈퇴하시겠습니까?")
-
-
-//                        val builder = AlertDialog.Builder(view.context)
-//                        val dialogView =
-//                            layoutInflater.inflate(R.layout.item_mypage_delete_dialog, null)
-//                        builder.setView(dialogView).show()
                     }
                     "비밀번호 재설정" -> {
                         val intent = Intent(activity, UpdatePwActivity::class.java)
