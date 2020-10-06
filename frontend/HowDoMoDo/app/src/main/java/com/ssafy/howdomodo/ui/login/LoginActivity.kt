@@ -70,6 +70,11 @@ class LoginActivity : AppCompatActivity() {
                     editor.putString("userCode", it.data.userCode)
                     editor.commit()
                     Log.e("qwewq", "QWEqwe")
+                }else{
+                    sharedPreferences = getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
+                    val editor = sharedPreferences.edit()
+                    editor.clear()
+                    editor.commit()
                 }
 
                 startActivity(intent)
