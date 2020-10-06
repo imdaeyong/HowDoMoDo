@@ -134,6 +134,7 @@ class MovieSelectDialogFragment : DialogFragment() {
                     val intent = Intent(activity, SelectAreaActivity::class.java)
                     ObjectMovie.movieTitle = movieTitle
                     startActivity(intent)
+                    dismiss()
                 }else{
                     Toast.makeText(view!!.context, "취소", Toast.LENGTH_SHORT).show()
                 }

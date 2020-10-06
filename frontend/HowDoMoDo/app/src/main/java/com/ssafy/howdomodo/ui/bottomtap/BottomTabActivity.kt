@@ -15,12 +15,12 @@ class BottomTabActivity : AppCompatActivity() {
     var flag = 0
     var token = ""
     var myUniv = 1
-    override fun onRestart() {
-        super.onRestart()
-        val intnet = Intent(this,BottomTabActivity::class.java)
-        startActivity(intnet)
-        finish()
-    }
+//    override fun onRestart() {
+//        super.onRestart()
+//        val intnet = Intent(this,BottomTabActivity::class.java)
+//        startActivity(intnet)
+//        finish()
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
