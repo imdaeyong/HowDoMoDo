@@ -11,10 +11,24 @@
         android:layout_marginStart="34dp"
         android:fontFamily="@font/noto_sans_kr_medium"
         android:lineSpacingExtra="6sp"
-        android:text="기성복점 73회"
+        android:text="기성복점"
         android:textColor="#333333"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_store_detail_tv_cnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:fontFamily="@font/noto_sans_kr_regular"
+        android:lineSpacingExtra="6sp"
+        android:text="73회"
+        android:textColor="#333333"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -40,7 +40,8 @@ class StoreDetailViewHolder(itemView: View) :
 
 
     fun bind(storeDetail: Down) {
-        itemView.item_store_detail_tv_text.text = storeDetail.jong + " " + storeDetail.cnt + "회"
+        itemView.item_store_detail_tv_text.text = storeDetail.jong
+        itemView.item_store_detail_tv_cnt.text = "${storeDetail.cnt}회"
     }
 
 }
