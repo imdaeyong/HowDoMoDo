@@ -7,17 +7,16 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.howdomodo.R
-import com.ssafy.howdomodo.data.datasource.model.Gugun
+import com.ssafy.howdomodo.data.datasource.model.Region
 import kotlinx.android.synthetic.main.item_gugun.view.*
-
 
 
 class GugunAdapter(private val onclick: GugunViewHolder.GugunClickListener) :
     RecyclerView.Adapter<GugunViewHolder>() {
-    private val gugunData = ArrayList<Gugun>()
+    val cityData = ArrayList<Region>()
 
-    fun setGugunData(data: List<Gugun>) {
-        with(gugunData) {
+    fun setGuGunData(data: List<Region>) {
+        with(cityData) {
             clear()
             addAll(data)
         }
@@ -25,12 +24,12 @@ class GugunAdapter(private val onclick: GugunViewHolder.GugunClickListener) :
     }
 
     fun getClicked(position: Int): Boolean {
-        return gugunData[position].isClicked
+        return cityData[position].isClicked
     }
 
-    fun getClickedGugun(): Int {
-        for (i in gugunData.indices) {
-            if (gugunData[i].isClicked) {
+    fun getClickedGuGun(): Int {
+        for (i in cityData.indices) {
+            if (cityData[i].isClicked) {
                 return i
             }
         }
@@ -38,7 +37,7 @@ class GugunAdapter(private val onclick: GugunViewHolder.GugunClickListener) :
     }
 
     fun setClicked(position: Int, status: Boolean) {
-        gugunData[position].isClicked = status
+        cityData[position].isClicked = status
         notifyDataSetChanged()
     }
 
@@ -49,11 +48,11 @@ class GugunAdapter(private val onclick: GugunViewHolder.GugunClickListener) :
     }
 
     override fun getItemCount(): Int {
-        return gugunData.size
+        return cityData.size
     }
 
     override fun onBindViewHolder(holder: GugunViewHolder, position: Int) {
-        holder.bind(gugunData[position])
+        holder.bind(cityData[position])
     }
 }
 
@@ -73,8 +72,8 @@ class GugunViewHolder(
         }
     }
 
-    fun bind(data: Gugun) {
-        var gugun = data.gugun
+    fun bind(data: Region) {
+        var gugun = data.name
         itemView.item_gugun_tv_gugun.text = gugun
 
         if (data.isClicked) {

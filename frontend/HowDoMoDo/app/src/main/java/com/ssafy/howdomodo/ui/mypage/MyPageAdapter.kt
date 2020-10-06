@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.howdomodo.R
+import com.ssafy.howdomodo.`object`.UserCollection
+import kotlinx.android.synthetic.main.fragment_mypage.view.*
 import kotlinx.android.synthetic.main.item_my_page.view.*
 import kotlinx.android.synthetic.main.mypage_top.view.*
 
@@ -12,7 +14,7 @@ class MyPageAdapter(private val clickListener: MyPageViewHolder.ClickListener) :
     RecyclerView.Adapter<MyPageViewHolder>() {
 
     val mineList =
-        listOf<String>("로그아웃", "오픈소스 라이선스", "이용약관", "개인정보처리방침", "회원탈퇴")
+        listOf<String>("로그아웃", "오픈소스 라이선스", "이용약관", "개인정보처리방침","비밀번호 재설정" ,"회원탈퇴",)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyPageViewHolder {
         val inflatedView =

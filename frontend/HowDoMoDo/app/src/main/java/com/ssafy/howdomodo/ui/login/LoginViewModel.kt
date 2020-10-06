@@ -9,16 +9,25 @@ import com.ssafy.howdomodo.data.repository.LoginRepository
 
 class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
     val loginResponse = MutableLiveData<LoginResponse>()
+    val tempPw = MutableLiveData<String>()
     val getHeader = MutableLiveData<String>()
     val loginError = MutableLiveData<String>()
+    val findError = MutableLiveData<String>()
 
     fun login(loginRequestBody: JsonObject) {
-        Log.e("TEST1",loginRequestBody.get("userPw").toString())
         loginRepository.login(loginRequestBody, success = { response ->
             loginResponse.value = response
         }, fail = {
-            Log.e("TEST1","실패")
             loginError.value = it.message
+        })
+    }
+
+    fun findPW(userEmail: String, userName: String) {
+        loginRepository.findPW(userEmail,userName,success = {response ->
+            tempPw.value = response.data
+
+        }, fail = {
+            findError.value = it.message
         })
     }
 

@@ -41,4 +41,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="극장 선택" />
+    <Button
+        android:id="@+id/act_main_btn_Chat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="채팅 TEST" />
+    <Button
+        android:id="@+id/act_main_btn_theater_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="상영 영화 정보" />
 </LinearLayout>

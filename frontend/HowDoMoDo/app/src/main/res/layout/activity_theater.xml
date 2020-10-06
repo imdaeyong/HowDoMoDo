@@ -9,7 +9,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/act_theater_cl_btn_next"
+        app:layout_constraintBottom_toTopOf="@id/act_theater_cl_theater_selected"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -50,6 +50,18 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!--맵 껴넣는곳!!!!-->
+            <RelativeLayout
+                android:id="@+id/act_theater_rl_map_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/act_theater_cl_top">
+
+
+            </RelativeLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/now_place"
                 android:layout_width="320dp"
@@ -137,7 +149,7 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/place_recyclerview"
+                android:id="@+id/act_theater_rv_theaters"
                 android:layout_width="match_parent"
                 android:layout_height="270dp"
                 android:layout_marginTop="10dp"
@@ -150,18 +162,19 @@
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/act_theater_cl_btn_next"
+        android:id="@+id/act_theater_cl_theater_selected"
         android:layout_width="match_parent"
         android:layout_height="56dp"
+        android:clickable="false"
         android:background="@drawable/next_btn_not_complete"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
-            android:id="@+id/act_theater_bt_theater_selected"
+            android:id="@+id/act_theater_tv_theater_selected"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:lineSpacingExtra="8sp"
-            android:text="영화관 선택"
+            android:text="영화관 선택 완료"
             android:textColor="#ffffff"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"

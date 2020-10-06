@@ -31,7 +31,7 @@ class MainAdapter(private val clickListener: MainViewHolder.ClickListener) :
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val item = movieData[position]
         holder.apply {
-            Log.e("MainAdapter","MainAdapter")
+            //Log.e("MainAdapter","MainAdapter")
             bind(item)
         }
     }
