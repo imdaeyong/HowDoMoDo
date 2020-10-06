@@ -1,5 +1,6 @@
 package com.ssafy.howdomodo.ui.gwanSelect
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -11,11 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.`object`.ObjectMovie
 import com.ssafy.howdomodo.`object`.TheaterCollection
+import com.ssafy.howdomodo.ui.BasicActivity
+import com.ssafy.howdomodo.ui.theater.TicketInfoActivity
 import kotlinx.android.synthetic.main.activity_gwan_select.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 
-class GwanSelectActivity : AppCompatActivity() {
+class GwanSelectActivity : BasicActivity() {
 
     private val viewModel: GwanSelectViewModel by viewModel()
     lateinit var dayAdapter: DayAdapter
@@ -23,7 +26,11 @@ class GwanSelectActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gwan_select)
+        actList.add(this)
 
+        act_gwan_iv_back.setOnClickListener{
+            finish()
+        }
 
         gwanAdapter = GwanAdapter()
         act_gwan_rv_gwan.layoutManager = LinearLayoutManager(this)
@@ -94,9 +101,9 @@ class GwanSelectActivity : AppCompatActivity() {
         })
 
         act_gwan_cl_btn_next.setOnClickListener {
-            Log.e("cl!!", "asd")
+            var intent = Intent(this,TicketInfoActivity::class.java)
+            startActivity(intent)
         }
-
         act_gwan_cl_btn_next.isClickable = false
 
     }

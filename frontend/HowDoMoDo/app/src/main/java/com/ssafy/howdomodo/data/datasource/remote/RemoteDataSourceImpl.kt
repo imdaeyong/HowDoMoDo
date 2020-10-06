@@ -110,12 +110,12 @@ class RemoteDataSourceImpl : RemoteDataSource {
         })
     }
 
-    override fun userNickCheck(
-        userNick: String,
+    override fun userEmailCheck(
+        email: String,
         success: (SignUpResponse) -> Unit,
         fail: (Throwable) -> Unit
     ) {
-        api.userNickCheck(userNick).enqueue(object : Callback<SignUpResponse> {
+        api.userEmailCheck(email).enqueue(object : Callback<SignUpResponse> {
             override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
                 fail(t)
             }
@@ -124,6 +124,30 @@ class RemoteDataSourceImpl : RemoteDataSource {
                 call: Call<SignUpResponse>,
                 response: Response<SignUpResponse>
             ) {
+                success(response.body()!!)
+            }
+        })
+    }
+
+
+
+    override fun userNickCheck(
+        nickname: String,
+        success: (SignUpResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    ) {
+        Log.e("userNickCheck","들어옴"+nickname)
+        api.userNickCheck(nickname).enqueue(object : Callback<SignUpResponse> {
+            override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
+                fail(t)
+            }
+
+            override fun onResponse(
+                call: Call<SignUpResponse>,
+                response: Response<SignUpResponse>
+            ) {
+
+                Log.e("userNickCheck","onResponse"+response.toString())
                 success(response.body()!!)
             }
         })
@@ -192,6 +216,12 @@ class RemoteDataSourceImpl : RemoteDataSource {
         })
     }
 
+
+    override fun nickDuplicateCheck(
+        userNick: String,
+        success: (SignUpResponse) -> Unit,
+        fail: (Throwable) -> Unit
+    ){}
     override fun getTheaters(
         siName:String,
         guName:String,

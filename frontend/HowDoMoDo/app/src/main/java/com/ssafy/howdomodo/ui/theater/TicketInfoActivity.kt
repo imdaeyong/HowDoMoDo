@@ -4,18 +4,23 @@ import android.content.Intent
 import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.`object`.TheaterCollection
+import com.ssafy.howdomodo.ui.BasicActivity
+import com.ssafy.howdomodo.ui.last.LastActivity
 import kotlinx.android.synthetic.main.activity_ticket_info.*
 
 
-class TicketInfoActivity : AppCompatActivity() {
+class TicketInfoActivity : BasicActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ticket_info)
+        actList.add(this)
+
         val cgv = "com.cgv.android.movieapp"
         val lotte = "kr.co.lottecinema.lcm"
         val mega = "com.megabox.mop"
@@ -35,6 +40,11 @@ class TicketInfoActivity : AppCompatActivity() {
 
         act_ticket_info_cl_btn_next.setOnClickListener{
             Log.e("TEST",TheaterCollection.mvTheater)
+
+            var sintent= Intent(this, LastActivity::class.java)
+            startActivity(sintent)
+
+
             if(TheaterCollection.mvTheater.contains("CGV")){
                 if(getPackageList(cgv)){
                     val intent = this.getPackageManager().getLaunchIntentForPackage(cgv);
@@ -59,13 +69,21 @@ class TicketInfoActivity : AppCompatActivity() {
                 if(getPackageList(mega)){
                     val intent = this.getPackageManager().getLaunchIntentForPackage(mega);
                     intent!!.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    startActivity(intent)
                 }else{
                     val url = "https://play.google.com/store/apps/details?id=" + mega +"&hl=ko"
                     val i = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                     startActivity(i)
                 }
             }
+
+//            actFinish()
+
+//            val handler = Handler()
+//            handler.postDelayed({
+//                var intent= Intent(this, LastActivity::class.java)
+//                startActivity(intent)
+//            },1000)
         }
     }
     fun getPackageList(url: String): Boolean {

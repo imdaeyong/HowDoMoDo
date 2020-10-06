@@ -16,6 +16,7 @@ import com.ssafy.howdomodo.`object`.TheaterCollection
 import com.ssafy.howdomodo.`object`.UserCollection
 import com.ssafy.howdomodo.data.datasource.model.Theater
 import com.ssafy.howdomodo.ui.Favorites.FavoritesAdapter
+import com.ssafy.howdomodo.ui.theater.TheaterActivity
 import kotlinx.android.synthetic.main.fragment_favorite.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -46,7 +47,7 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if(UserCollection.userCode!=null && UserCollection.userCode!=""){
+        if (UserCollection.userCode != null && UserCollection.userCode != "") {
             userCode = UserCollection.userCode.toInt()
         }
 //        favoritesViewModel.favoritesInfo(UserCollection.userCode.toInt())
@@ -78,10 +79,23 @@ class FavoriteFragment : Fragment() {
                     object :
                         FavoritesAdapter.FavoritesViewHolder.FavoritesClickListener {
                         override fun onclick(position: Int, textView: TextView) {
-                            TheaterCollection.mvTheater = favoritesList[position].theaterBrand + " " + favoritesList[position].theaterName
-                            TheaterCollection.mvTheaterName = favoritesList[position].theaterBrand
+                            var theaterName = favoritesList[position].theaterBrand.trim() + " " + favoritesList[position].theaterName
+
+                            TheaterCollection.mvTheater = theaterName
+
+                            if(theaterName.contains("메가박스")) {
+                                TheaterCollection.mvTheaterName = "mega"
+                            }else if(theaterName.contains("롯데시네마")){
+                                TheaterCollection.mvTheaterName = "lotte"
+                            }else {
+                                TheaterCollection.mvTheaterName = "cgv"
+                            }
+
+                            val movieSelecDialogFragment = MovieSelectDialogFragment().getInstance()
+                            movieSelecDialogFragment.show(fragmentManager!!, "movie_select")
 
                         }
+
                         override fun starClick(position: Int, starImageView: ImageView) {
                             Toast.makeText(context, position.toString(), Toast.LENGTH_SHORT)
                             Log.e("즐겨찾기 삭제", "starclick접속")
@@ -106,7 +120,11 @@ class FavoriteFragment : Fragment() {
     fun isStarClicked(position: Int, starImageView: ImageView) {
         var f_t = favoritesList[position]
         starImageView.setImageResource(R.drawable.star_unclicked)
-        Toast.makeText(this.context, favoritesList[position].theaterBrand+favoritesList[position].theaterName+"즐겨찾기 삭제!",Toast.LENGTH_SHORT)
+        Toast.makeText(
+            this.context,
+            favoritesList[position].theaterBrand + favoritesList[position].theaterName + "즐겨찾기 삭제!",
+            Toast.LENGTH_SHORT
+        )
         favoritesViewModel.favoritesDelete(userCode, f_t.theaterId)
         favoritesList.removeAt(position)
         favoritesViewModel.favoritesInfo(userCode)

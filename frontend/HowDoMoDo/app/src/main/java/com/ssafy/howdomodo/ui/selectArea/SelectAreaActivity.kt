@@ -14,12 +14,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.data.datasource.model.Store
 import com.ssafy.howdomodo.data.datasource.model.StoreDetail
+import com.ssafy.howdomodo.ui.BasicActivity
 import com.ssafy.howdomodo.ui.theater.TheaterActivity
 import kotlinx.android.synthetic.main.activity_select_area.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class SelectAreaActivity : AppCompatActivity() {
+class SelectAreaActivity : BasicActivity() {
 
     companion object {
         val boolList = arrayListOf<Boolean>(false, false)
@@ -87,6 +88,12 @@ class SelectAreaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_area)
+
+        actList.add(this)
+
+        act_select_area_iv_back.setOnClickListener{
+            finish()
+        }
 
         boolList[0] = false
         boolList[1] = false
@@ -186,6 +193,7 @@ class SelectAreaActivity : AppCompatActivity() {
             Log.e("gu", guName)
             startActivity(intent)
         }
+        act_select_area_cl_btn_next.isClickable=false
 
     }
 

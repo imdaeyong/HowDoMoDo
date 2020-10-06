@@ -36,9 +36,15 @@ interface NetworkService {
     ): Call<SignUpResponse>
 
     // 닉네임 중복 체크
-    @GET("/users/check/{nickName}")
+    @GET("/users/check/{nickname}")
     fun userNickCheck(
-        @Path("nickName") nickName: String
+        @Path("nickname") nickname: String
+    ): Call<SignUpResponse>
+
+    // 이메일 중복 체크
+    @GET("/users/join/{email}")
+    fun userEmailCheck(
+        @Path("email") email: String
     ): Call<SignUpResponse>
 
     // 비밀번호 찾기
