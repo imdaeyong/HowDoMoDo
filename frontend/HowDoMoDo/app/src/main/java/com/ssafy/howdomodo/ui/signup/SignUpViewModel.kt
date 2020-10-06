@@ -8,12 +8,14 @@ import com.ssafy.howdomodo.data.repository.SignUpRepository
 
 class SignUpViewModel(private val signUpRepository: SignUpRepository) : ViewModel() {
     val errorToast = MutableLiveData<String>()
-    val successMessage = MutableLiveData<String>()
+    val signUpSuccessMessage = MutableLiveData<String>()
+    val emailCheckSuccessMessage = MutableLiveData<String>()
+    val nickCheckSuccessMessage = MutableLiveData<String>()
 
     fun signUp(signUpRequestBody: JsonObject) {
         signUpRepository.signUp(signUpRequestBody,
             success = {
-                successMessage.value = it.message
+                signUpSuccessMessage.value = it.message
             },
             fail = {
                 errorToast.value = it.message
@@ -23,9 +25,8 @@ class SignUpViewModel(private val signUpRepository: SignUpRepository) : ViewMode
     fun userEmailCheck(email: String) {
         signUpRepository.userEmailCheck(email,
             success = {
-
-                successMessage.value = it.message
-                Log.e("userEmailCheck","success"+successMessage.value)
+                emailCheckSuccessMessage.value = it.message
+                Log.e("userEmailCheck","success"+emailCheckSuccessMessage.value)
 
             },
             fail = {
@@ -38,8 +39,8 @@ class SignUpViewModel(private val signUpRepository: SignUpRepository) : ViewMode
     fun userNickCheck(nickname: String) {
         signUpRepository.userNickCheck(nickname,
             success = {
-               successMessage.value = it.message
-                Log.e("userNickCheck","success"+successMessage.value)
+                nickCheckSuccessMessage.value = it.message
+                Log.e("userNickCheck","success"+nickCheckSuccessMessage.value)
 
             },
             fail = {
