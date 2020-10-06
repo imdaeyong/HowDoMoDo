@@ -1,7 +1,8 @@
 package com.ssafy.howdomodo.ui.login
 
-import  android.content.Context
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,7 +16,6 @@ import com.google.gson.JsonParser
 import com.ssafy.howdomodo.R
 import com.ssafy.howdomodo.`object`.UserCollection
 import com.ssafy.howdomodo.ui.bottomtap.BottomTabActivity
-import com.ssafy.howdomodo.ui.main.MainActivity
 import com.ssafy.howdomodo.ui.signup.SignupActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONObject
@@ -23,6 +23,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
     private val loginViewModel: LoginViewModel by viewModel()
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +60,23 @@ class LoginActivity : AppCompatActivity() {
                 UserCollection.userName = it.data.userName
                 UserCollection.userNick = it.data.userNick
                 UserCollection.userCode = it.data.userCode
+
+                if (act_login_cb_auto_login.isChecked) {
+                    sharedPreferences = getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
+                    val editor = sharedPreferences.edit()
+                    editor.putString("userEmail", it.data.userEmail)
+                    editor.putString("userName", it.data.userName)
+                    editor.putString("userNick", it.data.userNick)
+                    editor.putString("userCode", it.data.userCode)
+                    editor.commit()
+                    Log.e("qwewq", "QWEqwe")
+                }else{
+                    sharedPreferences = getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
+                    val editor = sharedPreferences.edit()
+                    editor.clear()
+                    editor.commit()
+                }
+
                 startActivity(intent)
                 finish()
             } else {
