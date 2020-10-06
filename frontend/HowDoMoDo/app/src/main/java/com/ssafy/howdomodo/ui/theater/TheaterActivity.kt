@@ -85,17 +85,17 @@ class TheaterActivity : BasicActivity(), POIItemEventListener{
         if (intent.hasExtra("siName")) {
             selectSiName = intent.getStringExtra("siName")!!
             selectGuName = intent.getStringExtra("guName")!!
-            Toast.makeText(
-                this@TheaterActivity,
-                intent.getStringExtra("siName") + intent.getStringExtra("guName"),
-                Toast.LENGTH_SHORT
-            )
-                .show()
+//            Toast.makeText(
+//                this@TheaterActivity,
+//                intent.getStringExtra("siName") + intent.getStringExtra("guName"),
+//                Toast.LENGTH_SHORT
+//            )
+//                .show()
         } else {
-            Log.e(
-                "유사에러",
-                "이전 페이지에서 넘어온 시도데이터가 없음 - > 디폴트 검색!" + selectSiName + selectGuName + userCode
-            )
+            //Log.e(
+//                "유사에러",
+//                "이전 페이지에서 넘어온 시도데이터가 없음 - > 디폴트 검색!" + selectSiName + selectGuName + userCode
+//            )
         }
 
         //현재위치 불러오기.
@@ -130,7 +130,7 @@ class TheaterActivity : BasicActivity(), POIItemEventListener{
         observeData()
 
         act_theater_cl_theater_selected.setOnClickListener {
-            Log.e("clicked!",TheaterCollection.mvTheater)
+            //Log.e("clicked!",TheaterCollection.mvTheater)
             val intent = Intent(this, GwanSelectActivity::class.java)
             startActivity(intent)
         }
@@ -144,7 +144,7 @@ class TheaterActivity : BasicActivity(), POIItemEventListener{
         getTheatersViewModel.getTheatersResponse.observe(this, Observer {
             //영화 리스트 가져왔을떄.
             if (it.status == 200) {
-                Toast.makeText(this, "영화관 리스트 출력!", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, "영화관 리스트 출력!", Toast.LENGTH_SHORT).show()
 
                 theaterAdapter = TheaterAdapter(
                     object :
@@ -172,12 +172,12 @@ class TheaterActivity : BasicActivity(), POIItemEventListener{
                         }
 
                         override fun starClick(position: Int, starImageView: ImageView) {
-                            Toast.makeText(
-                                this@TheaterActivity,
-                                position.toString(),
-                                Toast.LENGTH_SHORT
-                            )
-                                .show()
+//                            Toast.makeText(
+//                                this@TheaterActivity,
+//                                position.toString(),
+//                                Toast.LENGTH_SHORT
+//                            )
+//                                .show()
                             theaterList[position].fav = !theaterList[position].fav
                             isStarCheck(position, starImageView)
                         }
@@ -247,7 +247,7 @@ class TheaterActivity : BasicActivity(), POIItemEventListener{
 
 
             } else {
-                Toast.makeText(this, "TheaterActivity observeData 에러!", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, "TheaterActivity observeData 에러!", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -272,7 +272,7 @@ class TheaterActivity : BasicActivity(), POIItemEventListener{
 
             var body = JsonParser.parseString(favoriteJson.toString()) as JsonObject
 
-            Log.e("isstarcheck", body.toString())
+            //Log.e("isstarcheck", body.toString())
 
             favoritesViewModel.favoritesAdd(body)
             stariv.setImageResource(R.drawable.star_clicked)
@@ -357,10 +357,10 @@ class TheaterActivity : BasicActivity(), POIItemEventListener{
     }
 
     override fun onCalloutBalloonOfPOIItemTouched(mapView: MapView?, mappoiItem: MapPOIItem?) {
-        Toast.makeText(    this,
-            "Clicked " + mappoiItem?.getItemName() + " Callout Balloon",
-            Toast.LENGTH_SHORT
-        ).show()
+//        Toast.makeText(    this,
+//            "Clicked " + mappoiItem?.getItemName() + " Callout Balloon",
+//            Toast.LENGTH_SHORT
+//        ).show()
 
     }
 

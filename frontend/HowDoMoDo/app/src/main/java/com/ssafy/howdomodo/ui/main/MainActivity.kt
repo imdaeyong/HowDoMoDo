@@ -72,11 +72,11 @@ class MainActivity : AppCompatActivity() {
                 var md = MessageDigest.getInstance("SHA")
                 md.update(signature.toByteArray())
                 val something = String(Base64.encode(md.digest(), 0))
-                Log.e("Hash key", something)
+                //Log.e("Hash key", something)
             }
         } catch (e: Exception) {
             // TODO Auto-generated catch block
-            Log.e("name not found", e.toString())
+            //Log.e("name not found", e.toString())
         }
     }
 }

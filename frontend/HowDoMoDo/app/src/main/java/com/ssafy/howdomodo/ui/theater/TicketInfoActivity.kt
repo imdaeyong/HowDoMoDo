@@ -39,7 +39,7 @@ class TicketInfoActivity : BasicActivity() {
         act_ticket_info_tv_mvtitle.setText(TheaterCollection.mvTitle)
 
         act_ticket_info_cl_btn_next.setOnClickListener{
-            Log.e("TEST",TheaterCollection.mvTheater)
+            //Log.e("TEST",TheaterCollection.mvTheater)
 
             var sintent= Intent(this, LastActivity::class.java)
             startActivity(sintent)

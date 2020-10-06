@@ -65,7 +65,7 @@ class MypageActivity : AppCompatActivity() {
             maleCheck=true
             act_mypage_update_cl_gender_male.setBackgroundResource(R.drawable.item_sido_selected)
             act_mypage_update_tv_gender_male.setTextColor(Color.parseColor("#fff4eb"))
-            Toast.makeText(this, "남자클릭",Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "남자클릭",Toast.LENGTH_SHORT).show()
 
             if (femaleCheck) {
                 femaleCheck=false
@@ -79,7 +79,7 @@ class MypageActivity : AppCompatActivity() {
             femaleCheck=true
             act_mypage_update_cl_gender_female.setBackgroundResource(R.drawable.item_sido_selected)
             act_mypage_update_tv_gender_female.setTextColor(Color.parseColor("#fff4eb"))
-            Toast.makeText(this, "여자클릭",Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "여자클릭",Toast.LENGTH_SHORT).show()
 
             if (maleCheck) {
                 maleCheck=false
@@ -142,7 +142,7 @@ class MypageActivity : AppCompatActivity() {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
         mypageViewModel.successMessage.observe(this, Observer {
-            Log.e("TEST",it)
+            //Log.e("TEST",it)
             if (it == "회원 정보 수정 성공") {
                 val intent = Intent(this, BottomTabActivity::class.java)
                 UserCollection.userName = act_mypage_update_et_name.text.toString()

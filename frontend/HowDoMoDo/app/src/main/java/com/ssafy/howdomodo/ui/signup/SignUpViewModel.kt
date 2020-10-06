@@ -23,11 +23,11 @@ class SignUpViewModel(private val signUpRepository: SignUpRepository) : ViewMode
     fun userEmailCheck(email: String) {
         signUpRepository.userEmailCheck(email,
             success = {
-                Log.e("userEmailCheck","success"+successMessage.value)
+                //Log.e("userEmailCheck","success"+successMessage.value)
                 successMessage.value = it.message
             },
             fail = {
-                Log.e("userEmailCheck","fail"+email)
+                //Log.e("userEmailCheck","fail"+email)
 
                 errorToast.value = it.message
             })
@@ -36,11 +36,11 @@ class SignUpViewModel(private val signUpRepository: SignUpRepository) : ViewMode
     fun userNickCheck(nickname: String) {
         signUpRepository.userNickCheck(nickname,
             success = {
-                Log.e("userNickCheck","success"+successMessage.value)
+                //Log.e("userNickCheck","success"+successMessage.value)
                 successMessage.value = it.message
             },
             fail = {
-                Log.e("userNickCheck","fail"+nickname)
+                //Log.e("userNickCheck","fail"+nickname)
                 errorToast.value = it.message
             })
     }

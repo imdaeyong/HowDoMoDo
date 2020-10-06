@@ -280,6 +280,11 @@ class MypageFragment : Fragment() {
                         dialog.setOnOKClickedListener { content ->
                             if (content == "확인") {
                                 // 탈퇴
+                                sharedPreferences =
+                                    activity!!.getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
+                                val editor = sharedPreferences.edit()
+                                editor.clear()
+                                editor.commit()
                                 mypageViewModel.userDelete(UserCollection.userCode.toInt())
                             } else {
                                 Toast.makeText(view.context, "취소", Toast.LENGTH_SHORT).show()
