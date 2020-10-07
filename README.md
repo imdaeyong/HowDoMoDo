@@ -239,10 +239,41 @@
 ![image](https://user-images.githubusercontent.com/45157374/95287243-593ea780-08a0-11eb-9b9c-9311a42c1313.png)
 
 
-
 - 현재 상영중인 영화리스트를 상단에 가로 형태로 보여줍니다. (네이버 영화 크롤링)
 
 - 하단에 영화 제목으로 네이버 블로그 검색결과를 보여줍니다. -> 영화의 후기를 참조 할 수 있습니다.
 
-- 예매하러가기 클릭 시 예매 플로우로 들어가게 됩니다.
+- 예매하러가기 클릭 시 영화 긍부정 데이터를 보여주게 됩니다.
 
+<br>
+
+
+#### 영화 긍부정 데이터 분석 화면
+
+![Screenshot_20201007-204701_HowDoMoDo](https://user-images.githubusercontent.com/45157374/95327869-a9892a00-08df-11eb-9ba4-2f835fa8883a.jpg)
+
+- 해당 영화를 선택하기 전에 사용자에게 관객의 긍부정 데이터를 제공함으로서 영화 선택에 도움을 줍니다.
+
+- 댓글 빅데이터를 분석하여 긍부정 데이터 출력
+
+<br>
+
+
+#### 장소 선택 및 카드데이터 분석 결과 출력 화면
+
+![Screenshot_20201007-204712_HowDoMoDo](https://user-images.githubusercontent.com/45157374/95328101-01c02c00-08e0-11eb-9af3-b4a79e82b713.jpg)
+
+- 시/도, 구/군을 선택하여 사용자가 영화 관람을 원하는 장소를 선택합니다.
+
+- 해당 장소에서 사용된 카드 데이터를 분석하여 사용자에게 어떠한 활동이 많이 아루어졌는지 보여줍니다.
+
+- 그 결과 사용자가 원하는 활동이 있는 장소를 고를 수 있도록 도와줍니다.
+
+<br>
+
+
+
+#### 영화관 선택 화면
+
+![Screenshot_20201007-204743_HowDoMoDo](https://user-images.githubusercontent.com/45157374/95328325-611e3c00-08e0-11eb-923d-cc16f5b40d6d.jpg)
+![Screenshot_20201007-204805_HowDoMoDo](https://user-images.githubusercontent.com/45157374/95328339-65e2f000-08e0-11eb-8a9a-0d26e605ec66.jpg)
