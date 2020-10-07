@@ -28,10 +28,11 @@ class MainViewModel (private val naverRepository: NaverRepository) : ViewModel()
                 blogData.value = it.items
             }
         }, fail = {
-            Log.e("error is :", it.toString())
+            //Log.e("error is :", it.toString())
             errorToast.value = it
         })
         loading.value = false
     }
+
 
 }

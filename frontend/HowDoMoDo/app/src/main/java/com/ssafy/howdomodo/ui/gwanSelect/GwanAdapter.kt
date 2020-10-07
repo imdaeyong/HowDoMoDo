@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ssafy.howdomodo.R
-import com.ssafy.howdomodo.data.datasource.model.Gwan
+import com.ssafy.howdomodo.`object`.TheaterCollection
+import com.ssafy.howdomodo.data.datasource.model.TimeTable
 import kotlinx.android.synthetic.main.item_gwan.view.*
 
 class GwanAdapter : RecyclerView.Adapter<GwanViewHolder>() {
     companion object {
-        var gwanData = ArrayList<Gwan>()
+        var gwanData = ArrayList<TimeTable>()
     }
 
     private lateinit var listener: GwanViewHolder.ClickListener
@@ -23,10 +24,10 @@ class GwanAdapter : RecyclerView.Adapter<GwanViewHolder>() {
 
     fun getClickedMovieTime(): ArrayList<Int>? {
         val list = ArrayList<Int>()
-        Log.e("data:",GwanAdapter.gwanData.toString())
+        //Log.e("data:",GwanAdapter.gwanData.toString())
         for (i in GwanAdapter.gwanData.indices) {
-            for (j in GwanAdapter.gwanData[i].times.indices) {
-                if (GwanAdapter.gwanData[i].times[j].isClicked) {
+            for (j in GwanAdapter.gwanData[i].timeList.indices) {
+                if (GwanAdapter.gwanData[i].timeList[j].isClicked) {
                     list.add(i)
                     list.add(j)
                     return list
@@ -37,11 +38,11 @@ class GwanAdapter : RecyclerView.Adapter<GwanViewHolder>() {
     }
 
     fun setClicked(parentPosition: Int, position: Int, status: Boolean) {
-        GwanAdapter.gwanData[parentPosition].times[position].isClicked = status
+        GwanAdapter.gwanData[parentPosition].timeList[position].isClicked = status
         notifyDataSetChanged()
     }
 
-    fun setGwanData(newData: List<Gwan>) {
+    fun setGwanData(newData: List<TimeTable>) {
         with(gwanData) {
             clear()
             addAll(newData)
@@ -71,32 +72,36 @@ class GwanViewHolder(itemView: View, private val listener: ClickListener) : Recy
     }
 
     lateinit var movieTimeAdapter: MovieTimeAdapter
-    fun bind(data: Gwan, position: Int) {
-        movieTimeAdapter = MovieTimeAdapter(position, object : MovieTimeViewHolder.TimeClickListener {
-            override fun timeClick(position: Int, parentPosition: Int) {
-                if (!movieTimeAdapter.getClicked(parentPosition, position)) {
-                    val clicked = movieTimeAdapter.getClickedMovieTime()
-                    if (clicked == null) {
-                        movieTimeAdapter.setClicked(parentPosition, position, true)
+    fun bind(data: TimeTable, position: Int) {
+        movieTimeAdapter =
+            MovieTimeAdapter(position, object : MovieTimeViewHolder.TimeClickListener {
+                override fun timeClick(position: Int, parentPosition: Int) {
+                    if (!movieTimeAdapter.getClicked(parentPosition, position)) {
+                        val clicked = movieTimeAdapter.getClickedMovieTime()
+                        if (clicked == null) {
+                            movieTimeAdapter.setClicked(parentPosition, position, true)
+                        } else {
+                            movieTimeAdapter.setClicked(clicked[0], clicked[1], false)
+                            movieTimeAdapter.setClicked(parentPosition, position, true)
+                        }
+                        listener.onClick()
                     } else {
-                        movieTimeAdapter.setClicked(clicked[0], clicked[1], false)
-                        movieTimeAdapter.setClicked(parentPosition, position, true)
+                        movieTimeAdapter.setClicked(parentPosition, position, false)
+                        listener.onClick()
                     }
-                    listener.onClick()
-                }else{
-                    movieTimeAdapter.setClicked(parentPosition, position, false)
-                    listener.onClick()
+                    TheaterCollection.mvType = GwanAdapter.gwanData[parentPosition].screen
+                    TheaterCollection.mvTheaterNum = GwanAdapter.gwanData[parentPosition].hall
+                    //Log.e("screent",TheaterCollection.mvTheaterNum)
                 }
-            }
-        })
-        movieTimeAdapter.setTimeData(data.times)
+            })
+        movieTimeAdapter.setTimeData(data.timeList)
         itemView.item_gwan_rv_seat.adapter = movieTimeAdapter
         itemView.item_gwan_rv_seat.layoutManager = GridLayoutManager(itemView.context, 5)
         itemView.item_gwan_rv_seat.setHasFixedSize(true)
 
-        itemView.item_gwan_tv_title.text = data.kind
-        itemView.item_gwan_tv_number.text = "${data.number}관"
-        itemView.item_gwan_tv_seat_count.text = "${data.seatCount}석"
+        itemView.item_gwan_tv_title.text = data.screen
+        itemView.item_gwan_tv_number.text = data.hall
+        itemView.item_gwan_tv_seat_count.text = "${data.total}석"
 
     }
 

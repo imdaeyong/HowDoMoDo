@@ -90,16 +90,28 @@
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@id/act_main_tv_movie"
             app:layout_constraintTop_toBottomOf="@id/act_main_rv_movie" />
+
+
+        <ImageView
+            android:id="@+id/act_theater_iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_down"
+            app:layout_constraintEnd_toEndOf="@+id/act_main_spinner_posting"
+            app:layout_constraintTop_toTopOf="@+id/act_main_spinner_posting" />
+
         <!-- 드롭다운, 무비 블로그 포스팅 -->
         <Spinner
             android:id="@+id/act_main_spinner_posting"
-            android:layout_width="wrap_content"
+            android:layout_width="140dp"
             android:layout_height="40dp"
             android:entries="@array/movie"
             android:text="드롭다운"
             android:textColor="#FFFFFF"
             app:layout_constraintStart_toStartOf="@id/act_main_tv_posting"
-            app:layout_constraintTop_toBottomOf="@id/act_main_tv_posting" />
+            app:layout_constraintTop_toBottomOf="@id/act_main_tv_posting"
+
+            />
 
         <!-- RecyclerView, 무비 블로그 포스팅 -->
         <androidx.recyclerview.widget.RecyclerView

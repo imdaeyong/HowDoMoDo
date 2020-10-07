@@ -22,8 +22,8 @@ class MovieTimeAdapter(private val parentPosition: Int, private val timeClick: M
     fun getClickedMovieTime(): ArrayList<Int>? {
         val list = ArrayList<Int>()
         for (i in GwanAdapter.gwanData.indices) {
-            for (j in GwanAdapter.gwanData[i].times.indices) {
-                if (GwanAdapter.gwanData[i].times[j].isClicked) {
+            for (j in GwanAdapter.gwanData[i].timeList.indices) {
+                if (GwanAdapter.gwanData[i].timeList[j].isClicked) {
                     list.add(i)
                     list.add(j)
                     return list
@@ -34,11 +34,11 @@ class MovieTimeAdapter(private val parentPosition: Int, private val timeClick: M
     }
 
     fun getClicked(parentPosition: Int, position: Int): Boolean {
-        return GwanAdapter.gwanData[parentPosition].times[position].isClicked
+        return GwanAdapter.gwanData[parentPosition].timeList[position].isClicked
     }
 
     fun setClicked(parentPosition: Int, position: Int, status: Boolean) {
-        GwanAdapter.gwanData[parentPosition].times[position].isClicked = status
+        GwanAdapter.gwanData[parentPosition].timeList[position].isClicked = status
         notifyDataSetChanged()
     }
 
@@ -69,9 +69,9 @@ class MovieTimeViewHolder(itemView: View, private val timeClickListener: TimeCli
     }
 
     fun bind(data: MovieTime) {
-        itemView.item_movie_time_tv_start_time.text = data.startTime
-        itemView.item_movie_time_tv_end_time.text = data.endTime
-        itemView.item_movie_time_tv_percent.text = "${data.percent}%"
+        itemView.item_movie_time_tv_start_time.text = data.time
+        itemView.item_movie_time_tv_end_time.text = data.title
+        itemView.item_movie_time_tv_percent.text = "${data.count}석"
 
         if (data.isClicked) {
             itemView.item_movie_time_cl_box.setBackgroundResource(R.drawable.movie_time_selected)

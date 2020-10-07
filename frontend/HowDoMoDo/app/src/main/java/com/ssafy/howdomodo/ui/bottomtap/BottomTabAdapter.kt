@@ -3,7 +3,7 @@ package com.ssafy.howdomodo.ui.bottomtap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.ssafy.howdomodo.ui.Favorite.FavoriteFragment
+import com.ssafy.howdomodo.ui.favorite.FavoriteFragment
 import com.ssafy.howdomodo.ui.chat.ChatFragment
 import com.ssafy.howdomodo.ui.main.MainFragment
 import com.ssafy.howdomodo.ui.mypage.MypageFragment

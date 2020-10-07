@@ -15,13 +15,13 @@ object Loading {
     fun goLoading(nowActivityName: Context) {
         val intent = Intent(nowActivityName, LoadingActivity::class.java)
         nowActivityName.startActivity(intent)
-        Log.e("로딩", "시작~~~~~~~")
+        //Log.e("로딩", "시작~~~~~~~")
     }
 
     fun exitLoading() {
         val handler = Handler()
         handler.postDelayed({
-            Log.e("로딩", "끝ㅠㅠㅠㅠㅠㅠ")
+            //Log.e("로딩", "끝ㅠㅠㅠㅠㅠㅠ")
             activity.finish()
         }, 1000)
     }

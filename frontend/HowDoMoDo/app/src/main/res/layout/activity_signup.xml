@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_background"
     tools:context="com.ssafy.howdomodo.ui.signup.SignupActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -20,7 +19,8 @@
             android:layout_marginTop="12dp"
             android:lineSpacingExtra="8sp"
             android:text="회원가입"
-            android:textColor="#3c1e1d"
+            android:fontFamily="@font/noto_sans_kr_regular"
+            android:textColor="#FFFFFF"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,10 +32,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="22dp"
             android:layout_marginTop="64dp"
+            android:fontFamily="@font/noto_sans_kr_regular"
             android:lineSpacingExtra="9sp"
             android:text="이메일"
-            android:textColor="#333333"
             android:textSize="15sp"
+            android:textColor="#FFFFFF"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,6 +45,7 @@
             android:layout_width="228dp"
             android:layout_height="36dp"
             android:layout_marginTop="6dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/sign_up_et_border"
             app:layout_constraintStart_toStartOf="@+id/act_sign_up_tv_place_email"
             app:layout_constraintTop_toBottomOf="@+id/act_sign_up_tv_place_email"
@@ -56,24 +58,38 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:hint="이메일을 입력하세요"
+                android:fontFamily="@font/noto_sans_kr_regular"
                 android:inputType="textEmailAddress"
                 android:lineSpacingExtra="9sp"
                 android:paddingLeft="7dp"
-                android:textColor="#333333"
-                android:textSize="15sp" />
+                android:textColor="#FFFFFF"
+                android:textColorHint="#F73859"
+                android:textSize="15sp"
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
-            android:id="@+id/act_sign_up_bt_email_duplicate_check"
-            android:layout_width="75dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="19dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/btn_jungbok"
-            android:text="중복체크"
-            app:layout_constraintBottom_toBottomOf="@id/act_sign_up_cl_email"
-            app:layout_constraintStart_toEndOf="@id/act_sign_up_cl_email"
-            app:layout_constraintTop_toTopOf="@id/act_sign_up_cl_email" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/act_sign_up_cl_email_duplicate_check"
+        android:layout_width="75dp"
+        android:layout_height="36dp"
+        android:background="@drawable/sign_up_et_border"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/act_sign_up_cl_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/act_sign_up_cl_email"
+        >
+
+        <TextView
+            android:id="@+id/act_sign_up_tv_email_duplicate_check"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:gravity="center"
+            android:text="중복 확인"
+            android:textColor="#f73859"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/act_sign_up_tv_place_nick"
@@ -83,8 +99,9 @@
             android:layout_marginTop="16dp"
             android:lineSpacingExtra="9sp"
             android:text="닉네임"
-            android:textColor="#333333"
             android:textSize="15sp"
+            android:fontFamily="@font/noto_sans_kr_regular"
+            android:textColor="#FFFFFF"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/act_sign_up_cl_email" />
 
@@ -104,24 +121,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
+                android:fontFamily="@font/noto_sans_kr_regular"
                 android:hint="닉네임을 입력하세요"
                 android:lineSpacingExtra="9sp"
                 android:paddingLeft="7dp"
-                android:textColor="#333333"
+
+                android:textColor="#FFFFFF"
+                android:textColorHint="#F73859"
                 android:textSize="15sp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
-            android:id="@+id/act_sign_up_bt_nick_duplicate"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/act_sign_up_cl_nick_duplicate_check"
             android:layout_width="75dp"
             android:layout_height="36dp"
-            android:layout_marginStart="19dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/btn_jungbok"
-            android:text="중복확인"
+            android:background="@drawable/sign_up_et_border"
+            android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toBottomOf="@id/act_sign_up_cl_nick"
-            app:layout_constraintStart_toEndOf="@id/act_sign_up_cl_nick"
-            app:layout_constraintTop_toTopOf="@id/act_sign_up_cl_nick" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/act_sign_up_cl_nick"
+            >
+
+            <TextView
+                android:id="@+id/act_sign_up_tv_nick_duplicate_check"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/noto_sans_kr_bold"
+                android:gravity="center"
+                android:text="중복 확인"
+                android:textColor="#f73859"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/act_sign_up_tv_place_name"
@@ -131,7 +162,8 @@
             android:layout_marginTop="16dp"
             android:lineSpacingExtra="9sp"
             android:text="이름"
-            android:textColor="#333333"
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/noto_sans_kr_regular"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/act_sign_up_cl_nick" />
@@ -142,7 +174,7 @@
             android:layout_height="36dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/sign_up_et_border"
-            app:layout_constraintEnd_toEndOf="@id/act_sign_up_bt_email_duplicate_check"
+            app:layout_constraintEnd_toEndOf="@id/act_sign_up_cl_email_duplicate_check"
             app:layout_constraintStart_toStartOf="@+id/act_sign_up_tv_place_name"
             app:layout_constraintTop_toBottomOf="@+id/act_sign_up_tv_place_name"
 
@@ -156,7 +188,9 @@
                 android:hint="이름을 입력하세요"
                 android:lineSpacingExtra="9sp"
                 android:paddingLeft="7dp"
-                android:textColor="#333333"
+                android:fontFamily="@font/noto_sans_kr_regular"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#F73859"
                 android:textSize="15sp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -169,8 +203,9 @@
             android:layout_marginTop="16dp"
             android:lineSpacingExtra="9sp"
             android:text="비밀번호"
-            android:textColor="#333333"
+            android:textColor="#FFFFFF"
             android:textSize="15sp"
+            android:fontFamily="@font/noto_sans_kr_regular"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/act_sign_up_cl_name" />
 
@@ -180,7 +215,7 @@
             android:layout_height="36dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/sign_up_et_border"
-            app:layout_constraintEnd_toEndOf="@id/act_sign_up_bt_email_duplicate_check"
+            app:layout_constraintEnd_toEndOf="@id/act_sign_up_cl_email_duplicate_check"
             app:layout_constraintStart_toStartOf="@+id/act_sign_up_tv_place_pass"
             app:layout_constraintTop_toBottomOf="@+id/act_sign_up_tv_place_pass"
 
@@ -193,9 +228,12 @@
                 android:background="@null"
                 android:hint="비밀번호를 입력하세요"
                 android:inputType="textPassword"
+                android:fontFamily="@font/noto_sans_kr_regular"
                 android:lineSpacingExtra="9sp"
                 android:paddingLeft="7dp"
-                android:textColor="#333333"
+
+                android:textColor="#FFFFFF"
+                android:textColorHint="#F73859"
                 android:textSize="15sp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -205,7 +243,7 @@
             android:layout_height="36dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/sign_up_et_border"
-            app:layout_constraintEnd_toEndOf="@id/act_sign_up_bt_email_duplicate_check"
+            app:layout_constraintEnd_toEndOf="@id/act_sign_up_cl_email_duplicate_check"
             app:layout_constraintStart_toStartOf="@+id/act_sign_up_cl_pass"
             app:layout_constraintTop_toBottomOf="@+id/act_sign_up_cl_pass"
 
@@ -220,7 +258,9 @@
                 android:inputType="textPassword"
                 android:lineSpacingExtra="9sp"
                 android:paddingLeft="7dp"
-                android:textColor="#333333"
+                android:fontFamily="@font/noto_sans_kr_regular"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#F73859"
                 android:textSize="15sp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -233,7 +273,8 @@
             android:layout_marginTop="16dp"
             android:lineSpacingExtra="9sp"
             android:text="생년월일"
-            android:textColor="#333333"
+            android:fontFamily="@font/noto_sans_kr_regular"
+            android:textColor="#FFFFFF"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/act_sign_up_cl_pass_check" />
@@ -244,7 +285,7 @@
             android:layout_height="36dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/sign_up_et_border"
-            app:layout_constraintEnd_toEndOf="@id/act_sign_up_bt_email_duplicate_check"
+            app:layout_constraintEnd_toEndOf="@id/act_sign_up_cl_email_duplicate_check"
             app:layout_constraintStart_toStartOf="@+id/act_sign_up_tv_place_birth"
             app:layout_constraintTop_toBottomOf="@+id/act_sign_up_tv_place_birth"
 
@@ -259,7 +300,9 @@
                 android:inputType="number"
                 android:lineSpacingExtra="9sp"
                 android:paddingLeft="7dp"
-                android:textColor="#333333"
+                android:fontFamily="@font/noto_sans_kr_regular"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#F73859"
                 android:textSize="15sp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -272,7 +315,8 @@
             android:layout_marginTop="16dp"
             android:lineSpacingExtra="9sp"
             android:text="성별"
-            android:textColor="#333333"
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/noto_sans_kr_regular"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/act_sign_up_cl_birth" />
@@ -282,40 +326,63 @@
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_marginTop="6dp"
-            app:layout_constraintEnd_toEndOf="@id/act_sign_up_bt_email_duplicate_check"
+            app:layout_constraintEnd_toEndOf="@id/act_sign_up_cl_email_duplicate_check"
             app:layout_constraintStart_toStartOf="@+id/act_sign_up_tv_place_sex"
-            app:layout_constraintTop_toBottomOf="@+id/act_sign_up_tv_place_sex">
+            app:layout_constraintTop_toBottomOf="@+id/act_sign_up_tv_place_sex"
+            android:background="@drawable/sign_up_et_border"
+            >
 
-            <TextView
-                android:id="@+id/act_sign_up_tv_sex_female"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/act_sign_up_cl_gender_female"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="여성"
-                android:gravity="center"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:background="@drawable/sign_up_et_border">
 
-            <TextView
-                android:id="@+id/act_sign_up_tv_sex_male"
+                <TextView
+                    android:id="@+id/act_sign_up_tv_gender_female"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="여성"
+                    android:fontFamily="@font/noto_sans_kr_regular"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/act_sign_up_cl_gender_male"
+android:background="@drawable/sign_up_et_border"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="남성"
-                android:gravity="center"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_weight="1">
 
+                <TextView
+                    android:id="@+id/act_sign_up_tv_gender_male"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:fontFamily="@font/noto_sans_kr_regular"
+                    android:text="남성"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
         <Button
             android:id="@+id/act_sign_up_bt_signup"
             android:layout_width="0dp"
-            android:layout_marginStart="22dp"
-            android:layout_marginEnd="22dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="22dp"
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/noto_sans_kr_regular"
             android:text="가입하기"
+            android:clickable="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/act_sign_up_ll_sex" />

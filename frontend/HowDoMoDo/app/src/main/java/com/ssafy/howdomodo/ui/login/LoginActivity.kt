@@ -2,9 +2,11 @@ package com.ssafy.howdomodo.ui.login
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -12,15 +14,16 @@ import androidx.lifecycle.Observer
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import com.ssafy.howdomodo.R
+import com.ssafy.howdomodo.`object`.UserCollection
 import com.ssafy.howdomodo.ui.bottomtap.BottomTabActivity
-import com.ssafy.howdomodo.ui.main.MainActivity
 import com.ssafy.howdomodo.ui.signup.SignupActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONObject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
-    private val nameViewModel: LoginViewModel by viewModel()
+    private val loginViewModel: LoginViewModel by viewModel()
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,10 +34,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun observeData() {
-        nameViewModel.loginError.observe(this, Observer {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        loginViewModel.loginError.observe(this, Observer {
+//            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
-        nameViewModel.getHeader.observe(this, Observer {
+        loginViewModel.getHeader.observe(this, Observer {
             // TODO: 2020/09/16 헤더를 넣어주는 로직을 짜야한다. SharedPreferences 를 사용하라.
             val token = it
             if(act_login_cb_auto_login.isChecked){
@@ -44,13 +47,41 @@ class LoginActivity : AppCompatActivity() {
                 editor.commit()
             }
         })
-        nameViewModel.loginResponse.observe(this, Observer {
+        loginViewModel.loginError.observe(this, Observer {
+//            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        })
+        loginViewModel.loginResponse.observe(this, Observer {
             // TODO: 2020/09/16 로그인 통신이 성공했을때의 로직을 짜라.
-            val intent = Intent(this, MainActivity::class.java)
-//            intent.putExtra("email", it.data.email)
-            startActivity(intent)
-            finish()
 
+            if (loginViewModel.loginResponse.value?.status == 200) {
+                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, BottomTabActivity::class.java)
+                UserCollection.userEmail = it.data!!.userEmail
+                UserCollection.userName = it.data.userName
+                UserCollection.userNick = it.data.userNick
+                UserCollection.userCode = it.data.userCode
+
+                if (act_login_cb_auto_login.isChecked) {
+                    sharedPreferences = getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
+                    val editor = sharedPreferences.edit()
+                    editor.putString("userEmail", it.data.userEmail)
+                    editor.putString("userName", it.data.userName)
+                    editor.putString("userNick", it.data.userNick)
+                    editor.putString("userCode", it.data.userCode)
+                    editor.commit()
+                    //Log.e("qwewq", "QWEqwe")
+                }else{
+                    sharedPreferences = getSharedPreferences("TOKEN", Context.MODE_PRIVATE)
+                    val editor = sharedPreferences.edit()
+                    editor.clear()
+                    editor.commit()
+                }
+
+                startActivity(intent)
+                finish()
+            } else {
+
+            }
         })
 
     }
@@ -85,28 +116,20 @@ class LoginActivity : AppCompatActivity() {
 //                    Toast.makeText(applicationContext, act_login_et_id.text.toString() + " , " + act_login_et_password.text.toString(), Toast.LENGTH_LONG).show()
 
                     val loginJsonObject = JSONObject()
-                    loginJsonObject.put("userName", act_login_et_id.text.toString())
-                    loginJsonObject.put("userPassword", act_login_et_password.text.toString())
+                    loginJsonObject.put("userEmail", act_login_et_id.text.toString())
+                    loginJsonObject.put("userPw", act_login_et_password.text.toString())
                     val body = JsonParser.parseString(loginJsonObject.toString()) as JsonObject
-//                    nameViewModel.login(body)
+                    loginViewModel.login(body)
+                    observeData()
 
-                    if (act_login_et_id.text.toString() == "test" && act_login_et_password.text.toString() == "test") {
-                        val intent = Intent(this, BottomTabActivity::class.java)
-                        startActivity(intent)
-                        finish()
-
-                    } else {
-                        Toast.makeText(this, "아이디 및 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
-                    }
-//                    Login_Control().POST_login(act_login_et_id.text.toString(), act_login_et_password.text.toString())
                 }
             }
-//            R.id.act_login_tv_sign_up ->startActivity(Intent(applicationContext, SignUpActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
         }
     }
 
     fun Findpw_Click_Listener(view :View){
-
+        val intent = Intent(this,FindPwActivity::class.java)
+        startActivity(intent)
     }
 
     fun Signup_Click_Listener(view :View){
