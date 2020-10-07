@@ -59,6 +59,7 @@ class MovieSelectDialogFragment : DialogFragment() {
     ): View? {
         val inflatedView = inflater.inflate(R.layout.dialog_movie_select, container, false)
         setBackground()
+        Loading.goLoading(activity!!)
         mvm.getNewMoviedata()
         mainAdapter = MainAdapter(object : MainViewHolder.ClickListener {
             override fun movieClick(position: Int) {
@@ -67,6 +68,7 @@ class MovieSelectDialogFragment : DialogFragment() {
                 TheaterCollection.mvTitle = mainAdapter.movieData[position].title
 
                 MainFragment.moviePosition = position
+                Loading.goLoading(activity!!)
                 mvm.getMoviePsNs(movieCode)
 //
 //                val movieTitle = mainAdapter.movieData[position].title
@@ -113,6 +115,17 @@ class MovieSelectDialogFragment : DialogFragment() {
 
     fun movieObserve(mainAdapter: MainAdapter) {
 
+        mvm.psNsLoading.observe(this, Observer {
+            Loading.exitLoading()
+        })
+        mvm.loading.observe(this, Observer {
+            MainFragment.movieDataBool = it
+
+            if (!MainFragment.movieDataBool && !MainFragment.postDataBool) {
+                Loading.exitLoading()
+            }
+        })
+        
         mvm.movieData.observe(this, Observer {
             val movieList = it
             mainAdapter.setMovieItemList(movieList)
