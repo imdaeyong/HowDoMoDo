@@ -275,5 +275,5 @@
 
 #### 영화관 선택 화면
 
-![Screenshot_20201007-204743_HowDoMoDo](https://user-images.githubusercontent.com/45157374/95328325-611e3c00-08e0-11eb-923d-cc16f5b40d6d.jpg)
+![Screenshot_20201007-204743_HowDoMoDo](https://user-images.githubusercontent.com/45157374/95328325-611e3c00-08e0-11eb-923d-cc16f5b40d6d.jpg){: width="100" height="100"}
 ![Screenshot_20201007-204805_HowDoMoDo](https://user-images.githubusercontent.com/45157374/95328339-65e2f000-08e0-11eb-8a9a-0d26e605ec66.jpg)
