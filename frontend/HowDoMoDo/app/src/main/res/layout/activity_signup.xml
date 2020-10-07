@@ -19,6 +19,7 @@
             android:layout_marginTop="12dp"
             android:lineSpacingExtra="8sp"
             android:text="회원가입"
+            android:fontFamily="@font/noto_sans_kr_regular"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,6 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="22dp"
             android:layout_marginTop="64dp"
+            android:fontFamily="@font/noto_sans_kr_regular"
             android:lineSpacingExtra="9sp"
             android:text="이메일"
             android:textSize="15sp"
@@ -56,6 +58,7 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:hint="이메일을 입력하세요"
+                android:fontFamily="@font/noto_sans_kr_regular"
                 android:inputType="textEmailAddress"
                 android:lineSpacingExtra="9sp"
                 android:paddingLeft="7dp"
@@ -97,6 +100,7 @@
             android:lineSpacingExtra="9sp"
             android:text="닉네임"
             android:textSize="15sp"
+            android:fontFamily="@font/noto_sans_kr_regular"
             android:textColor="#FFFFFF"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/act_sign_up_cl_email" />
@@ -117,6 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
+                android:fontFamily="@font/noto_sans_kr_regular"
                 android:hint="닉네임을 입력하세요"
                 android:lineSpacingExtra="9sp"
                 android:paddingLeft="7dp"
@@ -158,6 +163,7 @@
             android:lineSpacingExtra="9sp"
             android:text="이름"
             android:textColor="#FFFFFF"
+            android:fontFamily="@font/noto_sans_kr_regular"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/act_sign_up_cl_nick" />
@@ -182,7 +188,7 @@
                 android:hint="이름을 입력하세요"
                 android:lineSpacingExtra="9sp"
                 android:paddingLeft="7dp"
-
+                android:fontFamily="@font/noto_sans_kr_regular"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#F73859"
                 android:textSize="15sp" />
@@ -199,6 +205,7 @@
             android:text="비밀번호"
             android:textColor="#FFFFFF"
             android:textSize="15sp"
+            android:fontFamily="@font/noto_sans_kr_regular"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/act_sign_up_cl_name" />
 
@@ -221,6 +228,7 @@
                 android:background="@null"
                 android:hint="비밀번호를 입력하세요"
                 android:inputType="textPassword"
+                android:fontFamily="@font/noto_sans_kr_regular"
                 android:lineSpacingExtra="9sp"
                 android:paddingLeft="7dp"
 
@@ -250,7 +258,7 @@
                 android:inputType="textPassword"
                 android:lineSpacingExtra="9sp"
                 android:paddingLeft="7dp"
-
+                android:fontFamily="@font/noto_sans_kr_regular"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#F73859"
                 android:textSize="15sp" />
@@ -265,6 +273,7 @@
             android:layout_marginTop="16dp"
             android:lineSpacingExtra="9sp"
             android:text="생년월일"
+            android:fontFamily="@font/noto_sans_kr_regular"
             android:textColor="#FFFFFF"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -291,7 +300,7 @@
                 android:inputType="number"
                 android:lineSpacingExtra="9sp"
                 android:paddingLeft="7dp"
-
+                android:fontFamily="@font/noto_sans_kr_regular"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#F73859"
                 android:textSize="15sp" />
@@ -307,6 +316,7 @@
             android:lineSpacingExtra="9sp"
             android:text="성별"
             android:textColor="#FFFFFF"
+            android:fontFamily="@font/noto_sans_kr_regular"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/act_sign_up_cl_birth" />
@@ -335,6 +345,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="여성"
+                    android:fontFamily="@font/noto_sans_kr_regular"
                     android:textColor="#FFFFFF"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -353,6 +364,7 @@ android:background="@drawable/sign_up_et_border"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:fontFamily="@font/noto_sans_kr_regular"
                     android:text="남성"
                     android:textColor="#FFFFFF"
                     app:layout_constraintStart_toStartOf="parent"
@@ -368,6 +380,7 @@ android:background="@drawable/sign_up_et_border"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="22dp"
             android:textColor="#FFFFFF"
+            android:fontFamily="@font/noto_sans_kr_regular"
             android:text="가입하기"
             android:clickable="false"
             app:layout_constraintEnd_toEndOf="parent"
