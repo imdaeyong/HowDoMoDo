@@ -47,6 +47,7 @@
 
 
 <hr>
+
 ### 📃 사용 기술
 
 #### [Backend]
@@ -123,21 +124,20 @@
   `{상태} {기능} | {JIRA issue ID}`
 
   - ex)  `Feat Login Function | S03P11A305-1`
-- ex) `Update Movie Function Communication | S03P11A305-2` `  
+  - ex) `Update Movie Function Communication | S03P11A305-2` 
   
 
-`[마무리] | {날짜 }| {JIRA issue ID}`
+  `[마무리] | {날짜 }| {JIRA issue ID}`
 
-- ex) `[마무리] | 2020.07.21 | S03P11A305-1`
+  - ex) `[마무리] | 2020.07.21 | S03P11A305-1`
   
 
-`[MR] | '{소스브랜치}' into '{타겟브랜치}'`
+  `[MR] | '{소스브랜치}' into '{타겟브랜치}'`
 
->  **진행상황** 
-  >
-> - Todo
-  > - In Progress
-> - Done
+-  **진행상황** 
+>  - Todo
+>  - In Progress
+>  - Done
 
 - **Git Branch 전략**
 
@@ -166,13 +166,15 @@
 
 - Frontend
 
-  👩‍💻 **김찬영** 👨‍💻 김대용 👩‍💻 김형택
+  👱 **김찬영** 👨 김대용 👦 김형택
 
   ```markdown
-  # [김 찬 영]
-  # [김 대 용]
-  # [김 형 택]
-  ## Role
+  # [Role]
+  ## [김 찬 영]
+  
+  ## [김 대 용]  
+  
+  ## [김 형 택]
   ### 1. Main Page
   	- 1) Recycler View를 통한 실시간 상영 영화 정보 구성
       	- 실시간 상영 영화 API 활용
@@ -201,11 +203,11 @@
 
 - Backend
 
-  👨‍💻 **권오정** 👩‍💻 전수현
+  👨 **권오정** 👩 전수현
 
 - Big Data
 
-  👩‍💻 **이선수**
+  👨 **이선수**
 
   
 
