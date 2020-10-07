@@ -44,6 +44,13 @@
 1. Programming Languages : [ Kotlin ]
 2. Framework Tool : [ Android Studio ]
 
+**BigData/AI/Crawling**
+
+1. Programming Languages : [ Python ]
+2. Framework Tool : [ Django ] [ Spark ]
+3. SQL data storage : [ MariaDB]
+4. Hosting : [ AWS ]
+
 
 
 <hr>
@@ -108,7 +115,24 @@
 
 #### [Big Data]
 
-> 
+> **Pyspark**: pyspark 라이브러리를 활용하여 '19.09~'19.12 (4개월) 간의 카드사 데이터 분석
+>
+> - 데이터 전처리 및 SQLContext를 활용한 그룹핑 작업
+>
+> - persist()를 활용한 Action 결과 Dataframe 캐쉬 저장 (DISK AND CACHE)
+>
+> - 단계별 모듈화로 사전 분석을 통해 연산 과정을 단축시킴
+>
+> - 동일한 instance로 접근하여 생성한 cache값을 활용할 수 있도록 singleton pattern 적용
+>
+>   
+>
+> **Bertforsequenceclassification**:  Transformers의 pre-trained model 활용 (약 15만 개 리뷰 긍부정 데이터 학습)
+>
+> - 사전 학습은 Colab에서 진행
+> - LSTM 대비 정확도 상승
+> - Crawling을 활용하여 '네이버 영화' 페이지의 리뷰 두 페이지 분량 추출 및 평가 데이터 폼 구축
+> - 현 개발환경에 GPU가 없어 상대적 속도 감소
 
 <hr>
 
@@ -149,14 +173,16 @@
 
         - Front_doc
         - Front_epic Name
-
-      - Back
-
-        - Back_doc
-        
+- Back
+      
+  - Back_doc
         - Back_epic Name
-        
-          
+      - bigdata_recommand
+      - pn_score_analysis
+      
+    - release
+    
+      
 
 ### 📃 역할 분담
 
@@ -209,6 +235,25 @@
 
   👨 **이선수**
 
+  ```markdown
+  # [Role]
+  ## [이선수]
+  ### 1. bigdata analysis of activitiy 
+  	- 1) spark 세션 생성 및 분석 데이터 로드
+  	- 2) 시구군 기준 그룹핑 dataframe 생성
+  	- 3) param에 따른 dataframe 분석
+  	- 4) 결과값 response (json)
+  	- 5) Django RESTful api 활용 (GET)
+  	- 6) python 모듈화 및 singleton pattern 적용 (여러 세션의 접근에 동일한 사전분석 데이터를 		활용하기 위해)
+  ### 2. positive/negative score analysis
+  	- 1) Bertforsequenceclassification 15만개 긍부정 리뷰 사전 학습 및, 학습 모델 추출			(Colab 환경에서 학습 후 추출) 
+  	- 2) Crawling을 통해 '네이버 영화' 홈페이지의 리뷰 2페이지 분량 추출
+  	- 3) 평가 데이터 토큰화 및 어텐션 마스킹, 파이토치의 텐서형으로 변환
+  	- 4) Django RESTful api 활용 (GET)
+  	- 5) python 모듈화 및 singleton pattern 적용 (여러 세션의 접근에 동일한 사전분석 데이터를 		활용하기 위해)
+  	- 6) AWS 환경설정 및 배포 관리
+  ```
+  
   
 
 ### 📃 Jira
