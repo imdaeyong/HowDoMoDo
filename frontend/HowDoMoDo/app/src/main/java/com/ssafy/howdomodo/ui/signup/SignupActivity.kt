@@ -37,33 +37,27 @@ class SignupActivity : AppCompatActivity() {
         observe()
 
         val str = intent.getStringExtra("btnName")
-        Toast.makeText(this, str.toString(), Toast.LENGTH_SHORT).show()
-
 
 
         act_sign_up_cl_email_duplicate_check.setOnClickListener {
             var email = act_sign_up_et_email.text.toString()
-            if(email!=""){
+            Log.e("email중복버튼클릭", email)
+            if (email != "") {
                 signUpViewModel.userEmailCheck(email)
-//                var err = signUpViewModel.errorToast.value
-//                var data = signUpViewModel.successMessage.value
-//                if(err!=null) {
-//                    Log.e("emailcheck", err!!)
-//                    Toast.makeText(this,"오류가 발생했습니다",Toast.LENGTH_SHORT)
-//                }else if(data!=null){
-
-            }else{
-                Toast.makeText(this,"이메일을 입력해주세요!",Toast.LENGTH_SHORT)
+            } else {
+                Toast.makeText(this, "이메일을 입력해주세요!", Toast.LENGTH_SHORT).show()
             }
         }
 
         act_sign_up_cl_nick_duplicate_check.setOnClickListener {
             var nick = act_sign_up_et_nick.text.toString()
-            if(nick!=""){
+            Log.e("nick중복버튼클릭", nick)
+            if (nick != "") {
                 signUpViewModel.userNickCheck(nick)
-            }else{
-                Toast.makeText(this,"닉네임을 입력해주세요!",Toast.LENGTH_SHORT)
-            }}
+            } else {
+                Toast.makeText(this, "닉네임을 입력해주세요!", Toast.LENGTH_SHORT).show()
+            }
+        }
 
 
         act_sign_up_cl_gender_female.isClickable = true
@@ -125,6 +119,7 @@ class SignupActivity : AppCompatActivity() {
             signUpJsonObject.put("userNick", nick)
             val body = JsonParser.parseString(signUpJsonObject.toString()) as JsonObject
             signUpViewModel.signUp(body)
+            Toast.makeText(this,"회원가입 성공!",Toast.LENGTH_SHORT).show()
 //
 //            var dialog = AlertDialog.Builder(this)
 //            dialog.setTitle(email)
@@ -139,9 +134,7 @@ class SignupActivity : AppCompatActivity() {
     }
 
 
-
-
-    fun setButtonActive(){
+    fun setButtonActive() {
         act_sign_up_bt_signup.isClickable = true
         act_sign_up_bt_signup.setBackgroundColor(Color.parseColor("#f73859"))
 
@@ -151,36 +144,29 @@ class SignupActivity : AppCompatActivity() {
     fun observe() {
         var email = act_sign_up_et_email.toString()
         var nick = act_sign_up_et_nick.toString()
-        var errormsg : String
+        var errormsg: String
         signUpViewModel.errorToast.observe(this, Observer {
-            if (nick == null || nick.length <=2) {
+            if (nick == null || nick.length <= 2) {
                 errormsg = "닉네임은 3글자 이상 입력해주세요!"
             } else if (email == null || email.length <= 5) {
                 errormsg = "Email은 6글자 이상 입력해주세요!"
-            }else {
+            } else {
                 errormsg = "잠시 후 다시 시도해주세요"
             }
             Toast.makeText(this, errormsg, Toast.LENGTH_SHORT).show()
         })
-        signUpViewModel.successMessage.observe(this, Observer {
-            Log.e("signupActivity",it)
+        signUpViewModel.signUpSuccessMessage.observe(this, Observer {
+            Log.e("signupActivity", it)
+            var i = it
             if (it == "회원 가입 성공") {
                 // 회원가입 성공!!!
                 val goLogin = Intent(this, LoginActivity::class.java)
                 startActivity(goLogin)
                 finish()
-            } else if (it.contains("닉네임")&&it.contains("가능")) {
-                var dialog = AlertDialog.Builder(this)
-                dialog.setTitle("닉네임 중복 확인 결과")
-                dialog.setMessage("사용할 수 있는 닉네임입니다!")
-                dialog.show()
-                act_sign_up_et_nick.isEnabled = false
-                act_sign_up_cl_nick_duplicate_check.isClickable = false
-                act_sign_up_cl_nick_duplicate_check.setBackgroundColor(Color.parseColor("#F73859"))
-                act_sign_up_tv_nick_duplicate_check.setTextColor(Color.parseColor("#FFFFFF"))
-                act_sign_up_tv_nick_duplicate_check.setText("확인 완료")
-                duplicateNickCheck = true
-             } else if (it.contains("Email")&&it.contains("가능")) {
+            }
+        })
+        signUpViewModel.emailCheckSuccessMessage.observe(this, Observer {
+            if (it.contains("Email") && it.contains("가능")) {
                 var dialog = AlertDialog.Builder(this)
                 dialog.setTitle("아메일 중복 확인 결과")
                 dialog.setMessage("사용할 수 있는 이메일입니다!")
@@ -191,11 +177,27 @@ class SignupActivity : AppCompatActivity() {
                 act_sign_up_tv_email_duplicate_check.setTextColor(Color.parseColor("#FFFFFF"))
                 act_sign_up_tv_email_duplicate_check.setText("확인 완료")
                 duplicateEmailCheck = true
-            }else {
-                Toast.makeText(this, "잠시 후 다시 시도해주세요",Toast.LENGTH_SHORT)
+                if(duplicateNickCheck&&duplicateEmailCheck){
+                    setButtonActive()
+                }
+            }
+        })
+        signUpViewModel.nickCheckSuccessMessage.observe(this, Observer {
+            if (it.contains("닉네임") && it.contains("가능")) {
+                var dialog = AlertDialog.Builder(this)
+                dialog.setTitle("닉네임 중복 확인 결과")
+                dialog.setMessage("사용할 수 있는 닉네임입니다!")
+                dialog.show()
+                act_sign_up_et_nick.isEnabled = false
+                act_sign_up_cl_nick_duplicate_check.isClickable = false
+                act_sign_up_cl_nick_duplicate_check.setBackgroundColor(Color.parseColor("#F73859"))
+                act_sign_up_tv_nick_duplicate_check.setTextColor(Color.parseColor("#FFFFFF"))
+                act_sign_up_tv_nick_duplicate_check.setText("확인 완료")
+                duplicateNickCheck = true
+                if(duplicateNickCheck&&duplicateEmailCheck){
+                    setButtonActive()
+                }
             }
         })
     }
-
-
 }

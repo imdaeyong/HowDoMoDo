@@ -41,14 +41,19 @@
         android:visibility="gone"
         android:text="즐겨찾는 영화관이 없습니다."
         app:layout_constraintTop_toBottomOf="@id/frag_fav_cl_top" />
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/frag_fav_swipe"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_marginTop="15dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/frag_fav_cl_top">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/frag_fav_rv_favorite"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/frag_fav_cl_top" />
+        android:layout_height="match_parent" />
 
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

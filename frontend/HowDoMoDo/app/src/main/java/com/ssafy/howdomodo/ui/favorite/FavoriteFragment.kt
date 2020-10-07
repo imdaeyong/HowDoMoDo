@@ -1,7 +1,6 @@
 package com.ssafy.howdomodo.ui.favorite
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,6 @@ import com.ssafy.howdomodo.`object`.TheaterCollection
 import com.ssafy.howdomodo.`object`.UserCollection
 import com.ssafy.howdomodo.data.datasource.model.Theater
 import com.ssafy.howdomodo.ui.Favorites.FavoritesAdapter
-import com.ssafy.howdomodo.ui.theater.TheaterActivity
 import kotlinx.android.synthetic.main.fragment_favorite.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -54,6 +52,44 @@ class FavoriteFragment : Fragment() {
 
         favoritesViewModel.favoritesInfo(userCode)
 
+        favoritesAdapter = FavoritesAdapter(
+            object :
+                FavoritesAdapter.FavoritesViewHolder.FavoritesClickListener {
+                override fun onclick(position: Int, textView: TextView) {
+                    var theaterName = favoritesList[position].theaterBrand.trim() + " " + favoritesList[position].theaterName
+
+                    TheaterCollection.mvTheater = theaterName
+
+                    if(theaterName.contains("메가박스")) {
+                        TheaterCollection.mvTheaterName = "mega"
+                    }else if(theaterName.contains("롯데시네마")){
+                        TheaterCollection.mvTheaterName = "lotte"
+                    }else {
+                        TheaterCollection.mvTheaterName = "cgv"
+                    }
+
+                    val movieSelecDialogFragment = MovieSelectDialogFragment().getInstance()
+                    movieSelecDialogFragment.show(fragmentManager!!, "movie_select")
+
+                }
+
+                override fun starClick(position: Int, starImageView: ImageView) {
+//                            Toast.makeText(context, position.toString(), Toast.LENGTH_SHORT)
+                    //Log.e("즐겨찾기 삭제", "starclick접속")
+                    isStarClicked(position, starImageView)
+                }
+            })
+
+        frag_fav_rv_favorite.adapter = favoritesAdapter
+        var favoritelm = LinearLayoutManager(this.context)
+        frag_fav_rv_favorite.layoutManager = favoritelm
+        frag_fav_rv_favorite.setHasFixedSize(true)
+
+        frag_fav_swipe.setOnRefreshListener {
+            favoritesViewModel.favoritesInfo(userCode)
+
+            frag_fav_swipe.isRefreshing = false
+        }
         observeData()
     }
 
@@ -75,39 +111,9 @@ class FavoriteFragment : Fragment() {
                     favoritesList = emptyList
                 }
 
-                favoritesAdapter = FavoritesAdapter(
-                    object :
-                        FavoritesAdapter.FavoritesViewHolder.FavoritesClickListener {
-                        override fun onclick(position: Int, textView: TextView) {
-                            var theaterName = favoritesList[position].theaterBrand.trim() + " " + favoritesList[position].theaterName
 
-                            TheaterCollection.mvTheater = theaterName
-
-                            if(theaterName.contains("메가박스")) {
-                                TheaterCollection.mvTheaterName = "mega"
-                            }else if(theaterName.contains("롯데시네마")){
-                                TheaterCollection.mvTheaterName = "lotte"
-                            }else {
-                                TheaterCollection.mvTheaterName = "cgv"
-                            }
-
-                            val movieSelecDialogFragment = MovieSelectDialogFragment().getInstance()
-                            movieSelecDialogFragment.show(fragmentManager!!, "movie_select")
-
-                        }
-
-                        override fun starClick(position: Int, starImageView: ImageView) {
-//                            Toast.makeText(context, position.toString(), Toast.LENGTH_SHORT)
-                            //Log.e("즐겨찾기 삭제", "starclick접속")
-                            isStarClicked(position, starImageView)
-                        }
-                    })
 
                 favoritesAdapter.setFavoritesData(favoritesList)
-                frag_fav_rv_favorite.adapter = favoritesAdapter
-                var favoritelm = LinearLayoutManager(this.context)
-                frag_fav_rv_favorite.layoutManager = favoritelm
-                frag_fav_rv_favorite.setHasFixedSize(true)
 
                 if (favoritesList == emptyList) {
                     frag_fav_tv_warning.visibility = View.VISIBLE
