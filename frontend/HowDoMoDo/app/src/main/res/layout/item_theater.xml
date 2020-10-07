@@ -4,15 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="70dp"
     android:layout_marginStart="4dp"
-    android:layout_marginTop="2dp"
     android:layout_marginEnd="4dp"
-    android:layout_marginBottom="2dp"
     android:background="#ffffff"
     android:id="@+id/item_theater_cl_box"
     >
 
     <ImageView
-        android:id="@+id/item_select_area_theater_iv_photo"
+        android:id="@+id/item_theater_iv_photo"
         android:layout_width="37dp"
         android:layout_height="37dp"
         android:layout_marginStart="22dp"
@@ -22,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/item_select_area_theater_tv_name"
+        android:id="@+id/item_theater_tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -31,30 +29,35 @@
         android:text="CGV"
         android:textColor="#333333"
         android:textSize="13sp"
-        app:layout_constraintStart_toEndOf="@id/item_select_area_theater_iv_photo"
-        app:layout_constraintTop_toTopOf="@id/item_select_area_theater_iv_photo" />
+        app:layout_constraintStart_toEndOf="@id/item_theater_iv_photo"
+        app:layout_constraintTop_toTopOf="@id/item_theater_iv_photo" />
 
     <TextView
-        android:id="@+id/item_select_area_theater_tv_distance"
+        android:id="@+id/item_theater_tv_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_kr_regular"
         android:lineSpacingExtra="6sp"
-        android:text="3.5km"
+        android:ellipsize="marquee"
+        android:ems="9"
+        android:singleLine="true"
+        android:focusable="true"
+        android:text="영화관 주소"
         android:textColor="#707070"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@id/item_select_area_theater_tv_name"
-        app:layout_constraintBottom_toBottomOf="@id/item_select_area_theater_iv_photo"/>
+        app:layout_constraintStart_toStartOf="@id/item_theater_tv_name"
+        app:layout_constraintBottom_toBottomOf="@id/item_theater_iv_photo"
+
+        />
 
     <ImageView
-        android:id="@+id/item_select_area_theater_iv_booking"
+        android:id="@+id/item_theater_iv_favorite"
         android:layout_width="wrap_content"
         android:layout_height="37dp"
-        android:layout_marginEnd="19dp"
+        android:layout_marginEnd="13dp"
         android:src="@drawable/star_unclicked"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/item_Theater_view_under_bar"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/item_theater_tv_name" />
 
     <View
         android:id="@+id/item_Theater_view_under_bar"
@@ -64,5 +67,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginEnd="19dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/item_select_area_theater_iv_photo" />
+        app:layout_constraintStart_toStartOf="@id/item_theater_iv_photo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

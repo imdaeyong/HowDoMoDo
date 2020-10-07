@@ -13,31 +13,45 @@
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/tenet"
-        />
-    <ImageView
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:src="@drawable/movie_twelve"
-        app:layout_constraintTop_toBottomOf="@id/ll_main_iv_poster"
-        app:layout_constraintEnd_toStartOf="@id/ll_main_tv_name"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="6dp"
-        />
-    <TextView
-        android:id="@+id/ll_main_tv_name"
+        android:src="@drawable/tenet" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_main_cl_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:textColor="#ffffff"
-        android:lineSpacingExtra="6sp"
-        app:layout_constraintTop_toBottomOf="@id/ll_main_iv_poster"
-        app:layout_constraintStart_toStartOf="@id/ll_main_iv_poster"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="@id/ll_main_iv_poster"
-        android:layout_marginTop="6dp"
-        android:text="영화 이름"
-        android:fontFamily="@font/noto_sans_kr_medium"
-        />
+        app:layout_constraintStart_toStartOf="@id/ll_main_iv_poster"
+        app:layout_constraintTop_toBottomOf="@id/ll_main_iv_poster">
+
+        <ImageView
+            android:id="@+id/ll_main_iv_age"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/movie_twelve"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ll_main_tv_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/ll_main_tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:maxEms="5"
+            android:ellipsize="marquee"
+            android:fontFamily="@font/noto_sans_kr_medium"
+            android:lineSpacingExtra="6sp"
+            android:text="영화 이름"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/ll_main_iv_age"
+            app:layout_constraintStart_toEndOf="@id/ll_main_iv_age"
+            app:layout_constraintTop_toTopOf="parent"
+            android:singleLine="true" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/ll_main_tv_star"
@@ -47,7 +61,7 @@
         android:textColor="#ffffff"
         android:lineSpacingExtra="6sp"
         android:text="평점"
-        app:layout_constraintTop_toBottomOf="@id/ll_main_tv_name"
+        app:layout_constraintTop_toBottomOf="@id/ll_main_cl_title"
         app:layout_constraintEnd_toEndOf="@id/ll_main_iv_poster"
         app:layout_constraintStart_toStartOf="@id/ll_main_iv_poster"
         app:layout_constraintHorizontal_bias="0.2"
@@ -75,7 +89,7 @@
         android:textColor="#ffffff"
         android:lineSpacingExtra="6sp"
         android:text="장르"
-        app:layout_constraintTop_toBottomOf="@id/ll_main_tv_name"
+        app:layout_constraintTop_toBottomOf="@id/ll_main_cl_title"
         app:layout_constraintEnd_toEndOf="@id/ll_main_iv_poster"
         app:layout_constraintStart_toStartOf="@id/ll_main_iv_poster"
         app:layout_constraintHorizontal_bias="0.55"
@@ -87,6 +101,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="11sp"
+        android:maxEms="2"
+        android:singleLine="true"
+        android:ellipsize="end"
         android:textColor="#ffffff"
         android:lineSpacingExtra="6sp"
         android:text="영화 장르"
@@ -106,7 +123,7 @@
         android:lineSpacingExtra="6sp"
         android:fontFamily="@font/noto_sans_kr_medium"
         android:text="예매하러 가기"
-        app:layout_constraintTop_toBottomOf="@id/ll_main_tv_name"
+        app:layout_constraintTop_toBottomOf="@id/ll_main_cl_title"
         android:layout_marginTop="37dp"
         app:layout_constraintEnd_toEndOf="@id/ll_main_iv_poster"
         app:layout_constraintStart_toStartOf="@id/ll_main_iv_poster"

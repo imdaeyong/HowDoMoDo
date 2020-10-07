@@ -1,11 +1,16 @@
 package com.ssafy.howdomodo.data.datasource.model
 
+import android.os.Parcel
+import android.os.Parcelable
+
 class Theater(
-        val kind : String,
-        val name : String,
-        val distance : String,
-        var isClicked : Boolean,
-        var theater_lat : Double,
-        var theater_lng : Double,
-        var isSelectedMarker :Boolean,
+        val theaterId :Int,
+        val cityId : Int,
+        val theaterName : String,
+        var theaterAddress : String,
+        val theaterBrand : String,
+        var theaterLat : Double,
+        var theaterLon : Double,
+        var isClicked :Boolean =false,
+        var fav : Boolean
 )

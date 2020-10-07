@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/main_background"
-    tools:context=".ui.Favorite.FavoriteFragment">
+    tools:context=".ui.favorite.FavoriteFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frag_fav_cl_top"
@@ -38,6 +38,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
         android:text="즐겨찾는 영화관이 없습니다."
         app:layout_constraintTop_toBottomOf="@id/frag_fav_cl_top" />
 

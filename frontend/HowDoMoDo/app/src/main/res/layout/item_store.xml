@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_store_cl_box"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_marginTop="14dp"
+        android:id="@+id/item_store_iv_image"
+        android:layout_width="78dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="24dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_store_tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/noto_sans_kr_medium"
+        android:lineSpacingExtra="6sp"
+        android:text="식생활"
+        android:textColor="#333333"
+        android:textSize="13sp"
+        app:layout_constraintStart_toEndOf="@id/item_store_iv_image"
+        app:layout_constraintTop_toTopOf="@id/item_store_iv_image" />
+
+    <TextView
+        android:id="@+id/item_store_tv_cnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_kr_regular"
+        android:lineSpacingExtra="6sp"
+        android:text="사용 횟수 633회"
+        android:textColor="#707070"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/item_store_iv_image"
+        app:layout_constraintStart_toStartOf="@id/item_store_tv_title" />
+
+    <ImageView
+        android:id="@+id/item_store_iv_up_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:src="@drawable/btn_down"
+        app:layout_constraintBottom_toBottomOf="@id/item_store_iv_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/item_store_iv_image" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/item_store_rv_down"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/item_store_view_under_bar"
+        app:layout_constraintTop_toBottomOf="@id/item_store_iv_image"
+        />
+
+
+    <View
+        android:id="@+id/item_store_view_under_bar"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="19dp"
+        android:background="#DDDDDD"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/item_store_iv_image"
+        app:layout_constraintTop_toBottomOf="@id/item_store_rv_down" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
