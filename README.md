@@ -27,7 +27,11 @@
 
 ### 📃 기술 스택
 
-이미지 첨부할 것
+![image](https://user-images.githubusercontent.com/33771279/95332900-fd4b4180-08e6-11eb-812e-89241f116cfe.png)
+
+**SW Architecture**
+
+![image](https://user-images.githubusercontent.com/33771279/95333316-95492b00-08e7-11eb-9815-db977c6ddd1b.png)
 
 **BACKEND**
 
@@ -63,7 +67,7 @@
 >
 > **Swagger** : Swagger를 이용하여 RESTful API 문서 자동화
 >
-> **MySql** : 
+> **MariaDB** :  Docker에 구성하여 데이터를 관리
 >
 > **AWS** : EC2 서비스를 이용하여 Ubuntu 서버를 구축(호스팅)
 >
@@ -176,8 +180,24 @@
 - Back
       
   - Back_doc
-        - Back_epic Name
+      - Back_Setting
+    
+      - Back_Users
+    
+      - Back_Theaters
+    
+      - Back_Current_Movielist
+    
+      - Back_django
+    
+      - Back_api
+    
+      - Back_Crawling
+    
+      - Back_SelectTheaters
+    
       - bigdata_recommand
+    
       - pn_score_analysis
       
     - release
@@ -237,6 +257,16 @@
 - Backend
 
   👨 **권오정** 👩 전수현
+
+  ```markdown
+  # [Role]
+  ## [전수현]
+  ### 1. Spring Server
+  	- 1) 회원정보 CRUD
+  	- 2) 시구군 및 즐겨찾기 CRUD
+  ```
+
+  
 
 - Big Data
 
