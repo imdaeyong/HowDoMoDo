@@ -50,31 +50,65 @@
 
 ### 📃 사용 기술
 
-**Spring boot** : How Do Mo Do Project의 전반적인 기능 Rest Controller 구현
+#### [Backend]
 
-**Swagger** : Swagger를 이용하여 RESTful API 문서 자동화
-
-**MySql** : 
-
-**AWS** : EC2 서비스를 이용하여 Ubuntu 서버를 구축(호스팅)
-
-**Nginx** : 웹서버를 구축
-
-
-
-**Recycler View**: 
-
-**MVVM**: 
-
-**OkHttp**: 
-
-**Glide**: 
-
-**Koin AndroidX**: 
-
-**KAKAO Map**: 
+> **Spring boot** : How Do Mo Do Project의 전반적인 기능 Rest Controller 구현
+>
+> **Swagger** : Swagger를 이용하여 RESTful API 문서 자동화
+>
+> **MySql** : 
+>
+> **AWS** : EC2 서비스를 이용하여 Ubuntu 서버를 구축(호스팅)
+>
+> **Nginx** : 웹서버를 구축
 
 
+
+#### [Frontend]
+
+> **MVVM**: MVVM (Model, View, View Model) 패턴을 활용하여 뷰 모델과 모델이 뷰로부터 독립적인 형태를 만들어서 UI로부터 				비즈니스 로직과 프레젠테이션 로직을 분리
+>
+> - 뷰는 **UI**와 **UI 로직**을 다룬다.
+> - 뷰 모델은 **프레젠테이션 로직**과 뷰를 위한 **상태**를 다룬다.
+> - 모델은 **비즈니스 로직**과 **데이터**를 다룬다.
+>
+> **Naver 검색 API**: 네이버 블로그 검색 결과를 출력해주는 REST API를 활용하여 영화에 대한 블로그 리뷰 View를 구성
+>
+> **Recycler View**: Recycler View를 활용하여 리스트화된 데이터를 효과적으로 보여줄 수 있도록 View를 구성
+>
+> - *Adapter* : 새로운 뷰의 추가를 위한 어뎁터
+>   - 데이터를 가져와서 뷰에 적용
+>   - Recycler View에게 View Holder를 전달
+> - *View Holder* : 실제 아이템의 레퍼런스를 가지고 있고, 뷰에 새로운 데이터를 넣어 업데이트할 때 캐시로 사용  
+>   - 'findviewbyid'를 Layout에 뷰가 추가될 때가 아닌 뷰가 생성될 때만 호출되게 최소화
+> - *Layout Manager* : Recycler View에게 뷰를 어떻게 보여줄지 알려주는 역할
+>   - 수직, 수평 , 그리드 등으로 보여주는거나 아이템을 추가 제거할때 애니메이션 효과 사용
+>
+> **Retrofit2**: API에 특화된 CRUD 방식의 웹 서버 연결을 편하게 구현할 수 있는 라이브러리를 활용하여 통신 작업을 진행
+>
+> **OkHttp**: HTTP & HTTP /2 통신 클라이언트 라이브러리를 활용하여 Request, Response 방식의 통신 활용
+>
+> **Glide**: 구글의 안드로이드 이미지 로딩 라이브러리인 Glide를 활용하여 Recycler View에 영화 포스터를 넣기 위해 사용
+>
+> **Koin AndroidX**: DI기술 사용을 위해 코틀린을 위한 DI 라이브러리 Koin AndroidX를 사용
+>
+> - **DI** (Dependency Injection): 의존성 주입 
+>   - **구성요소간의 의존 관계가 소스코드 내부가 아닌 외부 설정 파일등을 통해 정의되게하는 디자인 패턴**
+>     - EX) `카페에서 커피를 만드는데 커피 머신이 어떤 부품으로 구성되어있는지 바리스타는 알필요가 없다`
+>     - 이렇게 분리시켜 놓으면 객체의 생성과 사용을 분리시킬 수 있고, 재사용이 유연해진다.
+>   - `재사용성`을 높임
+>   - `테스트`에 용이
+>   - 코드를 `단순화`
+>   - `종속된 코드`를 감축
+>   - `결합도`를 낮추면서 `유연성`과 `확장성`이 향상
+>
+> **KAKAO Map**: 
+
+
+
+#### [Big Data]
+
+> 
 
 <hr>
 
@@ -90,20 +124,21 @@
   `{상태} {기능} | {JIRA issue ID}`
 
   - ex)  `Feat Login Function | S03P11A305-1`
-- ex) `Update Movie Function Communication | S03P11A305-2` `  
+  - ex) `Update Movie Function Communication | S03P11A305-2` 
   
-`[마무리] | {날짜 }| {JIRA issue ID}`
+
+  `[마무리] | {날짜 }| {JIRA issue ID}`
+
+  - ex) `[마무리] | 2020.07.21 | S03P11A305-1`
   
-- ex) `[마무리] | 2020.07.21 | S03P11A305-1`
-  
-`[MR] | '{소스브랜치}' into '{타겟브랜치}'`
-  
->  **진행상황** 
-  >
-> - Todo
-  > - In Progress
-> - Done
-  
+
+  `[MR] | '{소스브랜치}' into '{타겟브랜치}'`
+
+-  **진행상황** 
+>  - Todo
+>  - In Progress
+>  - Done
+
 - **Git Branch 전략**
 
   - Master
@@ -131,15 +166,48 @@
 
 - Frontend
 
-  👩‍💻 **김찬영** 👨‍💻 김대용 👩‍💻 김형택
+  👱 **김찬영** 👨 김대용 👦 김형택
+
+  ```markdown
+  # [Role]
+  ## [김 찬 영]
+  
+  ## [김 대 용]  
+  
+  ## [김 형 택]
+  ### 1. Main Page
+  	- 1) Recycler View를 통한 실시간 상영 영화 정보 구성
+      	- 실시간 상영 영화 API 활용
+      	- 예매하기 버튼을 클릭하여 해당 영화에 대한 긍정/부정 분석 결과를 Dialog로 출력
+      		- BigData 분석 결과를 통한 긍정/ 부정 점수를 통신하고 결과값을 받아와 Dialog에 적용
+      	- 영화관 선택 화면으로 연결
+      - 2) Recycler View를 통한 영화 블로그 리뷰 정보 구성
+      	- Spinner를 통해 영화를 선택
+      	- 선택된 영화를 네이버 블로그 검색 API 활용
+      	- Web View Activity를 활용하여 해당 블로그로 연결
+  ### 2. Login Page
+  	- 1) Login Activity, View Model, layout을 통해 view를 구성
+  	- 2) Backend 파트와 로그인 관련 통신
+  ### 3. MyPage
+  	- 1) 회원정보 수정 Activity, View Model, layout을 통해 view를 구성
+  	- 2) 회원 탈퇴 Activity, View Model, layout을 통해 view를 구성
+  	- 3) Backend 파트와 회원정보 수정, 탈퇴 기능 통신
+  ### 4. Dialog Activity
+  	- 1) 회원 탈퇴 및 영화 리뷰 긍정/부정 분석 정보 Dialog Activity를 구현
+  	- 2) 사용자에게 효과적으로 보여질 수 있도록 layout을 구현
+  ### 5. Splash Page
+  	- 1) App 처음 실행 화면 Splash Activity, layout을 통해 view를 구성
+  ```
+
+  
 
 - Backend
 
-  👨‍💻 **권오정** 👩‍💻 전수현
+  👨 **권오정** 👩 전수현
 
 - Big Data
 
-  👩‍💻 **이선수**
+  👨 **이선수**
 
   
 

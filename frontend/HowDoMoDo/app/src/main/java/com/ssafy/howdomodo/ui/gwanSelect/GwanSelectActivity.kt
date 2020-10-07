@@ -51,12 +51,13 @@ class GwanSelectActivity : BasicActivity() {
 //        val brand = TheaterCollection.mvTheater.split(" ")[0]
         val brand = TheaterCollection.mvTheaterName
         val theaterName = TheaterCollection.mvTheater.split(" ")[1]
+        val timeFormat = SimpleDateFormat("yyyyMMdd")
 
-        //Log.e("gwan", ObjectMovie.movieTitle + " " + brand + " " + theaterName)
+        Log.e("gwan", timeStr.format(Week.times[0].dayDate).toString() + " " + brand + " " + theaterName +" "+TheaterCollection.mvTitle)
         viewModel.getGwanData(
             brand,
             theaterName,
-            timeStr.format(Week.times[0].dayDate).toString(),
+            timeFormat.format(Week.times[0].dayDate).toString(),
             TheaterCollection.mvTitle
         )
         dayAdapter = DayAdapter(object : DayViewHolder.DayClickListener {
@@ -67,7 +68,6 @@ class GwanSelectActivity : BasicActivity() {
                         gwanAdapter.setClicked(clicked[0], clicked[1], false)
                     }
                     btnToggle()
-                    val timeFormat = SimpleDateFormat("yyyyMMdd")
 
                     //Log.e("tt", timeFormat.format(Week.times[position].dayDate).toString())
                     TheaterCollection.mvDate =
@@ -82,6 +82,8 @@ class GwanSelectActivity : BasicActivity() {
                         timeFormat.format(Week.times[position].dayDate).toString(),
                         TheaterCollection.mvTitle
                     )
+                    Log.e("gwa2n", timeStr.format(Week.times[0].dayDate).toString() + " " + brand + " " + theaterName +" "+TheaterCollection.mvTitle)
+
                 }
             }
         })

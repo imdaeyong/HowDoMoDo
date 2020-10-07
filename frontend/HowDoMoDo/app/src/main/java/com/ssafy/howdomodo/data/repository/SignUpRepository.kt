@@ -21,5 +21,5 @@ class SignUpRepository(private val remoteDataSource: RemoteDataSource){
         email: String,
         success: (SignUpResponse) -> Unit,
         fail: (Throwable) -> Unit
-    ) = remoteDataSource.userNickCheck(email, success, fail)
+    ) = remoteDataSource.userEmailCheck(email, success, fail)
 }
