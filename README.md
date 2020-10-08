@@ -5,7 +5,7 @@
 ### 🏠 [App Download Homepage](http://j3a305.p.ssafy.io:8080/home/index.html)
 ### 🎥 [App 시연영상](https://www.youtube.com/watch?v=thH3XNfE6p4)
 <iframe width="560" height="315" src="https://www.youtube.com/embed/thH3XNfE6p4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
+![image](/uploads/c1ee21f2cf3430966e3f673341a34310/image.png)
 <hr>
 
 ### 📂 Contents
