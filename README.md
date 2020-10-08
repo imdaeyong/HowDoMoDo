@@ -17,6 +17,15 @@
 - [역할분담](#-역할-분담)
 - [Jira](#-jira)
 - [화면 구성 Flow](#-화면-구성-flow)
+- [프로젝트 산출물](https://lab.ssafy.com/s03-bigdata-sub3/s03p23a305/tree/develop/doc)    
+    - [프로젝트 계획서](https://lab.ssafy.com/s03-bigdata-sub3/s03p23a305/blob/develop/doc/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B3%84%ED%9A%8D%EC%84%9C/%EC%84%9C%EC%9A%B83%EB%B0%98_A305_%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_%EA%B3%84%ED%9A%8D%EC%84%9C.pdf)
+    - [기능 명세서](https://lab.ssafy.com/s03-bigdata-sub3/s03p23a305/tree/develop/doc/%EA%B8%B0%EB%8A%A5%20%EB%AA%85%EC%84%B8)
+    - [와이어프레임](https://lab.ssafy.com/s03-bigdata-sub3/s03p23a305/tree/develop/doc/%EC%99%80%EC%9D%B4%EC%96%B4%ED%94%84%EB%A0%88%EC%9E%84)
+    - [ERD](https://lab.ssafy.com/s03-bigdata-sub3/s03p23a305/tree/develop/doc/ERD)
+    - [API문서](https://lab.ssafy.com/s03-bigdata-sub3/s03p23a305/tree/develop/doc/API%EB%AC%B8%EC%84%9C)
+    - [UCC Download](https://lab.ssafy.com/s03-bigdata-sub3/s03p23a305/tree/develop/doc/UCC%EC%98%81%EC%83%81)
+    - [발표자료](https://lab.ssafy.com/s03-bigdata-sub3/s03p23a305/tree/develop/doc/%EB%B0%9C%ED%91%9C%EC%9E%90%EB%A3%8C)
+    - [회의록](https://lab.ssafy.com/s03-bigdata-sub3/s03p23a305/tree/develop/doc/%ED%9A%8C%EC%9D%98%EB%A1%9D)
 
 <hr>
 
@@ -24,7 +33,7 @@
 
 - ☝ **영화사 통합 플랫폼**
 
-  - 3개의 영화사 상영시간 통합을 통한 **빠른 정보 검색과 활동을 고려한 영화관 선택** (CGV, 롯데시네마, 메가박스)
+  - **3개의 영화사(CGV, 롯데시네마, 메가박스)** 상영시간 통합을 통한 **빠른 정보 검색과 활동을 고려한 영화관 선택** 
 
 - ☝ 카드사 결제정보 빅데이터를 활용한 영화관 **주변 활동 분석 및 추천!** (맛집, 쇼핑 등의 여가활동)
 
