@@ -3,18 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="150dp"
-    android:layout_height="188dp"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
     android:background="#1e2329"
     android:layout_marginLeft="22dp">
 
     <!--  Posting Title  -->
     <TextView
         android:id="@+id/ll_main_tv_posting_title"
-        android:layout_width="119dp"
-        android:layout_height="38dp"
-        android:layout_marginLeft="14dp"
-        android:layout_marginRight="17dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:lines="2"
         android:lineSpacingExtra="6sp"
         android:textColor="#ffffff"
         android:textSize="13sp"
@@ -26,36 +27,36 @@
     <!--  Posting Content  -->
     <TextView
         android:id="@+id/ll_main_tv_posting_content"
-        android:layout_width="129dp"
-        android:layout_height="51dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:lineSpacingExtra="6sp"
+        android:layout_marginTop="7dp"
+        android:ellipsize="end"
         android:textColor="#ffffff"
         android:textSize="11sp"
         android:fontFamily="@font/noto_sans_kr_regular"
         tools:text="사진은 권력이다 영화 공작, 남과북의 공작정치에 대한 고발장이자 반성문 같은 영화.."
         app:layout_constraintStart_toStartOf="@id/ll_main_tv_posting_title"
         app:layout_constraintTop_toBottomOf="@id/ll_main_tv_posting_title"
-        android:layout_marginTop="7dp"
-        />
+        android:lines="3" />
     <!--  Posting Date  -->
     <TextView
         android:id="@+id/ll_main_tv_posting_date"
-        android:layout_width="76dp"
-        android:layout_height="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:textSize="10sp"
-        android:textColor="#ffffff"
+        android:layout_marginTop="11dp"
         android:lineSpacingExtra="5sp"
         tools:text="2016년 12월 18일"
         android:fontFamily="@font/noto_sans_kr_regular"
         app:layout_constraintStart_toStartOf="@id/ll_main_tv_posting_title"
         app:layout_constraintTop_toBottomOf="@id/ll_main_tv_posting_content"
-        android:layout_marginTop="11dp"
-        />
+        android:textColor="#DDDDDD" />
     <!--  Posting Button  -->
     <Button
         android:id="@+id/ll_main_btn_posting"
         android:layout_height="27dp"
-        android:layout_width="122dp"
+        android:layout_width="match_parent"
         android:textSize="13sp"
         android:textColor="#ffffff"
         android:background="@drawable/main_btn_posting_border"

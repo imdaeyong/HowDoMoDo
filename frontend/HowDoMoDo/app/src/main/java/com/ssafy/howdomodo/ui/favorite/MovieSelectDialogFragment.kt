@@ -9,11 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,10 +19,7 @@ import com.ssafy.howdomodo.`object`.TheaterCollection
 import com.ssafy.howdomodo.ui.Loading
 import com.ssafy.howdomodo.ui.gwanSelect.GwanSelectActivity
 import com.ssafy.howdomodo.ui.main.*
-import com.ssafy.howdomodo.ui.selectArea.SelectAreaActivity
 import kotlinx.android.synthetic.main.dialog_movie_select.view.*
-import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.android.synthetic.main.item_ticketing_dialog.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieSelectDialogFragment : DialogFragment() {
@@ -144,7 +137,7 @@ class MovieSelectDialogFragment : DialogFragment() {
 //            item_psns_content.text = PsNs
             dialog.setOnOKClickedListener { content->
                 if(content == "확인"){
-                    val intent = Intent(activity, SelectAreaActivity::class.java)
+                    val intent = Intent(activity, GwanSelectActivity::class.java)
                     ObjectMovie.movieTitle = movieTitle
                     startActivity(intent)
                     dismiss()

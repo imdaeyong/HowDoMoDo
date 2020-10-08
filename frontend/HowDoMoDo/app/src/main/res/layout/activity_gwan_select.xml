@@ -50,12 +50,15 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/act_gwan_cl_left"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="1">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingHorizontal="12dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -66,29 +69,21 @@
                     android:id="@+id/act_gwan_iv_movie_age"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="30dp"
-                    android:src="@drawable/movie_twelve"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/movie_twelve" />
 
                 <TextView
                     android:id="@+id/act_gwan_tv_movie_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
                     android:ellipsize="end"
-                    android:maxLength="5"
                     android:fontFamily="@font/noto_sans_kr_medium"
                     android:lineSpacingExtra="6sp"
                     android:maxLines="1"
-                    android:text="공작"
                     android:textColor="#ffffff"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/act_gwan_iv_movie_age"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    tools:text="공장가가가가가sdfsdfsdf각가ㅏㄱ" />
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -101,7 +96,6 @@
                 android:id="@+id/act_gwan_tv_theater_name"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:maxLength="10"
                 android:maxLines="1"
                 android:ellipsize="end"
                 app:layout_constraintEnd_toEndOf="parent"
