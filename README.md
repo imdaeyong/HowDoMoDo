@@ -20,7 +20,7 @@
 - [프로젝트 산출물](https://lab.ssafy.com/s03-bigdata-sub3/s03p23a305/tree/develop/doc)    
     - [프로젝트 계획서](https://lab.ssafy.com/s03-bigdata-sub3/s03p23a305/blob/develop/doc/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B3%84%ED%9A%8D%EC%84%9C/%EC%84%9C%EC%9A%B83%EB%B0%98_A305_%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8_%EA%B3%84%ED%9A%8D%EC%84%9C.pdf)
     - [기능 명세서](https://lab.ssafy.com/s03-bigdata-sub3/s03p23a305/tree/develop/doc/%EA%B8%B0%EB%8A%A5%20%EB%AA%85%EC%84%B8)
-    - [와이어프레임](https://lab.ssafy.com/s03-bigdata-sub3/s03p23a305/tree/develop/doc/%EC%99%80%EC%9D%B4%EC%96%B4%ED%94%84%EB%A0%88%EC%9E%84)
+    - [와이어프레임](https://lab.ssafy.com/s03-bigdata-sub3/s03p23a305/blob/master/doc/%EC%99%80%EC%9D%B4%EC%96%B4%ED%94%84%EB%A0%88%EC%9E%84/%EC%B5%9C%EC%A2%85_%EC%99%80%EC%9D%B4%EC%96%B4_%ED%94%84%EB%A0%88%EC%9E%84.pdf)
     - [ERD](https://lab.ssafy.com/s03-bigdata-sub3/s03p23a305/tree/develop/doc/ERD)
     - [API문서](https://lab.ssafy.com/s03-bigdata-sub3/s03p23a305/tree/develop/doc/API%EB%AC%B8%EC%84%9C)
     - [UCC Download](https://lab.ssafy.com/s03-bigdata-sub3/s03p23a305/tree/develop/doc/UCC%EC%98%81%EC%83%81)
