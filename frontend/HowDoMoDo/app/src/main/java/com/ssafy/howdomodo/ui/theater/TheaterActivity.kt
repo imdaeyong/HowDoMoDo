@@ -377,7 +377,7 @@ class TheaterActivity : BasicActivity(), POIItemEventListener{
         startActivity(intent)
 
         Toast.makeText(    this,
-            "카카오맵으로 연결 " + p1?.itemName + "길찾기",
+            "카카오맵으로 연결! " + p1?.itemName + "길찾기",
             Toast.LENGTH_SHORT
         ).show()
 

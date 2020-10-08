@@ -381,7 +381,7 @@ class RemoteDataSourceImpl : RemoteDataSource {
                     call: Call<GwanResponse>,
                     response: Response<GwanResponse>
                 ) {
-                    //Log.e("qwe", response.body().toString())
+                    Log.e("qwe", response.body().toString())
                     if (response.body()!!.status == 200) {
                         success(response.body()!!)
 

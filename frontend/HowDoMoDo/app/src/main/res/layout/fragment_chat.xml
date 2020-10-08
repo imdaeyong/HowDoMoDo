@@ -35,6 +35,7 @@
         android:layout_marginTop="29dp"
         android:lineSpacingExtra="8sp"
         android:textColor="#bbbbbb"
+        android:fontFamily="@font/noto_sans_kr_regular"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
