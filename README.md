@@ -369,6 +369,7 @@
 #### 장소 선택 및 카드데이터 분석 결과 출력 화면
 
 ![Screenshot_20201007-204712_HowDoMoDo](https://user-images.githubusercontent.com/45157374/95328101-01c02c00-08e0-11eb-9af3-b4a79e82b713.jpg)
+![image](/uploads/7a7fa42e9680f979616332ad64d1867b/image.png)
 
 - 시/도, 구/군을 선택하여 사용자가 영화 관람을 원하는 장소를 선택합니다.
 
@@ -382,8 +383,9 @@
 
 #### 영화관 선택 화면
 
-![Screenshot_20201007-204743_HowDoMoDo](https://user-images.githubusercontent.com/45157374/95328325-611e3c00-08e0-11eb-923d-cc16f5b40d6d.jpg)
+![image](/uploads/38361594fbeb06829f27eda3ab6937fd/image.png)
 ![Screenshot_20201007-204805_HowDoMoDo](https://user-images.githubusercontent.com/45157374/95328339-65e2f000-08e0-11eb-8a9a-0d26e605ec66.jpg)
+![image](/uploads/bc675b09c061f1d9ae333f8a68abb007/image.png)
 
 - 해당 장소에 있는 3개 회사(메가박스, CGV, 롯데시네마)를 모두 출력해줍니다.
 
