@@ -180,32 +180,21 @@
 
         - Front_doc
         - Front_epic Name
-- Back
-      
-  - Back_doc
-      - Back_Setting
-    
-      - Back_Users
-    
-      - Back_Theaters
-    
-      - Back_Current_Movielist
-    
-      - Back_django
-    
-      - Back_api
-    
-      - Back_Crawling
-    
-      - Back_SelectTheaters
-    
+      - Back
+        - Back_doc
+        - Back_Setting
+        - Back_Users
+        - Back_Theaters
+        - Back_Current_Movielist
+        - Back_django
+        - Back_api
+        - Back_Crawling
+        - Back_SelectTheaters
       - bigdata_recommand
-    
       - pn_score_analysis
-      
-    - release
-    
-      
+      - release
+
+<hr>
 
 ### 📃 역할 분담
 
@@ -228,6 +217,7 @@
   ### 2. 장소 선택 페이지 
   	- 1) 시/도, 구/군 선택 서버 연동하여 데이터 출력
   	- 2) 구/군 데이터를 통해 카드데이터 분석 결과 출력
+  
   ## [김 대 용]  
   ### 1. Signup Page
     - 1) Signup Activity, Signup ViewModel로 뷰 구성 및 Backend와 통신
@@ -285,6 +275,27 @@
   ### 1. Spring Server
   	- 1) 회원정보 CRUD
   	- 2) 시구군 및 즐겨찾기 CRUD
+  ### 2. Database
+  	- 1) movie_project 데이터베이스 생성
+  	- 2) 회원, 권한, 지역, 영화관 테이블 생성
+  
+  ## [권오정]
+  ### 1. 운영서버 환경 구축
+    - 1) Database 서버
+      	- Docker 설치
+      	- Docker MariaDB 이미지 Database 서버 설치
+    - 2) Django 서버
+      	- Anacoda 설치
+      	- Django 서버 구축
+  ### 2. Crwaling
+    - 1) 영화관 정보
+      	- 각 영화사 극장명, 주소 수집
+      	- 네이버 오픈 API (map-geocode)로 극장 위도, 경도 수집
+    - 2) 현재 상영 영화 정보
+      	- 네이버 영화 > 현재 상영영화 > 상영영화 정보 수집
+    - 3) 현재 사영중인 영화관 정보
+    		- 영화사 > 극장 > 사영영화 예매 정보 수집
+  ### 3. 소개 UCC 제작
   ```
 
   
