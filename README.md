@@ -3,27 +3,32 @@
 ![version](https://img.shields.io/badge/version-0.0.1-orange?)![spring](https://img.shields.io/badge/spring-4.0.0-yellow?logo=spring)![spring-boot](https://img.shields.io/badge/springboot-4.0.0-yellow?logo=spring)[![mysql](https://jaywcjlove.github.io/sb/ico/mysql.svg)](http://www.mysql.com/)![aws-ec2](https://img.shields.io/badge/aws-ec2-blue)
 
 ### 🏠 [App Download Homepage](http://j3a305.p.ssafy.io:8080/home/index.html)
+### 🎥 [App 시연영상](https://www.youtube.com/watch?v=thH3XNfE6p4)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/thH3XNfE6p4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <hr>
 
 ### 📂 Contents
 
-- [Project 소개](#-영화-관련-추천-서비스)
+- [Project 소개](#%EF%B8%8F-영화-관련-추천-서비스)
 - [기술 스택](#-기술-스택)
 - [사용 기술](#-사용-기술)
-- [Git Flow](#-Git-Flow) 
+- [Git Flow](#-git-flow) 
 - [역할분담](#-역할-분담)
 - [Jira](#-jira)
-- [화면 구성 Flow](#-화면-구성-Flow)
+- [화면 구성 Flow](#-화면-구성-flow)
 
 <hr>
 
 ### 🖥️ 영화 관련 추천 서비스
 
-- 3개의 영화사 상영시간 통합을 통한 빠른 정보 검색과 활동을 고려한 영화관 선택
-- 영화사 통합 플랫폼
-- 빅데이터를 활용한 영화관 주변 활동 분석
-- 리뷰 긍/부정 분석
+- ☝ **영화사 통합 플랫폼**
+
+  - 3개의 영화사 상영시간 통합을 통한 **빠른 정보 검색과 활동을 고려한 영화관 선택** (CGV, 롯데시네마, 메가박스)
+
+- ☝ 카드사 결제정보 빅데이터를 활용한 영화관 **주변 활동 분석 및 추천!** (맛집, 쇼핑 등의 여가활동)
+
+- ☝ 영화의 수많은 **리뷰 긍/부정 분석을 통해 영화를 추천**!
 
 
 <hr>
@@ -198,131 +203,210 @@
 
 ### 📃 역할 분담
 
-- PM
+- - #### PM & BigData
 
   🕵‍♂ **이선수**
 
-- Frontend
+  ```
+  1. bigdata analysis of activitiy 
 
-  👱 **김찬영** 👨 김대용 👦 김형택
+  	1) spark 세션 생성 및 분석 데이터 로드
 
-  ```markdown
-  # [Role]
-  ## [김 찬 영]
-  ### 1. 상영관 선택 페이지
-    - 1) 중첩 Recycler View를 통한 상영 영화 시간 정보 구성
-      	- 영화사 페이지 크롤링 데이터 활용
-    - 2) Recycler View를 통한 날짜 데이터 정보 구성
-      	- 현재 시간으로부터 7일간 날짜를 저장하여 출력
-  ### 2. 장소 선택 페이지 
-  	- 1) 시/도, 구/군 선택 서버 연동하여 데이터 출력
-  	- 2) 구/군 데이터를 통해 카드데이터 분석 결과 출력
-  
-  ## [김 대 용]  
-  ### 1. Signup Page
-    - 1) Signup Activity, Signup ViewModel로 뷰 구성 및 Backend와 통신
-    - 2) 데이터 유효값 확인
-        - 이메일, 닉네임 중복체크 기능 구현 - 둘 중에 하나라도 중복 체크가 되지않았으면 회원가입 불가
-        - 생년월일 및 이메일, 닉네임 Validate Check
-  ### 2. Theater Page
-    - 1) Recycler View, Bottom Sheet, Kakao Map을 이용한 View 구성
-        - 하단 Bottom Sheet 안에 Recycler View를 이용해 영화관 리스트 구성
-        - 리스트 클릭시 맵에서 해당 위치 Marker로 이동 및 하단 버튼 활성화
-        - 해당 아이템 오른쪽 즐겨찾기 버튼 누를시 즐겨찾기 추가/삭제
-        - 영화관별로 마커이미지 상이, 마커 클릭시 해당 영화관 정보를 담은 InfoWindow 출력
-        - InfoWindow 클릭시 현재 위치로부터 해당 위치까지 길찾기 기능(KakaoMap)
-  ### 3. Favorite Page
-    - 1) View 구성
-        - Bottom Tab에서 즐겨찾기 클릭시 RecyclerView를 이용한 즐겨찾기 리스트 구현
-        - 오른쪽에 별모양을 눌러 즐겨찾기 삭제 기능
-        - 상영관 클릭시 영화선택 -> 시간대 선택 페이지로 바로 이동.
-  ### 4. 시연 UCC 제작
-  
-  ## [김 형 택]
-  ### 1. Main Page
-    - 1) Recycler View를 통한 실시간 상영 영화 정보 구성
-      	- 실시간 상영 영화 API 활용
-      	- 예매하기 버튼을 클릭하여 해당 영화에 대한 긍정/부정 분석 결과를 Dialog로 출력
-      	- BigData 분석 결과를 통한 긍정/ 부정 점수를 통신하고 결과값을 받아와 Dialog에 적용
-      	- 영화관 선택 화면으로 연결
-    - 2) Recycler View를 통한 영화 블로그 리뷰 정보 구성
-      	- Spinner를 통해 영화를 선택
-      	- 선택된 영화를 네이버 블로그 검색 API 활용
-      	- Web View Activity를 활용하여 해당 블로그로 연결
-  ### 2. Login Page
-    - 1) Login Activity, View Model, layout을 통해 view를 구성
-  	- 2) Backend 파트와 로그인 관련 통신
-  ### 3. MyPage
-  	- 1) 회원정보 수정 Activity, View Model, layout을 통해 view를 구성
-  	- 2) 회원 탈퇴 Activity, View Model, layout을 통해 view를 구성
-  	- 3) Backend 파트와 회원정보 수정, 탈퇴 기능 통신
-  ### 4. Dialog Activity
-  	- 1) 회원 탈퇴 및 영화 리뷰 긍정/부정 분석 정보 Dialog Activity를 구현
-  	- 2) 사용자에게 효과적으로 보여질 수 있도록 layout을 구현
-  ### 5. Splash Page
-  	- 1) App 처음 실행 화면 Splash Activity, layout을 통해 view를 구성
+  	2) 시구군 기준 그룹핑 dataframe 생성
+
+  	3) param에 따른 dataframe 분석
+
+  	4) 결과값 response (json)
+
+  	5) Django RESTful api 활용 (GET)
+
+  	6) python 모듈화 및 singleton pattern 적용 (여러 세션의 접근에 동일한 사전분석 데이터를 활용하기 위해)
+
+  2. positive/negative score analysis
+
+  	1) Bertforsequenceclassification 15만개 긍부정 리뷰 사전 학습 및, 학습 모델 추출 (Colab 환경에서 학습 후 추출) 
+
+  	2) Crawling을 통해 '네이버 영화' 홈페이지의 리뷰 2페이지 분량 추출
+
+  	3) 평가 데이터 토큰화 및 어텐션 마스킹, 파이토치의 텐서형으로 변환
+
+  	4) Django RESTful api 활용 (GET)
+
+  	5) python 모듈화 및 singleton pattern 적용 (여러 세션의 접근에 동일한 사전분석 데이터를 활용하기 위해)
+
+  	6) AWS 환경설정 및 배포 관리
+  ```
+<br>
+ <hr>
+
+- #### Frontend
+
+  👱 **김찬영**
+  ```
+    1. 상영관 선택 페이지
+
+	    1) 중첩 Recycler View를 통한 상영 영화 시간 정보 구성
+
+		    - 영화사 페이지 크롤링 데이터 활용
+
+	    2) Recycler View를 통한 날짜 데이터 정보 구성
+
+		    - 현재 시간으로부터 7일간 날짜를 저장하여 출력
+
+    2. 장소 선택 페이지 
+
+	    1) 시/도, 구/군 선택 서버 연동하여 데이터 출력
+
+   	    2) 구/군 데이터를 통해 카드데이터 분석 결과 출력
   ```
 
+  👨 **김대용**
+  ```
+  1. Signup Page
+
+	  1) Signup Activity, Signup ViewModel로 뷰 구성 및 Backend와 통신
+
+	  2) 데이터 유효값 확인
+
+		  - 이메일, 닉네임 중복체크 기능 구현 - 둘 중에 하나라도 중복 체크가 되지않았으면 회원가입 불가
+
+		    - 생년월일 및 이메일, 닉네임 Validate Check
+
+  2. Theater Page
+
+	  1) Recycler View, Bottom Sheet, Kakao Map을 이용한 View 구성
+
+		  - 하단 Bottom Sheet 안에 Recycler View를 이용해 영화관 리스트 구성
+
+		  - 리스트 클릭시 맵에서 해당 위치 Marker로 이동 및 하단 버튼 활성화
+
+		  - 해당 아이템 오른쪽 즐겨찾기 버튼 누를시 즐겨찾기 추가/삭제
+
+	  	- 영화관별로 마커이미지 상이, 마커 클릭시 해당 영화관 정보를 담은 InfoWindow 출력
+
+  		- InfoWindow 클릭시 현재 위치로부터 해당 위치까지 길찾기 기능(KakaoMap)
+
+  3. Favorite Page
+
+	  1) View 구성
+
+		  - Bottom Tab에서 즐겨찾기 클릭시 RecyclerView를 이용한 즐겨찾기 리스트 구현
+
+	  	- 오른쪽에 별모양을 눌러 즐겨찾기 삭제 기능
+
+	  	- 상영관 클릭시 영화선택 -> 시간대 선택 페이지로 바로 이동.
+
+  4. 시연 UCC 제작
   
-
-- Backend
-
-  👨 **권오정** 👩 전수현
-
-  ```markdown
-  # [Role]
-  ## [전수현]
-  ### 1. Spring Server
-  	- 1) 회원정보 CRUD
-  	- 2) 시구군 및 즐겨찾기 CRUD
-  ### 2. Database
-  	- 1) movie_project 데이터베이스 생성
-  	- 2) 회원, 권한, 지역, 영화관 테이블 생성
-  
-  ## [권오정]
-  ### 1. 운영서버 환경 구축
-    - 1) Database 서버
-      	- Docker 설치
-      	- Docker MariaDB 이미지 Database 서버 설치
-    - 2) Django 서버
-      	- Anacoda 설치
-      	- Django 서버 구축
-  ### 2. Crwaling
-    - 1) 영화관 정보
-      	- 각 영화사 극장명, 주소 수집
-      	- 네이버 오픈 API (map-geocode)로 극장 위도, 경도 수집
-    - 2) 현재 상영 영화 정보
-      	- 네이버 영화 > 현재 상영영화 > 상영영화 정보 수집
-    - 3) 현재 사영중인 영화관 정보
-    		- 영화사 > 극장 > 사영영화 예매 정보 수집
-  ### 3. 소개 UCC 제작
   ```
 
-  
+  👦 **김형택**
 
-- Big Data
-
-  👨 **이선수**
-
-  ```markdown
-  # [Role]
-  ## [이선수]
-  ### 1. bigdata analysis of activitiy 
-  	- 1) spark 세션 생성 및 분석 데이터 로드
-  	- 2) 시구군 기준 그룹핑 dataframe 생성
-  	- 3) param에 따른 dataframe 분석
-  	- 4) 결과값 response (json)
-  	- 5) Django RESTful api 활용 (GET)
-  	- 6) python 모듈화 및 singleton pattern 적용 (여러 세션의 접근에 동일한 사전분석 데이터를 		활용하기 위해)
-  ### 2. positive/negative score analysis
-  	- 1) Bertforsequenceclassification 15만개 긍부정 리뷰 사전 학습 및, 학습 모델 추출			(Colab 환경에서 학습 후 추출) 
-  	- 2) Crawling을 통해 '네이버 영화' 홈페이지의 리뷰 2페이지 분량 추출
-  	- 3) 평가 데이터 토큰화 및 어텐션 마스킹, 파이토치의 텐서형으로 변환
-  	- 4) Django RESTful api 활용 (GET)
-  	- 5) python 모듈화 및 singleton pattern 적용 (여러 세션의 접근에 동일한 사전분석 데이터를 		활용하기 위해)
-  	- 6) AWS 환경설정 및 배포 관리
   ```
-  
+  1. Main Page
+
+  	1) Recycler View를 통한 실시간 상영 영화 정보 구성
+
+	  	- 실시간 상영 영화 API 활용
+
+	  	- 예매하기 버튼을 클릭하여 해당 영화에 대한 긍정/부정 분석 결과를 Dialog로 출력
+
+	  	- BigData 분석 결과를 통한 긍정/ 부정 점수를 통신하고 결과값을 받아와 Dialog에 적용
+
+	  	- 영화관 선택 화면으로 연결
+
+  	2) Recycler View를 통한 영화 블로그 리뷰 정보 구성
+
+	  	- Spinner를 통해 영화를 선택
+
+	  	- 선택된 영화를 네이버 블로그 검색 API 활용
+
+  		- Web View Activity를 활용하여 해당 블로그로 연결
+
+  2. Login Page
+
+  	1) Login Activity, View Model, layout을 통해 view를 구성
+
+  	2) Backend 파트와 로그인 관련 통신
+
+  3. MyPage
+
+  	1) 회원정보 수정 Activity, View Model, layout을 통해 view를 구성
+
+  	2) 회원 탈퇴 Activity, View Model, layout을 통해 view를 구성
+
+  	3) Backend 파트와 회원정보 수정, 탈퇴 기능 통신
+
+  4. Dialog Activity
+
+	  1) 회원 탈퇴 및 영화 리뷰 긍정/부정 분석 정보 Dialog Activity를 구현
+
+	  2) 사용자에게 효과적으로 보여질 수 있도록 layout을 구현
+
+  5. Splash Page
+
+	  1) App 처음 실행 화면 Splash Activity, layout을 통해 view를 구성
+  ```
+<br>
+ <hr>
+
+- #### Backend
+
+  👨 **권오정** 
+
+  ```
+  1. 운영서버 환경 구축
+
+  	1) Database 서버
+
+	  	- Docker 설치
+
+	  	- Docker MariaDB 이미지 Database 서버 설치
+
+	  2) Django 서버
+
+	  	- Anacoda 설치
+
+	  	- Django 서버 구축
+
+  2. Crwaling
+
+	  1) 영화관 정보
+
+		  - 각 영화사 극장명, 주소 수집
+
+		  - 네이버 오픈 API (map-geocode)로 극장 위도, 경도 수집
+
+	  2) 현재 상영 영화 정보
+
+		  - 네이버 영화 > 현재 상영영화 > 상영영화 정보 수집
+
+	  3) 현재 사영중인 영화관 정보
+
+		  - 영화사 > 극장 > 사영영화 예매 정보 수집
+
+  3. 소개 UCC 제작
+  ```
+
+  👩 **전수현**
+
+  ```
+  1. Spring Server
+
+	  1) 회원정보 CRUD
+
+	  2) 시구군 및 즐겨찾기 CRUD
+
+  2. Database
+
+	  1) movie_project 데이터베이스 생성
+
+	  2) 회원, 권한, 지역, 영화관 테이블 생성
+  ```
+
+<br>
+<hr>
+<br>
   
 
 ### 📃 Jira
